@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SheekController;
 use App\Http\Livewire\Counter;
+use App\Http\Livewire\EditSheek;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,5 @@ Route::prefix('check-system')->group(function () {
     // Admin Dashboard
     Route::view('/', 'back-end.index')->name('back-end.dashboard');
     Route::resource('sheeks', SheekController::class);
+    Route::get('move-sheek/{sheek}', EditSheek::class);
 });

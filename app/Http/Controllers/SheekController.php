@@ -92,6 +92,9 @@ class SheekController extends Controller
     public function edit(Sheek $sheek)
     {
         //
+        return response()->view('back-end.sheek.edit', [
+            'sheek' => $sheek,
+        ]);
     }
 
     /**
