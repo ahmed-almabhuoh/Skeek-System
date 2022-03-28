@@ -1,0 +1,90 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">{{ __('cms.add_skeed') }}</h3>
+            </div>
+            <!-- /.card-header -->
+            <div style="margin: 15px;">
+                @if ($errors->any())
+                    @foreach ($errors->all as $error)
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-ban"></i> Fail!</h5>
+                            {{ $error }}
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <!-- form start -->
+            <form method="POST" action="{{ route('sheeks.store') }}">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="beneficiary_name_input">{{ __('cms.beneficiary_name') }}</label>
+                        <input type="text" class="form-control" id="beneficiary_name_input" wire:model="beneficiary_name"
+                            placeholder="Enter Beneficiary Name" value="{{ old('beneficiary_name') }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount_input">{{ __('cms.amount') }}</label>
+                        <input type="number" class="form-control" id="amount_input" placeholder="Enter amount number" wire:model="amount"
+                            value="{{ old('amount') }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Currancy</label>
+                        <select class="form-control" id="currancy_input" wire:model="currany">
+                            <option @if (old('currancy') == 'Dinar') selected @endif>{{ __('cms.dinar') }}
+                            </option>
+                            <option @if (old('currancy') == 'Dollar') selected @endif>{{ __('cms.dollar') }}
+                            </option>
+                            <option @if (old('currancy') == 'shakel') selected @endif>{{ __('cms.shakel') }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc_input">{{ __('cms.desc') }}</label>
+                        <input type="text" class="form-control" id="desc_input" placeholder="Enter description"
+                            value="{{ old('desc') }}">
+                    </div>
+                    <label>{{ __('cms.type') }}</label>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status_input" checked="">
+                            <label class="form-check-label">{{ __('cms.paid') }}</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status_input">
+                            <label class="form-check-label">{{ __('cms.recived') }}</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+    </div>
+    <!--/.col (left) -->
+    <div class="col-md-6">
+        <!-- Form Element sizes -->
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
+            </div>
+            <div class="card-body">
+                <h3>Sheek</h3>
+                Beneficiary Name: {{ $beneficiary_name }} <br>
+                Amount: {{ $amount }} <br>
+                Currancy: {{ $currany }} <br>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

@@ -16,4 +16,12 @@ return [
     'created_at' => 'Created at',
     'upated_at' => 'Updated at',
     'settings' => 'Settings',
+    'add_skeed' => 'Add Sheek',
+    'dollar' => 'Dollar', 
+    'dinar' => 'Dinar',
+    'shakel' => 'Shakel',
+    'paid' => 'Paid',
+    'recived' => 'Recived',
+    'submit' => 'Submit',
+    'your_sheek' => 'Your Sheek',
 ];

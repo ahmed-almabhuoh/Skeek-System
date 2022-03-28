@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sheek;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 class SheekController extends Controller
@@ -29,6 +30,7 @@ class SheekController extends Controller
     public function create()
     {
         //
+        return response()->view('back-end.sheek.add');
     }
 
     /**
@@ -40,6 +42,28 @@ class SheekController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'beneficiary_name' => 'required|string|min:3|max:50',
+            'amount' => 'required|integer|min:1',
+            'currancy' => 'required|string|in:Dollar,Dinar|Shakel',
+            'desc' => 'nullable',
+            'status' => 'required|string|in:recived,paid',
+        ]);
+
+        $sheek = new Sheek();
+        $sheek->beneficiary_name = $request->input('beneficiary_name'); 
+        $sheek->amount = $request->input('amount'); 
+        $sheek->currancy = $request->input('currancy'); 
+        $sheek->desc = $request->input('desc'); 
+        $sheek->status = $request->input('status'); 
+        $isSaved = $sheek->save();
+
+        if ($isSaved) {
+            return redirect()->back();
+        }else {
+            return redirect()->back();
+        }
+        
     }
 
     /**

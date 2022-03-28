@@ -25,5 +25,3 @@ Route::prefix('check-system')->group(function () {
     Route::view('/', 'back-end.index')->name('back-end.dashboard');
     Route::resource('sheeks', SheekController::class);
 });
-
-Route::Livewire('posts', 'post');
