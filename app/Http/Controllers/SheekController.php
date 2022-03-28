@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sheek;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SheekController extends Controller
 {
@@ -41,29 +42,34 @@ class SheekController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'beneficiary_name' => 'required|string|min:3|max:50',
+        $validator = Validator($request->all(), [
+            'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
-            'currancy' => 'required|string|in:Dollar,Dinar|Shakel',
+            'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
+            // Return to this :)
+            'bank' => 'required|string',
             'desc' => 'nullable',
-            'status' => 'required|string|in:recived,paid',
+            'status' => 'required|string|in:paid,recived',
         ]);
+        //
+        if (!$validator->fails()) {
+            $sheek = new Sheek();
+            $sheek->beneficiary_name = $request->get('beneficiary_name');
+            $sheek->amount = $request->get('amount');
+            $sheek->currancy = $request->get('currancy');
+            $sheek->bank_name = $request->get('bank');
+            $sheek->desc = $request->get('desc');
+            $sheek->type = $request->get('status');
+            $isCreated = $sheek->save();
 
-        $sheek = new Sheek();
-        $sheek->beneficiary_name = $request->input('beneficiary_name'); 
-        $sheek->amount = $request->input('amount'); 
-        $sheek->currancy = $request->input('currancy'); 
-        $sheek->desc = $request->input('desc'); 
-        $sheek->status = $request->input('status'); 
-        $isSaved = $sheek->save();
-
-        if ($isSaved) {
-            return redirect()->back();
-        }else {
-            return redirect()->back();
+            return response()->json([
+                'message' => $isCreated ? 'Sheed added successfylly' : 'Faild to add sheek',
+            ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_GATEWAY);
+        }else{
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_GATEWAY);
         }
-        
     }
 
     /**

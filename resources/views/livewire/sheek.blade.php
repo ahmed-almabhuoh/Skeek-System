@@ -20,23 +20,22 @@
                 @endif
             </div>
             <!-- form start -->
-            <form method="POST" action="{{ route('sheeks.store') }}">
-                @csrf
+            <form>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="beneficiary_name_input">{{ __('cms.beneficiary_name') }}</label>
-                        <input type="text" class="form-control" id="beneficiary_name_input"
+                        <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
+                        <input type="text" class="form-control" id="beneficiary_name"
                             wire:model="beneficiary_name" placeholder="Enter Beneficiary Name"
                             value="{{ old('beneficiary_name') }}">
                     </div>
                     <div class="form-group">
-                        <label for="amount_input">{{ __('cms.amount') }}</label>
-                        <input type="number" class="form-control" id="amount_input" placeholder="Enter amount number"
+                        <label for="amount">{{ __('cms.amount') }}</label>
+                        <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
                             wire:model="amount" value="{{ old('amount') }}">
                     </div>
                     <div class="form-group">
                         <label>Currancy</label>
-                        <select class="form-control" id="currancy_input" wire:model="currany">
+                        <select class="form-control" id="currancy" wire:model="currany">
                             <option @if (old('currancy') == 'Dinar') selected @endif>{{ __('cms.dinar') }}
                             </option>
                             <option @if (old('currancy') == 'Dollar') selected @endif>{{ __('cms.dollar') }}
@@ -47,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
-                        <select class="form-control" id="currancy_input" wire:model="bank">
+                        <select class="form-control" id="bank_name" wire:model="bank">
                             <option>{{ __('cms.palestine') }}</option>
                             <option>{{ __('cms.al_qudes') }}</option>
                             <option>{{ __('cms.al_islamy_al_araby') }}</option>
@@ -57,18 +56,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="desc_input">{{ __('cms.desc') }}</label>
-                        <input type="text" class="form-control" id="desc_input" placeholder="Enter description"
+                        <label for="desc">{{ __('cms.desc') }}</label>
+                        <input type="text" class="form-control" id="desc" placeholder="Enter description"
                             value="{{ old('desc') }}">
                     </div>
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status_input" checked="">
+                            <input class="form-check-input" type="radio" name="status" id="paid" checked="">
                             <label class="form-check-label">{{ __('cms.paid') }}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status_input">
+                            <input class="form-check-input" type="radio" id="recived" name="status">
                             <label class="form-check-label">{{ __('cms.recived') }}</label>
                         </div>
                     </div>
@@ -76,7 +75,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" onclick="store()" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
@@ -101,3 +100,5 @@
         <!-- /.card -->
     </div>
 </div>
+
+

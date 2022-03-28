@@ -18,7 +18,7 @@ class CreateSheeksTable extends Migration
             $table->string('beneficiary_name');
             $table->double('amount')->unsigned();
             $table->string('currancy');
-            $table->string('desc');
+            $table->string('desc')->nullable();
             $table->enum('type', ['paid', 'recived']);
             $table->timestamps();
         });
