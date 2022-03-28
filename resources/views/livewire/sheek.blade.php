@@ -25,13 +25,14 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="beneficiary_name_input">{{ __('cms.beneficiary_name') }}</label>
-                        <input type="text" class="form-control" id="beneficiary_name_input" wire:model="beneficiary_name"
-                            placeholder="Enter Beneficiary Name" value="{{ old('beneficiary_name') }}">
+                        <input type="text" class="form-control" id="beneficiary_name_input"
+                            wire:model="beneficiary_name" placeholder="Enter Beneficiary Name"
+                            value="{{ old('beneficiary_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="amount_input">{{ __('cms.amount') }}</label>
-                        <input type="number" class="form-control" id="amount_input" placeholder="Enter amount number" wire:model="amount"
-                            value="{{ old('amount') }}">
+                        <input type="number" class="form-control" id="amount_input" placeholder="Enter amount number"
+                            wire:model="amount" value="{{ old('amount') }}">
                     </div>
                     <div class="form-group">
                         <label>Currancy</label>
@@ -42,6 +43,17 @@
                             </option>
                             <option @if (old('currancy') == 'shakel') selected @endif>{{ __('cms.shakel') }}
                             </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ __('cms.bank') }}</label>
+                        <select class="form-control" id="currancy_input" wire:model="bank">
+                            <option>{{ __('cms.palestine') }}</option>
+                            <option>{{ __('cms.al_qudes') }}</option>
+                            <option>{{ __('cms.al_islamy_al_araby') }}</option>
+                            <option>{{ __('cms.al_islamy_al_araby') }}</option>
+                            <option>{{ __('cms.al_aurdon') }}</option>
+                            <option>{{ __('cms.al_intaj') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -82,6 +94,7 @@
                 Beneficiary Name: {{ $beneficiary_name }} <br>
                 Amount: {{ $amount }} <br>
                 Currancy: {{ $currany }} <br>
+                Bank: {{ $bank }} <br>
             </div>
             <!-- /.card-body -->
         </div>

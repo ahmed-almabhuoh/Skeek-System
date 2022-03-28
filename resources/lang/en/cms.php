@@ -24,4 +24,11 @@ return [
     'recived' => 'Recived',
     'submit' => 'Submit',
     'your_sheek' => 'Your Sheek',
+    'bank' => 'Bank',
+    'palestine' => 'Palestine',
+    'al_qudes' => 'Al Qudes',
+    'al_islamy_al_phalasteiny' => 'Al Eslamy Al Phalasteiny',
+    'al_islamy_al_araby' => 'Al Eslamy Al Araby',
+    'al_aurdon' => 'Al Audron',
+    'al_intaj' => 'Al Intaj',
 ];
