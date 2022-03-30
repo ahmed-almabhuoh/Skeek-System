@@ -96,7 +96,7 @@
               .then(function(response) {
                   // handle success
                   console.log(response);
-                  window.location.href = '/admin';
+                  window.location.href = '/check-system';
               })
               .catch(function(error) {
                   // handle error

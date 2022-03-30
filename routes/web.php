@@ -21,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('admin', function () {
-    redirect()->route('back-end.dashboard');
-});
-
 Route::prefix('auth')->middleware('guest:admin')->group(function () {
     Route::get('/{guard}/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login']);
