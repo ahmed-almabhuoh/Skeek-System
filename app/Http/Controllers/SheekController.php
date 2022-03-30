@@ -106,7 +106,33 @@ class SheekController extends Controller
      */
     public function update(Request $request, Sheek $sheek)
     {
+        $validator = Validator($request->all(), [
+            'beneficiary_name' => 'required|string|min:5|max:50',
+            'amount' => 'required|integer|min:1',
+            'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
+            // Return to this :)
+            'bank_name' => 'required|string',
+            'desc' => 'nullable',
+            'type' => 'required|string|in:paid,recived',
+        ]);
         //
+        if (!$validator->fails()) {
+            $sheek->beneficiary_name = $request->get('beneficiary_name');
+            $sheek->amount = $request->get('amount');
+            $sheek->currancy = $request->get('currancy');
+            $sheek->bank_name = $request->get('bank_name');
+            $sheek->desc = $request->get('desc');
+            $sheek->type = $request->get('type');
+            $isUpdated = $sheek->save();
+
+            return response()->json([
+                'message' => $isUpdated ? 'Sheek updated successfully' : 'Faild to update sheek',
+            ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        }else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_GATEWAY);
+        }
     }
 
     /**

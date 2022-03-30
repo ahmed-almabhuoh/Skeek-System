@@ -13,7 +13,7 @@
     <section class="content">
         <div class="container-fluid">
             @livewire('edit-sheek', [
-                'sheek' => $sheek,
+            'sheek' => $sheek,
             ])
             <!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,19 +26,27 @@
     <script>
         function update(id) {
             // check-system/sheeks
-            let formData = new FormData();
-            formData.append('beneficiary_name', document.getElementById('beneficiary_name').value);
-            formData.append('amount', document.getElementById('amount').value);
-            formData.append('currancy', document.getElementById('currancy').value);
-            formData.append('bank', document.getElementById('bank_name').value);
-            formData.append('desc', document.getElementById('desc').value);
-            formData.append('status', document.getElementById('recived').checked ? 'recived' : 'paid');
-            axios.put('/check-system/sheeks/' + id, formData)
+            // let sheekData = new FormData();
+            // sheekData.append('beneficiary_name', document.getElementById('beneficiary_name').value);
+            // formData.append('amount', document.getElementById('amount').value);
+            // formData.append('currancy', document.getElementById('currancy').value);
+            // formData.append('bank', document.getElementById('bank_name').value);
+            // formData.append('desc', document.getElementById('desc').value);
+            // formData.append('status', document.getElementById('recived').checked ? 'recived' : 'paid');
+            axios.put('/check-system/sheeks/' + id, {
+                beneficiary_name: document.getElementById('beneficiary_name').value,
+                amount: document.getElementById('amount').value,
+                currancy: document.getElementById('currancy').value,
+                bank_name: document.getElementById('bank_name').value,
+                desc: document.getElementById('desc').value,
+                type: document.getElementById('type').value ? 'recived' : 'paid',
+            })
                 .then(function(response) {
                     // handle success
                     console.log(response);
                     toastr.success(response.data.message);
-                    // document.getElementById('create-form').reset();
+                    // document.getElementById('set-form').reset();
+                    // document.getElementById('reset-form').reset();
                 })
                 .catch(function(error) {
                     // handle error
@@ -50,5 +58,6 @@
                 });
         }
     </script>
+
     @livewireScripts
 @endsection

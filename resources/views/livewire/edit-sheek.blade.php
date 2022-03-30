@@ -22,31 +22,34 @@
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
                             wire:model="amount" value="{{ $amount }}">
                     </div>
+                    @php
+                        $old_currancy = $currancy;
+                    @endphp
                     <div class="form-group">
                         <label>Currancy</label>
                         <select class="form-control" id="currancy" wire:model="currancy">
-                            <option @if ($currancy == 'Dinar') selected @endif>{{ __('cms.dinar') }}
+                            <option>{{ __('cms.dinar') }}
                             </option>
-                            <option @if ($currancy == 'Dollar') selected @endif>{{ __('cms.dollar') }}
+                            <option>{{ __('cms.dollar') }}
                             </option>
-                            <option @if ($currancy == 'Shakel') selected @endif>{{ __('cms.shakel') }}
+                            <option>{{ __('cms.shakel') }}
                             </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
                         <select class="form-control" id="bank_name" wire:model="bank_name">
-                            <option @if ($bank_name == 'Palestine') selected @endif>{{ __('cms.palestine') }}
+                            <option >{{ __('cms.palestine') }}
                             </option>
-                            <option @if ($bank_name == 'Al Qudes') selected @endif>{{ __('cms.al_qudes') }}
+                            <option >{{ __('cms.al_qudes') }}
                             </option>
-                            <option @if ($bank_name == 'Al Eslamy Al Araby') selected @endif>
+                            <option >
                                 {{ __('cms.al_islamy_al_araby') }}</option>
-                            <option @if ($bank_name == 'Al Eslamy Al Phalasteiny') selected @endif>
+                            <option >
                                 {{ __('cms.al_islamy_al_phalasteiny') }}</option>
-                            <option @if ($bank_name == 'Al Aurdon') selected @endif>{{ __('cms.al_aurdon') }}
+                            <option >{{ __('cms.al_aurdon') }}
                             </option>
-                            <option @if ($bank_name == 'Al Intaj') selected @endif>{{ __('cms.al_intaj') }}
+                            <option >{{ __('cms.al_intaj') }}
                             </option>
                         </select>
                     </div>
@@ -58,13 +61,13 @@
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status" id="paid"
+                            <input class="form-check-input" type="radio" name="status" id="type"
                                 @if ($type == 'paid') checked @endif
                             >
                             <label class="form-check-label">{{ __('cms.paid') }}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="recived" name="status"
+                            <input class="form-check-input" type="radio" id="type" name="status"
                                 @if ($type == 'recived') checked @endif
                             >
                             <label class="form-check-label">{{ __('cms.recived') }}</label>
@@ -74,7 +77,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="button" onclick="store()" class="btn btn-primary">Submit</button>
+                    <button type="button" onclick="update({{$sheek_id}})" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
@@ -99,3 +102,15 @@
         <!-- /.card -->
     </div>
 </div>
+
+
+{{-- @if ($currancy == 'Dinar') selected @endif
+@if ($currancy == 'Dollar') selected @endif
+@if ($currancy == 'Shakel') selected @endif --}}
+
+{{-- @if ($bank_name == 'Palestine') selected @endif
+@if ($bank_name == 'Al Qudes') selected @endif
+@if ($bank_name == 'Al Eslamy Al Araby') selected @endif
+@if ($bank_name == 'Al Eslamy Al Phalasteiny') selected @endif
+@if ($bank_name == 'Al Aurdon') selected @endif
+@if ($bank_name == 'Al Intaj') selected @endif --}}

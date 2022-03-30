@@ -9,11 +9,12 @@ class EditSheek extends Component
     // Sheek Property
     public $sheek;
     public $beneficiary_name;
-    public $amount = 0;
-    public $bank_name = '';
-    public $currancy = '';
-    public $desc = '';
-    public $type = '';
+    public $amount;
+    public $bank_name;
+    public $currancy;
+    public $desc;
+    public $type;
+    public $sheek_id;
 
     public function mount ($sheek) {
         $this->sheek = $sheek;
@@ -23,6 +24,7 @@ class EditSheek extends Component
         $this->currancy = $this->sheek->currancy;
         $this->desc = $this->sheek->desc;
         $this->type = $this->sheek->type;
+        $this->sheek_id = $this->sheek->id;
     }
 
     public function render()
