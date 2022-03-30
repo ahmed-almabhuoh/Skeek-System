@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SheekController;
 use App\Http\Livewire\Counter;
@@ -32,6 +33,9 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::view('/', 'back-end.index')->name('back-end.dashboard');
     Route::resource('sheeks', SheekController::class);
     Route::get('move-sheek/{sheek}', EditSheek::class);
+
+    // Home
+    Route::get('dashboard', [SheekController::class, 'statisics'])->name('admin.dashboard');
 
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

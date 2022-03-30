@@ -148,4 +148,33 @@ class SheekController extends Controller
     {
         //
     }
+
+    public function statisics () {
+
+        $recived_sheek_num = Sheek::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['type', 'recived'],
+        ])->count();
+
+        $paid_sheek_num = Sheek::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['type', 'paid'],
+        ])->count();
+
+        $amount_paid_sheek = Sheek::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['type', 'paid'],
+        ])->sum('amount');
+
+        $amount_recived_sheek = Sheek::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['type', 'recived'],
+        ])->sum('amount');
+        return response()->view('back-end.home', [
+            'recived_sheek_num' => $recived_sheek_num,
+            'paid_sheek_num' => $paid_sheek_num,
+            'amount_paid_sheek' => $amount_paid_sheek,
+            'amount_recived_sheek' => $amount_recived_sheek,
+        ]);
+    }
 }

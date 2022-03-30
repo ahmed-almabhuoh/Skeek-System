@@ -96,7 +96,7 @@
               .then(function(response) {
                   // handle success
                   console.log(response);
-                  window.location.href = '/check-system';
+                  window.location.href = '/check-system/dashboard';
               })
               .catch(function(error) {
                   // handle error
