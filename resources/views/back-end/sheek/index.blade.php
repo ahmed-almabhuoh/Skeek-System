@@ -25,7 +25,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>{{ __('cms.beneficiary_name') }}</th>
-                                        <th>{{__('cms.bank_name')}}</th>
+                                        <th>{{ __('cms.bank_name') }}</th>
                                         <th>{{ __('cms.amount') }}</th>
                                         <th>{{ __('cms.currancy') }}</th>
                                         <th>{{ __('cms.type') }}</th>
@@ -46,7 +46,7 @@
                                                 </div>
                                             </td>
                                             <td><span class="badge bg-danger">55%</span></td> --}}
-                                            <td>{{$sheek->bank_name}}</td>
+                                            <td>{{ $sheek->bank_name }}</td>
                                             <td>{{ $sheek->amount }}</td>
                                             <td>{{ $sheek->currancy }}</td>
                                             <td>{{ $sheek->type }}</td>
@@ -55,10 +55,11 @@
                                             <td>{{ $sheek->updated_at->format('Y-m-d H:i') }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{route('sheeks.edit', $sheek->id)}}" class="btn btn-warning">
+                                                    <a href="{{ route('sheeks.edit', $sheek->id) }}"
+                                                        class="btn btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" class="btn btn-danger">
+                                                    <button type="button" onclick="confirmDestroy({{$sheek->id}}, this)" class="btn btn-danger">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -79,6 +80,50 @@
 @endsection
 
 @section('scripts')
+    <script>
+        function confirmDestroy(id, refrance) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    destoy(id, refrance);
+                }
+            });
+        }
 
+        function destoy(id, refrance) {
+            // check-system/sheeks/{sheek} 
+            axios.delete('/check-system/sheeks/' + id)
+                .then(function(response) {
+                    // handle success
+                    console.log(response);
+                    refrance.closest('tr').remove();
+                    showDeletingMessage(response.data);
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                    showDeletingMessage(error.response.data);
+                })
+                .then(function() {
+                    // always executed
+                });
+        }
+
+        function showDeletingMessage(data) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    </script>
     @livewireScripts
 @endsection

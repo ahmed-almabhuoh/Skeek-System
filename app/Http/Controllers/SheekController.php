@@ -147,6 +147,19 @@ class SheekController extends Controller
     public function destroy(Sheek $sheek)
     {
         //
+        if ($sheek->delete()) {
+            return response()->json([
+                'icon' => 'success',
+                'title' => 'Deleted',
+                'text' => 'Sheek deleted successfully',
+            ]);
+        }else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Faild!',
+                'text' => 'Faild to delete sheek',
+            ]);
+        }
     }
 
     public function statisics () {
@@ -171,10 +184,10 @@ class SheekController extends Controller
             ['type', 'recived'],
         ])->sum('amount');
         return response()->view('back-end.home', [
-            'recived_sheek_num' => $recived_sheek_num,
-            'paid_sheek_num' => $paid_sheek_num,
-            'amount_paid_sheek' => $amount_paid_sheek,
-            'amount_recived_sheek' => $amount_recived_sheek,
+            'recived_sheek_num' => $recived_sheek_num ?? 0,
+            'paid_sheek_num' => $paid_sheek_num ?? 0,
+            'amount_paid_sheek' => $amount_paid_sheek ?? 0,
+            'amount_recived_sheek' => $amount_recived_sheek ?? 0,
         ]);
     }
 }
