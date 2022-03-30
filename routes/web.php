@@ -36,3 +36,7 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::fallback(function () {
+    return view('error.page-not-found');
+});

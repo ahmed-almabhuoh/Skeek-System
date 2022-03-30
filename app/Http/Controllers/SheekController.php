@@ -17,7 +17,9 @@ class SheekController extends Controller
     public function index()
     {
         //
-        $sheeks = Sheek::all();
+        $sheeks = Sheek::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->get();
         return response()->view('back-end.sheek.index', [
             'sheeks' => $sheeks,
         ]);
@@ -60,6 +62,7 @@ class SheekController extends Controller
             $sheek->bank_name = $request->get('bank');
             $sheek->desc = $request->get('desc');
             $sheek->type = $request->get('status');
+            $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 
             return response()->json([

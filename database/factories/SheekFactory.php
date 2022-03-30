@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SheekFactory extends Factory
@@ -19,6 +20,8 @@ class SheekFactory extends Factory
             'amount' => $this->faker->numberBetween(100, 10000),
             'currancy' => $this->faker->randomElement(['paid', 'recived']),
             'desc' => $this->faker->word(),
+            'bank_name' => 'Phalasteen',
+            'admin_id' => Admin::inRandomOrder()->first()->id,
         ];
     }
 }

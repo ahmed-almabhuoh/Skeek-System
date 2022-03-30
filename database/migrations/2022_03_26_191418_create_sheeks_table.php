@@ -18,6 +18,11 @@ class CreateSheeksTable extends Migration
             $table->string('beneficiary_name');
             $table->double('amount')->unsigned();
             $table->string('currancy');
+            
+            // Admin foreign key
+            $table->foreignId('admin_id');
+            $table->foreign('admin_id')->on('admins')->references('id');
+            
             $table->string('desc')->nullable();
             $table->enum('type', ['paid', 'recived']);
             $table->timestamps();
