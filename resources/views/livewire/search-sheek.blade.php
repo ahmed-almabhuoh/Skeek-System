@@ -1,4 +1,5 @@
 <div>
+<<<<<<< HEAD
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 
     <section class="content">
@@ -71,4 +72,18 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
+=======
+    {{-- Stop trying to control. --}}
+    <input type="text" wire:model="searchTerm" />
+
+    @if (!is_null($searchTerm))
+        <ul>
+            @foreach ($sheeks as $sheek)
+                <li>
+                    <a href="{{route('sheeks.edit', $sheek->id)}}">{{ $sheek->beneficiary_name }}</a>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+>>>>>>> 0fcda399259e05067193472199dd5cf0298ef286
 </div>

@@ -7,7 +7,13 @@ use Livewire\Component;
 
 class SearchSheek extends Component
 {
+<<<<<<< HEAD
     public $searchTerm;
+=======
+    // public $searchTerm;
+
+    public $searchTerm = null;
+>>>>>>> 0fcda399259e05067193472199dd5cf0298ef286
     public $sheeks;
 
     public function render()
