@@ -228,12 +228,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{-- AXIOS LIBRARY --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Toastr -->
-<<<<<<< HEAD
     <script src="{{ asset('sheekSystem/plugins/toastr/toastr.min.js') }}"></script>
 
-=======
-    <script src="{{ asset('checkSystem/plugins/toastr/toastr.min.js') }}"></script>
->>>>>>> 0fcda399259e05067193472199dd5cf0298ef286
     @yield('scripts')
 </body>
 
