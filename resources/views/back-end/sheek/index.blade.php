@@ -51,8 +51,8 @@
                                             <td>{{ $sheek->currancy }}</td>
                                             <td>{{ $sheek->type }}</td>
                                             <td>{{ $sheek->desc }}</td>
-                                            <td>{{ $sheek->created_at->format('Y-m-d H:i') }}</td>
-                                            <td>{{ $sheek->updated_at->format('Y-m-d H:i') }}</td>
+                                            <td>{{ $sheek->created_at->diffForHumans() }}</td>
+                                            <td>{{ $sheek->updated_at->diffForHumans() }}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="{{ route('sheeks.edit', $sheek->id) }}"

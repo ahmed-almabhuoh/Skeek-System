@@ -37,6 +37,10 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     // Home
     Route::get('dashboard', [SheekController::class, 'statisics'])->name('admin.dashboard');
 
+    // Paid & Recived Sheeks
+    Route::get('recived-sheeks', [SheekController::class, 'recivedSheek'])->name('sheeks.recived');
+    Route::get('paid-sheeks', [SheekController::class, 'paidSheeks'])->name('sheeks.paid');
+
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

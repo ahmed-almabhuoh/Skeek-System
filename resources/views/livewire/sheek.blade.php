@@ -20,7 +20,7 @@
                 @endif
             </div>
             <!-- form start -->
-            <form>
+            <form id="create-form">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>

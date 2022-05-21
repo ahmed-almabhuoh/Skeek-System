@@ -44,34 +44,43 @@ class SheekController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator($request->all(), [
+        // return response()->json([
+        //     'message' => $request->input('beneficiary_name'),
+        // ], Response::HTTP_OK);
+        $validator = Validator($request->only([
+            'beneficiary_name',
+            'amount',
+            'currancy',
+            'bank_name',
+            'desc',
+            'type',
+        ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
-            // Return to this :)
-            'bank' => 'required|string',
+            'bank_name' => 'required|string',
             'desc' => 'nullable',
-            'status' => 'required|string|in:paid,recived',
+            'type' => 'required|string|in:paid,recived',
         ]);
         //
         if (!$validator->fails()) {
             $sheek = new Sheek();
-            $sheek->beneficiary_name = $request->get('beneficiary_name');
-            $sheek->amount = $request->get('amount');
-            $sheek->currancy = $request->get('currancy');
-            $sheek->bank_name = $request->get('bank');
-            $sheek->desc = $request->get('desc');
-            $sheek->type = $request->get('status');
+            $sheek->beneficiary_name = $request->input('beneficiary_name');
+            $sheek->amount = $request->input('amount');
+            $sheek->currancy = $request->input('currancy');
+            $sheek->bank_name = $request->input('bank_name');
+            $sheek->desc = $request->input('desc');
+            $sheek->type = $request->input('type');
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 
             return response()->json([
                 'message' => $isCreated ? 'Sheed added successfylly' : 'Faild to add sheek',
-            ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_GATEWAY);
-        }else{
+            ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
             return response()->json([
                 'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_GATEWAY);
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -109,32 +118,41 @@ class SheekController extends Controller
      */
     public function update(Request $request, Sheek $sheek)
     {
-        $validator = Validator($request->all(), [
+        // return response()->json([
+        //     'message' => $request->input('bank_name'),
+        // ], Response::HTTP_OK);
+        $validator = Validator($request->only([
+            'beneficiary_name',
+            'amount',
+            'currancy',
+            'bank_name',
+            'desc',
+            'type',
+        ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
-            // Return to this :)
-            'bank_name' => 'required|string',
+            'bank_name' => 'required|string|min:3|max:50',
             'desc' => 'nullable',
             'type' => 'required|string|in:paid,recived',
         ]);
         //
         if (!$validator->fails()) {
-            $sheek->beneficiary_name = $request->get('beneficiary_name');
-            $sheek->amount = $request->get('amount');
-            $sheek->currancy = $request->get('currancy');
-            $sheek->bank_name = $request->get('bank_name');
-            $sheek->desc = $request->get('desc');
-            $sheek->type = $request->get('type');
+            $sheek->beneficiary_name = $request->input('beneficiary_name');
+            $sheek->amount = $request->input('amount');
+            $sheek->currancy = $request->input('currancy');
+            $sheek->bank_name = $request->input('bank_name');
+            $sheek->desc = $request->input('desc');
+            $sheek->type = $request->input('type');
             $isUpdated = $sheek->save();
 
             return response()->json([
                 'message' => $isUpdated ? 'Sheek updated successfully' : 'Faild to update sheek',
             ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        }else {
+        } else {
             return response()->json([
                 'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_GATEWAY);
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -153,7 +171,7 @@ class SheekController extends Controller
                 'title' => 'Deleted',
                 'text' => 'Sheek deleted successfully',
             ]);
-        }else {
+        } else {
             return response()->json([
                 'icon' => 'error',
                 'title' => 'Faild!',
@@ -162,7 +180,8 @@ class SheekController extends Controller
         }
     }
 
-    public function statisics () {
+    public function statisics()
+    {
 
         $recived_sheek_num = Sheek::where([
             ['admin_id', auth('admin')->user()->id],
@@ -183,11 +202,28 @@ class SheekController extends Controller
             ['admin_id', auth('admin')->user()->id],
             ['type', 'recived'],
         ])->sum('amount');
+
         return response()->view('back-end.home', [
             'recived_sheek_num' => $recived_sheek_num ?? 0,
             'paid_sheek_num' => $paid_sheek_num ?? 0,
             'amount_paid_sheek' => $amount_paid_sheek ?? 0,
             'amount_recived_sheek' => $amount_recived_sheek ?? 0,
+        ]);
+    }
+
+    public function recivedSheek()
+    {
+        $sheeks = Sheek::where('type', 'LIKE', 'recived')->get();
+        return response()->view('back-end.sheek.index', [
+            'sheeks' => $sheeks,
+        ]);
+    }
+
+    public function paidSheeks()
+    {
+        $sheeks = Sheek::where('type', 'LIKE', 'paid')->get();
+        return response()->view('back-end.sheek.index', [
+            'sheeks' => $sheeks,
         ]);
     }
 }

@@ -39,17 +39,17 @@
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
                         <select class="form-control" id="bank_name" wire:model="bank_name">
-                            <option >{{ __('cms.palestine') }}
+                            <option value="palestine">{{ __('cms.palestine') }}
                             </option>
-                            <option >{{ __('cms.al_qudes') }}
+                            <option value="al_qudes">{{ __('cms.al_qudes') }}
                             </option>
-                            <option >
+                            <option value="al_islamy_al_araby">
                                 {{ __('cms.al_islamy_al_araby') }}</option>
-                            <option >
+                            <option>
                                 {{ __('cms.al_islamy_al_phalasteiny') }}</option>
-                            <option >{{ __('cms.al_aurdon') }}
+                            <option value="al_aurdon">{{ __('cms.al_aurdon') }}
                             </option>
-                            <option >{{ __('cms.al_intaj') }}
+                            <option value="al_intaj">{{ __('cms.al_intaj') }}
                             </option>
                         </select>
                     </div>
@@ -62,14 +62,12 @@
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="status" id="type"
-                                @if ($type == 'paid') checked @endif
-                            >
+                                @if ($type == 'paid') checked @endif>
                             <label class="form-check-label">{{ __('cms.paid') }}</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" id="type" name="status"
-                                @if ($type == 'recived') checked @endif
-                            >
+                                @if ($type == 'recived') checked @endif>
                             <label class="form-check-label">{{ __('cms.recived') }}</label>
                         </div>
                     </div>
@@ -77,7 +75,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="button" onclick="update({{$sheek_id}})" class="btn btn-primary">Submit</button>
+                    <button type="button" onclick="update({{ $sheek_id }})" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
