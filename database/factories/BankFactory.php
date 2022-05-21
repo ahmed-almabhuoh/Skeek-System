@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bank;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BankFactory extends Factory
@@ -13,8 +14,6 @@ class BankFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+       
     }
 }
