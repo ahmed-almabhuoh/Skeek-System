@@ -19,12 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('sheekSystem/dist/css/adminlte.min.css') }}">
 
     <!-- Toastr -->
-<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
 
-=======
-    <link rel="stylesheet" href="{{ asset('checkSystem/plugins/toastr/toastr.min.css') }}">
->>>>>>> 0fcda399259e05067193472199dd5cf0298ef286
     @yield('styles')
 </head>
 

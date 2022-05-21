@@ -1,5 +1,4 @@
 <div>
-<<<<<<< HEAD
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 
     <section class="content">
@@ -9,7 +8,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Search</h3>
-                            <input type="text" wire:model="searchTerm" style="margin-left: 15px"/>
+                            <input type="text" wire:model="searchTerm" style="margin-left: 15px; width: 250px; outline: none;"/>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -72,18 +71,4 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
-=======
-    {{-- Stop trying to control. --}}
-    <input type="text" wire:model="searchTerm" />
-
-    @if (!is_null($searchTerm))
-        <ul>
-            @foreach ($sheeks as $sheek)
-                <li>
-                    <a href="{{route('sheeks.edit', $sheek->id)}}">{{ $sheek->beneficiary_name }}</a>
-                </li>
-            @endforeach
-        </ul>
-    @endif
->>>>>>> 0fcda399259e05067193472199dd5cf0298ef286
 </div>
