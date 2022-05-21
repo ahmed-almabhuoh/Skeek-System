@@ -19,6 +19,9 @@
                             <h3 class="card-title">{{ __('cms.sheeks') }}</h3>
                         </div>
                         <!-- /.card-header -->
+                        <div style="margin-left: 80%">
+                            <livewire:search-sheek />
+                        </div>
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
@@ -59,7 +62,9 @@
                                                         class="btn btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button type="button" onclick="confirmDestroy({{$sheek->id}}, this)" class="btn btn-danger">
+                                                    <button type="button"
+                                                        onclick="confirmDestroy({{ $sheek->id }}, this)"
+                                                        class="btn btn-danger">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -80,6 +85,7 @@
 @endsection
 
 @section('scripts')
+    @livewireScripts
     <script>
         function confirmDestroy(id, refrance) {
             Swal.fire({
@@ -125,5 +131,4 @@
             });
         }
     </script>
-    @livewireScripts
 @endsection

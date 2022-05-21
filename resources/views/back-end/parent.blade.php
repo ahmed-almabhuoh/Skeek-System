@@ -20,7 +20,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('checkSystem/plugins/toastr/toastr.min.css') }}">
-
     @yield('styles')
 </head>
 
@@ -36,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{route('admin.dashboard')}}" class="nav-link">{{__('cms.dashboard')}}</a>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">{{ __('cms.dashboard') }}</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -100,15 +99,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{auth('admin')->user()->name}}</a>
+                        <a href="#" class="d-block">{{ auth('admin')->user()->name }}</a>
                     </div>
                 </div>
 
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="text" placeholder="Search"
+                            aria-label="Search" wire:model="searchTerm" />
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -228,7 +227,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Toastr -->
     <script src="{{ asset('checkSystem/plugins/toastr/toastr.min.js') }}"></script>
-
     @yield('scripts')
 </body>
 
