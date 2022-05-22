@@ -21,7 +21,7 @@ class SheekController extends Controller
         //
         $sheeks = Sheek::where([
             ['admin_id', auth('admin')->user()->id],
-        ])->get();
+        ])->with('bank')->get();
         return response()->view('back-end.sheek.index', [
             'sheeks' => $sheeks,
         ]);

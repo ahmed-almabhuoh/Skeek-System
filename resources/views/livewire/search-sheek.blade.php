@@ -35,7 +35,7 @@
                                         <tr>
                                             <td>{{ $sheek->id }}</td>
                                             <td>{{ $sheek->beneficiary_name }}</td>
-                                            <td>{{ $sheek->bank_name }}</td>
+                                            <td>{{ $sheek->bank->name }}</td>
                                             <td>{{ $sheek->amount }}</td>
                                             <td>{{ $sheek->currancy }}</td>
                                             <td>{{ $sheek->type }}</td>
