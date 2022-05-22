@@ -5,7 +5,27 @@
 @section('index', __('cms.add'))
 
 @section('styles')
+    <style>
+        .sheek-background {
+            position: relative;
+        }
 
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+
+        .sheek-background img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #000;
+            /* opacity: 0.3; */
+        }
+
+    </style>
     @livewireStyles
 @endsection
 

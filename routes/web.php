@@ -41,6 +41,10 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::get('recived-sheeks', [SheekController::class, 'recivedSheek'])->name('sheeks.recived');
     Route::get('paid-sheeks', [SheekController::class, 'paidSheeks'])->name('sheeks.paid');
 
+    // Change password
+    Route::get('change-password', [AuthController::class, 'showChangePassword'])->name('password.change');
+    Route::post('change-password', [AuthController::class, 'changePassword']);
+
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

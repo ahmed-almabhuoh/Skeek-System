@@ -34,6 +34,13 @@
     </li>
 
     <li class="nav-header">Settings</li>
+    {{-- Change password --}}
+    <li class="nav-item">
+        <a href="{{ route('password.change') }}" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Change password</p>
+        </a>
+    </li>
     {{-- Logout --}}
     <li class="nav-item">
         <a href="{{ route('logout') }}" class="nav-link">

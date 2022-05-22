@@ -41,4 +41,9 @@ return [
     'edit_sheek' => 'Edit Sheek',
     'edit' => 'Edit',
     'bank_name' => 'Bank',
+    'change_password' => 'Change Password',
+    'current_password' => 'Current Password',
+    'new_password' => 'New Password',
+    'new_password_confirmation' => 'New Password Confirmation',
+    'change' => 'Change',
 ];

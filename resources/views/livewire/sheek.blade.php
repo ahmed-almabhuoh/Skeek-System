@@ -1,6 +1,6 @@
 <div class="row">
     <!-- left column -->
-    <div class="col-md-6">
+    <div class="col-md-5">
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
@@ -78,24 +78,24 @@
         <!-- /.card -->
     </div>
     <!--/.col (left) -->
-    <div class="col-md-6">
+    <div class="col-md-7">
         <!-- Form Element sizes -->
         <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body" style="background-image: url({{Storage::url($image_name)}})">
+            <div class="card-body sheek-background">
                 <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" style="display: inline;">
-                <h3>Sheek</h3>
-                Beneficiary Name: {{ $beneficiary_name }} <br>
-                Amount: {{ $amount }} <br>
-                Currancy: {{ $currany }} <br>
-                {{-- Bank: {{ $bank->name }} <br> --}}
-                Description: {{ $desc }} <br>
-                Country: {{ $country_id }} <br>
-                Back: {{ $bank }} <br>
-                {{-- Image: {{ dd($image_name->img) }} <br> --}}
-                Image name: {{ $image_name }} <br>
+                {{-- <h3>Sheek</h3> --}}
+                <div class="center">
+                    Beneficiary Name: {{ $beneficiary_name }} <br>
+                    Amount: {{ $amount }} <br>
+                    Currancy: {{ $currany }} <br>
+                    Description: {{ $desc }} <br>
+                    Country: {{ $country_id }} <br>
+                    Back: {{ $bank }} <br>
+                    Image name: {{ $image_name }} <br>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
