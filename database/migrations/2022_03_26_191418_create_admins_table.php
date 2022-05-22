@@ -17,6 +17,10 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+
+            // Country foreign key
+            $table->foreignId('country_id')->constrained();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

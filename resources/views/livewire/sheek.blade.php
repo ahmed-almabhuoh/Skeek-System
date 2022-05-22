@@ -7,26 +7,13 @@
                 <h3 class="card-title">{{ __('cms.add_skeed') }}</h3>
             </div>
             <!-- /.card-header -->
-            <div style="margin: 15px;">
-                @if ($errors->any())
-                    @foreach ($errors->all as $error)
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert"
-                                aria-hidden="true">×</button>
-                            <h5><i class="icon fas fa-ban"></i> Fail!</h5>
-                            {{ $error }}
-                        </div>
-                    @endforeach
-                @endif
-            </div>
             <!-- form start -->
             <form id="create-form">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
-                        <input type="text" class="form-control" id="beneficiary_name"
-                            wire:model="beneficiary_name" placeholder="Enter Beneficiary Name"
-                            value="{{ old('beneficiary_name') }}">
+                        <input type="text" class="form-control" id="beneficiary_name" wire:model="beneficiary_name"
+                            placeholder="Enter Beneficiary Name" value="{{ old('beneficiary_name') }}">
                     </div>
                     <div class="form-group">
                         <label for="amount">{{ __('cms.amount') }}</label>
@@ -44,21 +31,30 @@
                             </option>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label>{{ __('cms.bank') }}</label>
-                        <select class="form-control" id="bank_name" wire:model="bank">
-                            <option>{{ __('cms.palestine') }}</option>
-                            <option>{{ __('cms.al_qudes') }}</option>
-                            <option>{{ __('cms.al_islamy_al_araby') }}</option>
-                            <option>{{ __('cms.al_islamy_al_araby') }}</option>
-                            <option>{{ __('cms.al_aurdon') }}</option>
-                            <option>{{ __('cms.al_intaj') }}</option>
+                        <label>Country</label>
+                        <select class="form-control" wire:model="country_id" id="country_id">
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
+                            {{-- <option value="German">Gereman</option> --}}
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label>{{ __('cms.bank') }}</label>
+                        <select class="form-control" id="bank_id" wire:model="bank">
+                            @foreach ($banks as $selected_bank)
+                                <option value="{{ $selected_bank->id }}">{{ $selected_bank->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="desc">{{ __('cms.desc') }}</label>
                         <input type="text" class="form-control" id="desc" placeholder="Enter description"
-                            value="{{ old('desc') }}">
+                            value="{{ old('desc') }}" wire:model="desc">
                     </div>
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
@@ -93,12 +89,13 @@
                 Beneficiary Name: {{ $beneficiary_name }} <br>
                 Amount: {{ $amount }} <br>
                 Currancy: {{ $currany }} <br>
-                Bank: {{ $bank }} <br>
+                {{-- Bank: {{ $bank->name }} <br> --}}
+                Description: {{ $desc }} <br>
+                Country: {{ $country_id }} <br>
+                Back: {{ $bank }} <br>
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>
 </div>
-
-

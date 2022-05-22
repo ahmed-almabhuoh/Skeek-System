@@ -20,11 +20,15 @@ class CreateSheeksTable extends Migration
             $table->string('currancy');
             
             // Admin foreign key
-            $table->foreignId('admin_id');
-            $table->foreign('admin_id')->on('admins')->references('id');
+            $table->foreignId('admin_id')->constrained();
+
+            // Bank forign key
+            $table->foreignId('bank_id')->constrained();
             
             $table->string('desc')->nullable();
             $table->enum('type', ['paid', 'recived']);
+
+            $table->string('img');
             $table->timestamps();
         });
     }

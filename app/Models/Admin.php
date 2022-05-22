@@ -10,7 +10,13 @@ class Admin extends Authenticatable
 {
     use HasFactory;
 
-    public function sheeks () {
+    public function sheeks()
+    {
         return $this->hasMany(Sheek::class, 'admin_id', 'id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 }

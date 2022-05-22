@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Sheek;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class SheekController extends Controller
     public function create()
     {
         //
-        return response()->view('back-end.sheek.add');
+        $banks = Bank::all();
+        return response()->view('back-end.sheek.add', [
+            'banks' => $banks,
+        ]);
     }
 
     /**
@@ -44,21 +48,20 @@ class SheekController extends Controller
      */
     public function store(Request $request)
     {
-        // return response()->json([
-        //     'message' => $request->input('beneficiary_name'),
-        // ], Response::HTTP_OK);
         $validator = Validator($request->only([
             'beneficiary_name',
             'amount',
             'currancy',
-            'bank_name',
+            'bank_id',
+            // 'country_id',
             'desc',
             'type',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
-            'bank_name' => 'required|string',
+            'bank_id' => 'required|integer|exists:banks,id',
+            // 'country_id' => 'required|integer|exists:countries,id',
             'desc' => 'nullable',
             'type' => 'required|string|in:paid,recived',
         ]);
@@ -68,9 +71,10 @@ class SheekController extends Controller
             $sheek->beneficiary_name = $request->input('beneficiary_name');
             $sheek->amount = $request->input('amount');
             $sheek->currancy = $request->input('currancy');
-            $sheek->bank_name = $request->input('bank_name');
+            $sheek->bank_id = $request->input('bank_id');
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');
+            $sheek->img = 'later';
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBackNameToSheeksTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddBackNameToSheeksTable extends Migration
      */
     public function up()
     {
-        Schema::table('sheeks', function (Blueprint $table) {
-            //
-            $table->string('bank_name', 50)->after('amount');
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 45)->unique();
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class AddBackNameToSheeksTable extends Migration
      */
     public function down()
     {
-        Schema::table('sheeks', function (Blueprint $table) {
-            //
-            $table->dropColumn('bank_name');
-        });
+        Schema::dropIfExists('countries');
     }
 }

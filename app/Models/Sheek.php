@@ -12,4 +12,8 @@ class Sheek extends Model
     public function admin () {
         return $this->belongsTo(Admin::class, 'admin_id', 'id');
     }
+
+    public function bank () {
+        return $this->belongsTo(Bank::class, 'bank_id', 'id');
+    }
 }

@@ -16,8 +16,11 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('name', 45);
-            $table->string('country', 45);
             $table->string('city', 45);
+
+            // Country foeign key
+            $table->foreignId('country_id')->constrained();
+            
             $table->timestamps();
         });
     }

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use Illuminate\Database\Seeder;
 
-class SheekImageSeeder extends Seeder
+class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,5 +15,8 @@ class SheekImageSeeder extends Seeder
     public function run()
     {
         //
+        Country::create([
+            'name' => 'Palestine',
+        ]);
     }
 }

@@ -9,8 +9,11 @@ class Bank extends Model
 {
     use HasFactory;
 
-    public function sheekImage()
-    {
-        return $this->hasOne(SheekImage::class, 'bank_id', 'id');
+    public function country () {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function sheek () {
+        return $this->hasOne(Sheek::class, 'bank_id', 'id');
     }
 }

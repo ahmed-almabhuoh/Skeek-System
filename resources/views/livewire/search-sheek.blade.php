@@ -1,6 +1,5 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -8,7 +7,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Search</h3>
-                            <input type="text" wire:model="searchTerm" style="margin-left: 15px; width: 250px; outline: none;"/>
+                            <input type="text" wire:model="searchTerm"
+                                style="margin-left: 15px; width: 250px; outline: none;" />
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -28,16 +28,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <div wire:loading style="margin-left: 40%; font-size: 20px;">
+                                        Loading
+                                    </div>
                                     @foreach ($sheeks as $sheek)
                                         <tr>
                                             <td>{{ $sheek->id }}</td>
                                             <td>{{ $sheek->beneficiary_name }}</td>
-                                            {{-- <td>
-                                                <div class="progress progress-xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-danger">55%</span></td> --}}
                                             <td>{{ $sheek->bank_name }}</td>
                                             <td>{{ $sheek->amount }}</td>
                                             <td>{{ $sheek->currancy }}</td>
