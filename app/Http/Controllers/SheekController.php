@@ -6,6 +6,7 @@ use App\Models\Bank;
 use App\Models\Sheek;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class SheekController extends Controller
@@ -74,7 +75,8 @@ class SheekController extends Controller
             $sheek->bank_id = $request->input('bank_id');
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');
-            $sheek->img = 'later';
+            // $sheek->img = DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first();
+            $sheek->img = (DB::table('images')->select('id')->where('bank_id', 1)->first())->id;
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 

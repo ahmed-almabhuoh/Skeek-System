@@ -84,8 +84,8 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body">
-                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image">
+            <div class="card-body" style="background-image: url({{Storage::url($image_name)}})">
+                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" style="display: inline;">
                 <h3>Sheek</h3>
                 Beneficiary Name: {{ $beneficiary_name }} <br>
                 Amount: {{ $amount }} <br>
