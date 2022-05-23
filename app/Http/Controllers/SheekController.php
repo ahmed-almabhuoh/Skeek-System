@@ -19,9 +19,7 @@ class SheekController extends Controller
     public function index()
     {
         //
-        $sheeks = Sheek::where([
-            ['admin_id', auth('admin')->user()->id],
-        ])->with('bank')->get();
+        $sheeks = Sheek::where('admin_id', auth()->user()->id)->with('bank')->get();
         return response()->view('back-end.sheek.index', [
             'sheeks' => $sheeks,
         ]);
@@ -35,10 +33,8 @@ class SheekController extends Controller
     public function create()
     {
         //
-        $banks = Bank::all();
-        return response()->view('back-end.sheek.add', [
-            'banks' => $banks,
-        ]);
+        // $banks = Bank::all();
+        return response()->view('back-end.sheek.add');
     }
 
     /**
@@ -49,26 +45,21 @@ class SheekController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json([
-            'message' => $request->input('sheek_date'),
-        ], Response::HTTP_BAD_REQUEST);
         $validator = Validator($request->only([
             'beneficiary_name',
             'amount',
             'currancy',
             'bank_id',
-            // 'country_id',
             'desc',
             'type',
-            'sheek_date',
+            // 'sheek_date',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
             'bank_id' => 'required|integer|exists:banks,id',
-            // 'country_id' => 'required|integer|exists:countries,id',
             'desc' => 'nullable',
-            'date' => 'required|string',
+            // 'date' => 'required|string',
             'type' => 'required|string|in:paid,recived',
         ]);
         //

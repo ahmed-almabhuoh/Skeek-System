@@ -108,7 +108,7 @@
                     Country: {{ $country_id }} <br>
                     Back: {{ $bank }} <br>
                     Image name: {{ $image_name }} <br> --}}
-                    {{ $underline }}
+                    {{-- {{ $underline }} --}}
                 </div>
             </div>
             <!-- /.card-body -->

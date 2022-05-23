@@ -69,7 +69,7 @@
             formData.append('bank_id', document.getElementById('bank_id').value);
             // formData.append('country_id', document.getElementById('country_id').value);
             formData.append('desc', document.getElementById('desc').value);
-            formData.append('sheek_date', document.getElementById('sheek_date').value);
+            // formData.append('sheek_date', document.getElementById('sheek_date').value);
             formData.append('type', document.getElementById('recived').checked ? 'recived' : 'paid');
             axios.post('/check-system/sheeks', formData)
                 .then(function(response) {

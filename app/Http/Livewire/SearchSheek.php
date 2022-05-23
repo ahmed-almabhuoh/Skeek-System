@@ -12,7 +12,10 @@ class SearchSheek extends Component
 
     public function render()
     {
-        $this->sheeks = Sheek::where('beneficiary_name', 'LIKE', '%' . $this->searchTerm . '%')->get();
+        $this->sheeks = Sheek::where([
+            ['beneficiary_name', 'LIKE', '%' . $this->searchTerm . '%'],
+            ['admin_id', auth()->user()->id]
+        ])->get();
         return view('livewire.search-sheek');
     }
 }
