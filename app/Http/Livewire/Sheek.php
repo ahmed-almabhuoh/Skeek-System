@@ -17,7 +17,8 @@ class Sheek extends Component
     public $country_id = 1;
     public $countries = [];
     public $desc;
-    // public $image_name;
+    public $line_type = 0;
+    public $underline;
 
     public function mount()
     {
@@ -25,10 +26,19 @@ class Sheek extends Component
     }
     public function render()
     {
-        // dd($this->countries);
         $this->banks = Bank::where('country_id', $this->country_id)->get();
         $image_name = DB::table('images')->select('img')->where('bank_id', $this->bank)->first();
-        // dd($this->image_name = DB::table('images')->select('img')->where('bank_id', $this->bank)->get());
+
+        if ($this->line_type == 1) {
+            $this->underline = '//';
+        }else if ($this->line_type == 2) {
+            $this->underline = 'يصرف للعميل الأول';
+        }else if ($this->line_type == 3) {
+            $this->underline = 'غير قابل للصرف';
+        }else {
+            $this->underline = '';
+        }
+
         return view('livewire.sheek', [
             'image_name' => 'img/' . $image_name->img,
         ]);

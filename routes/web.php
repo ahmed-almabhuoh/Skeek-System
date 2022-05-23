@@ -49,6 +49,13 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::prefix('check-system')->group(function () {
+
+    // Register
+    Route::get('register', [AuthController::class, 'showRegister'])->name('register.view');
+    Route::post('register', [AuthController::class, 'register']);
+});
+
 Route::fallback(function () {
     return view('error.page-not-found');
 });

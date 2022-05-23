@@ -21,6 +21,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
 
+    <style>
+        @media print {
+            .inspire {
+                display: none;
+            }
+
+            .printRowStyle {
+                display: block !important;
+            }
+
+            #result_tbl tbody tr td:first-child,
+            #result_tbl thead tr th:first-child,
+            #result_tbl tbody tr td:last-child,
+            #result_tbl thead tr th:last-child {
+                display: none;
+            }
+        }
+
+    </style>
+
     @yield('styles')
 </head>
 
@@ -163,7 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+            <div class="content-header inspire">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -197,7 +217,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer inspire">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
                 {{ env('APP_VERSION') }}

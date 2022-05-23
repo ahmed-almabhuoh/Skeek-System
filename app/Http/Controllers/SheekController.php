@@ -49,6 +49,9 @@ class SheekController extends Controller
      */
     public function store(Request $request)
     {
+        return response()->json([
+            'message' => $request->input('sheek_date'),
+        ], Response::HTTP_BAD_REQUEST);
         $validator = Validator($request->only([
             'beneficiary_name',
             'amount',
@@ -57,6 +60,7 @@ class SheekController extends Controller
             // 'country_id',
             'desc',
             'type',
+            'sheek_date',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
@@ -64,6 +68,7 @@ class SheekController extends Controller
             'bank_id' => 'required|integer|exists:banks,id',
             // 'country_id' => 'required|integer|exists:countries,id',
             'desc' => 'nullable',
+            'date' => 'required|string',
             'type' => 'required|string|in:paid,recived',
         ]);
         //

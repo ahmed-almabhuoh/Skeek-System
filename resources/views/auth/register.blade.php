@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $guard . ' Login' }}</title>
+    <title>AdminLTE 3 | Registration Page (v2)</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -19,17 +19,24 @@
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <!-- /.login-logo -->
+<body class="hold-transition register-page">
+    <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="index2.html" class="h1"><b>Sheek System</b></a>
+                <a href="sheekSystem/index2.html" class="h1"><b>Admin</b>LTE</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Register a new membership</p>
 
-                <form action="index3.html" method="post">
+                <form id="register-form">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Full name" id="name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" id="email">
                         <div class="input-group-append">
@@ -46,37 +53,50 @@
                             </div>
                         </div>
                     </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Retype password"
+                            id="password_confirmation">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <label for="agreeTerms">
+                                    I agree to the <a href="#">terms</a>
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="button" onclick="login('{{ $guard }}')"
-                                class="btn btn-primary btn-block">Sign In</button>
+                            <button type="button" onclick="applyRegister()"
+                                class="btn btn-primary btn-block">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
+                {{-- <div class="social-auth-links text-center">
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i>
+                        Sign up using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i>
+                        Sign up using Google+
+                    </a>
+                </div> --}}
 
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                    <a href="{{ route('register.view') }}" class="text-center">Register a new membership</a>
-                </p>
+                <a href="{{ route('login', 'admin') }}" class="text-center">I already have a membership</a>
             </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
-    <!-- /.login-box -->
+    <!-- /.register-box -->
 
     <!-- jQuery -->
     <script src="{{ asset('sheekSystem/plugins/jquery/jquery.min.js') }}"></script>
@@ -91,18 +111,19 @@
     <!-- Toastr -->`
     <script src="{{ asset('sheekSystem/plugins/toastr/toastr.min.js') }}"></script>
     <script>
-        function login(guard) {
+        function applyRegister() {
             // auth/login
-            axios.post('/auth/login', {
+            axios.post('/check-system/register', {
+                    name: document.getElementById('name').value,
                     email: document.getElementById('email').value,
                     password: document.getElementById('password').value,
-                    remember: document.getElementById('remember').checked,
-                    _guard: guard,
+                    password_confirmation: document.getElementById('password_confirmation').value,
+                    terms: document.getElementById('agreeTerms').checked,
                 })
                 .then(function(response) {
                     // handle success
                     console.log(response);
-                    window.location.href = '/check-system/dashboard';
+                    window.location.href = '/auth/admin/login';
                 })
                 .catch(function(error) {
                     // handle error

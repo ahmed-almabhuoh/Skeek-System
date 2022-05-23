@@ -103,4 +103,48 @@ class AuthController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
     }
+
+    public function showRegister()
+    {
+        return response()->view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validator = Validator($request->only([
+            'name',
+            'email',
+            'password',
+            'password_confirmation',
+            'terms',
+        ]), [
+            'name' => 'required|string|min:3|max:45',
+            'email' => 'required|email',
+            'password' => ['required', 'string', Password::min(8)->letters()->numbers()->uncompromised()->symbols()->mixedCase(), 'confirmed'],
+            'terms' => 'required|boolean',
+        ]);
+        //
+        if (! $validator->fails()) {
+
+            // Terms
+            if (! $request->input('terms'))
+                return response()->json([
+                    'message' => 'You cannot create new accout without approve on out terms',
+                ], Response::HTTP_BAD_REQUEST);
+
+            $admin = new Admin();
+            $admin->name = $request->input('name');
+            $admin->email = $request->input('email');
+            $admin->password = Hash::make($request->input('password'));
+            $isRegistered = $admin->save();
+
+            return response()->json([
+                'message' => $isRegistered ? 'Register successfully' : 'Faild to register right now, please try another moment',
+            ], $isRegistered ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        }else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
 }
