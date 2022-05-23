@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SheekController extends Controller
 {
+    public function __construct() 
+    {
+        $this->authorizeResource(Sheek::class, 'sheek');
+    }
     /**
      * Display a listing of the resource.
      *
