@@ -56,4 +56,10 @@ return [
     'banks' => 'Banks',
     'add_bank' => 'Add Bank',
     'browse_banks' => 'Browse Banks',
+    'city' => 'City',
+    'image' => 'Image',
+    'choose_image' => 'Choose image',
+    'upload' => 'Upload',
+    'country' => 'Country',
+    'edit_bank' => 'Edit Bank',
 ];

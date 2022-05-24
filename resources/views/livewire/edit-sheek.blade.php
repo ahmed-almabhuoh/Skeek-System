@@ -104,7 +104,7 @@
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
             <div class="card-body sheek-background">
-                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
+                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire" style="width: 605px; height: 272px;">
                 <span class="name">{{ $beneficiary_name }}</span> <br>
                 <span class="amount-in-letter">{{ $amount }}</span> <br>
                 <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
