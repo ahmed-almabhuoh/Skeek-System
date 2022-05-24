@@ -1,7 +1,7 @@
 @extends('back-end.index')
 
-@section('title', __('cms.banks'))
-@section('location', __('cms.banks'))
+@section('title', __('cms.banks') . ' in ' . $country->name)
+@section('location', __('cms.banks') . ' in ' . $country->name)
 @section('index', __('cms.index'))
 
 @section('styles')
@@ -20,7 +20,7 @@
                                 style="margin-left: 15px; width: 250px; outline: none;" />
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('cms.banks') }}</h3>
+                            <h3 class="card-title">{{ __('cms.banks') . ' in ' . $country->name }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

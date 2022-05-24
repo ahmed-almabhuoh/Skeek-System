@@ -53,6 +53,9 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::get('change-password', [AuthController::class, 'showChangePassword'])->name('password.change');
     Route::post('change-password', [AuthController::class, 'changePassword']);
 
+    // Show specific banks
+    Route::get('show-specific-banks/{country}/country', [BankController::class, 'showSpecificBanks'])->name('banks.specific');
+
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

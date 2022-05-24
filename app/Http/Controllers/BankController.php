@@ -20,7 +20,7 @@ class BankController extends Controller
     public function index()
     {
         //
-        $banks = Bank::where('admin_id', auth('admin')->user()->id)->get();
+        $banks = Bank::where('admin_id', auth('admin')->user()->id)->with('country')->get();
         return response()->view('back-end.banks.index', [
             'banks' => $banks,
         ]);
@@ -147,6 +147,7 @@ class BankController extends Controller
             $bank->name = $request->input('name');
             $bank->city = $request->input('city');
             $bank->country_id = $request->input('country_id');
+            $bank->active = $request->input('active');
             $isCreated = $bank->save();
             if ($request->hasFile('sheek_image')) {
                 //abc.png
@@ -196,5 +197,16 @@ class BankController extends Controller
                 'text' => 'Faild to delete bank',
             ], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    public function showSpecificBanks (Country $country) {
+        $banks = Bank::where([
+            ['country_id', $country->id],
+            ['admin_id', auth('admin')->user()->id],
+        ])->get();
+        return response()->view('back-end.banks.spacific-banks', [
+            'banks' => $banks,
+            'country' => $country,
+        ]);
     }
 }

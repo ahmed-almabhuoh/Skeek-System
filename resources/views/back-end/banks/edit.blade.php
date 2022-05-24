@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="active" checked>
+                                    <input type="checkbox" class="form-check-input" id="active" @if($bank->active) checked @endif>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                 </div>
                             </div>

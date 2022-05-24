@@ -29,6 +29,7 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>{{ __('cms.name') }}</th>
+                                        <th>{{ __('cms.bank_count') }}</th>
                                         <th>{{ __('cms.active') }}</th>
                                         <th>{{ __('cms.created_at') }}</th>
                                         <th>{{ __('cms.updated_at') }}</th>
@@ -40,6 +41,14 @@
                                         <tr>
                                             <td>{{ $country->id }}</td>
                                             <td>{{ $country->name }}</td>
+                                            {{-- <td>{{ $country->banks_count }}</td> --}}
+                                            <td>
+                                                <a class="btn btn-app bg-danger"
+                                                    href="{{ route('banks.specific', $country->id) }}">
+                                                    <span class="badge bg-teal">{{ $country->banks_count }}</span>
+                                                    <i class="fas fa-inbox"></i> {{ __('cms.bank_count') }}
+                                                </a>
+                                            </td>
                                             <td><span
                                                     class="badge @if (!$country->active) bg-danger @else bg-success @endif">{{ $country->active_status }}</span>
                                             </td>

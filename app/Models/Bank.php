@@ -16,4 +16,8 @@ class Bank extends Model
     public function sheek () {
         return $this->hasOne(Sheek::class, 'bank_id', 'id');
     }
+
+    public function getActiveStatusAttribute () {
+        return $this->active ? 'Active' : 'In-active';
+    }
 }

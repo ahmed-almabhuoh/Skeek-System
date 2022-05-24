@@ -62,4 +62,5 @@ return [
     'upload' => 'Upload',
     'country' => 'Country',
     'edit_bank' => 'Edit Bank',
+    'bank_count' => 'Bank no.'
 ];
