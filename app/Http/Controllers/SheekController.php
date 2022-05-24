@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SheekController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->authorizeResource(Sheek::class, 'sheek');
     }
@@ -56,15 +56,17 @@ class SheekController extends Controller
             'bank_id',
             'desc',
             'type',
-            // 'sheek_date',
+            'underline_type',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
             'bank_id' => 'required|integer|exists:banks,id',
             'desc' => 'nullable',
-            // 'date' => 'required|string',
+            'underline_type' => 'required|integer|in:1,2,3',
             'type' => 'required|string|in:paid,recived',
+        ], [
+            'bank_id.required' => 'You have to choose a bank',
         ]);
         //
         if (!$validator->fails()) {
@@ -77,6 +79,7 @@ class SheekController extends Controller
             $sheek->type = $request->input('type');
             // $sheek->img = DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first();
             $sheek->img = (DB::table('images')->select('id')->where('bank_id', 1)->first())->id;
+            $sheek->underline_type = $request->input('underline_type');
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 
@@ -131,25 +134,28 @@ class SheekController extends Controller
             'beneficiary_name',
             'amount',
             'currancy',
-            'bank_name',
+            'bank_id',
             'desc',
             'type',
+            'underline_type',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
             'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
-            'bank_name' => 'required|string|min:3|max:50',
+            'bank_id' => 'required|integer|exists:banks,id',
             'desc' => 'nullable',
             'type' => 'required|string|in:paid,recived',
+            'underline_type' => 'required|integer|in:1,2,3',
         ]);
         //
         if (!$validator->fails()) {
             $sheek->beneficiary_name = $request->input('beneficiary_name');
             $sheek->amount = $request->input('amount');
             $sheek->currancy = $request->input('currancy');
-            $sheek->bank_name = $request->input('bank_name');
+            $sheek->bank_id = $request->input('bank_id');
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');
+            $sheek->underline_type = $request->input('underline_type');
             $isUpdated = $sheek->save();
 
             return response()->json([

@@ -26,27 +26,20 @@
     <script>
         function update(id) {
             // check-system/sheeks
-            // let sheekData = new FormData();
-            // sheekData.append('beneficiary_name', document.getElementById('beneficiary_name').value);
-            // formData.append('amount', document.getElementById('amount').value);
-            // formData.append('currancy', document.getElementById('currancy').value);
-            // formData.append('bank', document.getElementById('bank_name').value);
-            // formData.append('desc', document.getElementById('desc').value);
-            // formData.append('status', document.getElementById('recived').checked ? 'recived' : 'paid');
             axios.put('/check-system/sheeks/' + id, {
                 beneficiary_name: document.getElementById('beneficiary_name').value,
                 amount: document.getElementById('amount').value,
                 currancy: document.getElementById('currancy').value,
-                bank_name: document.getElementById('bank_name').value,
+                bank_id: document.getElementById('bank_id').value,
                 desc: document.getElementById('desc').value,
-                type: document.getElementById('type').value ? 'recived' : 'paid',
+                type: document.getElementById('recived').checked ? 'recived' : 'paid',
+                underline_type: document.getElementById('underline_type').value,
             })
                 .then(function(response) {
                     // handle success
                     console.log(response);
                     toastr.success(response.data.message);
-                    // document.getElementById('set-form').reset();
-                    // document.getElementById('reset-form').reset();
+                    window.location.href = '/check-system/sheeks';
                 })
                 .catch(function(error) {
                     // handle error

@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                         <label>Underline</label>
-                        <select class="form-control" id="underline" wire:model="line_type">
+                        <select class="form-control" id="underline_type" wire:model="line_type">
                             <option value="1">//</option>
                             <option value="2">يصرف للمستفيد الأول</option>
                             <option value="3">غير قابل للتداول</option>
