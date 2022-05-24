@@ -1,6 +1,6 @@
 <div class="row">
     <!-- left column -->
-    <div class="col-md-6">
+    <div class="col-md-5">
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
@@ -76,15 +76,13 @@
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status" id="paid" @if ($sheek->type == 'paid')
-                                checked
-                            @endif>
+                            <input class="form-check-input" type="radio" name="status" id="paid"
+                                @if ($sheek->type == 'paid') checked @endif>
                             <label class="form-check-label">{{ __('cms.paid') }}</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="recived" name="status" @if ($sheek->type == 'recived')
-                            checked
-                        @endif>
+                            <input class="form-check-input" type="radio" id="recived" name="status"
+                                @if ($sheek->type == 'recived') checked @endif>
                             <label class="form-check-label">{{ __('cms.recived') }}</label>
                         </div>
                     </div>
@@ -99,20 +97,23 @@
         <!-- /.card -->
     </div>
     <!--/.col (left) -->
-    <div class="col-md-6">
+    <div class="col-md-7">
         <!-- Form Element sizes -->
         <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body">
-                <h3>Sheek</h3>
-                Name: {{ $beneficiary_name }}<br>
+            <div class="card-body sheek-background">
+                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
+                <span class="name">{{ $beneficiary_name }}</span> <br>
+                <span class="amount-in-letter">{{ $amount }}</span> <br>
+                <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
+                {{-- Name: {{ $beneficiary_name }}<br>
                 Amount: {{ $amount }}<br>
                 Currancy: {{ $currancy }}<br>
                 Selected Country: {{ $selected_country_id }} <br>
                 Underline: {{ $line_type }} <br>
-                Description: {{ $desc }} <br>
+                Description: {{ $desc }} <br> --}}
                 {{-- Bank Object: {{ $bank }}<br>
                 Country : {{ $country }}<br>
                 Banks : {{ $banks }}<br>

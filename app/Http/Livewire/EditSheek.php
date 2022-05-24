@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Bank;
 use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class EditSheek extends Component
@@ -57,6 +58,9 @@ class EditSheek extends Component
     {
         $this->banks = Bank::where('country_id', $this->selected_country_id)->get();
         $this->bank = Bank::where('id', $this->selected_bank_id)->first();
-        return view('livewire.edit-sheek');
+        $image_name = DB::table('images')->select('img')->where('bank_id', $this->selected_bank_id)->first();
+        return view('livewire.edit-sheek', [
+            'image_name' => 'img/' . $image_name->img,
+        ]);
     }
 }
