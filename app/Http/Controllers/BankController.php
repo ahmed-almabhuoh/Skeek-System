@@ -180,5 +180,21 @@ class BankController extends Controller
     public function destroy(Bank $bank)
     {
         //
+        $bank_id = $bank->id;
+        if ($bank->delete()) {
+            Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank_id)->first())->img);
+            DB::table('images')->where('bank_id', $bank_id)->delete();
+            return response()->json([
+                'icon' => 'success',
+                'title' => 'Deleted',
+                'text' => 'Bank deleted successfully',
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Faild',
+                'text' => 'Faild to delete bank',
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }
