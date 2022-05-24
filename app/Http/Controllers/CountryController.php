@@ -15,6 +15,10 @@ class CountryController extends Controller
     public function index()
     {
         //
+        $countries = Country::where('admin_id', auth()->user()->id)->get();
+        return response()->view('back-end.countries.index', [
+            'countries' => $countries,
+        ]);
     }
 
     /**

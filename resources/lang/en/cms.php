@@ -46,4 +46,9 @@ return [
     'new_password' => 'New Password',
     'new_password_confirmation' => 'New Password Confirmation',
     'change' => 'Change',
+    'countries' => 'Countries',
+    'add_countries' => 'Add Countries',
+    'edit_countries' => 'Edit Countries',
+    'browse_countries' => 'Browse Countries',
+    'name' => 'Name',
 ];

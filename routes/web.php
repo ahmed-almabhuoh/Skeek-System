@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
@@ -27,11 +28,16 @@ Route::prefix('auth')->middleware('guest:admin')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
+// Recourses
+Route::prefix('check-system')->middleware('auth:admin')->group(function () {
+    Route::resource('sheeks', SheekController::class);
+    Route::resource('countries', CountryController::class);
+});
+
 Route::prefix('check-system')->middleware('auth:admin')->group(function () {
 
     // Admin Dashboard
     Route::view('/', 'back-end.index')->name('back-end.dashboard');
-    Route::resource('sheeks', SheekController::class);
     Route::get('move-sheek/{sheek}', EditSheek::class);
 
     // Home
