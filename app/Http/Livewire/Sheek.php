@@ -22,7 +22,10 @@ class Sheek extends Component
 
     public function mount()
     {
-        $this->countries = Country::all();
+        $this->countries = Country::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['active', '1'],
+        ])->get();
     }
     public function render()
     {

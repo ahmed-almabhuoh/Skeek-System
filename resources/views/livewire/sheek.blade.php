@@ -13,17 +13,17 @@
                     <div class="form-group">
                         <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
                         <input type="text" class="form-control" id="beneficiary_name"
-                            wire:model.lazy="beneficiary_name" placeholder="Enter Beneficiary Name"
+                            wire:model="beneficiary_name" placeholder="Enter Beneficiary Name"
                             >
                     </div>
                     <div class="form-group">
                         <label for="amount">{{ __('cms.amount') }}</label>
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
-                            wire:model.lazy="amount">
+                            wire:model="amount">
                     </div>
                     <div class="form-group">
                         <label>Currancy</label>
-                        <select class="form-control" id="currancy" wire:model.lazy="currany">
+                        <select class="form-control" id="currancy" wire:model="currany">
                             <option @if (old('currancy') == 'Dinar') selected @endif>{{ __('cms.dinar') }}
                             </option>
                             <option @if (old('currancy') == 'Dollar') selected @endif>{{ __('cms.dollar') }}
@@ -35,7 +35,7 @@
 
                     <div class="form-group">
                         <label>Country</label>
-                        <select class="form-control" wire:model.lazy="country_id" id="country_id">
+                        <select class="form-control" wire:model="country_id" id="country_id">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
@@ -45,7 +45,7 @@
 
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
-                        <select class="form-control" id="bank_id" wire:model.lazy="bank">
+                        <select class="form-control" id="bank_id" wire:model="bank">
                             @foreach ($banks as $selected_bank)
                                 <option value="{{ $selected_bank->id }}">{{ $selected_bank->name }}</option>
                             @endforeach
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label for="desc">{{ __('cms.desc') }}</label>
                         <input type="text" class="form-control" id="desc" placeholder="Enter description"
-                            wire:model.lazy="desc">
+                            wire:model="desc">
                     </div>
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
