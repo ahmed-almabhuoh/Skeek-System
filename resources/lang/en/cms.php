@@ -51,4 +51,6 @@ return [
     'edit_countries' => 'Edit Countries',
     'browse_countries' => 'Browse Countries',
     'name' => 'Name',
+    'active' => 'Active',
+    'create' => 'Create',
 ];

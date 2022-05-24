@@ -16,4 +16,8 @@ class Country extends Model
     public function admins () {
         return $this->hasMany(Admin::class, 'county_id', 'id');
     }
+
+    public function getActiveStatusAttribute () {
+        return $this->active ? 'Active' : 'In-active';
+    }
 }

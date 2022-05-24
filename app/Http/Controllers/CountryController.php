@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CountryController extends Controller
 {
@@ -29,6 +31,7 @@ class CountryController extends Controller
     public function create()
     {
         //
+        return response()->view('back-end.countries.create');
     }
 
     /**
@@ -39,7 +42,29 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator($request->only([
+            'name',
+            'active',
+        ]), [
+            'name' => 'required|string|min:3|max:45',
+            'active' => 'required|boolean',
+        ]);
         //
+        if (! $validator->fails()) {
+            $country = new Country();
+            $country->name = $request->input('name');
+            $country->active = $request->input('active');
+            $country->admin_id = auth('admin')->user()->id;
+            $isCreated = $country->save();
+
+            return response()->json([
+                'message' => $isCreated ? 'Country added successfully' : 'Faild to add country',
+            ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        }else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
