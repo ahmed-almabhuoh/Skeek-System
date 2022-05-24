@@ -87,6 +87,9 @@ class CountryController extends Controller
     public function edit(Country $country)
     {
         //
+        return response()->view('back-end.countries.edit', [
+            'country' => $country,
+        ]);
     }
 
     /**
@@ -98,7 +101,27 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
+        $validator = Validator($request->only([
+            'name',
+            'active',
+        ]), [
+            'name' => 'required|string|min:3|max:45',
+            'active' => 'required|boolean',
+        ]);
         //
+        if (! $validator->fails()) {
+            $country->name = $request->input('name');
+            $country->active = $request->input('active');
+            $isUpdated = $country->save();
+
+            return response()->json([
+                'message' => $isUpdated ? 'Country updated successfully' : 'Faild to update country',
+            ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        }else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -110,5 +133,18 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         //
+        if ($country->delete()) {
+            return response()->json([
+                'icon' => 'success',
+                'title' => 'Deleted',
+                'text' => 'Country deleted successfully',
+            ], Response::HTTP_OK);
+        }else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Faild!',
+                'text' => 'Faild to delete country',
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }
