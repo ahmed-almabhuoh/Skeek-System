@@ -34,6 +34,29 @@
             </li>
         </ul>
     </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fa fa-handshake"></i>
+            <p>
+                {{ __('cms.banks') }}
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('banks.create') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{{ __('cms.add_bank') }}</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('banks.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{{ __('cms.browse_banks') }}</p>
+                </a>
+            </li>
+        </ul>
+    </li>
 
     <li class="nav-header">Sheeks Info</li>
     <li class="nav-item">

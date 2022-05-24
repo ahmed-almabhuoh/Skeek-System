@@ -15,6 +15,10 @@ class BankController extends Controller
     public function index()
     {
         //
+        $banks = Bank::where('admin_id', auth('admin')->user()->id)->get();
+        return response()->view('back-end.banks.index', [
+            'banks' => $banks,
+        ]);
     }
 
     /**

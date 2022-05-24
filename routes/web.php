@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
 use App\Http\Livewire\Counter;
@@ -32,6 +33,7 @@ Route::prefix('auth')->middleware('guest:admin')->group(function () {
 Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::resource('sheeks', SheekController::class);
     Route::resource('countries', CountryController::class);
+    Route::resource('banks', BankController::class);
 });
 
 Route::prefix('check-system')->middleware('auth:admin')->group(function () {

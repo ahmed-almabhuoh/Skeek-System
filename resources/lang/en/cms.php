@@ -53,4 +53,7 @@ return [
     'name' => 'Name',
     'active' => 'Active',
     'create' => 'Create',
+    'banks' => 'Banks',
+    'add_bank' => 'Add Bank',
+    'browse_banks' => 'Browse Banks',
 ];
