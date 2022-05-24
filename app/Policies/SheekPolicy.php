@@ -19,6 +19,9 @@ class SheekPolicy
     public function viewAny($user)
     {
         //
+        return auth('admin')->check()
+            ? $this->allow()
+            : $this->deny();
     }
 
     /**

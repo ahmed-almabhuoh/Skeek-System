@@ -14,12 +14,12 @@
                         <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
                         <input type="text" class="form-control" id="beneficiary_name"
                             wire:model.lazy="beneficiary_name" placeholder="Enter Beneficiary Name"
-                            value="{{ old('beneficiary_name') }}">
+                            >
                     </div>
                     <div class="form-group">
                         <label for="amount">{{ __('cms.amount') }}</label>
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
-                            wire:model.lazy="amount" value="{{ old('amount') }}">
+                            wire:model.lazy="amount">
                     </div>
                     <div class="form-group">
                         <label>Currancy</label>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label for="desc">{{ __('cms.desc') }}</label>
                         <input type="text" class="form-control" id="desc" placeholder="Enter description"
-                            value="{{ old('desc') }}" wire:model.lazy="desc">
+                            wire:model.lazy="desc">
                     </div>
                     <label>{{ __('cms.type') }}</label>
                     <div class="form-group">
