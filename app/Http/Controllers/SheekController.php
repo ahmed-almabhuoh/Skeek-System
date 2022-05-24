@@ -78,7 +78,7 @@ class SheekController extends Controller
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');
             // $sheek->img = DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first();
-            $sheek->img = (DB::table('images')->select('id')->where('bank_id', 1)->first())->id;
+            $sheek->img = (DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first())->id;
             $sheek->underline_type = $request->input('underline_type');
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
@@ -127,9 +127,6 @@ class SheekController extends Controller
      */
     public function update(Request $request, Sheek $sheek)
     {
-        // return response()->json([
-        //     'message' => $request->input('bank_name'),
-        // ], Response::HTTP_OK);
         $validator = Validator($request->only([
             'beneficiary_name',
             'amount',
@@ -155,6 +152,8 @@ class SheekController extends Controller
             $sheek->bank_id = $request->input('bank_id');
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');
+            // $sheek->img = DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first();
+            $sheek->img = (DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first())->id;
             $sheek->underline_type = $request->input('underline_type');
             $isUpdated = $sheek->save();
 
