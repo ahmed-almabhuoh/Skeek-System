@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BankController extends Controller
 {
+    public function __construct () {
+        $this->authorizeResource(Bank::class, 'bank');
+    }
     /**
      * Display a listing of the resource.
      *
