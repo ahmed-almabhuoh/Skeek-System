@@ -19,7 +19,7 @@ class CountrySearch extends Component
         $this->countries = Country::where([
             ['admin_id', auth('admin')->user()->id],
             ['name', 'LIKE', '%' . $this->searchTerm . '%'],
-        ])->get();
+        ])->withCount('banks')->get();
         return view('livewire.country-search');
     }
 }

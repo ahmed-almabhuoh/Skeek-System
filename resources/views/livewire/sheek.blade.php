@@ -53,6 +53,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Date:</label>
+                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <input type="text" id="date" wire:model.lazy="date" class="form-control datetimepicker-input" data-target="#reservationdate">
+                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label>Underline</label>
                         <select class="form-control" id="underline_type" wire:model="line_type">
                             <option value="1">//</option>
@@ -103,6 +113,7 @@
                     <span class="name">{{ $beneficiary_name }}</span> <br>
                     <span class="amount-in-letter">{{ $amount }}</span> <br>
                     <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
+{{--                    Date: {{$date}}--}}
                     {{-- Currancy: {{ $currany }} <br>
                     Description: {{ $desc }} <br>
                     Country: {{ $country_id }} <br>

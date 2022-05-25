@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminWelcomeEmail;
 use App\Models\Admin;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -137,6 +139,9 @@ class AuthController extends Controller
             $admin->email = $request->input('email');
             $admin->password = Hash::make($request->input('password'));
             $isRegistered = $admin->save();
+
+            if ($isRegistered)
+                Mail::to($admin)->send(new AdminWelcomeEmail($admin));
 
             return response()->json([
                 'message' => $isRegistered ? 'Register successfully' : 'Faild to register right now, please try another moment',

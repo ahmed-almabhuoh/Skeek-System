@@ -19,6 +19,7 @@ class Sheek extends Component
     public $desc;
     public $line_type = 0;
     public $underline;
+    public $date;
 
     public function mount()
     {
