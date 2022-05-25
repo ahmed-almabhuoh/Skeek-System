@@ -19,7 +19,7 @@ class AdminFactory extends Factory
             //
             'name' => 'Ahmad',
             'email' => 'az540546@gmail.com',
-            'country_id' => Country::inRandomOrder()->first()->id,
+            'country_id' => 1,
             'password' => Hash::make('password'),
         ];
     }

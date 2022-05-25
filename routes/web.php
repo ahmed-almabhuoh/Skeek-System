@@ -28,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->middleware('guest:admin')->group(function () {
     Route::get('/{guard}/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login']);
+
+    // Forget Password
+    Route::get('forget-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showForgetPassword'])->name('password.forget');
+    Route::post('forget-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'sendResetPasswordLink']);
+    // Reset Password
+    Route::get('reset-passwrod/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
+    Route::post('reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'resetPassword']);
 });
 
 // Recourses
@@ -49,7 +56,7 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
 Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(function () {
 
     // Admin Dashboard
-    Route::view('/', 'back-end.index')->name('back-end.dashboard');
+    Route::view('/dashboard', 'back-end.index')->name('back-end.dashboard');
     Route::get('move-sheek/{sheek}', EditSheek::class);
 
     // Home

@@ -14,7 +14,7 @@ class Sheek extends Component
     public $currany = 'Shakel';
     public $bank = 1;
     public $banks = [];
-    public $country_id = 1;
+    public $country_id;
     public $countries = [];
     public $desc;
     public $line_type = 0;
@@ -26,9 +26,15 @@ class Sheek extends Component
             ['admin_id', auth('admin')->user()->id],
             ['active', '1'],
         ])->get();
+        $this->country_id = (Country::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->first())->id;
     }
     public function render()
     {
+        $this->country_id = (Country::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->first())->id;
         $this->banks = Bank::where('country_id', $this->country_id)->get();
         $image_name = DB::table('images')->select('img')->where('bank_id', $this->bank)->first();
 
