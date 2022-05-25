@@ -45,7 +45,7 @@
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="sheek_image">
                                             <label class="custom-file-label"
-                                                for="sheek_image">{{ __('cms.choose_image') }}</label>
+                                                for="sheek_image">{{ __('cms.select_sheek_image') }}</label>
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text">{{ __('cms.upload') }}</span>

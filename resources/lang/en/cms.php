@@ -17,7 +17,7 @@ return [
     'updated_at' => 'Updated at',
     'settings' => 'Settings',
     'add_skeed' => 'Add Sheek',
-    'dollar' => 'Dollar', 
+    'dollar' => 'Dollar',
     'dinar' => 'Dinar',
     'shakel' => 'Shakel',
     'paid' => 'Paid',
@@ -35,7 +35,7 @@ return [
     'al_araby' => 'Al Araby',
     'al_estethmar_al_phalastiny' => 'Al Estethmar Al Phalastiny',
     'al_qahera_amman' => 'Al Qahera Amman',
-    'al_watany' => 'Al Watany', 
+    'al_watany' => 'Al Watany',
     'al_escan' => 'Al Escan',
     // Banks Name -- End --
     'edit_sheek' => 'Edit Sheek',
@@ -62,5 +62,6 @@ return [
     'upload' => 'Upload',
     'country' => 'Country',
     'edit_bank' => 'Edit Bank',
-    'bank_count' => 'Bank no.'
+    'bank_count' => 'Bank no.',
+    'select_sheek_image' => 'Select Sheek Image',
 ];
