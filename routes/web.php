@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Auth\EmailVerifyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
@@ -30,13 +31,22 @@ Route::prefix('auth')->middleware('guest:admin')->group(function () {
 });
 
 // Recourses
-Route::prefix('check-system')->middleware('auth:admin')->group(function () {
+Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(function () {
     Route::resource('sheeks', SheekController::class);
     Route::resource('countries', CountryController::class);
     Route::resource('banks', BankController::class);
 });
 
+// To Verify Email
 Route::prefix('check-system')->middleware('auth:admin')->group(function () {
+
+    // Email Verification
+    Route::get('verify-email', [EmailVerifyController::class, 'showVerifyEmail'])->name('verification.notice');
+    Route::get('verify-email/send', [EmailVerifyController::class, 'sendEmailVerification']);
+    Route::get('verify/{id}/{hash}', [EmailVerifyController::class, 'emailVerify'])->middleware('signed')->name('verification.verify');
+});
+
+Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(function () {
 
     // Admin Dashboard
     Route::view('/', 'back-end.index')->name('back-end.dashboard');
