@@ -30,6 +30,9 @@ class Sheek extends Component
         $this->country_id = (Country::where([
             ['admin_id', auth('admin')->user()->id],
         ])->first())->id;
+        $this->bank = (Bank::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->first())->id;
     }
     public function render()
     {
