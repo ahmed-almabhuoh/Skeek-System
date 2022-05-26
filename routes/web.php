@@ -31,9 +31,9 @@ Route::prefix('auth')->middleware('guest:admin')->group(function () {
 
     // Forget Password
     Route::get('forget-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showForgetPassword'])->name('password.forget');
-    Route::post('forget-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'sendResetPasswordLink']);
+    Route::post('forget-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'sendResetLink']);
     // Reset Password
-    Route::get('reset-passwrod/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
+    Route::get('reset-password/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetPassword'])->name('password.reset');
     Route::post('reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'resetPassword']);
 });
 
