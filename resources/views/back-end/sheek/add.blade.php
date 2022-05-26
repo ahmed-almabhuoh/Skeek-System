@@ -22,7 +22,7 @@
         .amount-in-numbers {
             position: absolute;
             top: 42%;
-            right: 14%;
+            right: 4%;
             transform: translate(-50%, -50%);
             font-size: 24px;
         }
@@ -34,6 +34,14 @@
             transform: translate(-50%, -50%);
             font-size: 22px;
             font-weight: bold;
+        }
+
+        .date {
+            position: absolute;
+            top: 55%;
+            right: 25%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
         }
 
         .sheek-background img {

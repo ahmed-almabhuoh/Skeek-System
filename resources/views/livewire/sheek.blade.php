@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                         <label for="date">{{ __('cms.date') }}</label>
-                        <input type="text" class="form-control" id="date" placeholder="Enter sheek date"
+                        <input type="text" class="form-control" id="date" placeholder="It's prefer to write it like this: 05-Jan-1971"
                                wire:model="date">
                     </div>
 
@@ -103,13 +103,13 @@
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
             <div class="card-body sheek-background">
-                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire" style="width: 605px; height: 272px;">
+                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
                 {{-- <h3>Sheek</h3> --}}
                 <div>
                     <span class="name">{{ $beneficiary_name }}</span> <br>
                     <span class="amount-in-letter">{{ $amount }}</span> <br>
                     <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
-{{--                    Date: {{$date}}--}}
+                    <span class="date">{{$date}}</span>
                     {{-- Currancy: {{ $currany }} <br>
                     Description: {{ $desc }} <br>
                     Country: {{ $country_id }} <br>
