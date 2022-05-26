@@ -30,7 +30,7 @@
                             <tr>
                                 <td>{{ $bank->id }}</td>
                                 <td>{{ $bank->name }}</td>
-                                <td>{{ $bank->country->name . ', ' . $bank->city }}</td>
+                                <td>{{ $bank->country->name ?? 'No Country' . ', ' . $bank->city }}</td>
                                 <td><span
                                         class="badge @if (!$bank->active) bg-danger @else bg-success @endif">{{ $bank->active_status }}</span>
                                 </td>

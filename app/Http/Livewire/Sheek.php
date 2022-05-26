@@ -29,16 +29,16 @@ class Sheek extends Component
         ])->get();
         $this->country_id = (Country::where([
             ['admin_id', auth('admin')->user()->id],
-        ])->first())->id;
+        ])->first())->id ?? 0;
         $this->bank = (Bank::where([
             ['admin_id', auth('admin')->user()->id],
-        ])->first())->id;
+        ])->first())->id ?? 0;
     }
     public function render()
     {
         $this->country_id = (Country::where([
             ['admin_id', auth('admin')->user()->id],
-        ])->first())->id;
+        ])->first())->id ?? 0;
         $this->banks = Bank::where('country_id', $this->country_id)->get();
         $image_name = DB::table('images')->select('img')->where('bank_id', $this->bank)->first();
 
@@ -52,8 +52,19 @@ class Sheek extends Component
             $this->underline = '';
         }
 
-        return view('livewire.sheek', [
-            'image_name' => 'img/' . $image_name->img,
-        ]);
+        if (!($this->country_id == 0))
+            if (is_null($image_name))
+                return view('livewire.sheek', [
+                    'message' => 'You have no bank',
+                ]);
+            else
+                return view('livewire.sheek', [
+                    'image_name' => 'img/' . $image_name->img,
+                    'message' => null,
+                ]);
+        else
+            return view('livewire.sheek', [
+                'message' => 'You have no country',
+            ]);
     }
 }
