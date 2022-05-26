@@ -114,7 +114,7 @@
                 <span class="name">{{ $beneficiary_name }}</span> <br>
                 <span class="amount-in-letter">{{ $amount }}</span> <br>
                 <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
-{{--                Date: {{$date}}--}}
+                <span class="date">{{$date}}</span>
                 {{-- Name: {{ $beneficiary_name }}<br>
                 Amount: {{ $amount }}<br>
                 Currancy: {{ $currancy }}<br>

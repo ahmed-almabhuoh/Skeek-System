@@ -31,7 +31,10 @@ class EditSheek extends Component
         $this->amount = $this->sheek->amount;
         $this->currancy = $this->sheek->currancy;
         $this->country = Country::where('id', $this->selected_bank_id)->first();
-        $this->countries = Country::all();
+        $this->countries = Country::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['active', 1],
+        ])->get();
         $this->line_type = $this->sheek->underline_type;
         $this->desc = $this->sheek->desc;
         $this->selected_bank_id = $this->sheek->bank_id;

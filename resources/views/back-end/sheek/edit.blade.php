@@ -36,6 +36,14 @@
             font-weight: bold;
         }
 
+        .date {
+            position: absolute;
+            top: 58%;
+            right: 25%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+        }
+
         .sheek-background img {
             width: 100%;
             height: auto;
