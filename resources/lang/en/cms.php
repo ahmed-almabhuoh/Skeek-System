@@ -65,4 +65,5 @@ return [
     'bank_count' => 'Bank no.',
     'select_sheek_image' => 'Select Sheek Image',
     'sheek_number' => 'Sheek no.',
+    'date' => 'Date',
 ];

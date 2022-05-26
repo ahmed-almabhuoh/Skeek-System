@@ -57,6 +57,7 @@ class SheekController extends Controller
             'desc',
             'type',
             'underline_type',
+            'date',
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
@@ -65,6 +66,7 @@ class SheekController extends Controller
             'desc' => 'nullable',
             'underline_type' => 'required|integer|in:1,2,3',
             'type' => 'required|string|in:paid,recived',
+            'date' => 'required|string|min:6|max:20',
         ], [
             'bank_id.required' => 'You have to choose a bank',
         ]);
@@ -80,6 +82,7 @@ class SheekController extends Controller
             // $sheek->img = DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first();
             $sheek->img = (DB::table('images')->select('id')->where('bank_id', $request->input('bank_id'))->first())->id;
             $sheek->underline_type = $request->input('underline_type');
+            $sheek->date = $request->input('date');
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 
