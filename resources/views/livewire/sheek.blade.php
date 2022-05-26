@@ -109,7 +109,7 @@
                         {{-- <h3>Sheek</h3> --}}
                         <div>
                             <span class="name">{{ $beneficiary_name }}</span> <br>
-                            <span class="amount-in-letter">{{ $amount }}</span> <br>
+                            <span class="amount-in-letter">{{ $amount_in_words }}</span> <br>
                             <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
                             <span class="date">{{$date}}</span>
                             {{-- Currancy: {{ $currany }} <br>

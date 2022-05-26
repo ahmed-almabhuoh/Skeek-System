@@ -32,8 +32,8 @@
             top: 43%;
             left: 40%;
             transform: translate(-50%, -50%);
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 16px;
+            /*font-weight: bold;*/
         }
 
         .date {
@@ -67,6 +67,7 @@
 
 
 @section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function store() {
             // check-system/sheeks
