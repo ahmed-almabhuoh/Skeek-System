@@ -19,6 +19,7 @@
                                         <th>{{ __('cms.beneficiary_name') }}</th>
                                         <th>{{ __('cms.bank_name') }}</th>
                                         <th>{{ __('cms.amount') }}</th>
+                                        <th>{{ __('cms.date') }}</th>
                                         <th>{{ __('cms.currancy') }}</th>
                                         <th>{{ __('cms.type') }}</th>
                                         <th>{{ __('cms.desc') }}</th>
@@ -37,6 +38,7 @@
                                             <td>{{ $sheek->beneficiary_name }}</td>
                                             <td>{{ $sheek->bank->name }}</td>
                                             <td>{{ $sheek->amount }}</td>
+                                            <td>{{ $sheek->date }}</td>
                                             <td>{{ $sheek->currancy }}</td>
                                             <td>{{ $sheek->type }}</td>
                                             <td>{{ $sheek->desc }}</td>
