@@ -48,6 +48,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="date">{{ __('cms.date') }}</label>
+                        <input type="text" class="form-control" id="date" placeholder="Enter sheek date"
+                               wire:model="date" value="{{$date}}">
+                    </div>
+
+                    <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
                         <select class="form-control" id="bank_id" wire:model="selected_bank_id">
                             @foreach ($banks as $drop_bank)
@@ -108,6 +114,7 @@
                 <span class="name">{{ $beneficiary_name }}</span> <br>
                 <span class="amount-in-letter">{{ $amount }}</span> <br>
                 <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
+{{--                Date: {{$date}}--}}
                 {{-- Name: {{ $beneficiary_name }}<br>
                 Amount: {{ $amount }}<br>
                 Currancy: {{ $currancy }}<br>

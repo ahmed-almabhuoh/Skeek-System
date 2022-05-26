@@ -23,6 +23,7 @@ class EditSheek extends Component
     public $line_type = 1;
     public $desc = '';
     public $image_name;
+    public $date;
 
     public function mount()
     {
@@ -34,6 +35,7 @@ class EditSheek extends Component
         $this->line_type = $this->sheek->underline_type;
         $this->desc = $this->sheek->desc;
         $this->selected_bank_id = $this->sheek->bank_id;
+        $this->date = $this->sheek->date;
     }
 
     public function render()

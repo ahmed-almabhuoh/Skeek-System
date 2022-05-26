@@ -71,6 +71,7 @@
                     desc: document.getElementById('desc').value,
                     type: document.getElementById('recived').checked ? 'recived' : 'paid',
                     underline_type: document.getElementById('underline_type').value,
+                    date: document.getElementById('date').value,
                 })
                 .then(function(response) {
                     // handle success
