@@ -112,7 +112,7 @@
             <div class="card-body sheek-background">
                 <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire" >
                 <span class="name">{{ $beneficiary_name }}</span> <br>
-                <span class="amount-in-letter">{{ $amount }}</span> <br>
+                <span class="amount-in-letter">{{ $amount_in_word }}</span> <br>
                 <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
                 <span class="date">{{$date}}</span>
                 {{-- Name: {{ $beneficiary_name }}<br>

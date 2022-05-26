@@ -83,11 +83,11 @@ class Sheek extends Component
         $words = trim($words);
         $words = ucfirst($words);
         if ($this->currany == 'Shakel') {
-            $words = $words . ' شيكل لا غير';
+            $words = 'فقط ' . $words . ' شيكل لا غير';
         }else if ($this->currany == 'Dollar') {
-            $words = $words . ' دولار لا غير';
+            $words = 'فقط ' . $words . ' دولار لا غير';
         }else {
-            $words = $words . ' دينار لا غير';
+            $words = 'فقط ' . $words . ' دينار لا غير';
         }
         return $words;
     }

@@ -32,8 +32,8 @@
             top: 45%;
             left: 40%;
             transform: translate(-50%, -50%);
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 16px;
+            /*font-weight: bold;*/
         }
 
         .date {
