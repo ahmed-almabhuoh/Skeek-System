@@ -230,16 +230,22 @@ class SheekController extends Controller
 
     public function recivedSheek()
     {
-        $sheeks = Sheek::where('type', 'LIKE', 'recived')->get();
-        return response()->view('back-end.sheek.index', [
+        $sheeks = Sheek::where([
+            ['type', 'recived'],
+            ['admin_id', auth('admin')->user()->id],
+        ])->get();
+        return response()->view('back-end.sheek.search-for-recived-sheek', [
             'sheeks' => $sheeks,
         ]);
     }
 
     public function paidSheeks()
     {
-        $sheeks = Sheek::where('type', 'LIKE', 'paid')->get();
-        return response()->view('back-end.sheek.index', [
+        $sheeks = Sheek::where([
+            ['type', 'recived'],
+            ['admin_id', auth('admin')->user()->id],
+        ])->get();
+        return response()->view('back-end.sheek.search-for-paid-sheek', [
             'sheeks' => $sheeks,
         ]);
     }

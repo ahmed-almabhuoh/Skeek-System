@@ -66,4 +66,6 @@ return [
     'select_sheek_image' => 'Select Sheek Image',
     'sheek_number' => 'Sheek no.',
     'date' => 'Date',
+    'paid_sheek' => 'Paid Sheeks',
+    'recived_sheek' => 'Recived Sheeks',
 ];

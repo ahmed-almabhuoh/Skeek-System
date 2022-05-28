@@ -34,6 +34,6 @@ class SendEmailVerificationJob extends Mailable implements ShouldQueue
     public function handle()
     {
         //
-        $this->request->user()->sendEmailVerificationNotification();
+        dispatch($this->request->user()->sendEmailVerificationNotification());
     }
 }

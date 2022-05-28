@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailVerificationJob;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,7 @@ class EmailVerifyController extends Controller
     }
 
     public function sendEmailVerification (Request $request) {
-//        SendEmailVerificationJob::dispatch($request->all())->onQueue('email_verification');
+//        new SendEmailVerificationJob($request->all());
         $request->user()->sendEmailVerificationNotification();
         return response()->json([
             'message' => 'Verification email send successfully',

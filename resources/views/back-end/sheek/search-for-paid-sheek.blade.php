@@ -1,7 +1,7 @@
 @extends('back-end.index')
 
-@section('title', __('cms.sheeks'))
-@section('location', __('cms.sheeks'))
+@section('title', __('cms.paid_sheek'))
+@section('location', __('cms.paid_sheek'))
 @section('index', __('cms.index'))
 
 @section('styles')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <livewire:search-sheek />
+    <livewire:search-for-paid-sheek />
 @endsection
 
 @section('scripts')
@@ -32,7 +32,7 @@
         }
 
         function destoy(id, refrance) {
-            // check-system/sheeks/{sheek} 
+            // check-system/sheeks/{sheek}
             axios.delete('/check-system/sheeks/' + id)
                 .then(function(response) {
                     // handle success
