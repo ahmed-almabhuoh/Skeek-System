@@ -5,8 +5,6 @@
 @section('index', __('cms.index'))
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
     <style>
         /* The Modal (background) */
         .modal {

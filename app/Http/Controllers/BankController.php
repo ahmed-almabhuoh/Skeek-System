@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BankController extends Controller
 {
-    public function __construct () {
+    public function __construct()
+    {
         $this->authorizeResource(Bank::class, 'bank');
     }
     /**
@@ -23,9 +24,14 @@ class BankController extends Controller
     public function index()
     {
         //
+        $countries = Country::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['active', '1'],
+        ])->get();
         $banks = Bank::where('admin_id', auth('admin')->user()->id)->with('country')->get();
         return response()->view('back-end.banks.index', [
             'banks' => $banks,
+            'countries' => $countries,
         ]);
     }
 
@@ -59,11 +65,13 @@ class BankController extends Controller
             'city',
             'sheek_image',
             'active',
+            'country_id',
         ]), [
             'name' => 'required|string|min:3|max:45',
             'city' => 'required|string|min:3|max:45',
             'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
             'active' => 'required|boolean',
+            'country_id' => 'nullable|exists:countries,id',
         ], [
             'sheek_image.max' => 'File is too large, try agian.',
         ]);
@@ -72,7 +80,7 @@ class BankController extends Controller
             $bank = new Bank();
             $bank->name = $request->input('name');
             $bank->city = $request->input('city');
-            $bank->country_id = $request->input('country_id');
+            $bank->country_id = $request->input('country_id') ?? (Country::where('admin_id', auth('admin')->user()->id)->first())->id;
             $bank->admin_id = auth('admin')->user()->id;
             $isCreated = $bank->save();
             if ($request->hasFile('sheek_image')) {
@@ -202,7 +210,8 @@ class BankController extends Controller
         }
     }
 
-    public function showSpecificBanks (Country $country) {
+    public function showSpecificBanks(Country $country)
+    {
         $banks = Bank::where([
             ['country_id', $country->id],
             ['admin_id', auth('admin')->user()->id],
