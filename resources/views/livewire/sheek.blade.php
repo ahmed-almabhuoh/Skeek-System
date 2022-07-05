@@ -12,9 +12,8 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
-                        <input type="text" class="form-control" id="beneficiary_name"
-                            wire:model="beneficiary_name" placeholder="Enter Beneficiary Name"
-                            >
+                        <input type="text" class="form-control" id="beneficiary_name" wire:model="beneficiary_name"
+                            placeholder="Enter Beneficiary Name">
                     </div>
                     <div class="form-group">
                         <label for="amount">{{ __('cms.amount') }}</label>
@@ -24,6 +23,7 @@
                     <div class="form-group">
                         <label>Currancy</label>
                         <select class="form-control" id="currancy" wire:model="currany">
+                            <option value="0" selected>Select a currancey</option>
                             <option @if (old('currancy') == 'Dinar') selected @endif>{{ __('cms.dinar') }}
                             </option>
                             <option @if (old('currancy') == 'Dollar') selected @endif>{{ __('cms.dollar') }}
@@ -36,6 +36,7 @@
                     <div class="form-group">
                         <label>Country</label>
                         <select class="form-control" wire:model="country_id" id="country_id">
+                            <option value="0" selected>Select a country</option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
@@ -46,6 +47,7 @@
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
                         <select class="form-control" id="bank_id" wire:model="bank">
+                            <option value="0" selected>Select a bank</option>
                             @foreach ($banks as $selected_bank)
                                 <option value="{{ $selected_bank->id }}">{{ $selected_bank->name }}</option>
                             @endforeach
@@ -54,8 +56,8 @@
 
                     <div class="form-group">
                         <label for="date">{{ __('cms.date') }}</label>
-                        <input type="text" class="form-control" id="date" placeholder="It's prefer to write it like this: 05-Jan-1971"
-                               wire:model="date">
+                        <input type="text" class="form-control" id="date"
+                            placeholder="It's prefer to write it like this: 05-Jan-1971" wire:model="date">
                     </div>
 
                     <div class="form-group">
@@ -103,15 +105,15 @@
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
             <div class="card-body sheek-background">
-                @if($country_id != 0)
-                    @if(is_null($message))
+                @if ($country_id != 0)
+                    @if (is_null($message))
                         <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
                         {{-- <h3>Sheek</h3> --}}
                         <div>
                             <span class="name">{{ $beneficiary_name }}</span> <br>
                             <span class="amount-in-letter">{{ $amount_in_words }}</span> <br>
                             <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
-                            <span class="date">{{$date}}</span>
+                            <span class="date">{{ $date }}</span>
                             {{-- Currancy: {{ $currany }} <br>
                             Description: {{ $desc }} <br>
                             Country: {{ $country_id }} <br>
@@ -120,10 +122,10 @@
                             {{-- {{ $underline }} --}}
                         </div>
                     @else
-                        {{$message}}, <a href="{{route('banks.create')}}">Go to add bank.</a>
+                        {{ $message }}, <a href="{{ route('banks.create') }}">Go to add bank.</a>
                     @endif
                 @else
-                    {{$message}}, <a href="{{route('countries.create')}}">Go to add country.</a>
+                    {{ $message }}, <a href="{{ route('countries.create') }}">Go to add country.</a>
                 @endif
             </div>
             <!-- /.card-body -->
