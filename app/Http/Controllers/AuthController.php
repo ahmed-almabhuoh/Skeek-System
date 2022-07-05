@@ -126,10 +126,10 @@ class AuthController extends Controller
             'terms' => 'required|boolean',
         ]);
         //
-        if (! $validator->fails()) {
+        if (!$validator->fails()) {
 
             // Terms
-            if (! $request->input('terms'))
+            if (!$request->input('terms'))
                 return response()->json([
                     'message' => 'You cannot create new accout without approve on out terms',
                 ], Response::HTTP_BAD_REQUEST);
@@ -146,7 +146,7 @@ class AuthController extends Controller
             return response()->json([
                 'message' => $isRegistered ? 'Register successfully' : 'Faild to register right now, please try another moment',
             ], $isRegistered ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        }else {
+        } else {
             return response()->json([
                 'message' => $validator->getMessageBag()->first(),
             ], Response::HTTP_BAD_REQUEST);

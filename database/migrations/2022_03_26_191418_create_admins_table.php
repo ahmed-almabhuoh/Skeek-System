@@ -19,7 +19,9 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
 
             // Country foreign key
-            $table->foreignId('country_id')->nullable()->default(1)->constrained();
+            // $table->foreignId('country_id')->nullable()->default(1)->constrained();
+            $table->foreignId('country_id')->nullable();
+            $table->foreign('country_id')->on('countries')->references('id');
 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
