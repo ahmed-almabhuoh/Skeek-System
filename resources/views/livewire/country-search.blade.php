@@ -19,23 +19,28 @@
                         <div class="modal-content">
                             <span class="close">&times;</span>
                             <p>Create new country..</p>
-                            <form id="create-form">
+                            <form id="create-form" method="POST" action="{{ route('countries.store') }}">
+                                @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">{{ __('cms.name') }}</label>
-                                        <input type="text" class="form-control" id="name"
-                                            placeholder="Enter country name">
+                                        @error('name')
+                                            <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                                Enter country name please.</p>
+                                        @enderror
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ old('name') }}" placeholder="Enter country name">
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="active" checked>
+                                        <input type="checkbox" class="form-check-input" id="active" name="active"
+                                            checked>
                                         <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="button" onclick="applyStoreCountry()"
-                                        class="btn btn-primary">{{ __('cms.create') }}</button>
+                                    <input type="submit" value="Create" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>
