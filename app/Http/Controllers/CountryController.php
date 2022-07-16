@@ -47,29 +47,17 @@ class CountryController extends Controller
      */
     public function store(CreateCountryRequest $request)
     {
-        // $validator = Validator($request->only([
-        //     'name',
-        //     'active',
-        // ]), [
-        //     'name' => 'required|string|min:3|max:45',
-        //     'active' => 'required|boolean',
-        // ]);
-        //
-        // if (! $validator->fails()) {
         $country = new Country();
         $country->name = $request->input('name');
         $country->active = $request->input('active');
         $country->admin_id = auth('admin')->user()->id;
         $isCreated = $country->save();
 
-        // return response()->json([
-        //     'message' => $isCreated ? 'Country added successfully' : 'Faild to add country',
-        // ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
-        // }else {
-        //     return response()->json([
-        //         'message' => $validator->getMessageBag()->first(),
-        //     ], Response::HTTP_BAD_REQUEST);
-        // }
+        if ($isCreated) {
+            return redirect()->route('countries.index')->with(['suc_msg' => 'Country ' . $request->input('name') . ' created successfully.',]);
+        } else {
+            return redirect()->route('countries.create')->with(['err_msg' => 'Failed to store country.',]);
+        }
     }
 
     /**

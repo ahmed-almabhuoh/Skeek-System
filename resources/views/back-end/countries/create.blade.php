@@ -21,28 +21,25 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        {{-- <form id="create-form" action="{{ route('countries.create') }}"> --}}
                         <form method="POST" action="{{ route('countries.store') }}">
                             @csrf
                             <div class="card-body">
-                                @if ($errors->any())
-                                    <h5 style="color: red;">Failed to add country</h5>
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>
+                                    @error('name')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Enter country name" value="{{ old('name') }}">
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="active" name="active" checked>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    @error('active')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <!-- /.card-body -->
