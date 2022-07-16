@@ -19,6 +19,19 @@
                         <div class="card-header">
                             <h3 class="card-title">{{ __('cms.add_countries') }}</h3>
                         </div>
+                        @if ($errors->any())
+                            <div style="margin: 15px">
+
+                                @if (!session()->get('created'))
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-ban"></i> {{ session()->get('title') }}!</h5>
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form method="POST" action="{{ route('countries.store') }}">
@@ -45,8 +58,6 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                {{-- <button type="button" onclick="applyStoreCountry()"
-                                    class="btn btn-primary">{{ __('cms.create') }}</button> --}}
                                 <input type="submit" value="Create" class="btn btn-primary">
                             </div>
                         </form>
@@ -61,28 +72,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        function applyStoreCountry() {
-            // check-system/countries
-            axios.post('/check-system/countries', {
-                    name: document.getElementById('name').value,
-                    active: document.getElementById('active').checked,
-                })
-                .then(function(response) {
-                    // handle success
-                    console.log(response);
-                    toastr.success(response.data.message);
-                    document.getElementById('create-form').reset();
-                    window.location.href = '/check-system/countries';
-                })
-                .catch(function(error) {
-                    // handle error
-                    console.log(error);
-                    toastr.error(error.response.data.message)
-                })
-                .then(function() {
-                    // always executed
-                });
-        }
-    </script>
+  
 @endsection

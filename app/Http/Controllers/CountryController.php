@@ -36,6 +36,11 @@ class CountryController extends Controller
     public function create()
     {
         //
+        session([
+            'created' => false,
+            'title' => 'Failed',
+            'message' => 'Wrong inputs, re-enter and retry agian.',
+        ]);
         return response()->view('back-end.countries.create');
     }
 
@@ -54,9 +59,19 @@ class CountryController extends Controller
         $isCreated = $country->save();
 
         if ($isCreated) {
-            return redirect()->route('countries.index')->with(['suc_msg' => 'Country ' . $request->input('name') . ' created successfully.',]);
+            session([
+                'created' => true,
+                'title' => 'Added Successfully',
+                'message' => 'Country ' . $request->input('name') . ' added successfully.',
+            ]);
+            return redirect()->route('countries.index');
         } else {
-            return redirect()->route('countries.create')->with(['err_msg' => 'Failed to store country.',]);
+            session([
+                'created' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to add country with un-expected error.',
+            ]);
+            return redirect()->route('countries.create');
         }
     }
 

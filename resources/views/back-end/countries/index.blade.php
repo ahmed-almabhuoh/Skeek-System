@@ -74,6 +74,13 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @if (session()->get('created'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-check"></i> {{ session()->get('title') }}!</h5>
+                    {{ session()->get('message') }}
+                </div>
+            @endif
             <livewire:country-search />
             <!-- /.row -->
         </div><!-- /.container-fluid -->
