@@ -21,21 +21,36 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form">
+                        {{-- <form id="create-form" action="{{ route('countries.create') }}"> --}}
+                        <form method="POST" action="{{ route('countries.store') }}">
+                            @csrf
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <h5 style="color: red;">Failed to add country</h5>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter country name">
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="Enter country name" value="{{ old('name') }}">
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="active" checked>
+                                    <input type="checkbox" class="form-check-input" id="active" name="active" checked>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="button" onclick="applyStoreCountry()" class="btn btn-primary">{{ __('cms.create') }}</button>
+                                {{-- <button type="button" onclick="applyStoreCountry()"
+                                    class="btn btn-primary">{{ __('cms.create') }}</button> --}}
+                                <input type="submit" value="Create" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -53,9 +68,9 @@
         function applyStoreCountry() {
             // check-system/countries
             axios.post('/check-system/countries', {
-                name: document.getElementById('name').value,
-                active: document.getElementById('active').checked,
-            })
+                    name: document.getElementById('name').value,
+                    active: document.getElementById('active').checked,
+                })
                 .then(function(response) {
                     // handle success
                     console.log(response);
