@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCountryRequest;
+use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Country;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -107,28 +108,26 @@ class CountryController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(UpdateCountryRequest $request, Country $country)
     {
-        $validator = Validator($request->only([
-            'name',
-            'active',
-        ]), [
-            'name' => 'required|string|min:3|max:45',
-            'active' => 'required|boolean',
-        ]);
-        //
-        if (!$validator->fails()) {
-            $country->name = $request->input('name');
-            $country->active = $request->input('active');
-            $isUpdated = $country->save();
+        $country->name = $request->input('name');
+        $country->active = $request->input('active');
+        $isUpdated = $country->save();
 
-            return response()->json([
-                'message' => $isUpdated ? 'Country updated successfully' : 'Faild to update country',
-            ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        if ($isUpdated) {
+            session([
+                'created' => true,
+                'title' => 'Updated Successfully',
+                'message' => 'Country ' . $request->input('name') . ' updated successfully.',
+            ]);
+            return redirect()->route('countries.index');
         } else {
-            return response()->json([
-                'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_REQUEST);
+            session([
+                'created' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to update country with un-expected error.',
+            ]);
+            return redirect()->route('countries.edit', $country);
         }
     }
 

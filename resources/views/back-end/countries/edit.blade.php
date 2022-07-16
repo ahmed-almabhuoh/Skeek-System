@@ -21,23 +21,31 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="update-form">
+                        <form id="update-form" method="POST" action="{{ route('countries.update', $country->id) }}">
+                            @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter country name" value="{{$country->name}}">
+                                    @error('name')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" class="form-control" name="name" id="name"
+                                        placeholder="Enter country name" value="{{ $country->name }}">
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="active" @if ($country->active)
-                                        checked
-                                    @endif>
+                                    <input type="checkbox" class="form-check-input" name="active" id="active"
+                                        @if ($country->active) checked @endif>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="button" onclick="applyEditingCountry()" class="btn btn-primary">{{ __('cms.edit') }}</button>
+                                {{-- <button type="button" onclick="applyEditingCountry()"
+                                    class="btn btn-primary">{{ __('cms.edit') }}</button> --}}
+                                <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -54,10 +62,10 @@
     <script>
         function applyEditingCountry() {
             // check-system/countries
-            axios.put('/check-system/countries/{{$country->id}}', {
-                name: document.getElementById('name').value,
-                active: document.getElementById('active').checked,
-            })
+            axios.put('/check-system/countries/{{ $country->id }}', {
+                    name: document.getElementById('name').value,
+                    active: document.getElementById('active').checked,
+                })
                 .then(function(response) {
                     // handle success
                     console.log(response);
