@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
+use App\Models\Bank;
 use App\Models\Country;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -165,5 +166,13 @@ class CountryController extends Controller
                 'text' => 'Faild to delete country',
             ], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    public function displayCountryBanks(Country $country)
+    {
+        return response()->view('back-end.countries.country-banks', [
+            'country' => $country,
+            // 'banks' => $country->banks,
+        ]);
     }
 }

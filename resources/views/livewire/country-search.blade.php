@@ -64,7 +64,11 @@
                             @foreach ($countries as $country)
                                 <tr>
                                     <td>{{ $country->id }}</td>
-                                    <td>{{ $country->name }}</td>
+                                    <td>
+                                        <a href="{{ route('country.banks', $country->id) }}">
+                                            {{ $country->name }}
+                                        </a>
+                                    </td>
                                     {{-- <td>{{ $country->banks_count }}</td> --}}
                                     <td>
                                         <a class="btn btn-app bg-danger"

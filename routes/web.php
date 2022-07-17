@@ -73,6 +73,9 @@ Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(fun
     // Show specific banks
     Route::get('show-specific-banks/{country}/country', [BankController::class, 'showSpecificBanks'])->name('banks.specific');
 
+    // Display Country Banks
+    Route::get('country-banks/{country}', [CountryController::class, 'displayCountryBanks'])->name('country.banks');
+
     // Logout
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
