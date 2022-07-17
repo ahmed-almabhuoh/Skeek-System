@@ -28,7 +28,7 @@ class CreateBankRequest extends FormRequest
             'name' => 'required|string|min:3|max:45',
             'city' => 'required|string|min:3|max:45',
             // 'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
-            'sheek_image' => 'required|image|max:2048||dimensions:min_width=600,min_height=270,max_width=620,max_height=280',
+            'sheek_image' => 'required|image|max:2048|mimes:jpg,png,jpeg,gif|dimensions:min_width=600,min_height=270,max_width=620,max_height=280',
             // 'sheek_image' => 'required',
             'active' => 'required|boolean',
             'country_id' => 'nullable|exists:countries,id',
