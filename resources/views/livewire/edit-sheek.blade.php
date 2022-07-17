@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="date">{{ __('cms.date') }}</label>
                         <input type="text" class="form-control" id="date" placeholder="Enter sheek date"
-                               wire:model="date" value="{{$date}}">
+                            wire:model="date" value="{{ $date }}">
                     </div>
 
                     <div class="form-group">
@@ -96,7 +96,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="button" onclick="update({{ $sheek->id }})" class="btn btn-primary">Update</button>
+                    <button type="button" onclick="update({{ $sheek->id }})"
+                        class="btn btn-primary">Update</button>
                 </div>
             </form>
         </div>
@@ -110,11 +111,11 @@
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
             <div class="card-body sheek-background">
-                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire" >
+                <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
                 <span class="name">{{ $beneficiary_name }}</span> <br>
                 <span class="amount-in-letter">{{ $amount_in_word }}</span> <br>
                 <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
-                <span class="date">{{$date}}</span>
+                <span class="date">{{ $date }}</span>
                 {{-- Name: {{ $beneficiary_name }}<br>
                 Amount: {{ $amount }}<br>
                 Currancy: {{ $currancy }}<br>
@@ -125,6 +126,7 @@
                 Country : {{ $country }}<br>
                 Banks : {{ $banks }}<br>
                 Countries: {{ $countries }} <br> --}}
+                {{-- Currancy: {{ $currancy }}<br> --}}
             </div>
             <!-- /.card-body -->
         </div>
