@@ -1,10 +1,15 @@
 <div>
     {{-- Do your work, then step back. --}}
     <div>
+        {{-- Start --}}
+        <h6>Upload Sheek Image</h6>
+
+        <label class="switch">
+            <input type="checkbox" wire:click="$toggle('showFileElement')">
+            <span class="slider round"></span>
+        </label>
+        {{-- End --}}
         <div class="container mx-auto">
-            <button type="button" wire:click="$toggle('showFileElement')" class="px-4 py-2 text-purple-100 bg-purple-500">Upload New
-                Image
-            </button>
             @if ($showFileElement)
                 <div class="form-group">
                     <label for="sheek_image">{{ __('cms.image') }}</label>
