@@ -128,7 +128,7 @@ class BankController extends Controller
 
         // Initial User Session
         session([
-            'isUpdated' => false,
+            'created' => false,
             'title' => 'Failed',
             'message' => 'Wrong inputs, re-enter and retry agian.',
         ]);
@@ -147,19 +147,6 @@ class BankController extends Controller
      */
     public function update(UpdateBankRequest $request, Bank $bank)
     {
-        // $validator = Validator($request->only([
-        //     'name',
-        //     'city',
-        //     'sheek_image',
-        //     'active',
-        // ]), [
-        //     'name' => 'required|string|min:3|max:45',
-        //     'city' => 'required|string|min:3|max:45',
-        //     'sheek_image' => 'nullable',
-        //     'active' => 'required|boolean',
-        // ]);
-        //
-        // if (!$validator->fails()) {
         $bank->name = $request->input('name');
         $bank->city = $request->input('city');
         $bank->country_id = $request->input('country_id');
@@ -185,28 +172,19 @@ class BankController extends Controller
 
         if ($isUpdated) {
             session([
-                'isUpdated' => true,
-                'title' => 'Successfully',
-                'message' => 'Bank updated successfully',
+                'created' => true,
+                'title' => 'Success',
+                'message' => 'Bank ' . $request->input('name') . ' updated successfully.',
             ]);
             return redirect()->route('banks.index');
         } else {
             session([
-                'isUpdated' => false,
+                'created' => false,
                 'title' => 'Failed',
-                'message' => 'Failed to update bank',
+                'message' => 'Failed to update bank ' . $request->input('name') . '.',
             ]);
             return redirect()->route('banks.edit', $bank->id);
         }
-
-        //     return response()->json([
-        //         'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
-        //     ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        // } else {
-        //     return response()->json([
-        //         'message' => $validator->getMessageBag()->first(),
-        //     ], Response::HTTP_BAD_REQUEST);
-        // }
     }
 
     /**
