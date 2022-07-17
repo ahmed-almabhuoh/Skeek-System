@@ -59,6 +59,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    {{-- 1657965807_sheek_images.png --}}
                                     <label for="sheek_image">{{ __('cms.image') }}</label>
                                     @error('sheek_image')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
@@ -74,6 +75,10 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">{{ __('cms.upload') }}</span>
                                         </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top: 2%;">
+                                        <center><img src="/storage/img/{{ $img->img }}" alt="Sheek Image"
+                                                class="inspire"></center>
                                     </div>
                                 </div>
                                 <div class="form-check">

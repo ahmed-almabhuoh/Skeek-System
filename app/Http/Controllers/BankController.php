@@ -134,6 +134,7 @@ class BankController extends Controller
         ]);
         return response()->view('back-end.banks.edit', [
             'bank' => $bank,
+            'img' => DB::table('images')->where('bank_id', $bank->id)->first(),
             'countries' => $countries,
         ]);
     }
