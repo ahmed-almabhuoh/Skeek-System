@@ -67,23 +67,6 @@ class BankController extends Controller
      */
     public function store(CreateBankRequest $request)
     {
-        // $validator = Validator($request->only([
-        //     'name',
-        //     'city',
-        //     'sheek_image',
-        //     'active',
-        //     'country_id',
-        // ]), [
-        //     'name' => 'required|string|min:3|max:45',
-        //     'city' => 'required|string|min:3|max:45',
-        //     'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
-        //     'active' => 'required|boolean',
-        //     'country_id' => 'nullable|exists:countries,id',
-        // ], [
-        //     'sheek_image.max' => 'File is too large, try agian.',
-        // ]);
-        //
-        // if (!$validator->fails()) {
         $bank = new Bank();
         $bank->name = $request->input('name');
         $bank->city = $request->input('city');
@@ -115,15 +98,6 @@ class BankController extends Controller
             ]);
             return redirect()->route('banks.create');
         }
-
-        //     return response()->json([
-        //         'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
-        //     ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        // } else {
-        //     return response()->json([
-        //         'message' => $validator->getMessageBag()->first(),
-        //     ], Response::HTTP_BAD_REQUEST);
-        // }
     }
 
     /**
