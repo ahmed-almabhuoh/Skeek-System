@@ -19,21 +19,50 @@
                         <div class="card-header">
                             <h3 class="card-title">{{ __('cms.add_bank') }}</h3>
                         </div>
+                        @if ($errors->any())
+                            <div style="margin: 15px">
+
+                                @if (!session()->get('created'))
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">×</button>
+                                        <h5><i class="icon fas fa-ban"></i> {{ session()->get('title') }}!</h5>
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form">
+                        <form id="create-form" method="POST" action="{{ route('banks.store') }}"
+                            enctype="multipart/form-data">
+                            @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter bank name">
+                                    @error('name')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Enter bank name">
                                 </div>
                                 <div class="form-group">
                                     <label for="city">{{ __('cms.city') }}</label>
-                                    <input type="text" class="form-control" id="city" placeholder="Enter city">
+                                    @error('city')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" class="form-control" id="city" name="city"
+                                        placeholder="Enter city">
                                 </div>
                                 <div class="form-group">
                                     <label>{{ __('cms.country') }}</label>
-                                    <select class="form-control" id="country_id">
+                                    @error('country_id')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <select class="form-control" id="country_id" name="country_id">
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
@@ -41,9 +70,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="sheek_image">{{ __('cms.image') }}</label>
+                                    @error('sheek_image')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="sheek_image">
+                                            <input type="file" class="custom-file-input" id="sheek_image"
+                                                name="sheek_image">
                                             <label class="custom-file-label"
                                                 for="sheek_image">{{ __('cms.select_sheek_image') }}</label>
                                         </div>
@@ -53,6 +87,10 @@
                                     </div>
                                 </div>
                                 <div class="form-check">
+                                    @error('active')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
                                     <input type="checkbox" class="form-check-input" id="active" checked>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                 </div>
@@ -60,8 +98,9 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="button" onclick="applyStoreBank()"
-                                    class="btn btn-primary">{{ __('cms.create') }}</button>
+                                {{-- <button type="button" onclick="applyStoreBank()"
+                                    class="btn btn-primary">{{ __('cms.create') }}</button> --}}
+                                <input type="submit" value="Create" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

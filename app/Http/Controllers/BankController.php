@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateBankRequest;
 use App\Models\Bank;
 use App\Models\Country;
 use Dotenv\Validator;
@@ -47,6 +48,12 @@ class BankController extends Controller
             ['admin_id', auth('admin')->user()->id],
             ['active', '1'],
         ])->get();
+
+        session([
+            'created' => false,
+            'title' => 'Failed',
+            'message' => 'Wrong inputs, re-enter and retry agian.',
+        ]);
         return response()->view('back-end.banks.create', [
             'countries' => $countries,
         ]);
@@ -58,49 +65,65 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBankRequest $request)
     {
-        $validator = Validator($request->only([
-            'name',
-            'city',
-            'sheek_image',
-            'active',
-            'country_id',
-        ]), [
-            'name' => 'required|string|min:3|max:45',
-            'city' => 'required|string|min:3|max:45',
-            'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
-            'active' => 'required|boolean',
-            'country_id' => 'nullable|exists:countries,id',
-        ], [
-            'sheek_image.max' => 'File is too large, try agian.',
-        ]);
+        // $validator = Validator($request->only([
+        //     'name',
+        //     'city',
+        //     'sheek_image',
+        //     'active',
+        //     'country_id',
+        // ]), [
+        //     'name' => 'required|string|min:3|max:45',
+        //     'city' => 'required|string|min:3|max:45',
+        //     'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
+        //     'active' => 'required|boolean',
+        //     'country_id' => 'nullable|exists:countries,id',
+        // ], [
+        //     'sheek_image.max' => 'File is too large, try agian.',
+        // ]);
         //
-        if (!$validator->fails()) {
-            $bank = new Bank();
-            $bank->name = $request->input('name');
-            $bank->city = $request->input('city');
-            $bank->country_id = $request->input('country_id') ?? (Country::where('admin_id', auth('admin')->user()->id)->first())->id;
-            $bank->admin_id = auth('admin')->user()->id;
-            $isCreated = $bank->save();
-            if ($request->hasFile('sheek_image')) {
-                //abc.png
-                $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();
-                $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
-                DB::table('images')->insert([
-                    'img' => $sheekImageName,
-                    'bank_id' => $bank->id,
-                ]);
-            }
-
-            return response()->json([
-                'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
-            ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        } else {
-            return response()->json([
-                'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_REQUEST);
+        // if (!$validator->fails()) {
+        $bank = new Bank();
+        $bank->name = $request->input('name');
+        $bank->city = $request->input('city');
+        $bank->country_id = $request->input('country_id') ?? (Country::where('admin_id', auth('admin')->user()->id)->first())->id;
+        $bank->admin_id = auth('admin')->user()->id;
+        $isCreated = $bank->save();
+        if ($request->hasFile('sheek_image')) {
+            //abc.png
+            $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();
+            $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
+            DB::table('images')->insert([
+                'img' => $sheekImageName,
+                'bank_id' => $bank->id,
+            ]);
         }
+
+        if ($isCreated) {
+            session([
+                'created' => true,
+                'title' => 'Bank Created',
+                'message' => 'Bank created successfully',
+            ]);
+            return redirect()->route('banks.index');
+        } else {
+            session([
+                'created' => true,
+                'title' => 'Failed',
+                'message' => 'Failed to create new bank',
+            ]);
+            return redirect()->route('banks.create');
+        }
+
+        //     return response()->json([
+        //         'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
+        //     ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        // } else {
+        //     return response()->json([
+        //         'message' => $validator->getMessageBag()->first(),
+        //     ], Response::HTTP_BAD_REQUEST);
+        // }
     }
 
     /**
