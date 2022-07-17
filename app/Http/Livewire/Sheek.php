@@ -39,6 +39,9 @@ class Sheek extends Component
 
     public function another()
     {
+        if ($this->amount == '')
+            $this->amount = 1;
+            
         $Arabic = new \ArPHP\I18N\Arabic();
 
         $Arabic->setNumberFeminine(1);
