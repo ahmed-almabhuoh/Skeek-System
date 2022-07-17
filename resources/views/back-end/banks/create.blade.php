@@ -6,6 +6,7 @@
 
 @section('styles')
 
+    @livewireStyles
 @endsection
 
 @section('content')
@@ -68,24 +69,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="sheek_image">{{ __('cms.image') }}</label>
-                                    @error('sheek_image')
-                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
-                                            {{ $message }}</p>
-                                    @enderror
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="sheek_image"
-                                                name="sheek_image">
-                                            <label class="custom-file-label"
-                                                for="sheek_image">{{ __('cms.select_sheek_image') }}</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">{{ __('cms.upload') }}</span>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <livewire:option-sheek-image />
+                                
                                 <div class="form-check">
                                     @error('active')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
@@ -147,4 +133,6 @@
                 });
         }
     </script>
+
+    @livewireScripts
 @endsection
