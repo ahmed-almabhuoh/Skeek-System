@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 2%;">
-                                        <center><img src="/storage/img/{{ $img->img }}" alt="Sheek Image"
+                                        <center><img src="/storage/img/{{ $img->img ?? '' }}" alt="Sheek Image"
                                                 class="inspire"></center>
                                     </div>
                                 </div>
