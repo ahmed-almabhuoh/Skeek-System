@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBankRequest;
+use App\Http\Requests\UpdateBankRequest;
 use App\Models\Bank;
 use App\Models\Country;
 use Dotenv\Validator;
@@ -124,6 +125,13 @@ class BankController extends Controller
             ['admin_id', auth()->user()->id],
             ['active', '1'],
         ])->get();
+
+        // Initial User Session
+        session([
+            'isUpdated' => false,
+            'title' => 'Failed',
+            'message' => 'Wrong inputs, re-enter and retry agian.',
+        ]);
         return response()->view('back-end.banks.edit', [
             'bank' => $bank,
             'countries' => $countries,
@@ -137,47 +145,68 @@ class BankController extends Controller
      * @param  \App\Models\Bank  $bank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(UpdateBankRequest $request, Bank $bank)
     {
-        $validator = Validator($request->only([
-            'name',
-            'city',
-            'sheek_image',
-            'active',
-        ]), [
-            'name' => 'required|string|min:3|max:45',
-            'city' => 'required|string|min:3|max:45',
-            'sheek_image' => 'nullable',
-            'active' => 'required|boolean',
-        ]);
+        // $validator = Validator($request->only([
+        //     'name',
+        //     'city',
+        //     'sheek_image',
+        //     'active',
+        // ]), [
+        //     'name' => 'required|string|min:3|max:45',
+        //     'city' => 'required|string|min:3|max:45',
+        //     'sheek_image' => 'nullable',
+        //     'active' => 'required|boolean',
+        // ]);
         //
-        if (!$validator->fails()) {
-            $bank->name = $request->input('name');
-            $bank->city = $request->input('city');
-            $bank->country_id = $request->input('country_id');
-            $bank->active = $request->input('active');
-            $isCreated = $bank->save();
-            if ($request->hasFile('sheek_image')) {
-                //abc.png
-                Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank->id)->first())->img);
-                $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();
-                $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
-                DB::table('images')->where([
-                    ['bank_id', $bank->id]
-                ])->update([
-                    'img' => $sheekImageName,
-                    'bank_id' => $bank->id,
-                ]);
-            }
+        // if (!$validator->fails()) {
+        $bank->name = $request->input('name');
+        $bank->city = $request->input('city');
+        $bank->country_id = $request->input('country_id');
+        $bank->active = $request->input('active');
+        $isUpdated = $bank->save();
+        if ($request->hasFile('sheek_image')) {
+            //abc.png
+            // Delete previos image
+            Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank->id)->first())->img);
 
-            return response()->json([
-                'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
-            ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        } else {
-            return response()->json([
-                'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_REQUEST);
+            // Set the new image for the bank "Laravel Storage"
+            $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();
+            $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
+
+            // Store image
+            DB::table('images')->where([
+                ['bank_id', $bank->id]
+            ])->update([
+                'img' => $sheekImageName,
+                'bank_id' => $bank->id,
+            ]);
         }
+
+        if ($isUpdated) {
+            session([
+                'isUpdated' => true,
+                'title' => 'Successfully',
+                'message' => 'Bank updated successfully',
+            ]);
+            return redirect()->route('banks.index');
+        } else {
+            session([
+                'isUpdated' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to update bank',
+            ]);
+            return redirect()->route('banks.edit', $bank->id);
+        }
+
+        //     return response()->json([
+        //         'message' => $isCreated ? 'Bank added successfully' : 'Faild to add bank',
+        //     ], $isCreated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        // } else {
+        //     return response()->json([
+        //         'message' => $validator->getMessageBag()->first(),
+        //     ], Response::HTTP_BAD_REQUEST);
+        // }
     }
 
     /**

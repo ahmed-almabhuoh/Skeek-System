@@ -21,33 +21,53 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form">
+                        <form id="create-form" method="POST" action="{{ route('banks.update', $bank->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter bank name" value="{{$bank->name}}">
+                                    @error('name')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="Enter bank name" value="{{ $bank->name }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="city">{{ __('cms.city') }}</label>
-                                    <input type="text" class="form-control" id="city" placeholder="Enter city" value="{{$bank->city}}">
+                                    @error('city')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" class="form-control" id="city" name="city"
+                                        placeholder="Enter city" value="{{ $bank->city }}">
                                 </div>
                                 <div class="form-group">
                                     <label>{{ __('cms.country') }}</label>
-                                    <select class="form-control" id="country_id">
+                                    @error('country')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <select class="form-control" id="country_id" name="country_id">
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}"
-                                                    @if ($bank->country_id == $country->id)
-                                                        selected
-                                                    @endif
-                                                >{{ $country->name }}</option>
+                                                @if ($bank->country_id == $country->id) selected @endif>{{ $country->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="sheek_image">{{ __('cms.image') }}</label>
+                                    @error('sheek_image')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="sheek_image">
+                                            <input type="file" class="custom-file-input" id="sheek_image"
+                                                name="sheek_image">
                                             <label class="custom-file-label"
                                                 for="sheek_image">{{ __('cms.choose_image') }}</label>
                                         </div>
@@ -57,15 +77,21 @@
                                     </div>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="active" @if($bank->active) checked @endif>
+                                    @error('active')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="checkbox" class="form-check-input" id="active" name="active"
+                                        @if ($bank->active) checked @endif>
                                     <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="button" onclick="applyEditBank()"
-                                    class="btn btn-primary">{{ __('cms.edit') }}</button>
+                                {{-- <button type="button" onclick="applyEditBank()"
+                                    class="btn btn-primary">{{ __('cms.edit') }}</button> --}}
+                                <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -95,7 +121,7 @@
             formData.append('country_id', document.getElementById('country_id').value);
             formData.append('sheek_image', document.getElementById('sheek_image').files[0]);
             formData.append('active', document.getElementById('active').checked ? 1 : 0);
-            axios.post('/check-system/banks/{{$bank->id}}', formData)
+            axios.post('/check-system/banks/{{ $bank->id }}', formData)
                 .then(function(response) {
                     // handle success
                     console.log(response);
