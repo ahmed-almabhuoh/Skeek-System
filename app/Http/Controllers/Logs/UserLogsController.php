@@ -27,7 +27,7 @@ class UserLogsController extends Controller
             'browser_version' => $browser_version,
             'platform_version' => $platform_version,
             'created_at' => Carbon::now()->toDateTimeString(),
-            'user_id' => auth('user')->user()->id,
+            'user_id' => auth('admin')->user()->id,
         ]);
     }
 }

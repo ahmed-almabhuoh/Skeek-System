@@ -22,6 +22,8 @@ class CountryController extends Controller
      */
     public function index()
     {
+        // Store Logs
+        $this->storeUserLogs('show countries');
         //
         $countries = Country::where('admin_id', auth()->user()->id)->withCount('banks')->get();
         return response()->view('back-end.countries.index', [
@@ -36,6 +38,8 @@ class CountryController extends Controller
      */
     public function create()
     {
+        // Store Logs
+        $this->storeUserLogs('show create country');
         //
         session([
             'created' => false,
@@ -60,6 +64,8 @@ class CountryController extends Controller
         $isCreated = $country->save();
 
         if ($isCreated) {
+            // Store Logs
+            $this->storeUserLogs('create country');
             session([
                 'created' => true,
                 'title' => 'Added Successfully',
@@ -96,6 +102,8 @@ class CountryController extends Controller
     public function edit(Country $country)
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show edit country');
         return response()->view('back-end.countries.edit', [
             'country' => $country,
         ]);
@@ -115,6 +123,8 @@ class CountryController extends Controller
         $isUpdated = $country->save();
 
         if ($isUpdated) {
+            // Store Logs
+            $this->storeUserLogs('update country');
             session([
                 'created' => true,
                 'title' => 'Updated Successfully',
@@ -141,6 +151,8 @@ class CountryController extends Controller
     {
         //
         if ($country->delete()) {
+            // Store Logs
+            $this->storeUserLogs('delete country');
             return response()->json([
                 'icon' => 'success',
                 'title' => 'Deleted',

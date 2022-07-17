@@ -23,6 +23,8 @@ class SheekController extends Controller
     public function index()
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show sheeks');
         $sheeks = Sheek::where('admin_id', auth()->user()->id)->with('bank')->get();
         return response()->view('back-end.sheek.index', [
             'sheeks' => $sheeks,
@@ -37,6 +39,8 @@ class SheekController extends Controller
     public function create()
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show create sheek');
         // $banks = Bank::all();
         return response()->view('back-end.sheek.add');
     }
@@ -86,6 +90,8 @@ class SheekController extends Controller
             $sheek->admin_id = auth()->user()->id;
             $isCreated = $sheek->save();
 
+            // Store Logs
+            $this->storeUserLogs('create sheek');
             return response()->json([
                 'message' => $isCreated ? 'Sheed added successfylly' : 'Faild to add sheek',
             ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -116,6 +122,8 @@ class SheekController extends Controller
     public function edit(Sheek $sheek)
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show edit sheek');
         return response()->view('back-end.sheek.edit', [
             'sheek' => $sheek,
         ]);
@@ -163,6 +171,9 @@ class SheekController extends Controller
             $sheek->date = $request->input('date');
             $isUpdated = $sheek->save();
 
+            // Store Logs
+            $this->storeUserLogs('update sheek');
+
             return response()->json([
                 'message' => $isUpdated ? 'Sheek updated successfully' : 'Faild to update sheek',
             ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
@@ -183,6 +194,8 @@ class SheekController extends Controller
     {
         //
         if ($sheek->delete()) {
+            // Store Logs
+            $this->storeUserLogs('delete sheek');
             return response()->json([
                 'icon' => 'success',
                 'title' => 'Deleted',
@@ -199,7 +212,8 @@ class SheekController extends Controller
 
     public function statisics()
     {
-
+        // Store Logs
+        $this->storeUserLogs('dispaly sheeks statics');
         $recived_sheek_num = Sheek::where([
             ['admin_id', auth('admin')->user()->id],
             ['type', 'recived'],

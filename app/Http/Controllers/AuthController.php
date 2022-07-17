@@ -39,6 +39,9 @@ class AuthController extends Controller
             ];
 
             if (Auth::guard($request->get('_guard'))->attempt($credentials, $request->get('remember'))) {
+                // Store Logs
+                $this->storeUserLogs('login');
+
                 return response()->json([
                     'message' => 'login successfully',
                 ], Response::HTTP_OK);
@@ -56,6 +59,8 @@ class AuthController extends Controller
 
     public function logout()
     {
+        // Store Logs
+        $this->storeUserLogs('logout');
         $guard = 'admin';
         if (auth('admin')->check()) {
             $guard = 'admin';
@@ -67,6 +72,8 @@ class AuthController extends Controller
 
     public function showChangePassword()
     {
+        // Store Logs
+        $this->storeUserLogs('show change password');
         return response()->view('auth.change-password');
     }
 
@@ -90,6 +97,9 @@ class AuthController extends Controller
                 $admin = Admin::where('email', auth('admin')->user()->email)->first();
                 $admin->password = Hash::make($request->input('password'));
                 $isChanged = $admin->save();
+
+                // Store Logs
+                $this->storeUserLogs('change password');
 
                 return response()->json([
                     'message' => $isChanged ? 'Password changed successfully' : 'Faild to change password',

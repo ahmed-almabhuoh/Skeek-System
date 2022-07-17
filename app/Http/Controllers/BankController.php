@@ -26,6 +26,9 @@ class BankController extends Controller
     public function index()
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show banks');
+
         $countries = Country::where([
             ['admin_id', auth('admin')->user()->id],
             ['active', '1'],
@@ -45,6 +48,9 @@ class BankController extends Controller
     public function create()
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show create bank');
+
         $countries = Country::where([
             ['admin_id', auth('admin')->user()->id],
             ['active', '1'],
@@ -85,6 +91,8 @@ class BankController extends Controller
         }
 
         if ($isCreated) {
+            // Store Logs
+            $this->storeUserLogs('create bank');
             session([
                 'created' => true,
                 'title' => 'Bank Created',
@@ -121,6 +129,8 @@ class BankController extends Controller
     public function edit(Bank $bank)
     {
         //
+        // Store Logs
+        $this->storeUserLogs('show edit bank');
         $countries = Country::where([
             ['admin_id', auth()->user()->id],
             ['active', '1'],
@@ -172,6 +182,8 @@ class BankController extends Controller
         }
 
         if ($isUpdated) {
+            // Store Logs
+            $this->storeUserLogs('edit bank');
             session([
                 'created' => true,
                 'title' => 'Success',
@@ -201,6 +213,9 @@ class BankController extends Controller
         if ($bank->delete()) {
             Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank_id)->first())->img);
             DB::table('images')->where('bank_id', $bank_id)->delete();
+
+            // Store Logs
+            $this->storeUserLogs('delete bank');
             return response()->json([
                 'icon' => 'success',
                 'title' => 'Deleted',
@@ -217,6 +232,8 @@ class BankController extends Controller
 
     public function showSpecificBanks(Country $country)
     {
+        // Store Logs
+        $this->storeUserLogs('show country\'s banks');
         $banks = Bank::where([
             ['country_id', $country->id],
             ['admin_id', auth('admin')->user()->id],
