@@ -104,7 +104,7 @@ class BankController extends Controller
             session([
                 'created' => true,
                 'title' => 'Bank Created',
-                'message' => 'Bank created successfully',
+                'message' => 'Bank ' . $request->input('name') . ' created successfully',
             ]);
             return redirect()->route('banks.index');
         } else {
