@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateBankRequest extends FormRequest
 {
@@ -25,7 +26,12 @@ class CreateBankRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:3|max:45',
+            'name' => ['required', 'string', 'min:3', 'max:45', Rule::unique('banks')->where(function ($query) {
+                $query->where([
+                    ['admin_id', auth('admin')->user()->id],
+                    ['city', $this->city],
+                ]);
+            })],
             'city' => 'required|string|min:3|max:45',
             // 'sheek_image' => 'required|image|max:2048|mimes:jpg,png',
             'sheek_image' => 'nullable|image|max:2048|mimes:jpg,png,jpeg,gif|dimensions:min_width=600,min_height=270,max_width=620,max_height=280',
