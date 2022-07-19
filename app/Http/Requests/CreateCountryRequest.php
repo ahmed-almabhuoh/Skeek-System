@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateCountryRequest extends FormRequest
 {
@@ -43,7 +44,9 @@ class CreateCountryRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:3|max:45',
+            'name' => ['required', 'string', 'min:3', 'max:45', Rule::unique('countries')->where(function ($query) {
+                $query->where('admin_id', auth('admin')->user()->id);
+            })],
             'active' => 'required|boolean',
         ];
     }

@@ -110,15 +110,6 @@
                                         placeholder="Enter bank name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="city">{{ __('cms.city') }}</label>
-                                    @error('city')
-                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
-                                            {{ $message }}</p>
-                                    @enderror
-                                    <input type="text" class="form-control" id="city" name="city"
-                                        placeholder="Enter city">
-                                </div>
-                                <div class="form-group">
                                     <label>{{ __('cms.country') }}</label>
                                     @error('country_id')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
@@ -129,6 +120,15 @@
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">{{ __('cms.city') }}</label>
+                                    @error('city')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <input type="text" class="form-control" id="city" name="city"
+                                        placeholder="Enter city">
                                 </div>
 
                                 <livewire:option-sheek-image />
