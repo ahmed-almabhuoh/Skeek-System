@@ -166,7 +166,9 @@ class BankController extends Controller
         if ($request->hasFile('sheek_image')) {
             //abc.png
             // Delete previos image
-            Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank->id)->first())->img);
+            if ($bank->img) {
+                Storage::delete('public/img/' . (DB::table('images')->select('img')->where('bank_id', $bank->id)->first())->img);
+            }
 
             // Set the new image for the bank "Laravel Storage"
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();

@@ -15,7 +15,7 @@ class SearchSheek extends Component
         $this->sheeks = Sheek::where([
             ['beneficiary_name', 'LIKE', '%' . $this->searchTerm . '%'],
             ['admin_id', auth()->user()->id]
-        ])->get();
+        ])->with('bank')->get();
         return view('livewire.search-sheek');
     }
 }
