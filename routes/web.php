@@ -7,6 +7,7 @@ use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\SuperDashboardController;
+use App\Http\Controllers\Super\Users\UserController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
 use Illuminate\Support\Facades\Artisan;
@@ -100,4 +101,7 @@ Route::get('/foo', function () {
 
 Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::get('super-dashboard', [SuperDashboardController::class, 'showSuperDashboard'])->name('super.dashboard');
+
+    // Users
+    Route::get('show-users', [UserController::class, 'showAllusers'])->name('super.user_show');
 });

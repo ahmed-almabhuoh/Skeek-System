@@ -20,7 +20,7 @@
         </a>
         <ul class="nav nav-treeview" style="display: none;">
             <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ route('super.user_show') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All</p>
                 </a>
