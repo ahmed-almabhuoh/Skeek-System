@@ -49,7 +49,7 @@ class UserController extends Controller
     // Follow Up Admin
     public function followAdminUserLogs(Admin $admin)
     {
-        $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->get();
+        $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->orderBy('created_at', 'DESC')->get();
 
         return response()->view('back-end.supers.users.follow-up', [
             'userLogs' => $userLogs,
