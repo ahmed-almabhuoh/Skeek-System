@@ -105,4 +105,5 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     // Users
     Route::get('show-users', [UserController::class, 'showAllusers'])->name('super.user_show');
     Route::delete('delete-user/{admin}', [UserController::class, 'deleteUser']);
+    Route::get('ban-user/{admin}', [UserController::class, 'banAndUnBanUser'])->name('super.user_ban');
 });

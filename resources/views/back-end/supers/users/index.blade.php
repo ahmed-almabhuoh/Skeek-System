@@ -52,7 +52,9 @@
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->created_at->diffForHumans() }}</td>
                                         <td>{{ $admin->updated_at->diffForHumans() }}</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
+                                        <td><span
+                                                class="tag tag-success">{{ $admin->active ? 'Un-Banned' : 'Banned' }}</span>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
@@ -62,7 +64,8 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu" style="">
-                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('super.user_ban', $admin->id) }}">Block</a>
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
                                                     <div class="dropdown-divider"></div>

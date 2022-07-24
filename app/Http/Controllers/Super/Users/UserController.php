@@ -36,4 +36,12 @@ class UserController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
     }
+
+    // Ban Admin
+    public function banAndUnBanUser(Admin $admin)
+    {
+        $admin->active = $admin->active ? false : true;
+        $admin->save();
+        return redirect()->route('super.user_show');
+    }
 }
