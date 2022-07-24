@@ -23,7 +23,8 @@ class Admin extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
-    public function resetCodes () {
+    public function resetCodes()
+    {
         return $this->hasMany(ResetCode::class, 'admin_id', 'id');
     }
 }

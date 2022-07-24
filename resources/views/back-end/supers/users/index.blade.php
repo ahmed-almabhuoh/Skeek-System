@@ -66,7 +66,9 @@
                                                 <div class="dropdown-menu" role="menu" style="">
                                                     <a class="dropdown-item"
                                                         href="{{ route('super.user_ban', $admin->id) }}">Block</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('super.user_follow_actions', $admin->id) }}">Follow up
+                                                        actions</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="#">Separated link</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Super\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -43,5 +44,16 @@ class UserController extends Controller
         $admin->active = $admin->active ? false : true;
         $admin->save();
         return redirect()->route('super.user_show');
+    }
+
+    // Follow Up Admin
+    public function followAdminUserLogs(Admin $admin)
+    {
+        $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->get();
+
+        return response()->view('back-end.supers.users.follow-up', [
+            'userLogs' => $userLogs,
+            'admin' => $admin,
+        ]);
     }
 }
