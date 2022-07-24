@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
+use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::prefix('auth')->middleware('guest:admin')->group(function () {
+Route::prefix('auth')->middleware('guest:admin,super')->group(function () {
     Route::get('/{guard}/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login']);
 
@@ -53,7 +55,7 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::get('verify/{id}/{hash}', [EmailVerifyController::class, 'emailVerify'])->middleware('signed')->name('verification.verify');
 });
 
-Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(function () {
+Route::prefix('check-system')->middleware(['auth:admin,super', 'verified'])->group(function () {
 
     // Admin Dashboard
     Route::view('/dashboard', 'back-end.index')->name('back-end.dashboard');
@@ -89,4 +91,13 @@ Route::prefix('check-system')->group(function () {
 
 Route::fallback(function () {
     return view('error.page-not-found');
+});
+
+
+Route::get('/foo', function () {
+    Artisan::call('route:list');
+});
+
+Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
+    Route::get('super-dashboard', [SuperDashboardController::class, 'showSuperDashboard'])->name('super.dashboard');
 });

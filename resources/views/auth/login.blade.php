@@ -66,7 +66,7 @@
 
 
                 <p class="mb-1">
-                    <a href="{{route('password.forget')}}">I forgot my password</a>
+                    <a href="{{ route('password.forget') }}">I forgot my password</a>
                 </p>
                 <p class="mb-0">
                     <a href="{{ route('register.view') }}" class="text-center">Register a new membership</a>
@@ -102,7 +102,11 @@
                 .then(function(response) {
                     // handle success
                     console.log(response);
-                    window.location.href = '/check-system/dashboard';
+                    if (response.data.guard == 'admin') {
+                        window.location.href = '/check-system/dashboard';
+                    } else if (response.data.guard == 'super') {
+                        window.location.href = '/cheek-system/super-dashboard';
+                    }
                 })
                 .catch(function(error) {
                     // handle error

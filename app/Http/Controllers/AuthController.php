@@ -29,7 +29,9 @@ class AuthController extends Controller
             'email' => 'required|string|min:5|max:50|exists:' . $request->get('_guard') . 's,email',
             'password' => 'required|string',
             'remember' => 'required|boolean',
-            '_guard' => 'required|string|in:admin',
+            '_guard' => 'required|string|in:admin,super',
+        ], [
+            '_guard.in' => 'Wrong URL, please choose the right URL',
         ]);
 
         if (!$validator->fails()) {
@@ -37,13 +39,22 @@ class AuthController extends Controller
                 'email' => $request->get('email'),
                 'password' => $request->get('password')
             ];
+            $guard = 'admin';
 
             if (Auth::guard($request->get('_guard'))->attempt($credentials, $request->get('remember'))) {
                 // Store Logs
-                $this->storeUserLogs('login');
+                if (auth('admin')->check())
+                    $this->storeUserLogs('login');
+
+                if (auth('admin')->check()) {
+                    $guard = 'admin';
+                } else if (auth('super')->check()) {
+                    $guard = 'super';
+                }
 
                 return response()->json([
                     'message' => 'login successfully',
+                    'guard' => $guard,
                 ], Response::HTTP_OK);
             } else {
                 return response()->json([
@@ -60,10 +71,15 @@ class AuthController extends Controller
     public function logout()
     {
         // Store Logs
-        $this->storeUserLogs('logout');
+        if (auth('admin')->check())
+            $this->storeUserLogs('logout');
+
         $guard = 'admin';
         if (auth('admin')->check()) {
             $guard = 'admin';
+            auth($guard)->logout();
+        } else if (auth('super')->check()) {
+            $guard = 'super';
             auth($guard)->logout();
         }
 

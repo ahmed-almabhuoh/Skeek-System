@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Super;
 
 return [
 
@@ -43,6 +44,11 @@ return [
             'provider' => 'users',
         ],
 
+        'super' => [
+            'driver' => 'session',
+            'provider' => 'supers',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -75,6 +81,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => Admin::class,
+        ],
+
+        'supers' => [
+            'driver' => 'eloquent',
+            'model' => Super::class,
         ],
 
         // 'users' => [
