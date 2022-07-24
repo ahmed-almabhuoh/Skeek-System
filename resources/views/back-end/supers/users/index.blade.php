@@ -65,9 +65,16 @@
                                                 </button>
                                                 <div class="dropdown-menu" role="menu" style="">
                                                     <a class="dropdown-item"
-                                                        href="{{ route('super.user_ban', $admin->id) }}">Block</a>
+                                                        href="{{ route('super.user_ban', $admin->id) }}">
+                                                        @if ($admin->active)
+                                                            {{ 'Ban' }}
+                                                        @else
+                                                            {{ 'Un-Ban' }}
+                                                        @endif
+                                                    </a>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('super.user_follow_actions', $admin->id) }}">Follow up
+                                                        href="{{ route('super.user_follow_actions', $admin->id) }}">Follow
+                                                        up
                                                         actions</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
                                                     <div class="dropdown-divider"></div>

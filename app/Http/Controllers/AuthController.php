@@ -40,6 +40,12 @@ class AuthController extends Controller
                 'password' => $request->get('password')
             ];
             $guard = 'admin';
+            $admin = Admin::where('email', $request->input('email'))->first();
+            if (!$admin->active) {
+                return response()->json([
+                    'message' => 'Your account has been banned',
+                ], Response::HTTP_BAD_REQUEST);
+            }
 
             if (Auth::guard($request->get('_guard'))->attempt($credentials, $request->get('remember'))) {
                 // Store Logs

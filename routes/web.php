@@ -41,14 +41,14 @@ Route::prefix('auth')->middleware('guest:admin,super')->group(function () {
 });
 
 // Recourses
-Route::prefix('check-system')->middleware(['auth:admin', 'verified'])->group(function () {
+Route::prefix('check-system')->middleware(['auth:admin', 'banned', 'verified'])->group(function () {
     Route::resource('sheeks', SheekController::class);
     Route::resource('countries', CountryController::class);
     Route::resource('banks', BankController::class);
 });
 
 // To Verify Email
-Route::prefix('check-system')->middleware('auth:admin')->group(function () {
+Route::prefix('check-system')->middleware(['auth:admin', 'banned'])->group(function () {
 
     // Email Verification
     Route::get('verify-email', [EmailVerifyController::class, 'showVerifyEmail'])->name('verification.notice');
@@ -56,7 +56,7 @@ Route::prefix('check-system')->middleware('auth:admin')->group(function () {
     Route::get('verify/{id}/{hash}', [EmailVerifyController::class, 'emailVerify'])->middleware('signed')->name('verification.verify');
 });
 
-Route::prefix('check-system')->middleware(['auth:admin,super', 'verified'])->group(function () {
+Route::prefix('check-system')->middleware(['auth:admin,super', 'banned', 'verified'])->group(function () {
 
     // Admin Dashboard
     Route::view('/dashboard', 'back-end.index')->name('back-end.dashboard');
