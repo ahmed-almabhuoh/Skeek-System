@@ -55,7 +55,8 @@
                                         <td><span class="tag tag-success">Approved</span></td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-danger">Action</button>
+                                                <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
+                                                    class="btn btn-danger">Delete</button>
                                                 <button type="button" class="btn btn-danger dropdown-toggle dropdown-icon"
                                                     data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
@@ -84,5 +85,50 @@
 @endsection
 
 @section('super-scripts')
+    <script>
+        function confirmDestroy(id, refrance) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    destoy(id, refrance);
+                }
+            });
+        }
 
+        function destoy(id, refrance) {
+            // check-system/banks/{bank}
+            axios.delete('/cheek-system/delete-user/' + id)
+                .then(function(response) {
+                    // handle success
+                    console.log(response);
+                    refrance.closest('tr').remove();
+                    showDeletingMessage(response.data);
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                    showDeletingMessage(error.response.data);
+                })
+                .then(function() {
+                    // always executed
+                });
+        }
+
+        function showDeletingMessage(data) {
+            Swal.fire({
+                icon: data.icon,
+                title: data.title,
+                text: data.text,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    </script>
 @endsection
