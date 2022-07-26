@@ -44,6 +44,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Settings</th>
@@ -56,6 +57,15 @@
                                         <td>{{ $country->name }}</td>
                                         <td>{{ $country->created_at }}</td>
                                         <td>{{ $country->updated_at }}</td>
+                                        <td><span
+                                                class="badge @if (!$country->active) bg-danger @else bg-success @endif">
+                                                @if ($country->active)
+                                                    Active
+                                                @else
+                                                    In-active
+                                                @endif
+                                            </span>
+                                        </td>
                                         <td>
                                             {{-- <div class="btn-group">
                                                 <button type="button" onclick="confirmDestroy('{{ $country->id }}', this)"
