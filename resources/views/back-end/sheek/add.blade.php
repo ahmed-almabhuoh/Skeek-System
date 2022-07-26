@@ -6,43 +6,107 @@
 
 @section('styles')
     <style>
-        .sheek-background {
-            position: relative;
-        }
+        /* .sheek-background {
+                position: relative;
+                right: 0;
+                top: 100%
+            } */
 
-        .name {
-            position: absolute;
-            top: 35%;
-            left: 40%;
-            transform: translate(-50%, -50%);
-            font-size: 22px;
-            font-weight: bold;
-        }
+        @media print {
+            .inspire {
+                display: none;
+            }
 
-        .amount-in-numbers {
-            position: absolute;
-            top: 42%;
-            right: 4%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-        }
+            .row {
+                width: 100%;
+                height: 100%;
+            }
 
-        .amount-in-letter {
-            position: absolute;
-            top: 43%;
-            left: 40%;
-            transform: translate(-50%, -50%);
-            font-size: 16px;
+
             /*font-weight: bold;*/
+
+            /* .asd {
+                                width: 100% !important;
+                            } */
+            /* .style-printed-parent {
+                            width: 100% !important;
+                            height: 100% !important;
+                            position: relative !important;
+                        }
+
+                        .col-md-7 {
+                            width: 100% !important;
+                        }
+
+                        .row {
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        .style-printed {
+                            position: absolute !important;
+                            right: 0px !important;
+                            top: 100% !important;
+                            color: red !important
+                        } */
+
+            .style-printed {
+                position: absolute !important;
+                right: 0px !important;
+                top: 100% !important;
+                color: red !important
+            }
+
+            .style-printed-parent {
+                width: 100% !important;
+                height: 100% !important;
+                position: relative !important;
+            }
+
+            .printRowStyle {
+                display: block !important;
+            }
+
+            /* #result_tbl tbody tr td:first-child,
+                            #result_tbl thead tr th:first-child,
+                            #result_tbl tbody tr td:last-child,
+                            #result_tbl thead tr th:last-child {
+                                display: none;
+                            } */
         }
 
-        .date {
-            position: absolute;
-            top: 55%;
-            right: 25%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-        }
+        /* .name {
+                position: absolute;
+                top: 35%;
+                left: 40%;
+                transform: translate(-50%, -50%);
+                font-size: 22px;
+                font-weight: bold;
+            }
+
+            .amount-in-numbers {
+                position: absolute;
+                top: 42%;
+                right: 4%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+            }
+
+            .amount-in-letter {
+                position: absolute;
+                top: 43%;
+                left: 40%;
+                transform: translate(-50%, -50%);
+                font-size: 16px;
+            }
+
+            .date {
+                position: absolute;
+                top: 55%;
+                right: 25%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+            }                                    */
 
         .sheek-background img {
             width: 100%;
@@ -51,6 +115,9 @@
             /* opacity: 0.3; */
         }
 
+        .card-body-print {
+            background-color: red
+        }
     </style>
     @livewireStyles
 @endsection

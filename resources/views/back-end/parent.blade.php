@@ -21,26 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
 
-    <style>
-        @media print {
-            .inspire {
-                display: none;
-            }
-
-            .printRowStyle {
-                display: block !important;
-            }
-
-            #result_tbl tbody tr td:first-child,
-            #result_tbl thead tr th:first-child,
-            #result_tbl tbody tr td:last-child,
-            #result_tbl thead tr th:last-child {
-                display: none;
-            }
-        }
-
-    </style>
-
+ 
     @yield('styles')
 </head>
 
@@ -113,8 +94,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('sheekSystem/dist/img/user2-160x160.jpg') }}"
-                            class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('sheekSystem/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ auth('admin')->user()->name }}</a>

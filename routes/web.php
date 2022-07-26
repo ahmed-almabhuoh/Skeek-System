@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
+use App\Http\Controllers\Super\Country\StaticCountriesController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\UserController;
 use App\Http\Livewire\Counter;
@@ -109,4 +110,11 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::delete('delete-user/{admin}', [UserController::class, 'deleteUser']);
     Route::get('ban-user/{admin}', [UserController::class, 'banAndUnBanUser'])->name('super.user_ban');
     Route::get('admin-follow-up/{admin}', [UserController::class, 'followAdminUserLogs'])->name('super.user_follow_actions');
+
+    // Static Countries
+    // Show All
+    Route::get('static-countries', [StaticCountriesController::class, 'showAllStaticCountries'])->name('countries.static_show');
+    // Create
+    Route::get('static-countries-create', [StaticCountriesController::class, 'create'])->name('countries.statis_create');
+    Route::post('static-countries-create', [StaticCountriesController::class, 'store'])->name('countries.static_store');
 });

@@ -1,3 +1,4 @@
+
 <div class="row">
     <!-- left column -->
     <div class="col-md-5 inspire">
@@ -98,13 +99,13 @@
         <!-- /.card -->
     </div>
     <!--/.col (left) -->
-    <div class="col-md-7">
+    <div class="col-md-7 col-print-12 style-printed-parent ">
         <!-- Form Element sizes -->
-        <div class="card card-success">
+        <div class="card style-printed card-success">
             <div class="card-header inspire">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body sheek-background">
+            <div class="card-body sheek-background " >
                 @if ($country_id != 0)
                     @if (is_null($message))
                         <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
