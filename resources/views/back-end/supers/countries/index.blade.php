@@ -67,31 +67,16 @@
                                             </span>
                                         </td>
                                         <td>
-                                            {{-- <div class="btn-group">
-                                                <button type="button" onclick="confirmDestroy('{{ $country->id }}', this)"
-                                                    class="btn btn-danger">Delete</button>
-                                                <button type="button" class="btn btn-danger dropdown-toggle dropdown-icon"
-                                                    data-toggle="dropdown" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
+                                            <div class="btn-group">
+                                                <a href="{{ route('countries.edit', $country->id) }}"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
+                                                    class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
-                                                <div class="dropdown-menu" role="menu" style="">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('super.user_ban', $country->id) }}">
-                                                        @if ($country->active)
-                                                            {{ 'Ban' }}
-                                                        @else
-                                                            {{ 'Un-Ban' }}
-                                                        @endif
-                                                    </a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('super.user_follow_actions', $country->id) }}">Follow
-                                                        up
-                                                        actions</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Separated link</a>
-                                                </div>
-                                            </div> --}}
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -126,8 +111,8 @@
         }
 
         function destoy(id, refrance) {
-            // check-system/banks/{bank}
-            axios.delete('/cheek-system/delete-user/' + id)
+            // static-countries/{id}
+            axios.delete('/cheek-system/static-countries/' + id)
                 .then(function(response) {
                     // handle success
                     console.log(response);

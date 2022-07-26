@@ -117,4 +117,6 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     // Create
     Route::get('static-countries-create', [StaticCountriesController::class, 'create'])->name('countries.statis_create');
     Route::post('static-countries-create', [StaticCountriesController::class, 'store'])->name('countries.static_store');
+    // Delete
+    Route::delete('static-countries/{id}', [StaticCountriesController::class, 'destroy']);
 });
