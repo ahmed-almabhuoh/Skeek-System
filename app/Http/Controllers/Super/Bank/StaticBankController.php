@@ -51,7 +51,7 @@ class StaticBankController extends Controller
                 'title' => 'Added Successfully',
                 'message' => 'Bank ' . $request->input('name') . ' added successfully.',
             ]);
-            return redirect()->route('banks.static_show');
+            return redirect()->route('banks.static_index');
         } else {
             session([
                 'created' => false,
