@@ -45,6 +45,8 @@
                                     <th>ID</th>
                                     <th>Image</th>
                                     <th>Name</th>
+                                    <th>Country</th>
+                                    <th>City</th>
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
@@ -59,6 +61,14 @@
                                             <img src="{{ Storage::url('img/' . $bank->img) }}" width="40px" height="40px"
                                                 alt="Sheek Image">
                                         </td>
+                                        <td>
+                                            @foreach ($countries as $country)
+                                                @if ($country->id == $bank->country_id)
+                                                    {{ $country->name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $bank->city }}</td>
                                         <td>{{ $bank->name }}</td>
                                         <td>{{ $bank->created_at }}</td>
                                         <td>{{ $bank->updated_at }}</td>
@@ -73,7 +83,8 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ route('banks.static_edit', $bank->id) }}" class="btn btn-warning">
+                                                <a href="{{ route('banks.static_edit', $bank->id) }}"
+                                                    class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="button" onclick="confirmDestroy({{ $bank->id }}, this)"

@@ -17,8 +17,10 @@ class StaticBankController extends Controller
     public function index()
     {
         $banks = DB::table('static_bank')->get();
+        $countries = DB::table('static_countries')->get();
         return response()->view('back-end.supers.banks.index', [
             'banks' => $banks,
+            'countries' => $countries,
         ]);
     }
 
@@ -42,6 +44,7 @@ class StaticBankController extends Controller
                 'city' => $request->input('city'),
                 'img' => $sheekImageName,
                 'country_id' => $request->input('country_id'),
+                'active' => $request->input('active'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -87,12 +90,14 @@ class StaticBankController extends Controller
                 'name' => $request->input('name'),
                 'city' => $request->input('city'),
                 'img' => $sheekImageName,
+                'active' => $request->input('active'),
                 'country_id' => $request->input('country_id'),
                 'updated_at' => now(),
             ]);
         } else {
             $isUpdated = DB::table('static_bank')->where('id', $id)->update([
                 'name' => $request->input('name'),
+                'active' => $request->input('active'),
                 'city' => $request->input('city'),
                 'country_id' => $request->input('country_id'),
                 'updated_at' => now(),
