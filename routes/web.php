@@ -131,4 +131,5 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::delete('static-banks/{id}', [StaticBankController::class, 'delete'])->name('banks.static_delete');
     // Edit
     Route::get('edit-static-bank/{id}', [StaticBankController::class, 'edit'])->name('banks.static_edit');
+    Route::put('edit-static-bank/{id}', [StaticBankController::class, 'update'])->name('banks.static_update');
 });

@@ -33,9 +33,10 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form" method="POST" action="{{ route('banks.static_store') }}"
+                        <form id="create-form" method="POST" action="{{ route('banks.static_update', $bank->id) }}"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Name</label>

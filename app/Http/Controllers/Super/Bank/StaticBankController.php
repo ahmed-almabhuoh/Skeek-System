@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Super\Bank;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStaticBankRequest;
+use App\Http\Requests\UpdateStaticBankRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,6 +64,8 @@ class StaticBankController extends Controller
         }
     }
 
+
+    // Show Edit Static Bank
     public function edit($id)
     {
         $bank = DB::table('static_bank')->where('id', $id)->first();
@@ -71,6 +74,46 @@ class StaticBankController extends Controller
             'bank' => $bank,
             'countries' => $countries,
         ]);
+    }
+
+    // Update Static Bank
+    public function update(UpdateStaticBankRequest $request, $id)
+    {
+        if ($request->hasFile('image')) {
+            $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->storePubliclyAs('public/img/', $sheekImageName);
+
+            $isUpdated = DB::table('static_bank')->where('id', $id)->update([
+                'name' => $request->input('name'),
+                'city' => $request->input('city'),
+                'img' => $sheekImageName,
+                'country_id' => $request->input('country_id'),
+                'updated_at' => now(),
+            ]);
+        } else {
+            $isUpdated = DB::table('static_bank')->where('id', $id)->update([
+                'name' => $request->input('name'),
+                'city' => $request->input('city'),
+                'country_id' => $request->input('country_id'),
+                'updated_at' => now(),
+            ]);
+        }
+
+        if ($isUpdated) {
+            session([
+                'created' => true,
+                'title' => 'Updaeed Successfully',
+                'message' => 'Bank ' . $request->input('name') . ' updated successfully.',
+            ]);
+            return redirect()->route('banks.static_index');
+        } else {
+            session([
+                'created' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to update bank with un-expected error.',
+            ]);
+            return redirect()->route('banks.statis_create');
+        }
     }
 
     // Delete Static Bank
