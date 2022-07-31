@@ -75,6 +75,27 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
+                    <div class="callout callout-info">
+                        <h5>We are the work team, we have added some countries & its banks for you to save you time and
+                            effort!</h5>
+                        <ul>
+                            @foreach ($static_countries as $static_country)
+                                <li>
+                                    <strong>{{ $static_country->name }}</strong>
+                                    <ul>
+                                        @foreach ($static_banks as $static_bank)
+                                            @if ($static_bank->country_id == $static_country->id)
+                                                <li>
+                                                    {{ $static_bank->name }}
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <p>This does not prevent you from creating the countries & banks you want to deal with.</p>
+                    </div>
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -109,18 +130,35 @@
                                     <input type="text" name="name" class="form-control" id="name"
                                         placeholder="Enter bank name">
                                 </div>
+
                                 <div class="form-group">
-                                    <label>{{ __('cms.country') }}</label>
+                                    <label>Static Countries</label>
+                                    @error('static_country_id')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <select class="form-control" id="static_country_id" name="static_country_id">
+                                        <option value="0">*</option>
+                                        @foreach ($static_countries as $static_country)
+                                            <option value="{{ $static_country->id }}">{{ $static_country->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Your Countries</label>
                                     @error('country_id')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
                                     @enderror
                                     <select class="form-control" id="country_id" name="country_id">
+                                        <option value="0">*</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="city">{{ __('cms.city') }}</label>
                                     @error('city')
