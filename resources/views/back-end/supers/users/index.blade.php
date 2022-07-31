@@ -6,7 +6,6 @@
 
 
 @section('super-styles')
-
 @endsection
 
 @section('super-content')
@@ -55,7 +54,7 @@
                                         <td><span
                                                 class="tag tag-success">{{ $admin->active ? 'Un-Banned' : 'Banned' }}</span>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="btn-group">
                                                 <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
                                                     class="btn btn-danger">Delete</button>
@@ -80,6 +79,20 @@
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="#">Separated link</a>
                                                 </div>
+                                            </div>
+                                        </td> --}}
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
+                                                    class="btn btn-danger btn-flat">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                                <a href="{{ route('super.user_follow_actions', $admin->id) }}" class="btn btn-danger btn-flat">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                </a>
+                                                <a href="{{ route('super.user_ban', $admin->id) }}" class="btn btn-danger btn-flat">
+                                                    <i class="fa fa-ban" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
