@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\SheekController;
+use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\UserController;
@@ -119,4 +120,11 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::post('static-countries-create', [StaticCountriesController::class, 'store'])->name('countries.static_store');
     // Delete
     Route::delete('static-countries/{id}', [StaticCountriesController::class, 'destroy']);
+
+    // Static Banks
+    // Create
+    Route::get('static-banks-create', [StaticBankController::class, 'create'])->name('banks.static_create');
+    Route::post('static-banks-create', [StaticBankController::class, 'store'])->name('banks.static_store');
+    // Show
+    Route::get('static-banks', [StaticBankController::class, 'index'])->name('banks.static_index');
 });
