@@ -73,7 +73,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ route('banks.edit', $bank->id) }}" class="btn btn-warning">
+                                                <a href="{{ route('banks.static_edit', $bank->id) }}" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="button" onclick="confirmDestroy({{ $bank->id }}, this)"

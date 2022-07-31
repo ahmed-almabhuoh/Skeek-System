@@ -63,6 +63,16 @@ class StaticBankController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $bank = DB::table('static_bank')->where('id', $id)->first();
+        $countries = DB::table('static_countries')->get();
+        return response()->view('back-end.supers.banks.edit', [
+            'bank' => $bank,
+            'countries' => $countries,
+        ]);
+    }
+
     // Delete Static Bank
     public function delete($id)
     {
