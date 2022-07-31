@@ -18,10 +18,8 @@ class BanMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->user()->active)
-            return response()->json([
-                'message' => 'Your account has been banned',
-            ], Response::HTTP_BAD_REQUEST);
-            
+            return redirect()->route('logout');
+
         return $next($request);
     }
 }
