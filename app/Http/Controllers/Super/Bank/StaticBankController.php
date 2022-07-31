@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStaticBankRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class StaticBankController extends Controller
 {
@@ -59,6 +60,25 @@ class StaticBankController extends Controller
                 'message' => 'Failed to add bank with un-expected error.',
             ]);
             return redirect()->route('banks.statis_create');
+        }
+    }
+
+    // Delete Static Bank
+    public function delete($id)
+    {
+        $isDeleted = DB::table('static_bank')->where('id', $id)->delete();
+        if ($isDeleted) {
+            return response()->json([
+                'icon' => 'success',
+                'title' => 'Deleted',
+                'text' => 'Static bank deleted successfully'
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Failed',
+                'text' => 'Failed to delete static bank'
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 }

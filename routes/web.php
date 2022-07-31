@@ -127,4 +127,6 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::post('static-banks-create', [StaticBankController::class, 'store'])->name('banks.static_store');
     // Show
     Route::get('static-banks', [StaticBankController::class, 'index'])->name('banks.static_index');
+    // Delete
+    Route::delete('static-banks/{id}', [StaticBankController::class, 'delete'])->name('banks.static_delete');
 });
