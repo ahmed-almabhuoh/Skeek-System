@@ -8,6 +8,7 @@ use App\Models\Bank;
 use App\Models\Country;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class CountryController extends Controller
@@ -42,12 +43,17 @@ class CountryController extends Controller
         // Store Logs
         $this->storeUserLogs('show create country');
         //
+        
+        $static_countries = DB::table('static_countries')->where('active', 1)->get();
         session([
             'created' => false,
             'title' => 'Failed',
             'message' => 'Wrong inputs, re-enter and retry agian.',
         ]);
-        return response()->view('back-end.countries.create');
+
+        return response()->view('back-end.countries.create', [
+            'static_countries' => $static_countries,
+        ]);
     }
 
     /**

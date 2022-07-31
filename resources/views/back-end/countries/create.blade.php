@@ -14,6 +14,15 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
+                    <div class="callout callout-info">
+                        <h5>We are the work team, we have added some countries for you to save you time and effort!</h5>
+                        <ul>
+                            @foreach ($static_countries as $country)
+                                <li>{{ $country->name }}</li>
+                            @endforeach
+                        </ul>
+                        <p>This does not prevent you from creating the countries you want to deal with.</p>
+                    </div>
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -72,5 +81,5 @@
 @endsection
 
 @section('scripts')
-  
+
 @endsection
