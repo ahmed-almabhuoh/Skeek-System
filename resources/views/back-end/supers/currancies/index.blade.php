@@ -112,7 +112,7 @@
 
         function destoy(id, refrance) {
             // static-currancies/{id}
-            axios.delete('/cheek-system/static-currancies/' + id)
+            axios.delete('/cheek-system/currancies/' + id)
                 .then(function(response) {
                     // handle success
                     console.log(response);

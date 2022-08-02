@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCurrancyRequest;
 use App\Models\Currancy;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CurrancyController extends Controller
 {
@@ -107,5 +108,18 @@ class CurrancyController extends Controller
     public function destroy(Currancy $currancy)
     {
         //
+        if ($currancy->delete()) {
+            return response()->json([
+                'icon' => 'success',
+                'title' => 'Deleted',
+                'text' => 'Currancy deleted successfully',
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Faild!',
+                'text' => 'Faild to delete currancy',
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }
