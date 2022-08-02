@@ -109,8 +109,9 @@
                                             {{ $message }}
                                         </span>
                                     @enderror
-                                    <input type="checkbox" class="form-check-input" id="active" checked="">
-                                    <label class="form-check-label" for="active">Active</label>
+                                    <input type="checkbox" class="form-check-input" id="active" name="active"
+                                        @if ($bank->active) checked @endif>
+                                    <label class="form-check-label" for="active">Update</label>
                                 </div>
 
 

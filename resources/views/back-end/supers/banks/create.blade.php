@@ -98,7 +98,8 @@
                                             {{ $message }}
                                         </span>
                                     @enderror
-                                    <input type="checkbox" class="form-check-input" id="active" checked="">
+                                    <input type="checkbox" class="form-check-input" id="active" name="active"
+                                        checked="">
                                     <label class="form-check-label" for="active">Active</label>
                                 </div>
 
