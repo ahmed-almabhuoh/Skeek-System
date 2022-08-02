@@ -39,6 +39,7 @@ class CreateBankRequest extends FormRequest
                 // 'sheek_image' => 'required',
                 'active' => 'required|boolean',
                 'country_id' => 'nullable|integer|exists:countries,id',
+                'currancy_id' => 'required|integer|exists:currancies,id'
             ];
         } else if ($this->static_country_id != 0 && $this->country_id == 0) {
             return [
@@ -55,6 +56,7 @@ class CreateBankRequest extends FormRequest
                 // 'sheek_image' => 'required',
                 'active' => 'required|boolean',
                 'static_country_id' => 'nullable|integer|exists:static_countries,id',
+                'currancy_id' => 'required|integer|exists:currancies,id'
             ];
         } else {
             return [
@@ -72,6 +74,7 @@ class CreateBankRequest extends FormRequest
                 'active' => 'required|boolean',
                 'country_id' => 'nullable|integer|exists:countries,id',
                 'static_country_id' => 'nullable|integer|exists:static_countries,id',
+                'currancy_id' => 'required|integer|exists:currancies,id'
             ];
         }
     }
@@ -86,6 +89,9 @@ class CreateBankRequest extends FormRequest
             // Static Countries
             'static_country_id.integer' => 'Invalid country number',
             'static_country_id.exists' => 'Invalid country number',
+
+            // Currancy
+            'currancy_id.exsits' => 'Invalid currancy entered',
         ];
     }
 
@@ -98,6 +104,7 @@ class CreateBankRequest extends FormRequest
             'sheek_image' => 'Bank sheek image',
             'active' => 'Bank state',
             'static_country_id' => 'Static Country',
+            'currancy_id' => 'Currancy',
         ];
     }
 

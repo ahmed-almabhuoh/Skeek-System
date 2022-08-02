@@ -21,7 +21,7 @@
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
                             wire:model="amount">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Currancy</label>
                         <select class="form-control" id="currancy" wire:model="currany">
                             <option value="0" selected>Select a currancey</option>
@@ -32,12 +32,12 @@
                             <option @if (old('currancy') == 'shakel') selected @endif>{{ __('cms.shakel') }}
                             </option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label>Country</label>
                         <select class="form-control" wire:model="country_id" id="country_id">
-                            <option value="0" selected>Select a country</option>
+                            <option value="0" selected>*</option>
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label>{{ __('cms.bank') }}</label>
                         <select class="form-control" id="bank_id" wire:model="bank">
-                            <option value="0" selected>Select a bank</option>
+                            <option value="0" selected>*</option>
                             @foreach ($banks as $selected_bank)
                                 <option value="{{ $selected_bank->id }}">{{ $selected_bank->name }}</option>
                             @endforeach

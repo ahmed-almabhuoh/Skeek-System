@@ -210,6 +210,22 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Currancy</label>
+                                    @error('currancy_id')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <select class="form-control" id="currancy_id" name="currancy_id">
+                                        <option value="0">*</option>
+                                        @foreach ($currancies as $currancy)
+                                            @if ($currancy->active)
+                                                <option value="{{ $currancy->id }}">{{ $currancy->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="city">{{ __('cms.city') }}</label>
                                     @error('city')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">

@@ -89,6 +89,7 @@ class BankController extends Controller
             $bank->city = $request->input('city');
             $bank->country_id = $request->input('country_id') ?? (Country::where('admin_id', auth('admin')->user()->id)->first())->id;
             $bank->admin_id = auth('admin')->user()->id;
+            $bank->currancy_id = $request->input('currancy_id');
             $isCreated = $bank->save();
             if ($request->hasFile('sheek_image')) {
                 //abc.png
@@ -142,6 +143,7 @@ class BankController extends Controller
                     $bank->city = $request->input('city');
                     $bank->country_id = $adminCountry->id;
                     $bank->admin_id = auth('admin')->user()->id;
+                    $bank->currancy_id = $request->input('currancy_id');
                     $isCreated = $bank->save();
 
                     // If the admin upload an image with bank
@@ -186,7 +188,7 @@ class BankController extends Controller
                     }
                 }
             } else {
-                
+
                 // Start create new country from the system manual
                 $adminCountry = new Country();
                 $adminCountry->name = $static_country->name;
@@ -200,6 +202,7 @@ class BankController extends Controller
                     $bank->city = $request->input('city');
                     $bank->country_id = $adminCountry->id;
                     $bank->admin_id = auth('admin')->user()->id;
+                    $bank->currancy_id = $request->input('currancy_id');
                     $isCreated = $bank->save();
 
                     // If the admin upload an image with bank
