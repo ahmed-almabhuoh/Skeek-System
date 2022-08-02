@@ -32,6 +32,7 @@ class UpdateBankRequest extends FormRequest
             // 'sheek_image' => 'required',
             'active' => 'required|boolean',
             'country_id' => 'nullable|exists:countries,id',
+            'currancy_id' => 'required|integer|exists:currancies,id',
         ];
     }
 
@@ -40,6 +41,8 @@ class UpdateBankRequest extends FormRequest
         return [
             // Sheek image input
             'sheek_image.max' => 'File is too large, try agian.',
+
+            'currancy_id.exists' => 'Invalid currancy entered',
         ];
     }
 
@@ -51,6 +54,7 @@ class UpdateBankRequest extends FormRequest
             'country_id' => 'Bank country',
             'sheek_image' => 'Bank sheek image',
             'active' => 'Bank state',
+            'currancy_id' => 'Currancy',
         ];
     }
 

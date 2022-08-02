@@ -276,6 +276,7 @@ class BankController extends Controller
             ['admin_id', auth()->user()->id],
             ['active', '1'],
         ])->get();
+        $currancies = Currancy::where('active', 1)->get();
 
         // Initial User Session
         session([
@@ -287,6 +288,7 @@ class BankController extends Controller
             'bank' => $bank,
             'img' => DB::table('images')->where('bank_id', $bank->id)->first(),
             'countries' => $countries,
+            'currancies' => $currancies,
         ]);
     }
 
@@ -303,6 +305,7 @@ class BankController extends Controller
         $bank->city = $request->input('city');
         $bank->country_id = $request->input('country_id');
         $bank->active = $request->input('active');
+        $bank->currancy_id = $request->input('currancy_id');
         $isUpdated = $bank->save();
         if ($request->hasFile('sheek_image')) {
             //abc.png

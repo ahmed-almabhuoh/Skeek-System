@@ -51,6 +51,7 @@
                                             {{ $message }}</p>
                                     @enderror
                                     <select class="form-control" id="country_id" name="country_id">
+                                        <option value="0">*</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}"
                                                 @if ($bank->country_id == $country->id) selected @endif>{{ $country->name }}
@@ -58,6 +59,23 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Currancy</label>
+                                    @error('country')
+                                        <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <select class="form-control" id="currancy_id" name="currancy_id">
+                                        <option value="0">*</option>
+                                        @foreach ($currancies as $currancy)
+                                            <option value="{{ $currancy->id }}"
+                                                @if ($bank->currancy_id == $currancy->id) selected @endif>{{ $currancy->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
                                 <div class="form-group">
                                     {{-- 1657965807_sheek_images.png --}}
                                     <label for="sheek_image">{{ __('cms.image') }}</label>

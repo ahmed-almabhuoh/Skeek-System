@@ -80,6 +80,7 @@
                                 <th style="width: 10px">#</th>
                                 <th>{{ __('cms.name') }}</th>
                                 <th>{{ __('cms.country') }}</th>
+                                <th>Currancy</th>
                                 <th>{{ __('cms.active') }}</th>
                                 <th>{{ __('cms.created_at') }}</th>
                                 <th>{{ __('cms.updated_at') }}</th>
@@ -95,6 +96,7 @@
                                     <td>{{ $bank->id }}</td>
                                     <td>{{ $bank->name }}</td>
                                     <td>{{ $bank->country->name ?? 'No Country' . ', ' . $bank->city }}</td>
+                                    <td>{{ $bank->currancy->name ?? '-' }}</td>
                                     <td><span
                                             class="badge @if (!$bank->active) bg-danger @else bg-success @endif">{{ $bank->active_status }}</span>
                                     </td>
