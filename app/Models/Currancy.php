@@ -13,4 +13,8 @@ class Currancy extends Model
     {
         return $this->active ? 'Active' : 'In-active';
     }
+
+    public function sheeks () {
+        return $this->hasMany(Sheek::class);
+    }
 }
