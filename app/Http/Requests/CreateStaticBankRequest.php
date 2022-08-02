@@ -21,6 +21,8 @@ class CreateStaticBankRequest extends FormRequest
         return [
             // Sheek image input
             'image.max' => 'File is too large, try agian.',
+            'currancy_id.exists' => 'Invalid currancy entered',
+            'country_id.exists' => 'Invalid country entered',
         ];
     }
 
@@ -32,6 +34,7 @@ class CreateStaticBankRequest extends FormRequest
             'country_id' => 'Bank country',
             'image' => 'Bank sheek image',
             'active' => 'Bank state',
+            'currancy_id' => 'Currancy',
         ];
     }
 
@@ -62,6 +65,7 @@ class CreateStaticBankRequest extends FormRequest
             'city' => 'required|string|min:3|max:50',
             'image' => 'required|image|mimes:png,bmp,jpg,jpeg|dimensions:min_width=600,min_height=270,max_width=620,max_height=280|max:2048',
             'active' => 'required|boolean',
+            'currancy_id' => 'required|integer|exists:currancies,id',
         ];
     }
 }

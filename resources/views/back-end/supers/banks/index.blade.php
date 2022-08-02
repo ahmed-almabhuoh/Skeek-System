@@ -47,6 +47,7 @@
                                     <th>Name</th>
                                     <th>Country</th>
                                     <th>City</th>
+                                    <th>Currancy</th>
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
@@ -61,6 +62,7 @@
                                             <img src="{{ Storage::url('img/' . $bank->img) }}" width="40px" height="40px"
                                                 alt="Sheek Image">
                                         </td>
+                                        <td>{{ $bank->name }}</td>
                                         <td>
                                             @foreach ($countries as $country)
                                                 @if ($country->id == $bank->country_id)
@@ -69,7 +71,13 @@
                                             @endforeach
                                         </td>
                                         <td>{{ $bank->city }}</td>
-                                        <td>{{ $bank->name }}</td>
+                                        <td>
+                                            @foreach ($currancies as $currancy)
+                                                @if ($currancy->id == $bank->currancy_id)
+                                                    {{ $currancy->name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>{{ $bank->created_at }}</td>
                                         <td>{{ $bank->updated_at }}</td>
                                         <td><span

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Super\Bank;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStaticBankRequest;
 use App\Http\Requests\UpdateStaticBankRequest;
+use App\Models\Currancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,11 @@ class StaticBankController extends Controller
     {
         $banks = DB::table('static_bank')->get();
         $countries = DB::table('static_countries')->get();
+        $currancies = Currancy::all();
         return response()->view('back-end.supers.banks.index', [
             'banks' => $banks,
             'countries' => $countries,
+            'currancies' => $currancies,
         ]);
     }
 
@@ -28,8 +31,10 @@ class StaticBankController extends Controller
     public function create()
     {
         $countries = DB::table('static_countries')->get();
+        $currancies = Currancy::where('active', true)->get();
         return response()->view('back-end.supers.banks.create', [
             'countries' => $countries,
+            'currancies' => $currancies,
         ]);
     }
 
@@ -45,6 +50,7 @@ class StaticBankController extends Controller
                 'img' => $sheekImageName,
                 'country_id' => $request->input('country_id'),
                 'active' => $request->input('active'),
+                'currancy_id' => $request->input('currancy_id'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -73,9 +79,12 @@ class StaticBankController extends Controller
     {
         $bank = DB::table('static_bank')->where('id', $id)->first();
         $countries = DB::table('static_countries')->get();
+        $currancies = Currancy::where('active', true)->get();
+
         return response()->view('back-end.supers.banks.edit', [
             'bank' => $bank,
             'countries' => $countries,
+            'currancies' => $currancies,
         ]);
     }
 
@@ -92,6 +101,7 @@ class StaticBankController extends Controller
                 'img' => $sheekImageName,
                 'active' => $request->input('active'),
                 'country_id' => $request->input('country_id'),
+                'currancy_id' => $request->input('currancy_id'),
                 'updated_at' => now(),
             ]);
         } else {
@@ -100,6 +110,7 @@ class StaticBankController extends Controller
                 'active' => $request->input('active'),
                 'city' => $request->input('city'),
                 'country_id' => $request->input('country_id'),
+                'currancy_id' => $request->input('currancy_id'),
                 'updated_at' => now(),
             ]);
         }

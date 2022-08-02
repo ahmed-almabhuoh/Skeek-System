@@ -56,8 +56,24 @@
                                         </span>
                                     @enderror
                                     <select class="form-control" id="country_id" name="country_id">
+                                        <option value="0">*</option>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Currancy</label>
+                                    @error('currancy_id')
+                                        <span style="margin-left: 15px;diplay: block; color: red;">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                    <select class="form-control" id="currancy_id" name="currancy_id">
+                                        <option value="0">*</option>
+                                        @foreach ($currancies as $currancy)
+                                            <option value="{{ $currancy->id }}">{{ $currancy->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
