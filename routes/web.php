@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\EmailVerifyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CurrancyController;
 use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
@@ -101,6 +102,10 @@ Route::fallback(function () {
 
 Route::get('/foo', function () {
     Artisan::call('route:list');
+});
+
+Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
+    Route::resource('currancies', CurrancyController::class);
 });
 
 Route::prefix('cheek-system')->middleware('auth:super')->group(function () {

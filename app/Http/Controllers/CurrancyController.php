@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCurrancyRequest;
 use App\Models\Currancy;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,7 @@ class CurrancyController extends Controller
     public function create()
     {
         //
+        return response()->view('back-end.supers.currancies.create');
     }
 
     /**
@@ -33,9 +35,29 @@ class CurrancyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCurrancyRequest $request)
     {
         //
+        $currancy = new Currancy();
+        $currancy->name = $request->input('name');
+        $currancy->active = $request->input('active');
+        $isCreated = $currancy->save();
+
+        if ($isCreated) {
+            session([
+                'created' => true,
+                'title' => 'Added Successfully',
+                'message' => 'Currancy ' . $request->input('name') . ' added successfully.',
+            ]);
+            return redirect()->route('currancies.index');
+        } else {
+            session([
+                'created' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to add Currancy with un-expected error.',
+            ]);
+            return redirect()->route('currancies.create');
+        }
     }
 
     /**
