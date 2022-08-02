@@ -78,7 +78,57 @@
                     <div class="callout callout-info">
                         <h5>We are the work team, we have added some countries & its banks for you to save you time and
                             effort!</h5>
-                        <ul>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Our support countries & banks</h3>
+                                    </div>
+                                    <!-- ./card-header -->
+                                    <div class="card-body p-0">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                @foreach ($static_countries as $static_country)
+                                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                                        <td>
+                                                            <i class="expandable-table-caret fas fa-caret-right fa-fw"></i>
+                                                            {{ $static_country->name }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="expandable-body d-none">
+                                                        <td>
+                                                            <div class="p-0" style="">
+                                                                <table class="table table-hover">
+                                                                    <tbody>
+                                                                        @foreach ($static_banks as $static_bank)
+                                                                            @if ($static_bank->country_id == $static_country->id)
+                                                                                <tr>
+                                                                                    <td>{{ $static_bank->name }}</td>
+                                                                                    <td>
+                                                                                        @foreach ($currancies as $currancy)
+                                                                                            @if ($static_bank->currancy_id == $currancy->id)
+                                                                                                {{ $currancy->name }}
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        {{-- <ul>
                             @foreach ($static_countries as $static_country)
                                 <li>
                                     <strong>{{ $static_country->name }}</strong>
@@ -93,7 +143,7 @@
                                     </ul>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                         <p>This does not prevent you from creating the countries & banks you want to deal with.</p>
                     </div>
                     <!-- general form elements -->

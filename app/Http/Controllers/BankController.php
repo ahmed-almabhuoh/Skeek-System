@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBankRequest;
 use App\Http\Requests\UpdateBankRequest;
 use App\Models\Bank;
 use App\Models\Country;
+use App\Models\Currancy;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,7 @@ class BankController extends Controller
 
         $static_countries = DB::table('static_countries')->where('active', 1)->get();
         $static_banks = DB::table('static_bank')->where('active', 1)->get();
+        $currancies = Currancy::all();
 
         session([
             'created' => false,
@@ -68,6 +70,7 @@ class BankController extends Controller
             'countries' => $countries,
             'static_countries' => $static_countries,
             'static_banks' => $static_banks,
+            'currancies' => $currancies,
         ]);
     }
 
