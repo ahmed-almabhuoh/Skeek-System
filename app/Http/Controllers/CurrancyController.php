@@ -16,6 +16,10 @@ class CurrancyController extends Controller
     public function index()
     {
         //
+        $currancies = Currancy::all();
+        return response()->view('back-end.supers.currancies.index', [
+            'currancies' => $currancies,
+        ]);
     }
 
     /**

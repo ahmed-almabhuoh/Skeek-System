@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Currancy extends Model
 {
     use HasFactory;
+
+    public function getCurrancyStatusAttribute()
+    {
+        return $this->active ? 'Active' : 'In-active';
+    }
 }
