@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCurrancyRequest;
+use App\Http\Requests\UpdateCurrancyRequest;
 use App\Models\Currancy;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,6 +86,9 @@ class CurrancyController extends Controller
     public function edit(Currancy $currancy)
     {
         //
+        return response()->view('back-end.supers.currancies.edit', [
+            'currancy' => $currancy,
+        ]);
     }
 
     /**
@@ -94,9 +98,28 @@ class CurrancyController extends Controller
      * @param  \App\Models\Currancy  $currancy
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Currancy $currancy)
+    public function update(UpdateCurrancyRequest $request, Currancy $currancy)
     {
         //
+        $currancy->name = $request->input('name');
+        $currancy->active = $request->input('active');
+        $isCreated = $currancy->save();
+
+        if ($isCreated) {
+            session([
+                'created' => true,
+                'title' => 'Added Successfully',
+                'message' => 'Currancy ' . $request->input('name') . ' updated successfully.',
+            ]);
+            return redirect()->route('currancies.index');
+        } else {
+            session([
+                'created' => false,
+                'title' => 'Failed',
+                'message' => 'Failed to updated currancy with un-expected error.',
+            ]);
+            return redirect()->route('currancies.edit', $currancy->id);
+        }
     }
 
     /**
