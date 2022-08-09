@@ -20,4 +20,17 @@ class Controller extends BaseController
     }
     // -- Logs -- 
 
+    // Generate A Random String Function
+    public function generateNewPassword($n)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+/*-+}{:!@#$%^&*()_+/*-+}{:';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
 }

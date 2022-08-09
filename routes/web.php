@@ -10,6 +10,7 @@ use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
 use App\Http\Controllers\Super\SuperDashboardController;
+use App\Http\Controllers\Super\Users\AddNewUserController;
 use App\Http\Controllers\Super\Users\UserController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
@@ -116,6 +117,10 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::delete('delete-user/{admin}', [UserController::class, 'deleteUser']);
     Route::get('ban-user/{admin}', [UserController::class, 'banAndUnBanUser'])->name('super.user_ban');
     Route::get('admin-follow-up/{admin}', [UserController::class, 'followAdminUserLogs'])->name('super.user_follow_actions');
+    // -- Add new user
+    Route::get('add-user', [AddNewUserController::class, 'showAddNewUser'])->name('super.user_add');
+    Route::post('add-user', [AddNewUserController::class, 'storeNewUser'])->name('super.user_store');
+    // -- End add new user 
 
     // Static Countries
     // Show All
