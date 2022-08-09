@@ -59,8 +59,15 @@
                                     <tr>
                                         <td>{{ $bank->id }}</td>
                                         <td>
-                                            <img src="{{ Storage::url('img/' . $bank->img) }}" width="40px" height="40px"
-                                                alt="Sheek Image">
+                                            @php
+                                                $img = $bank->img;
+                                            @endphp
+                                            @if (!is_null($img))
+                                                <img src="{{ Storage::url('img/' . $bank->img) }}" width="40px"
+                                                    height="40px" alt="No image">
+                                            @else
+                                                No image
+                                            @endif
                                         </td>
                                         <td>{{ $bank->name }}</td>
                                         <td>
