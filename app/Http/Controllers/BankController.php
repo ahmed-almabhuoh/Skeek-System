@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateBankRequest;
 use App\Models\Bank;
 use App\Models\Country;
 use App\Models\Currancy;
+use Carbon\Carbon;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -307,6 +308,7 @@ class BankController extends Controller
         $bank->active = $request->input('active');
         $bank->currancy_id = $request->input('currancy_id');
         $isUpdated = $bank->save();
+
         if ($request->hasFile('sheek_image')) {
             //abc.png
             // Delete previos image
@@ -319,12 +321,26 @@ class BankController extends Controller
             $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
 
             // Store image
-            DB::table('images')->where([
-                ['bank_id', $bank->id]
-            ])->update([
-                'img' => $sheekImageName,
-                'bank_id' => $bank->id,
-            ]);
+            if (DB::table('images')->where([
+                ['bank_id', $bank->id],
+            ])->exists()) {
+                DB::table('images')->where([
+                    ['bank_id', $bank->id]
+                ])->update([
+                    'img' => $sheekImageName,
+                    'bank_id' => $bank->id,
+                    'updated_at' => Carbon::now(),
+                ]);
+            } else {
+                DB::table('images')->where([
+                    ['bank_id', $bank->id]
+                ])->insert([
+                    'img' => $sheekImageName,
+                    'bank_id' => $bank->id,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
         }
 
         if ($isUpdated) {

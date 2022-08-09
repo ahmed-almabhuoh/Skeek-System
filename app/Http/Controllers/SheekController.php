@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\Currancy;
 use App\Models\Sheek;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class SheekController extends Controller
         ]), [
             'beneficiary_name' => 'required|string|min:5|max:50',
             'amount' => 'required|integer|min:1',
-            'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
+            // 'currancy' => 'required|string|in:Dollar,Dinar,Shakel',
             'bank_id' => 'required|integer|exists:banks,id',
             'desc' => 'nullable',
             'underline_type' => 'required|integer|in:1,2,3',
@@ -79,7 +80,9 @@ class SheekController extends Controller
             $sheek = new Sheek();
             $sheek->beneficiary_name = $request->input('beneficiary_name');
             $sheek->amount = $request->input('amount');
-            $sheek->currancy = $request->input('currancy');
+            $sheek->currancy = (Currancy::whereHas('banks', function ($query) use ($request) {
+                $query->where('id', $request->input('bank_id'));
+            })->first())->name;
             $sheek->bank_id = $request->input('bank_id');
             $sheek->desc = $request->input('desc');
             $sheek->type = $request->input('type');

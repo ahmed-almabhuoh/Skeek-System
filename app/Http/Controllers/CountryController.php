@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Bank;
 use App\Models\Country;
+use App\Models\Currancy;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,8 +44,11 @@ class CountryController extends Controller
         // Store Logs
         $this->storeUserLogs('show create country');
         //
-        
+
         $static_countries = DB::table('static_countries')->where('active', 1)->get();
+        $static_banks = DB::table('static_bank')->where('active', 1)->get();
+        $currancies = Currancy::where('active', 1)->get();
+
         session([
             'created' => false,
             'title' => 'Failed',
@@ -53,6 +57,8 @@ class CountryController extends Controller
 
         return response()->view('back-end.countries.create', [
             'static_countries' => $static_countries,
+            'static_banks' => $static_banks,
+            'currancies' => $currancies,
         ]);
     }
 

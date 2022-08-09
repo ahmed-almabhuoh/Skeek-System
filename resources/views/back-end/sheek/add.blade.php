@@ -141,7 +141,7 @@
             let formData = new FormData();
             formData.append('beneficiary_name', document.getElementById('beneficiary_name').value);
             formData.append('amount', document.getElementById('amount').value);
-            formData.append('currancy', document.getElementById('currancy').value);
+            // formData.append('currancy', document.getElementById('currancy').value);
             formData.append('bank_id', document.getElementById('bank_id').value);
             formData.append('desc', document.getElementById('desc').value);
             formData.append('date', document.getElementById('date').value);

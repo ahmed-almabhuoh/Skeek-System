@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Bank;
 use App\Models\Country;
+use App\Models\Currancy;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -22,6 +23,8 @@ class Sheek extends Component
     public $line_type = 0;
     public $underline;
     public $date;
+    public $sheekCurrancy;
+    public $adminBank;
 
     public function mount()
     {
@@ -35,13 +38,19 @@ class Sheek extends Component
         $this->bank = (Bank::where([
             ['admin_id', auth('admin')->user()->id],
         ])->first())->id ?? 0;
+        $this->sheekCurrancy = Bank::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->with('currancy')->first();
+        $this->adminBank = Bank::where([
+            ['admin_id', auth('admin')->user()->id],
+        ])->with('currancy')->first();
     }
 
     public function another()
     {
         if ($this->amount == '')
             $this->amount = 1;
-            
+
         $Arabic = new \ArPHP\I18N\Arabic();
 
         $Arabic->setNumberFeminine(1);
@@ -49,21 +58,25 @@ class Sheek extends Component
 
         $integer = $this->amount;
 
-        $text = $Arabic->int2str($integer);
+        $text =  $Arabic->en2ar($this->adminBank->currancy->name) .   ' فقظ ' . ' '  . $Arabic->int2str($integer) . ' لا غير ';
 
-        if ($this->currany == 'Shakel') {
-            $text = 'فقط ' . $text . ' شيكل لا غير';
-        } else if ($this->currany == 'Dollar') {
-            $text = 'فقط ' . $text . ' دولار لا غير';
-        } else {
-            $text = 'فقط ' . $text . ' دينار لا غير';
-        }
+        // if ($this->currany == 'Shakel') {
+        //     $text = 'فقط ' . $text . ' شيكل لا غير';
+        // } else if ($this->currany == 'Dollar') {
+        //     $text = 'فقط ' . $text . ' دولار لا غير';
+        // } else {
+        //     $text = 'فقط ' . $text . ' دينار لا غير';
+        // }
 
         return $text;
     }
 
     public function render()
     {
+        $this->adminBank = Bank::where([
+            ['admin_id', auth('admin')->user()->id],
+            ['id', $this->bank],
+        ])->with('currancy')->first();
         $this->amount_in_words = $this->another();
         $this->country_id = (Country::where([
             ['admin_id', auth('admin')->user()->id],
