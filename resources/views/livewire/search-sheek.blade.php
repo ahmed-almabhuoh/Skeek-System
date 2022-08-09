@@ -61,6 +61,17 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if (count($sheeks) == 0)
+                                <tr>
+                                    <td colspan="8">
+                                        <center>
+                                            <div style="font-size: 16px; color: rgb(128, 126, 126)">
+                                                No data found
+                                            </div>
+                                        </center>
+                                    </td>
+                                </tr>
+                            @endif
                         </div>
                     </div>
                     <!-- /.card -->

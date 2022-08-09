@@ -27,7 +27,7 @@
             </div>
         </div>
     @endif
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Add New User</h3>
