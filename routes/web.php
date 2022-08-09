@@ -9,6 +9,9 @@ use App\Http\Controllers\CurrancyController;
 use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
+use App\Http\Controllers\Super\Super\CreateSuperContorller;
+use App\Http\Controllers\Super\Super\EditSuperController;
+use App\Http\Controllers\Super\Super\ShowAllSupersForSuperController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\AddNewUserController;
 use App\Http\Controllers\Super\Users\UserController;
@@ -142,4 +145,17 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     // Edit
     Route::get('edit-static-bank/{id}', [StaticBankController::class, 'edit'])->name('banks.static_edit');
     Route::put('edit-static-bank/{id}', [StaticBankController::class, 'update'])->name('banks.static_update');
+
+    // Super Routes
+    // -- Create Super
+    Route::get('add-super', [CreateSuperContorller::class, 'showCreateSuper'])->name('super.super_create');
+    Route::post('add-super', [CreateSuperContorller::class, 'storeSuper'])->name('super.super_store');
+    // -- End Create Super
+    // -- Index Supers
+    Route::get('index-supers', [ShowAllSupersForSuperController::class, 'index'])->name('super.super_index');
+    // -- End Index Super
+    // -- Edit Super 
+    Route::get('edit-super/{super}', [EditSuperController::class, 'showEditSuper'])->name('super.super_edit');
+    Route::put('edit-super/{super}', [EditSuperController::class, 'updateSuper'])->name('super.super_update');
+    // -- End Edit Super
 });

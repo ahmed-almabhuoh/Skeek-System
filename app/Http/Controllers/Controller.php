@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\App;
 use Jenssegers\Agent\Facades\Agent;
 
 class Controller extends BaseController
@@ -32,5 +33,12 @@ class Controller extends BaseController
         }
 
         return $randomString;
+    }
+
+    // Check Policy For Super User az54546@gmail.com
+    public function checkSuperPolicyAZ($super)
+    {
+        if ($super->email == 'az54546@gmail.com' && auth('super')->user()->email != '54546@gmail.com')
+            App::abort(403);
     }
 }
