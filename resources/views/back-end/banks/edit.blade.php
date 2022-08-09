@@ -75,7 +75,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     {{-- 1657965807_sheek_images.png --}}
                                     <label for="sheek_image">{{ __('cms.image') }}</label>
@@ -95,8 +95,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 2%;">
-                                        <center><img src="/storage/img/{{ $img->img ?? '' }}" alt="Sheek Image"
-                                                class="inspire"></center>
+
+                                        <center>
+                                            @if (!is_null($img))
+                                                <img src="/storage/img/{{ $img->img ?? '' }}" alt="Sheek Image"
+                                                    class="inspire">
+                                            @else
+                                                No image found
+                                            @endif
+                                        </center>
                                     </div>
                                 </div>
                                 <div class="form-check">

@@ -320,7 +320,7 @@ class BankController extends Controller
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('sheek_image')->getClientOriginalExtension();
             $request->file('sheek_image')->storePubliclyAs('public/img/', $sheekImageName);
 
-            // Store image
+            // Store image if update or create
             if (DB::table('images')->where([
                 ['bank_id', $bank->id],
             ])->exists()) {

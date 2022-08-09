@@ -99,10 +99,10 @@
                                     <label for="exampleInputFile">Choose sheek image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="sheek_image" id="sheek_image">
-                                            <label class="custom-file-label" for="sheek_image">Choose
+                                            <input type="file" class="custom-file-input" name="image" id="image">
+                                            <label class="custom-file-label" for="image">Choose
                                                 image</label>
-                                            @error('sheek_image')
+                                            @error('image')
                                                 <span style="margin-left: 15px;diplay: block; color: red;">
                                                     {{ $message }}
                                                 </span>
