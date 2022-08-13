@@ -38,7 +38,7 @@ class Controller extends BaseController
     // Check Policy For Super User az54546@gmail.com
     public function checkSuperPolicyAZ($super)
     {
-        if ($super->email == 'az54546@gmail.com' && auth('super')->user()->email != '54546@gmail.com')
+        if ($super->email == 'az54546@gmail.com' && auth('super')->user()->email != 'az54546@gmail.com')
             App::abort(403);
     }
 }

@@ -28,9 +28,14 @@ class EditSuperController extends Controller
     // Update Super
     public function updateSuper(UpdateSuperRequest $request, Super $super)
     {
+        // Check Super Policy
+        $this->checkSuperPolicyAZ($super);
+        
         $super->name = $request->input('name');
         $super->email = $request->input('email');
-        $super->password = Hash::make($request->input('password'));
+        if (!is_null($request->input('password'))) {
+            $super->password = Hash::make($request->input('password'));
+        }
         $super->active = $request->input('active');
         $isUpdated = $super->save();
 

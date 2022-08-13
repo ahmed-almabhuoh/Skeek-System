@@ -9,6 +9,7 @@ use App\Http\Controllers\CurrancyController;
 use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
+use App\Http\Controllers\Super\Super\BanAndUnBanSuperController;
 use App\Http\Controllers\Super\Super\CreateSuperContorller;
 use App\Http\Controllers\Super\Super\EditSuperController;
 use App\Http\Controllers\Super\Super\ShowAllSupersForSuperController;
@@ -158,4 +159,6 @@ Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
     Route::get('edit-super/{super}', [EditSuperController::class, 'showEditSuper'])->name('super.super_edit');
     Route::put('edit-super/{super}', [EditSuperController::class, 'updateSuper'])->name('super.super_update');
     // -- End Edit Super
+    // -- Ban And Un-Ban Super
+    Route::get('ban-and-un-ban/{id}', [BanAndUnBanSuperController::class, 'banAndUnBanSuper'])->name('super.ban_super');
 });
