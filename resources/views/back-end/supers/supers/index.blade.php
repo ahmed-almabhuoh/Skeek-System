@@ -19,7 +19,7 @@
                         {{ session('status') }}.
                     </div>
                 @elseif(session('code') == 500)
-                    <div class="alert alert-success alert-dismissible">
+                    <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-check"></i> Alert!</h5>
                         {{ session('status') }}.

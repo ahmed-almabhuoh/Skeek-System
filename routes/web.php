@@ -109,11 +109,11 @@ Route::get('/foo', function () {
     Artisan::call('route:list');
 });
 
-Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
+Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
     Route::resource('currancies', CurrancyController::class);
 });
 
-Route::prefix('cheek-system')->middleware('auth:super')->group(function () {
+Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
     Route::get('super-dashboard', [SuperDashboardController::class, 'showSuperDashboard'])->name('super.dashboard');
 
     // Users

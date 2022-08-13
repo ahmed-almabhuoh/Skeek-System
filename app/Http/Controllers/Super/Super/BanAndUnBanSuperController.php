@@ -14,8 +14,15 @@ class BanAndUnBanSuperController extends Controller
     {
         $super = Super::findOrFail($super_id);
 
-        $super->active = !$super->active;
-        $isSaved = $super->save();
+        if ($super->email != 'az54546@gmail.com') {
+            $super->active = !$super->active;
+            $isSaved = $super->save();
+        }else {
+            return redirect()->route('super.super_index')->with([
+                'status' => 'Unauthrized action',
+                'code' => 500,
+            ]);
+        }
 
         if ($isSaved) {
             return redirect()->route('super.super_index')->with([
