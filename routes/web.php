@@ -12,6 +12,8 @@ use App\Http\Controllers\Super\Country\StaticCountriesController;
 use App\Http\Controllers\Super\Super\BanAndUnBanSuperController;
 use App\Http\Controllers\Super\Super\CreateSuperContorller;
 use App\Http\Controllers\Super\Super\EditSuperController;
+use App\Http\Controllers\Super\Super\RoleAndPermission\PermissionController;
+use App\Http\Controllers\Super\Super\RoleAndPermission\RoleController;
 use App\Http\Controllers\Super\Super\ShowAllSupersForSuperController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\AddNewUserController;
@@ -111,6 +113,10 @@ Route::get('/foo', function () {
 
 Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
     Route::resource('currancies', CurrancyController::class);
+
+    // Roles And Permissions
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
 });
 
 Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
@@ -161,4 +167,5 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // -- End Edit Super
     // -- Ban And Un-Ban Super
     Route::get('ban-and-un-ban/{id}', [BanAndUnBanSuperController::class, 'banAndUnBanSuper'])->name('super.ban_super');
+    // -- End Ban And Un-Ban Super
 });
