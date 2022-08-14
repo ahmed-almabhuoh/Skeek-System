@@ -47,7 +47,9 @@
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
-                                    <th>Settings</th>
+                                    @canany(['Update-Country', 'Delete-Country'])
+                                        <th>Settings</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,18 +68,25 @@
                                                 @endif
                                             </span>
                                         </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="{{ route('countries.edit', $country->id) }}"
-                                                    class="btn btn-warning">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
-                                                    class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
+                                        @canany(['Update-Country', 'Delete-Country'])
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('Update-Country')
+                                                        <a href="{{ route('countries.edit', $country->id) }}"
+                                                            class="btn btn-warning">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete-Country')
+                                                        <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
+                                                            class="btn btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

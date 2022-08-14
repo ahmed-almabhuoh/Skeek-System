@@ -47,7 +47,9 @@
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
-                                    <th>Settings</th>
+                                    @canany(['Update-Currancy', 'Delete-Currancy'])
+                                        <th>Settings</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,18 +68,25 @@
                                         </td>
                                         <td>{{ $currancy->created_at }}</td>
                                         <td>{{ $currancy->updated_at }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="{{ route('currancies.edit', $currancy->id) }}"
-                                                    class="btn btn-warning">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button type="button" onclick="confirmDestroy({{ $currancy->id }}, this)"
-                                                    class="btn btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
+                                        @canany(['Update-Currancy', 'Delete-Currancy'])
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('Update-Currancy')
+                                                        <a href="{{ route('currancies.edit', $currancy->id) }}"
+                                                            class="btn btn-warning">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete-Currancy')
+                                                        <button type="button" onclick="confirmDestroy({{ $currancy->id }}, this)"
+                                                            class="btn btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

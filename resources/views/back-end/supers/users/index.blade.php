@@ -40,7 +40,9 @@
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Status</th>
-                                    <th>Settings</th>
+                                    @canany(['Ban-User', 'Follow-Up-User', 'Delete-User'])
+                                        <th>Settings</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,47 +56,32 @@
                                         <td><span
                                                 class="tag tag-success">{{ $admin->active ? 'Un-Banned' : 'Banned' }}</span>
                                         </td>
-                                        {{-- <td>
-                                            <div class="btn-group">
-                                                <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
-                                                    class="btn btn-danger">Delete</button>
-                                                <button type="button" class="btn btn-danger dropdown-toggle dropdown-icon"
-                                                    data-toggle="dropdown" aria-expanded="false">
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu" role="menu" style="">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('super.user_ban', $admin->id) }}">
-                                                        @if ($admin->active)
-                                                            {{ 'Ban' }}
-                                                        @else
-                                                            {{ 'Un-Ban' }}
-                                                        @endif
-                                                    </a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('super.user_follow_actions', $admin->id) }}">Follow
-                                                        up
-                                                        actions</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Separated link</a>
+                                        @canany(['Ban-User', 'Follow-Up-User', 'Delete-User'])
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('Delete-Uer')
+                                                        <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
+                                                            class="btn btn-danger btn-flat">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endcan
+
+                                                    @can('Follow-Up-User')
+                                                        <a href="{{ route('super.user_follow_actions', $admin->id) }}"
+                                                            class="btn btn-danger btn-flat">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Ban-User')
+                                                        <a href="{{ route('super.user_ban', $admin->id) }}"
+                                                            class="btn btn-danger btn-flat">
+                                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
-                                            </div>
-                                        </td> --}}
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
-                                                    class="btn btn-danger btn-flat">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                                <a href="{{ route('super.user_follow_actions', $admin->id) }}" class="btn btn-danger btn-flat">
-                                                    <i class="fa fa-location-arrow"></i>
-                                                </a>
-                                                <a href="{{ route('super.user_ban', $admin->id) }}" class="btn btn-danger btn-flat">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

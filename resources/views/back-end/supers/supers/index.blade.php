@@ -55,7 +55,9 @@
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Status</th>
-                                    <th>Settings</th>
+                                    @canany(['Ban-Super', 'Follow-Up-Super', 'Update-Super', 'Delete-Super'])
+                                        <th>Settings</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,26 +71,39 @@
                                         <td><span
                                                 class="tag tag-success">{{ $super->active ? 'Un-Banned' : 'Banned' }}</span>
                                         </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" onclick="confirmDestroy('{{ $super->id }}', this)"
-                                                    class="btn btn-danger btn-flat">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                                <a href="{{ route('super.ban_super', $super->id) }}"
-                                                    class="btn btn-warning btn-flat">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('super.super_edit', $super->id) }}"
-                                                    class="btn btn-primary btn-flat">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('super.user_follow_actions', $super->id) }}"
-                                                    class="btn btn-secondary btn-flat">
-                                                    <i class="fa fa-location-arrow"></i>
-                                                </a>
-                                            </div>
-                                        </td>
+                                        @canany(['Ban-Super', 'Follow-Up-Super', 'Update-Super', 'Delete-Super'])
+                                            <td>
+                                                <div class="btn-group">
+                                                    @can('Delete-Super')
+                                                        <button type="button" onclick="confirmDestroy('{{ $super->id }}', this)"
+                                                            class="btn btn-danger btn-flat">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    @endcan
+
+                                                    @can('Ban-Super')
+                                                        <a href="{{ route('super.ban_super', $super->id) }}"
+                                                            class="btn btn-warning btn-flat">
+                                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Update-Super')
+                                                        <a href="{{ route('super.super_edit', $super->id) }}"
+                                                            class="btn btn-primary btn-flat">
+                                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Follow-Up-Super')
+                                                        <a href="{{ route('super.user_follow_actions', $super->id) }}"
+                                                            class="btn btn-secondary btn-flat">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                        </a>
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>
