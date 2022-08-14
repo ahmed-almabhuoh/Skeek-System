@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Super\Super\RoleAndPermission;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,11 +21,62 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::get();
+        $roles = Role::withCount('permissions')->get();
 
         return response()->view('back-end.supers.role_permissions.roles.index', [
             'roles' => $roles,
         ]);
+    }
+
+    public function showRolePermission($id)
+    {
+        $role = Role::findOrFail($id);
+        $permissions = Permission::all();
+        $role_permissions = $role->permissions;
+
+        foreach ($permissions as $permission) {
+            $permission->setAttribute('assigned', false);
+            foreach ($role_permissions as $role_permission) {
+                if ($permission->id == $role_permission->id) {
+                    $permission->setAttribute('assigned', true);
+                }
+            }
+        }
+        return response()->view('back-end.supers.role_permissions.roles.role_permissions', [
+            'role' => $role,
+            'permissions' => $permissions,
+        ]);
+    }
+
+    public function assignPermissionToRole(Request $request, $permission_id)
+    {
+        $validator = Validator($request->only([
+            'role_id',
+        ]), [
+            'role_id' => 'required|integer|exists:roles,id'
+        ]);
+        //
+        if (!$validator->fails()) {
+            $role = Role::findOrFail($request->input('role_id'));
+            $permission = Permission::findOrFail($permission_id);
+
+            if ($role->hasPermissionTo($permission)) {
+                $role->revokePermissionTo($permission);
+                return response()->json([
+                    'message' => 'Permission removed from role successfully',
+                ], Response::HTTP_OK);
+            } else {
+                $role->givePermissionTo($permission);
+
+                return response()->json([
+                    'message' => 'Permission added to role successfully',
+                ], Response::HTTP_OK);
+            }
+        } else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**

@@ -1,12 +1,12 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Roles')
+@section('super-title', 'Permissions')
 @section('super-location', 'Dashboard')
-@section('super-index', 'Roles')
+@section('super-index', 'Permissions')
+
 
 @section('super-styles')
 @endsection
-
 
 @section('super-content')
     <div class="container-fluid">
@@ -31,7 +31,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Roles</h3>
+                        <h3 class="card-title">All Permission</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -54,35 +54,25 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Permission</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Settings</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($permissions as $permission)
                                     <tr>
-                                        <td>{{ $role->id }}</td>
-                                        <td>{{ $role->name }}</td>
+                                        <td>{{ $permission->id }}</td>
+                                        <td>{{ $permission->name }}</td>
+                                        <td>{{ $permission->created_at->diffForHumans() }}</td>
+                                        <td>{{ $permission->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ route('role.permissions', $role->id) }}"
-                                                    class="btn btn-block btn-outline-primary btn-flat">
-                                                    <small>- {{ $role->permissions_count }} -</small>
-                                                    Permissions
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>{{ $role->created_at->diffForHumans() }}</td>
-                                        <td>{{ $role->updated_at->diffForHumans() }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" onclick="confirmDestroy({{ $role->id }}, this)"
+                                                <button type="button" onclick="confirmDestroy({{ $permission->id }}, this)"
                                                     class="btn btn-danger btn-flat">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                <a href="{{ route('roles.edit', $role->id) }}"
+                                                <a href="{{ route('permissions.edit', $permission->id) }}"
                                                     class="btn btn-primary btn-flat">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
@@ -122,7 +112,7 @@
 
         function destoy(id, refrance) {
             // check-system/banks/{bank}
-            axios.delete('/cheek-system/roles/' + id)
+            axios.delete('/cheek-system/permissions/' + id)
                 .then(function(response) {
                     // handle success
                     console.log(response);

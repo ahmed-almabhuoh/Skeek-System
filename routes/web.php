@@ -168,4 +168,8 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // -- Ban And Un-Ban Super
     Route::get('ban-and-un-ban/{id}', [BanAndUnBanSuperController::class, 'banAndUnBanSuper'])->name('super.ban_super');
     // -- End Ban And Un-Ban Super
+
+    // Role Permission Routes
+    Route::get('role-permission/{id}', [RoleController::class, 'showRolePermission'])->name('role.permissions');
+    Route::post('role-permission/{id}', [RoleController::class, 'assignPermissionToRole']);
 });
