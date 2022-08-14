@@ -38,6 +38,25 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
+                        <label for="role_id" class="col-sm-2 col-form-label">Role name</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="role_id"
+                                style="@error('role_id') border-color: red; @enderror">
+                                <option value="0">*</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role_id')
+                                <SMAll style="color: red">
+                                    {{ $message }}
+                                </SMAll>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Full name</label>
                         <div class="col-sm-10">
                             <input type="text" name="name" class="form-control" id="name"

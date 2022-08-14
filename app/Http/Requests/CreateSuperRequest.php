@@ -27,6 +27,7 @@ class CreateSuperRequest extends FormRequest
         return [
             //
             'name' => 'required|string|min:3|max:50',
+            'role_id' => 'required|integer|exists:roles,id',
             'email' => 'required|string|min:9|max:50|unique:supers,email',
             'password' => ['required', 'string', Password::min(8)->letters()->numbers()->uncompromised()],
             'active' => 'required|boolean',
@@ -40,6 +41,7 @@ class CreateSuperRequest extends FormRequest
             'email' => 'Super email',
             'password' => 'Super password',
             'active' => 'Super status',
+            'role_id' => 'Role name',
         ];
     }
 

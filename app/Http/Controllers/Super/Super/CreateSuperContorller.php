@@ -7,6 +7,7 @@ use App\Http\Requests\CreateSuperRequest;
 use App\Models\Super;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class CreateSuperContorller extends Controller
 {
@@ -17,6 +18,7 @@ class CreateSuperContorller extends Controller
     {
         return response()->view('back-end.supers.supers.create', [
             'password' => $this->generateNewPassword(12),
+            'roles' => Role::get(),
         ]);
     }
 
@@ -31,6 +33,8 @@ class CreateSuperContorller extends Controller
         $isCreated = $super->save();
 
         if ($isCreated) {
+            $super->assignRole(Role::findOrFail($request->input('role_id')));
+
             return redirect()->route('super.user_add')->with([
                 'status' => 'Super added successfully',
                 'code' => 200,
