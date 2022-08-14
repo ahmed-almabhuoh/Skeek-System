@@ -138,7 +138,7 @@
 
         function destoy(id, refrance) {
             // check-system/banks/{bank}
-            axios.delete('/cheek-system/delete-user/' + id)
+            axios.delete('/cheek-system/delete-super/' + id)
                 .then(function(response) {
                     // handle success
                     console.log(response);

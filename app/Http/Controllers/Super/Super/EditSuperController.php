@@ -33,7 +33,7 @@ class EditSuperController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Update-Super');
-        
+
         // Check Super Policy
         $this->checkSuperPolicyAZ($super);
 

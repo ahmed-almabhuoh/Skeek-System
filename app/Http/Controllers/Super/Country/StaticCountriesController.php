@@ -16,7 +16,7 @@ class StaticCountriesController extends Controller
     public function showAllStaticCountries()
     {
         // Check Ability
-        $this->checkUserAbility('Read-Country');
+        $this->checkUserAbility('Read-Country', ['Update-Country', 'Delete-Country'], '||');
 
         $countries = DB::table('static_countries')->get();
 

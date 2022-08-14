@@ -18,7 +18,7 @@ class ShowAllSupersForSuperController extends Controller
     public function index()
     {
         // Check Ability
-        $this->checkUserAbility(['Read-Super']);
+        $this->checkUserAbility('Read-Super', ['Update-Super', 'Delete-Super', 'Ban-Super', 'Follow-Up-Super'], '||');
 
         if (auth('super')->user()->email == 'az54546@gmail.com') {
             $supers = Super::all();

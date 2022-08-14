@@ -11,6 +11,7 @@ use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
 use App\Http\Controllers\Super\Super\BanAndUnBanSuperController;
 use App\Http\Controllers\Super\Super\CreateSuperContorller;
+use App\Http\Controllers\Super\Super\DeleteSuperController;
 use App\Http\Controllers\Super\Super\EditSuperController;
 use App\Http\Controllers\Super\Super\RoleAndPermission\PermissionController;
 use App\Http\Controllers\Super\Super\RoleAndPermission\RoleController;
@@ -168,6 +169,9 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // -- Ban And Un-Ban Super
     Route::get('ban-and-un-ban/{id}', [BanAndUnBanSuperController::class, 'banAndUnBanSuper'])->name('super.ban_super');
     // -- End Ban And Un-Ban Super
+    // -- Delete Super User
+    Route::delete('delete-super/{super}', [DeleteSuperController::class, 'delete']);
+    // -- End Delete Super User
 
     // Role Permission Routes
     Route::get('role-permission/{id}', [RoleController::class, 'showRolePermission'])->name('role.permissions');

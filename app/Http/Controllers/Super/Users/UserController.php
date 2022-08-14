@@ -15,7 +15,7 @@ class UserController extends Controller
     public function showAllusers()
     {
         // Check Ability
-        $this->checkUserAbility('Read-User');
+        $this->checkUserAbility('Read-User', ['Update-User', 'Delete-User', 'Ban-User', 'Follow-Up-User'], '||');
 
         $admins = Admin::all();
 
