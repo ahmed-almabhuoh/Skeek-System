@@ -17,6 +17,9 @@ class StaticBankController extends Controller
     // Show All Banks
     public function index()
     {
+        // Check Ability
+        $this->checkUserAbility('Read-Bank', ['Update-Bank', 'Delete-Bank'], '||');
+
         $banks = DB::table('static_bank')->get();
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::all();
@@ -30,6 +33,9 @@ class StaticBankController extends Controller
     // Show Add New Bank
     public function create()
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Bank');
+
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::where('active', true)->get();
         return response()->view('back-end.supers.banks.create', [
@@ -40,6 +46,9 @@ class StaticBankController extends Controller
 
     public function store(CreateStaticBankRequest $request)
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Bank');
+
         if ($request->hasFile('image')) {
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storePubliclyAs('public/img/', $sheekImageName);
@@ -77,6 +86,9 @@ class StaticBankController extends Controller
     // Show Edit Static Bank
     public function edit($id)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Bank');
+
         $bank = DB::table('static_bank')->where('id', $id)->first();
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::where('active', true)->get();
@@ -91,6 +103,9 @@ class StaticBankController extends Controller
     // Update Static Bank
     public function update(UpdateStaticBankRequest $request, $id)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Bank');
+
         if ($request->hasFile('image')) {
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storePubliclyAs('public/img/', $sheekImageName);
@@ -135,6 +150,9 @@ class StaticBankController extends Controller
     // Delete Static Bank
     public function delete($id)
     {
+        // Check Ability
+        $this->checkUserAbility('Delete-Bank');
+
         $isDeleted = DB::table('static_bank')->where('id', $id)->delete();
         if ($isDeleted) {
             return response()->json([

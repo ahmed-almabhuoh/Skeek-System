@@ -25,14 +25,14 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
-                    @can('Read-Country')
+                    @canany(['Read-Country', 'Update-Country', 'Delete-Country'])
                         <li class="nav-item">
                             <a href="{{ route('countries.static_show') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All</p>
                             </a>
                         </li>
-                    @endcan
+                    @endcanany
 
                     @can('Create-Country')
                         <li class="nav-item">
@@ -56,14 +56,14 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
-                    @can('Read-Bank')
+                    @canany(['Read-Bank', 'Update-Bank', 'Delete-Bank'])
                         <li class="nav-item">
                             <a href="{{ route('banks.static_index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All</p>
                             </a>
                         </li>
-                    @endcan
+                    @endcanany
 
                     @can('Create-Bank')
                         <li class="nav-item">
@@ -77,7 +77,7 @@
             </li>
         @endcanany
 
-        @canany(['Create-Cuurancy', 'Read-Cuurancy', 'Update-Cuurancy', 'Delete-Cuurancy'])
+        @canany(['Create-Currancy', 'Read-Currancy', 'Update-Currancy', 'Delete-Currancy'])
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
@@ -87,17 +87,17 @@
                     </p>
                 </a>
 
-                @can('Read-Cuurancy')
-                    <ul class="nav nav-treeview" style="display: none;">
+                <ul class="nav nav-treeview" style="display: none;">
+                    @canany(['Read-Currancy', 'Update-Currancy', 'Delete-Currancy'])
                         <li class="nav-item">
                             <a href="{{ route('currancies.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All</p>
                             </a>
                         </li>
-                    @endcan
+                    @endcanany
 
-                    @can('Create-Cuurancy')
+                    @can('Create-Currancy')
                         <li class="nav-item">
                             <a href="{{ route('currancies.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -124,14 +124,14 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
-                    @can('Read-Super')
+                    @canany(['Read-Super', 'Update-Super', 'Delete-Super'])
                         <li class="nav-item">
                             <a href="{{ route('super.super_index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All</p>
                             </a>
                         </li>
-                    @endcan
+                    @endcanany
 
                     @can('Create-Super')
                         <li class="nav-item">
@@ -155,14 +155,14 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
-                    @can('Read-User')
+                    @canany(['Read-User', 'Update-User', 'Delete-User'])
                         <li class="nav-item">
                             <a href="{{ route('super.user_show') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All</p>
                             </a>
                         </li>
-                    @endcan
+                    @endcanany
 
                     @can('Create-User')
                         <li class="nav-item">

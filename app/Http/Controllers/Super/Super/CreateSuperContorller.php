@@ -16,6 +16,9 @@ class CreateSuperContorller extends Controller
     // Show form to create super user 
     public function showCreateSuper()
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Super');
+
         return response()->view('back-end.supers.supers.create', [
             'password' => $this->generateNewPassword(12),
             'roles' => Role::get(),
@@ -24,6 +27,9 @@ class CreateSuperContorller extends Controller
 
     public function storeSuper(CreateSuperRequest $request)
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Super');
+
         $super = new Super();
         $super->name = $request->input('name');
         $super->email = $request->input('email');

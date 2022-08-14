@@ -14,6 +14,9 @@ class AddNewUserController extends Controller
 
     public function showAddNewUser()
     {
+        // Check Ability
+        $this->checkUserAbility('Create-User');
+
         return response()->view('back-end.supers.users.add', [
             'password' => $this->generateNewPassword(12),
         ]);
@@ -21,6 +24,9 @@ class AddNewUserController extends Controller
 
     public function storeNewUser(CreateUserFromSuperRequest $request)
     {
+        // Check Ability
+        $this->checkUserAbility('Create-User');
+
         $admin = new Admin();
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');

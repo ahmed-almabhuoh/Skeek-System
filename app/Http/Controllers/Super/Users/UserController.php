@@ -14,6 +14,9 @@ class UserController extends Controller
 
     public function showAllusers()
     {
+        // Check Ability
+        $this->checkUserAbility('Read-User');
+
         $admins = Admin::all();
 
         return response()->view('back-end.supers.users.index', [
@@ -23,6 +26,9 @@ class UserController extends Controller
 
     public function deleteUser(Admin $admin)
     {
+        // Check Ability
+        $this->checkUserAbility('Delete-User');
+
         if ($admin->delete()) {
             return response()->json([
                 'icon' => 'success',
@@ -41,6 +47,9 @@ class UserController extends Controller
     // Ban Admin
     public function banAndUnBanUser(Admin $admin)
     {
+        // Check Ability
+        $this->checkUserAbility('Ban-User');
+
         $admin->active = $admin->active ? false : true;
         $admin->save();
         return redirect()->route('super.user_show');
@@ -49,6 +58,9 @@ class UserController extends Controller
     // Follow Up Admin
     public function followAdminUserLogs(Admin $admin)
     {
+        // Check Ability
+        $this->checkUserAbility('Follow-Up-User');
+
         $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->orderBy('created_at', 'DESC')->get();
 
         return response()->view('back-end.supers.users.follow-up', [

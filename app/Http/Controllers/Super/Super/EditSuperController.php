@@ -16,6 +16,9 @@ class EditSuperController extends Controller
     // Show edit super
     public function showEditSuper(Super $super)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Super');
+
         // Check Super Policy
         $this->checkSuperPolicyAZ($super);
 
@@ -28,9 +31,12 @@ class EditSuperController extends Controller
     // Update Super
     public function updateSuper(UpdateSuperRequest $request, Super $super)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Super');
+        
         // Check Super Policy
         $this->checkSuperPolicyAZ($super);
-        
+
         $super->name = $request->input('name');
         $super->email = $request->input('email');
         if (!is_null($request->input('password'))) {

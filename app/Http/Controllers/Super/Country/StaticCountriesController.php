@@ -15,6 +15,9 @@ class StaticCountriesController extends Controller
     // Show All Static Countries
     public function showAllStaticCountries()
     {
+        // Check Ability
+        $this->checkUserAbility('Read-Country');
+
         $countries = DB::table('static_countries')->get();
 
         return response()->view('back-end.supers.countries.index', [
@@ -25,11 +28,17 @@ class StaticCountriesController extends Controller
     // Show Create View
     public function create()
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Country');
+
         return response()->view('back-end.supers.countries.create');
     }
 
     public function store(CreateStaticCountry $request)
     {
+        // Check Ability
+        $this->checkUserAbility('Create-Country');
+
         $isCreated = DB::table('static_countries')->insert([
             'name' => $request->input('name'),
             'active' => $request->input('active'),
@@ -57,12 +66,10 @@ class StaticCountriesController extends Controller
     // Delete Static Country
     public function destroy($id)
     {
+        // Check Ability
+        $this->checkUserAbility('Delete-Country');
+
         $isDeleted = DB::table('static_countries')->where('id', $id)->delete();
-        // return response()->json([
-        //     'icon' => 'success',
-        //     'title' => $staticCountry->name,
-        //     'text' => $staticCountry->id
-        // ], Response::HTTP_OK);
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
