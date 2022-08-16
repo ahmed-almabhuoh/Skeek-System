@@ -72,7 +72,7 @@
                                                     class="btn btn-danger btn-flat">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                <a href="{{ route('permissions.edit', $permission->id) }}"
+                                                <a href="{{ route('permissions.edit', Crypt::encrypt($permission->id)) }}"
                                                     class="btn btn-primary btn-flat">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>

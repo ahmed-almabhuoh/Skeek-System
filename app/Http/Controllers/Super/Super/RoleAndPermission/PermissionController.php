@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,10 +85,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($permission_enc_id)
     {
         //
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail(Crypt::decrypt($permission_enc_id));
         return response()->view('back-end.supers.role_permissions.permissions.edit', [
             'permission' => $permission,
         ]);
@@ -100,10 +101,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePermissionRequest $request, $id)
+    public function update(UpdatePermissionRequest $request, $permission_enc_id)
     {
         //
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail(Crypt::decrypt($permission_enc_id));
         $permission->name = $request->input('name');
         $permission->guard_name = $request->input('guard');
         $isSaved = $permission->save();

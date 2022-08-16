@@ -34,10 +34,16 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="{{ route('permissions.update', $permission->id) }}">
+            <form class="form-horizontal" method="POST"
+                action="{{ route('permissions.update', Crypt::encrypt($permission->id)) }}">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
+                    <div class="form-group row" style="display: none;">
+                        <input type="text" name="id" class="form-control" id="id"
+                            value="{{ Crypt::encrypt($permission->id) }}" placeholder="Enter permission id">
+                    </div>
+
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Permission name</label>
                         <div class="col-sm-10">

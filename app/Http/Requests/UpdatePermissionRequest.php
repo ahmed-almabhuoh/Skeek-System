@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class UpdatePermissionRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:3|max:50',
+            'name' => 'required|string|min:3|max:50|unique:permissions,name,' . Crypt::decrypt($this->id),
             'guard' => 'required|string|in:super',
         ];
     }
