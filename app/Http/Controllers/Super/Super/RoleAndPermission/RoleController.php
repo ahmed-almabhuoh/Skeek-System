@@ -7,6 +7,7 @@ use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,9 +29,9 @@ class RoleController extends Controller
         ]);
     }
 
-    public function showRolePermission($id)
+    public function showRolePermission($role_enc_id)
     {
-        $role = Role::findOrFail($id);
+        $role = Role::findOrFail(Crypt::decrypt($role_enc_id));
         $permissions = Permission::all();
         $role_permissions = $role->permissions;
 
@@ -134,11 +135,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($role_enc_id)
     {
         //
         return response()->view('back-end.supers.role_permissions.roles.edit', [
-            'role' => Role::findOrFail($id),
+            'role' => Role::findOrFail(Crypt::decrypt($role_enc_id)),
         ]);
     }
 
@@ -149,10 +150,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, $id)
+    public function update(UpdateRoleRequest $request, $role_enc_id)
     {
         //
-        $role = Role::findOrFail($id);
+        $role = Role::findOrFail(Crypt::decrypt($role_enc_id));
         $role->name = $request->input('name');
         $role->guard_name = $request->input('guard');
         $isSaved = $role->save();

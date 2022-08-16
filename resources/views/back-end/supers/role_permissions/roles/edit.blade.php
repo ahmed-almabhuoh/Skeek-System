@@ -34,10 +34,17 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="{{ route('roles.update', $role->id) }}">
+            <form class="form-horizontal" method="POST" action="{{ route('roles.update', Crypt::encrypt($role->id)) }}">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
+                    <div class="form-group row" style="display: none;">
+                        <input type="text" name="id" class="form-control" id="name"
+                            value="{{ Crypt::encrypt($role->id) }}" placeholder="Enter role id">
+
+                    </div>
+
+
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Role name</label>
                         <div class="col-sm-10">

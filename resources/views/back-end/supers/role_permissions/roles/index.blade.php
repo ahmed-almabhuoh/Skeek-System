@@ -67,7 +67,7 @@
                                         <td>{{ $role->name }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ route('role.permissions', $role->id) }}"
+                                                <a href="{{ route('role.permissions', Crypt::encrypt($role->id)) }}"
                                                     class="btn btn-block btn-outline-primary btn-flat">
                                                     <small>- {{ $role->permissions_count }} -</small>
                                                     Permissions
@@ -82,7 +82,7 @@
                                                     class="btn btn-danger btn-flat">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                <a href="{{ route('roles.edit', $role->id) }}"
+                                                <a href="{{ route('roles.edit', Crypt::encrypt($role->id)) }}"
                                                     class="btn btn-primary btn-flat">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </a>
