@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCurrancyRequest;
 use App\Http\Requests\UpdateCurrancyRequest;
 use App\Models\Currancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Symfony\Component\HttpFoundation\Response;
 
 class CurrancyController extends Controller
@@ -83,11 +84,11 @@ class CurrancyController extends Controller
      * @param  \App\Models\Currancy  $currancy
      * @return \Illuminate\Http\Response
      */
-    public function edit(Currancy $currancy)
+    public function edit($currancy_enc_id)
     {
         //
         return response()->view('back-end.supers.currancies.edit', [
-            'currancy' => $currancy,
+            'currancy' => Currancy::findOrFail(Crypt::decrypt($currancy_enc_id)),
         ]);
     }
 
@@ -98,9 +99,11 @@ class CurrancyController extends Controller
      * @param  \App\Models\Currancy  $currancy
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCurrancyRequest $request, Currancy $currancy)
+    public function update(UpdateCurrancyRequest $request, $currancy_enc_id)
     {
         //
+        $currancy = Currancy::findOrFail(Crypt::decrypt($currancy_enc_id));
+
         $currancy->name = $request->input('name');
         $currancy->active = $request->input('active');
         $isCreated = $currancy->save();

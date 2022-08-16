@@ -33,11 +33,16 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form" method="POST" action="{{ route('currancies.update', $currancy->id) }}"
+                        <form id="create-form" method="POST"
+                            action="{{ route('currancies.update', Crypt::encrypt($currancy->id)) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
+                                <div class="form-group" style="display: none;">
+                                    <input type="text" name="id" class="form-control" id="id"
+                                        placeholder="Enter bank id" value="{{ Crypt::encrypt($currancy->id) }}">
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Currancy</label>
                                     @error('name')

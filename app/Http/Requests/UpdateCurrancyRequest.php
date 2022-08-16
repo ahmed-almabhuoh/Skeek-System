@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class UpdateCurrancyRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class UpdateCurrancyRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:3|max:50|unique:currancies,name,' . $this->currancy->id,
+            'name' => 'required|string|min:3|max:50|unique:currancies,name,' . Crypt::decrypt($this->id),
             'active' => 'required|boolean',
         ];
     }

@@ -72,7 +72,7 @@
                                             <td>
                                                 <div class="btn-group">
                                                     @can('Update-Currancy')
-                                                        <a href="{{ route('currancies.edit', $currancy->id) }}"
+                                                        <a href="{{ route('currancies.edit', Crypt::encrypt($currancy->id)) }}"
                                                             class="btn btn-warning">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
