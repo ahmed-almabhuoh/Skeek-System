@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class UpdateStaticCountryRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class UpdateStaticCountryRequest extends FormRequest
     {
         return [
             //
-            'name' => ['required', 'string', 'min:3', 'max:45', 'unique:static_countries,name,' . $this->id],
+            'name' => ['required', 'string', 'min:3', 'max:45', 'unique:static_countries,name,' . Crypt::decrypt($this->id)],
             'active' => 'required|boolean',
         ];
     }

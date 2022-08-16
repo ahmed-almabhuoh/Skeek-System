@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStaticCountry;
 use App\Http\Requests\UpdateStaticCountryRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -87,16 +88,16 @@ class StaticCountriesController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($country_enc_id)
     {
         return response()->view('back-end.supers.countries.edit', [
-            'country' => DB::table('static_countries')->where('id', $id)->first(),
+            'country' => DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->first(),
         ]);
     }
 
-    public function update(UpdateStaticCountryRequest $request, $id)
+    public function update(UpdateStaticCountryRequest $request, $country_enc_id)
     {
-        $isUpdated = DB::table('static_countries')->where('id', $request->input('id'))->update([
+        $isUpdated = DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->update([
             'name' => $request->input('name'),
             'active' => $request->input('active'),
             // 'created_at' => Carbon::now(),

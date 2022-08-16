@@ -35,13 +35,13 @@
                         @endif
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{ route('country.statis_update', $country->id) }}">
+                        <form method="POST" action="{{ route('country.statis_update', Crypt::encrypt($country->id)) }}">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group" style="display: none;">
-                                    <input type="number" class="form-control" id="id" name="id"
-                                        placeholder="Enter country id" value="{{ $country->id }}">
+                                    <input type="text" class="form-control" id="id" name="id"
+                                        placeholder="Enter country id" value="{{ Crypt::encrypt($country->id) }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">{{ __('cms.name') }}</label>

@@ -72,7 +72,7 @@
                                             <td>
                                                 <div class="btn-group">
                                                     @can('Update-Country')
-                                                        <a href="{{ route('country.statis_edit', $country->id) }}"
+                                                        <a href="{{ route('country.statis_edit', Crypt::encrypt($country->id)) }}"
                                                             class="btn btn-warning">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
