@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Super\Country;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStaticCountry;
+use App\Http\Requests\UpdateStaticCountryRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,6 +84,35 @@ class StaticCountriesController extends Controller
                 'title' => 'Failed',
                 'text' => 'Failed to delete static country'
             ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function edit($id)
+    {
+        return response()->view('back-end.supers.countries.edit', [
+            'country' => DB::table('static_countries')->where('id', $id)->first(),
+        ]);
+    }
+
+    public function update(UpdateStaticCountryRequest $request, $id)
+    {
+        $isUpdated = DB::table('static_countries')->where('id', $request->input('id'))->update([
+            'name' => $request->input('name'),
+            'active' => $request->input('active'),
+            // 'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if ($isUpdated) {
+            return redirect()->route('countries.static_show')->with([
+                'status' => 'Country Update Successfully',
+                'code' => 200,
+            ]);
+        } else {
+            return back()->with([
+                'status' => 'Failed to update country',
+                'code' => 500,
+            ]);
         }
     }
 }

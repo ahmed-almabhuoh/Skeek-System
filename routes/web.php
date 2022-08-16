@@ -139,6 +139,9 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // Create
     Route::get('static-countries-create', [StaticCountriesController::class, 'create'])->name('countries.statis_create');
     Route::post('static-countries-create', [StaticCountriesController::class, 'store'])->name('countries.static_store');
+    // Edit
+    Route::get('statis-country-edit/{id}', [StaticCountriesController::class, 'edit'])->name('country.statis_edit');
+    Route::put('statis-country-update/{id}', [StaticCountriesController::class, 'update'])->name('country.statis_update');
     // Delete
     Route::delete('static-countries/{id}', [StaticCountriesController::class, 'destroy']);
 
