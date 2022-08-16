@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStaticBankRequest;
 use App\Http\Requests\UpdateStaticBankRequest;
 use App\Models\Currancy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -84,12 +85,12 @@ class StaticBankController extends Controller
 
 
     // Show Edit Static Bank
-    public function edit($id)
+    public function edit($bank_enc_id)
     {
         // Check Ability
         $this->checkUserAbility('Update-Bank');
 
-        $bank = DB::table('static_bank')->where('id', $id)->first();
+        $bank = DB::table('static_bank')->where('id', Crypt::decrypt($bank_enc_id))->first();
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::where('active', true)->get();
 
@@ -101,7 +102,7 @@ class StaticBankController extends Controller
     }
 
     // Update Static Bank
-    public function update(UpdateStaticBankRequest $request, $id)
+    public function update(UpdateStaticBankRequest $request, $bank_enc_id)
     {
         // Check Ability
         $this->checkUserAbility('Update-Bank');
@@ -110,7 +111,7 @@ class StaticBankController extends Controller
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->storePubliclyAs('public/img/', $sheekImageName);
 
-            $isUpdated = DB::table('static_bank')->where('id', $id)->update([
+            $isUpdated = DB::table('static_bank')->where('id', Crypt::decrypt($bank_enc_id))->update([
                 'name' => $request->input('name'),
                 'city' => $request->input('city'),
                 'img' => $sheekImageName,
@@ -120,7 +121,7 @@ class StaticBankController extends Controller
                 'updated_at' => now(),
             ]);
         } else {
-            $isUpdated = DB::table('static_bank')->where('id', $id)->update([
+            $isUpdated = DB::table('static_bank')->where('id', Crypt::decrypt($bank_enc_id))->update([
                 'name' => $request->input('name'),
                 'active' => $request->input('active'),
                 'city' => $request->input('city'),

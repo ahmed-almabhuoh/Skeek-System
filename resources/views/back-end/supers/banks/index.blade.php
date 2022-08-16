@@ -102,7 +102,7 @@
                                             <td>
                                                 <div class="btn-group">
                                                     @can('Update-Bank')
-                                                        <a href="{{ route('banks.static_edit', $bank->id) }}"
+                                                        <a href="{{ route('banks.static_edit', Crypt::encrypt($bank->id)) }}"
                                                             class="btn btn-warning">
                                                             <i class="fas fa-edit"></i>
                                                         </a>

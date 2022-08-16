@@ -33,11 +33,17 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="create-form" method="POST" action="{{ route('banks.static_update', $bank->id) }}"
+                        <form id="create-form" method="POST"
+                            action="{{ route('banks.static_update', Crypt::encrypt($bank->id)) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
+                                <div class="form-group" style="display: none;">
+                                    <input type="text" name="id" class="form-control" id="id"
+                                        placeholder="Enter bank id" value="{{ Crypt::encrypt($bank->id) }}">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     @error('name')
@@ -129,7 +135,7 @@
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         @if ($bank->active) checked @endif>
-                                    <label class="form-check-label" for="active">Update</label>
+                                    <label class="form-check-label" for="active">Is active ?</label>
                                 </div>
 
 
@@ -138,7 +144,7 @@
 
                             <div class="card-footer">
 
-                                <input type="submit" value="Create" class="btn btn-primary">
+                                <input type="submit" value="Update" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

@@ -79,7 +79,8 @@
                                                     @endcan
 
                                                     @can('Delete-Country')
-                                                        <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
+                                                        <button type="button"
+                                                            onclick="confirmDestroy('{{ Crypt::encrypt($country->id) }}', this)"
                                                             class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
@@ -121,7 +122,7 @@
 
         function destoy(id, refrance) {
             // static-countries/{id}
-            axios.delete('/cheek-system/static-countries/' + id)
+            axios.delete('/cheek-system/static-countries/', id)
                 .then(function(response) {
                     // handle success
                     console.log(response);

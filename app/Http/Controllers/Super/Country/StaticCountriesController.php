@@ -67,12 +67,12 @@ class StaticCountriesController extends Controller
     }
 
     // Delete Static Country
-    public function destroy($id)
+    public function destroy($country_enc_id)
     {
         // Check Ability
         $this->checkUserAbility('Delete-Country');
 
-        $isDeleted = DB::table('static_countries')->where('id', $id)->delete();
+        $isDeleted = DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->delete();
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
