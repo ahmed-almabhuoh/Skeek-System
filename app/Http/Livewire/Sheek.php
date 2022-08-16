@@ -58,17 +58,18 @@ class Sheek extends Component
 
         $integer = $this->amount;
 
-        $text =  $Arabic->en2ar($this->adminBank->currancy->name) .   ' فقظ ' . ' '  . $Arabic->int2str($integer) . ' لا غير ';
+        return $text = 'فقط ' .  $Arabic->int2str($integer) . ' ' . $this->checkCurrancyInArabic($this->adminBank->currancy->name);
+    }
 
-        // if ($this->currany == 'Shakel') {
-        //     $text = 'فقط ' . $text . ' شيكل لا غير';
-        // } else if ($this->currany == 'Dollar') {
-        //     $text = 'فقط ' . $text . ' دولار لا غير';
-        // } else {
-        //     $text = 'فقط ' . $text . ' دينار لا غير';
-        // }
-
-        return $text;
+    public function checkCurrancyInArabic($str = 'NIS')
+    {
+        if ($this->adminBank->currancy->name == 'NIS') {
+            return 'شيكل لا غير';
+        } else if ($this->adminBank->currancy->name == 'Dollar') {
+            return 'دولار لا غير';
+        } else if ($this->adminBank->currancy->name == 'Dinar') {
+            return 'دينار لا غير';
+        }
     }
 
     public function render()

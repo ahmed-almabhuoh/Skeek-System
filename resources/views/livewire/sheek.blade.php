@@ -1,4 +1,3 @@
-
 <div class="row">
     <!-- left column -->
     <div class="col-md-5 inspire">
@@ -21,18 +20,6 @@
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
                             wire:model="amount">
                     </div>
-                    {{-- <div class="form-group">
-                        <label>Currancy</label>
-                        <select class="form-control" id="currancy" wire:model="currany">
-                            <option value="0" selected>Select a currancey</option>
-                            <option @if (old('currancy') == 'Dinar') selected @endif>{{ __('cms.dinar') }}
-                            </option>
-                            <option @if (old('currancy') == 'Dollar') selected @endif>{{ __('cms.dollar') }}
-                            </option>
-                            <option @if (old('currancy') == 'shakel') selected @endif>{{ __('cms.shakel') }}
-                            </option>
-                        </select>
-                    </div> --}}
 
                     <div class="form-group">
                         <label>Country</label>
@@ -41,7 +28,6 @@
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
                             @endforeach
-                            {{-- <option value="German">Gereman</option> --}}
                         </select>
                     </div>
 
@@ -105,22 +91,15 @@
             <div class="card-header inspire">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body sheek-background " >
+            <div class="card-body sheek-background ">
                 @if ($country_id != 0)
                     @if (is_null($message))
                         <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
-                        {{-- <h3>Sheek</h3> --}}
                         <div>
                             <span class="name">{{ $beneficiary_name }}</span> <br>
                             <span class="amount-in-letter">{{ $amount_in_words }}</span> <br>
                             <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
                             <span class="date">{{ $date }}</span>
-                            {{-- Currancy: {{ $currany }} <br>
-                            Description: {{ $desc }} <br>
-                            Country: {{ $country_id }} <br>
-                            Back: {{ $bank }} <br>
-                            Image name: {{ $image_name }} <br> --}}
-                            {{-- {{ $underline }} --}}
                         </div>
                     @else
                         {{ $message }}, <a href="{{ route('banks.create') }}">Go to add bank.</a>
