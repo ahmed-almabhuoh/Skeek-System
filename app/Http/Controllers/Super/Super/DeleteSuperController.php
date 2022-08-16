@@ -13,6 +13,10 @@ class DeleteSuperController extends Controller
 
     public function delete(Super $super)
     {
+
+        // Check Ability
+        $this->checkUserAbility('Delete-Super');
+
         if (auth('super')->user()->email == $super->email)
             return response()->json([
                 'icon' => 'error',
