@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSuperRequest;
 use App\Models\Super;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class EditSuperController extends Controller
@@ -14,29 +15,30 @@ class EditSuperController extends Controller
     //
 
     // Show edit super
-    public function showEditSuper(Super $super)
+    public function showEditSuper($supe_enc_id)
     {
         // Check Ability
         $this->checkUserAbility('Update-Super');
 
         // Check Super Policy
-        $this->checkSuperPolicyAZ($super);
+        $this->checkSuperPolicyAZ($supe_enc_id);
 
         return response()->view('back-end.supers.supers.edit', [
-            'super' => $super,
+            'super' => Super::findOrFail(Crypt::decrypt($supe_enc_id)),
             'password' => $this->generateNewPassword(12),
         ]);
     }
 
     // Update Super
-    public function updateSuper(UpdateSuperRequest $request, Super $super)
+    public function updateSuper(UpdateSuperRequest $request, $supe_enc_id)
     {
         // Check Ability
         $this->checkUserAbility('Update-Super');
 
         // Check Super Policy
-        $this->checkSuperPolicyAZ($super);
+        $this->checkSuperPolicyAZ($supe_enc_id);
 
+        $super = Super::findOrFail(Crypt::decrypt($supe_enc_id));
         $super->name = $request->input('name');
         $super->email = $request->input('email');
         if (!is_null($request->input('password'))) {

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Logs\UserLogsController;
+use App\Models\Super;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Jenssegers\Agent\Facades\Agent;
 
 class Controller extends BaseController
@@ -37,8 +39,9 @@ class Controller extends BaseController
     }
 
     // Check Policy For Super User az54546@gmail.com
-    public function checkSuperPolicyAZ($super)
+    public function checkSuperPolicyAZ($super_enc_id)
     {
+        $super = Super::findOrFail(Crypt::decrypt($super_enc_id));
         if ($super->email == 'az54546@gmail.com' && auth('super')->user()->email != 'az54546@gmail.com')
             App::abort(403);
     }

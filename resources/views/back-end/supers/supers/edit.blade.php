@@ -34,10 +34,16 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="POST" action="{{ route('super.super_update', $super->id) }}">
+            <form class="form-horizontal" method="POST"
+                action="{{ route('super.super_update', Crypt::encrypt($super->id)) }}">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
+                    <div class="form-group row" style="display: none;">
+                        <input type="text" name="id" class="form-control" id="id"
+                            value="{{ Crypt::encrypt($super->id) }}" placeholder="Enter super id">
+                    </div>
+
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Full name</label>
                         <div class="col-sm-10">

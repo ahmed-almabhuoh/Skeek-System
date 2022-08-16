@@ -89,7 +89,7 @@
                                                     @endcan
 
                                                     @can('Update-Super')
-                                                        <a href="{{ route('super.super_edit', $super->id) }}"
+                                                        <a href="{{ route('super.super_edit', Crypt::encrypt($super->id)) }}"
                                                             class="btn btn-primary btn-flat">
                                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                                         </a>
