@@ -24,6 +24,9 @@ class RoleController extends Controller
         //
         $roles = Role::withCount('permissions')->get();
 
+        // Store Logs
+        $this->storeSuperLogs('Show all rules');
+
         return response()->view('back-end.supers.role_permissions.roles.index', [
             'roles' => $roles,
         ]);
@@ -31,9 +34,15 @@ class RoleController extends Controller
 
     public function showRolePermission($role_enc_id)
     {
+        $rule = Role::findOrFail(Crypt::decrypt($role_enc_id));
+        // Store Logs
+        $this->storeSuperLogs('Show Assign Permission For Rule: ' . $rule->name);
+
         $role = Role::findOrFail(Crypt::decrypt($role_enc_id));
         $permissions = Permission::all();
         $role_permissions = $role->permissions;
+
+
 
         foreach ($permissions as $permission) {
             $permission->setAttribute('assigned', false);
@@ -60,6 +69,9 @@ class RoleController extends Controller
         if (!$validator->fails()) {
             $role = Role::findOrFail($request->input('role_id'));
             $permission = Permission::findOrFail($permission_id);
+
+            // Store Logs
+            $this->storeSuperLogs('Assign Permission: ' . $permission->name . ' To Rule:' . $role->name);
 
             if ($role->hasPermissionTo($permission)) {
                 $role->revokePermissionTo($permission);
@@ -88,6 +100,8 @@ class RoleController extends Controller
     public function create()
     {
         //
+        // Store Logs
+        $this->storeSuperLogs('Show Create Role Form');
         return response()->view('back-end.supers.role_permissions.roles.add');
     }
 
@@ -104,6 +118,9 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->guard_name = $request->input('guard');
         $isSaved = $role->save();
+
+        // Store Logs
+        $this->storeSuperLogs('Create Role With Name: ' . $request->input('name'));
 
         if ($isSaved) {
             return redirect()->route('roles.index')->with([
@@ -137,9 +154,12 @@ class RoleController extends Controller
      */
     public function edit($role_enc_id)
     {
+        $role = Role::findOrFail(Crypt::decrypt($role_enc_id));
+        // Store Logs
+        $this->storeSuperLogs('Show Edit Form For Role With Name: ' . $role->name);
         //
         return response()->view('back-end.supers.role_permissions.roles.edit', [
-            'role' => Role::findOrFail(Crypt::decrypt($role_enc_id)),
+            'role' => $role,
         ]);
     }
 
@@ -157,6 +177,9 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->guard_name = $request->input('guard');
         $isSaved = $role->save();
+
+        // Store Logs
+        $this->storeSuperLogs('Update Role With Name: ' . $role->name);
 
         if ($isSaved) {
             return redirect()->route('roles.index')->with([
@@ -181,6 +204,10 @@ class RoleController extends Controller
     {
         //
         $role = Role::findOrFail($id);
+
+        // Store Logs
+        $this->storeSuperLogs('Delete Role With Name: ' . $role->name);
+        
         if ($role->delete()) {
             return response()->json([
                 'icon' => 'success',

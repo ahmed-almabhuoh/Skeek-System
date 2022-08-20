@@ -23,8 +23,13 @@ class EditSuperController extends Controller
         // Check Super Policy
         $this->checkSuperPolicyAZ($supe_enc_id);
 
+        $super = Super::findOrFail(Crypt::decrypt($supe_enc_id));
+
+        // Store Logs
+        $this->storeSuperLogs('Show Edit Super Form With Name: ' . $super->name);
+
         return response()->view('back-end.supers.supers.edit', [
-            'super' => Super::findOrFail(Crypt::decrypt($supe_enc_id)),
+            'super' => $super,
             'password' => $this->generateNewPassword(12),
         ]);
     }
@@ -46,6 +51,9 @@ class EditSuperController extends Controller
         }
         $super->active = $request->input('active');
         $isUpdated = $super->save();
+
+        // Store Logs
+        $this->storeSuperLogs('Update Super With Name: ', $super->name);
 
         if ($isUpdated) {
             return redirect()->route('super.super_index')->with([

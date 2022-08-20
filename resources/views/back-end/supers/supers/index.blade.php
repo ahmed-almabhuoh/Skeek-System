@@ -96,7 +96,7 @@
                                                     @endcan
 
                                                     @can('Follow-Up-Super')
-                                                        <a href="{{ route('super.user_follow_actions', $super->id) }}"
+                                                        <a href="{{ route('super.follow_up_actions', Crypt::encrypt($super->id)) }}"
                                                             class="btn btn-secondary btn-flat">
                                                             <i class="fa fa-location-arrow"></i>
                                                         </a>

@@ -17,6 +17,9 @@ class UserController extends Controller
         // Check Ability
         $this->checkUserAbility('Read-User', ['Update-User', 'Delete-User', 'Ban-User', 'Follow-Up-User'], '||');
 
+        // Store Logs
+        $this->storeSuperLogs('Show All Users');
+
         $admins = Admin::all();
 
         return response()->view('back-end.supers.users.index', [
@@ -28,6 +31,9 @@ class UserController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Delete-User');
+
+        // Store Logs
+        $this->storeSuperLogs('Delete User With Name: ' . $admin->name);
 
         if ($admin->delete()) {
             return response()->json([
@@ -50,6 +56,9 @@ class UserController extends Controller
         // Check Ability
         $this->checkUserAbility('Ban-User');
 
+        // Store Logs
+        $this->storeSuperLogs('Ban User With Name: ' . $admin->name);
+
         $admin->active = $admin->active ? false : true;
         $admin->save();
         return redirect()->route('super.user_show');
@@ -60,6 +69,9 @@ class UserController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Follow-Up-User');
+
+        // Store Logs
+        $this->storeSuperLogs('Show All User Actions With Name: ' . $admin->name);
 
         $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->orderBy('created_at', 'DESC')->get();
 

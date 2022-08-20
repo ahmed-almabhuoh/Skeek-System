@@ -19,6 +19,9 @@ class CreateSuperContorller extends Controller
         // Check Ability
         $this->checkUserAbility('Create-Super');
 
+        // Store Logs
+        $this->storeSuperLogs('Show Create Super Form');
+
         return response()->view('back-end.supers.supers.create', [
             'password' => $this->generateNewPassword(12),
             'roles' => Role::get(),
@@ -29,6 +32,10 @@ class CreateSuperContorller extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Create-Super');
+
+
+        // Store Logs
+        $this->storeSuperLogs('Create New Super With Name: ' . $request->input('name'));
 
         $super = new Super();
         $super->name = $request->input('name');

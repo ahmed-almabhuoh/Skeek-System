@@ -79,8 +79,7 @@
                                                     @endcan
 
                                                     @can('Delete-Country')
-                                                        <button type="button"
-                                                            onclick="confirmDestroy('{{ Crypt::encrypt($country->id) }}', this)"
+                                                        <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
                                                             class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </button>

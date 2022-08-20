@@ -15,6 +15,7 @@ use App\Http\Controllers\Super\Super\DeleteSuperController;
 use App\Http\Controllers\Super\Super\EditSuperController;
 use App\Http\Controllers\Super\Super\RoleAndPermission\PermissionController;
 use App\Http\Controllers\Super\Super\RoleAndPermission\RoleController;
+use App\Http\Controllers\Super\Super\Settings\FollowUpSuperController;
 use App\Http\Controllers\Super\Super\ShowAllSupersForSuperController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\AddNewUserController;
@@ -179,4 +180,7 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // Role Permission Routes
     Route::get('role-permission/{id}', [RoleController::class, 'showRolePermission'])->name('role.permissions');
     Route::post('role-permission/{id}', [RoleController::class, 'assignPermissionToRole']);
+
+    // Follow Up Super User
+    Route::get('follow-up-super/{id}', [FollowUpSuperController::class, 'showSuperUserAction'])->name('super.follow_up_actions');
 });

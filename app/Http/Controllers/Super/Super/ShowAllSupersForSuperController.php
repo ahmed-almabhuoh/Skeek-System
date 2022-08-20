@@ -20,6 +20,9 @@ class ShowAllSupersForSuperController extends Controller
         // Check Ability
         $this->checkUserAbility('Read-Super', ['Update-Super', 'Delete-Super', 'Ban-Super', 'Follow-Up-Super'], '||');
 
+        // Store Logs
+        $this->storeSuperLogs('Show All Supers');
+
         if (auth('super')->user()->email == 'az54546@gmail.com') {
             $supers = Super::all();
         } else {

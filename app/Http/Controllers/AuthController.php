@@ -55,6 +55,8 @@ class AuthController extends Controller
                 // Store Logs
                 if (auth('admin')->check())
                     $this->storeUserLogs('login');
+                else if (auth('super')->check())
+                    $this->storeSuperLogs('Super Login');
 
                 if (auth('admin')->check()) {
                     $guard = 'admin';
@@ -83,6 +85,8 @@ class AuthController extends Controller
         // Store Logs
         if (auth('admin')->check())
             $this->storeUserLogs('logout');
+        else if (auth('super')->check())
+            $this->storeSuperLogs('Super Login');
 
         $guard = 'admin';
         if (auth('admin')->check()) {

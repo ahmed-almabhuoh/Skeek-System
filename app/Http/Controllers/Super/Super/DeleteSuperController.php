@@ -17,6 +17,9 @@ class DeleteSuperController extends Controller
         // Check Ability
         $this->checkUserAbility('Delete-Super');
 
+        // Store Logs
+        $this->storeSuperLogs('Delete Super With Name: ' . $super->name);
+
         if (auth('super')->user()->email == $super->email)
             return response()->json([
                 'icon' => 'error',

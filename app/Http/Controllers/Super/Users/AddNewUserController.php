@@ -17,6 +17,9 @@ class AddNewUserController extends Controller
         // Check Ability
         $this->checkUserAbility('Create-User');
 
+        // Store Logs
+        $this->storeSuperLogs('Show Create User Form');
+
         return response()->view('back-end.supers.users.add', [
             'password' => $this->generateNewPassword(12),
         ]);
@@ -33,6 +36,9 @@ class AddNewUserController extends Controller
         $admin->password = Hash::make($request->input('password'));
         $admin->active = $request->input('active');
         $isCreated = $admin->save();
+
+        // Store Logs
+        $this->storeSuperLogs('Create User With Name: ' . $admin->name);
 
 
         if ($isCreated) {

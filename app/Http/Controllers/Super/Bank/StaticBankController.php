@@ -21,6 +21,9 @@ class StaticBankController extends Controller
         // Check Ability
         $this->checkUserAbility('Read-Bank', ['Update-Bank', 'Delete-Bank'], '||');
 
+        // Store Logs
+        $this->storeSuperLogs('Store Static Banks');
+
         $banks = DB::table('static_bank')->get();
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::all();
@@ -37,6 +40,9 @@ class StaticBankController extends Controller
         // Check Ability
         $this->checkUserAbility('Create-Bank');
 
+        // Store Logs
+        $this->storeSuperLogs('Show Create Static Bank Form');
+
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::where('active', true)->get();
         return response()->view('back-end.supers.banks.create', [
@@ -49,6 +55,7 @@ class StaticBankController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Create-Bank');
+
 
         if ($request->hasFile('image')) {
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
@@ -65,6 +72,10 @@ class StaticBankController extends Controller
                 'updated_at' => now(),
             ]);
         }
+
+
+        // Store Logs
+        $this->storeSuperLogs('Create New Static Bank with name: ' + $request->input('name'));
 
         if ($isCreated) {
             session([
@@ -94,6 +105,9 @@ class StaticBankController extends Controller
         $countries = DB::table('static_countries')->get();
         $currancies = Currancy::where('active', true)->get();
 
+        // Store Logs
+        $this->storeSuperLogs('Show Edit Static Bank Form with name: ' + $bank->name);
+
         return response()->view('back-end.supers.banks.edit', [
             'bank' => $bank,
             'countries' => $countries,
@@ -106,6 +120,8 @@ class StaticBankController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Update-Bank');
+
+        $bank = DB::table('static_banks')->where('id', Crypt::decrypt($bank_enc_id))->first();
 
         if ($request->hasFile('image')) {
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
@@ -131,6 +147,9 @@ class StaticBankController extends Controller
             ]);
         }
 
+        // Store Logs
+        $this->storeSuperLogs('Update Static Bank with name: ' + $bank->name);
+
         if ($isUpdated) {
             session([
                 'created' => true,
@@ -153,6 +172,11 @@ class StaticBankController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Delete-Bank');
+
+        $bank = DB::table('static_banks')->where('id', $id)->first();
+
+        // Store Logs
+        $this->storeSuperLogs('Delete Static Bank With Name: ' + $bank->name);
 
         $isDeleted = DB::table('static_bank')->where('id', $id)->delete();
         if ($isDeleted) {

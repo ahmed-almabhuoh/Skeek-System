@@ -15,7 +15,12 @@ class BanAndUnBanSuperController extends Controller
         // Check Ability
         $this->checkUserAbility('Ban-Super');
 
+
+
         $super = Super::findOrFail($super_id);
+
+        // Store Logs
+        $this->storeSuperLogs('Ban Super With Name: ' . $super->name);
 
         if ($super->email != 'az54546@gmail.com') {
             $super->active = !$super->active;

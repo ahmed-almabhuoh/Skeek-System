@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Logs\SuperLogsController;
 use App\Http\Controllers\Logs\UserLogsController;
+use App\Http\Controllers\Super\Super\Settings\FollowUpSuperController;
 use App\Models\Super;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -18,11 +20,22 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     // Logs
+    // User
     public function storeUserLogs($action)
     {
         (new UserLogsController())->storeUserLog(request()->ip(), $action, Agent::device(), Agent::platform(), Agent::browser(), Agent::isDesktop(), Agent::isTablet(), Agent::isPhone(), Agent::isRobot(), Agent::version(Agent::browser()), Agent::version(Agent::platform()));
     }
+    // End User
+    // Super
+    public function storeSuperLogs($action)
+    {
+        (new SuperLogsController())->insertSupeLogs(request()->ip(), $action, Agent::device(), Agent::platform(), Agent::browser(), Agent::isDesktop(), Agent::isTablet(), Agent::isPhone(), Agent::isRobot(), Agent::version(Agent::browser()), Agent::version(Agent::platform()));
+    }
+    // End Super
     // -- Logs -- 
+
+
+
 
     // Generate A Random String Function
     public function generateNewPassword($n)

@@ -21,6 +21,10 @@ class StaticCountriesController extends Controller
         // Check Ability
         $this->checkUserAbility('Read-Country', ['Update-Country', 'Delete-Country'], '||');
 
+        // Store Logs
+        $this->storeSuperLogs('Show All Static Countries');
+
+
         $countries = DB::table('static_countries')->get();
 
         return response()->view('back-end.supers.countries.index', [
@@ -34,6 +38,9 @@ class StaticCountriesController extends Controller
         // Check Ability
         $this->checkUserAbility('Create-Country');
 
+        // Store Logs
+        $this->storeSuperLogs('Show Create Static Country Form');
+
         return response()->view('back-end.supers.countries.create');
     }
 
@@ -41,6 +48,9 @@ class StaticCountriesController extends Controller
     {
         // Check Ability
         $this->checkUserAbility('Create-Country');
+
+        // Store Logs
+        $this->storeSuperLogs('Create New Static Country With Name: ' . $request->input('name'));
 
         $isCreated = DB::table('static_countries')->insert([
             'name' => $request->input('name'),
@@ -67,12 +77,17 @@ class StaticCountriesController extends Controller
     }
 
     // Delete Static Country
-    public function destroy($country_enc_id)
+    public function destroy($id)
     {
         // Check Ability
         $this->checkUserAbility('Delete-Country');
 
-        $isDeleted = DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->delete();
+        $country = DB::table('static_countries')->where('id', $id)->first();
+
+        // Store Logs
+        $this->storeSuperLogs('Delete Static Country With Name: ' . $country->name);
+
+        $isDeleted = DB::table('static_countries')->where('id', Crypt::decrypt($id))->delete();
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
@@ -90,6 +105,14 @@ class StaticCountriesController extends Controller
 
     public function edit($country_enc_id)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Country');
+
+        $country = DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->first();
+
+        // Store Logs
+        $this->storeSuperLogs('Show Update Static Country Form With Name: ' . $country->name);
+
         return response()->view('back-end.supers.countries.edit', [
             'country' => DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->first(),
         ]);
@@ -97,12 +120,20 @@ class StaticCountriesController extends Controller
 
     public function update(UpdateStaticCountryRequest $request, $country_enc_id)
     {
+        // Check Ability
+        $this->checkUserAbility('Update-Country');
+
+
         $isUpdated = DB::table('static_countries')->where('id', Crypt::decrypt($country_enc_id))->update([
             'name' => $request->input('name'),
             'active' => $request->input('active'),
             // 'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+        // Store Logs
+        $this->storeSuperLogs('Update Static Country With Name: ' . $request->input('name'));
+
 
         if ($isUpdated) {
             return redirect()->route('countries.static_show')->with([

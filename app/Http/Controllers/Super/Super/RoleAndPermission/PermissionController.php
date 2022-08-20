@@ -21,6 +21,9 @@ class PermissionController extends Controller
     public function index()
     {
         //
+        // Store Logs
+        $this->storeSuperLogs('Show All permissions');
+
         $permissions = Permission::get();
         return response()->view('back-end.supers.role_permissions.permissions.index', [
             'permissions' => $permissions,
@@ -34,6 +37,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        // Store Logs
+        $this->storeSuperLogs('Show Create Form permission');
         //
         $roles = Role::get();
         return response()->view('back-end.supers.role_permissions.permissions.add', [
@@ -54,6 +59,9 @@ class PermissionController extends Controller
         $permission->name = $request->input('name');
         $permission->guard_name = $request->input('guard');
         $isSaved = $permission->save();
+
+        // Store Logs
+        $this->storeSuperLogs('Store permission with name: ' + $request->input('name'));
 
         if ($isSaved) {
             return redirect()->route('permissions.index')->with([
@@ -87,6 +95,9 @@ class PermissionController extends Controller
      */
     public function edit($permission_enc_id)
     {
+        $permission = Permission::findOrFail($permission_enc_id);
+        // Store Logs
+        $this->storeSuperLogs('Show edit form for permission with name: ' + $permission->name);
         //
         $permission = Permission::findOrFail(Crypt::decrypt($permission_enc_id));
         return response()->view('back-end.supers.role_permissions.permissions.edit', [
@@ -109,6 +120,9 @@ class PermissionController extends Controller
         $permission->guard_name = $request->input('guard');
         $isSaved = $permission->save();
 
+        // Store Logs
+        $this->storeSuperLogs('Update Permission With Name: ' + $permission->name);
+
         if ($isSaved) {
             return redirect()->route('permissions.index')->with([
                 'status' => 'Permission updated successfully',
@@ -130,6 +144,9 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
+        $permission = Permission::findOrFail($id);
+        // Store Logs
+        $this->storeSuperLogs('Delete Permission With Name: ' + $permission->name);
         //
         $permission = Permission::findOrFail($id);
         if ($permission->delete()) {

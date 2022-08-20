@@ -10,6 +10,9 @@ class SuperDashboardController extends Controller
     //
     public function showSuperDashboard()
     {
+        // Store Logs
+        $this->storeSuperLogs('Display Super Dashboard');
+        
         return response()->view('back-end.supers.dashboard');
     }
 }
