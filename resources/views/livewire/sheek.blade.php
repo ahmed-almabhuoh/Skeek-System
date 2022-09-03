@@ -1,9 +1,9 @@
 <div class="row">
     <!-- left column -->
-    <div class="col-md-5 inspire">
+    <div class="col-md-5">
         <!-- general form elements -->
         <div class="card card-primary">
-            <div class="card-header inspire">
+            <div class="card-header">
                 <h3 class="card-title">{{ __('cms.add_skeed') }}</h3>
             </div>
             <!-- /.card-header -->
@@ -85,21 +85,22 @@
         <!-- /.card -->
     </div>
     <!--/.col (left) -->
-    <div class="col-md-7 col-print-12 style-printed-parent ">
+    <div class="col-md-7 col-print-12">
         <!-- Form Element sizes -->
-        <div class="card style-printed card-success">
-            <div class="card-header inspire">
+        <div class="card card-success">
+            <div class="card-header">
                 <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
             </div>
-            <div class="card-body sheek-background ">
+            <div class="card-body">
                 @if ($country_id != 0)
                     @if (is_null($message))
-                        <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">
                         <div>
-                            <span class="name">{{ $beneficiary_name }}</span> <br>
-                            <span class="amount-in-letter">{{ $amount_in_words }}</span> <br>
-                            <span class="amount-in-numbers">{{ '#' . $amount . '#' }}</span> <br>
-                            <span class="date">{{ $date }}</span>
+                            {{-- Appeared Data --}}
+                            <img src="{{ Storage::url($image_name) }}" alt="Sheek Image">
+                            <span>{{ $beneficiary_name }}</span> <br>
+                            <span>{{ $amount_in_words }}</span> <br>
+                            <span>{{ '#' . $amount . '#' }}</span> <br>
+                            <span>{{ $date }}</span>
                         </div>
                     @else
                         {{ $message }}, <a href="{{ route('banks.create') }}">Go to add bank.</a>

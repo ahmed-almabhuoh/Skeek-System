@@ -5,6 +5,7 @@
 @section('index', __('cms.index'))
 
 @section('styles')
+
     @livewireStyles
 @endsection
 
