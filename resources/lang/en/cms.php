@@ -68,4 +68,5 @@ return [
     'date' => 'Date',
     'paid_sheek' => 'Paid Sheeks',
     'recived_sheek' => 'Recived Sheeks',
+    'forget_password' => 'AdminLTE 3 | Forgot Password (v2)',
 ];

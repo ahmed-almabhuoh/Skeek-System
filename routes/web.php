@@ -145,6 +145,8 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     Route::put('statis-country-update/{id}', [StaticCountriesController::class, 'update'])->name('country.statis_update');
     // Delete
     Route::delete('static-countries/{id}', [StaticCountriesController::class, 'destroy']);
+    // View 
+    Route::get('static-country-view/{id}', [StaticCountriesController::class, 'show'])->name('status_countries.show');
 
     // Static Banks
     // Create

@@ -10,7 +10,16 @@
 @endsection
 
 @section('super-content')
+
     <div class="container-fluid">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+            New Country
+        </button>
+
+        <button type="button" class="btn btn-default">
+            Export country report
+        </button>
+        <div style="margin: 10px"></div>
         @if (session()->get('created'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -79,11 +88,18 @@
                                                     @endcan
 
                                                     @can('Delete-Country')
-                                                        <button type="button" onclick="confirmDestroy({{ $country->id }}, this)"
+                                                        <button type="button"
+                                                            onclick="confirmDestroy('{{ Crypt::encrypt($country->id) }}', this)"
                                                             class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     @endcan
+
+                                                    <button type="button" class="btn btn-default" data-toggle="modal"
+                                                        data-target="#country-view-modal"
+                                                        onclick="country_show('{{ Crypt::encrypt($country->id) }}')">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
                                                 </div>
                                             </td>
                                         @endcanany
@@ -98,6 +114,97 @@
             </div>
         </div>
         <!-- /.row -->
+    </div>
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new static country</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('countries.statis_create') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <p>After you add this static country with <strong>active status</strong>, it'll be
+                            <strong>usable</strong> for all users in systems&hellip;
+                        </p>
+                        <div class="form-group">
+
+                            <label for="name"
+                                @error('name')
+                                style="color: red;"
+                            @enderror>Country
+                                name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                @error('name')
+                                    style="border-color: red" 
+                                    @enderror
+                                placeholder="Enter country name" value="{{ old('name') }}">
+                            @error('name')
+                                <small style="color:red">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <!-- select -->
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="active" name="active">
+                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Insert</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="country-view-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Status country detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @csrf
+                <div class="modal-body">
+                    <p>This is a static country is <strong>usable</strong> for all users in the system with
+                        <strong>active status</strong>
+                        <br> If you to change its settings <a href="#">Go to its edit view</a>&hellip;
+                    </p>
+                    <div class="form-group">
+
+                        <label for="name">Country
+                            name</label>
+                        <input type="text" class="form-control" id="country_name" name="country_name"
+                            placeholder="Enter country name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <!-- select -->
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="active" name="active" readonly>
+                                <label for="active" class="custom-control-label">Active ?!</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 @endsection
 
@@ -121,7 +228,7 @@
 
         function destoy(id, refrance) {
             // static-countries/{id}
-            axios.delete('/cheek-system/static-countries/', id)
+            axios.delete('/cheek-system/static-countries/' + id)
                 .then(function(response) {
                     // handle success
                     console.log(response);
@@ -146,6 +253,23 @@
                 showConfirmButton: false,
                 timer: 2000
             });
+        }
+
+        function country_show(id) {
+            // static-country-view/{id}
+            axios.get('/cheek-system/static-country-view/' + id)
+                .then(function(response) {
+                    // handle success
+                    console.log(response.data.country.name);
+                    document.getElementById('#country_name').value = response.data.country.name;
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function() {
+                    // always executed
+                });
         }
     </script>
 @endsection

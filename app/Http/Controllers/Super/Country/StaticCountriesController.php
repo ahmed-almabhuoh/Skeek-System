@@ -60,34 +60,36 @@ class StaticCountriesController extends Controller
         ]);
 
         if ($isCreated) {
-            session([
+            return redirect()->route('countries.static_show')->with([
                 'created' => true,
                 'title' => 'Added Successfully',
                 'message' => 'Country ' . $request->input('name') . ' added successfully.',
             ]);
-            return redirect()->route('countries.static_show');
         } else {
-            session([
+            return redirect()->route('countries.statis_create')->with([
                 'created' => false,
                 'title' => 'Failed',
                 'message' => 'Failed to add country with un-expected error.',
             ]);
-            return redirect()->route('countries.statis_create');
         }
     }
 
     // Delete Static Country
-    public function destroy($id)
+    public function destroy($enc_country_id)
     {
+
         // Check Ability
         $this->checkUserAbility('Delete-Country');
 
-        $country = DB::table('static_countries')->where('id', $id)->first();
+
+        $country = DB::table('static_countries')->where('id', Crypt::decrypt($enc_country_id))->first();
 
         // Store Logs
         $this->storeSuperLogs('Delete Static Country With Name: ' . $country->name);
 
-        $isDeleted = DB::table('static_countries')->where('id', Crypt::decrypt($id))->delete();
+
+
+        $isDeleted = DB::table('static_countries')->where('id', Crypt::decrypt($enc_country_id))->delete();
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
@@ -146,5 +148,13 @@ class StaticCountriesController extends Controller
                 'code' => 500,
             ]);
         }
+    }
+
+    public function show($enc_country_id)
+    {
+        return response()->json([
+            'country' => DB::table('static_countries')->where('id', Crypt::decrypt($enc_country_id))->first(),
+            'status' => true,
+        ], Response::HTTP_OK);
     }
 }
