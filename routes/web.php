@@ -159,6 +159,8 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // Edit
     Route::get('edit-static-bank/{id}', [StaticBankController::class, 'edit'])->name('banks.static_edit');
     Route::put('edit-static-bank/{id}', [StaticBankController::class, 'update'])->name('banks.static_update');
+    // Show
+    Route::get('static-bank-view/{id}', [StaticBankController::class, 'show'])->name('static_banks.show');
 
     // Super Routes
     // -- Create Super

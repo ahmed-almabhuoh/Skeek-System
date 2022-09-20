@@ -17,7 +17,7 @@ class CreateStaticBankTable extends Migration
             $table->id();
             $table->string('name', 45);
             $table->string('city', 45);
-            $table->string('img', 50);
+            $table->string('img');
             $table->timestamps();
         });
     }

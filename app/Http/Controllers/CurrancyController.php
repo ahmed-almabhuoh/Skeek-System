@@ -51,19 +51,27 @@ class CurrancyController extends Controller
         $isCreated = $currancy->save();
 
         if ($isCreated) {
-            session([
+            // session([
+            //     'created' => true,
+            //     'title' => 'Added Successfully',
+            //     'message' => 'Currancy ' . $request->input('name') . ' added successfully.',
+            // ]);
+            return redirect()->route('currancies.index')->with([
                 'created' => true,
                 'title' => 'Added Successfully',
                 'message' => 'Currancy ' . $request->input('name') . ' added successfully.',
             ]);
-            return redirect()->route('currancies.index');
         } else {
-            session([
+            // session([
+            //     'created' => false,
+            //     'title' => 'Failed',
+            //     'message' => 'Failed to add Currancy with un-expected error.',
+            // ]);
+            return redirect()->route('currancies.create')->with([
                 'created' => false,
                 'title' => 'Failed',
                 'message' => 'Failed to add Currancy with un-expected error.',
             ]);
-            return redirect()->route('currancies.create');
         }
     }
 
@@ -73,9 +81,13 @@ class CurrancyController extends Controller
      * @param  \App\Models\Currancy  $currancy
      * @return \Illuminate\Http\Response
      */
-    public function show(Currancy $currancy)
+    public function show($enc_currancy_id)
     {
         //
+        return response()->json([
+            'currancy' => Currancy::findOrFail(Crypt::decrypt($enc_currancy_id)),
+            'status' => true,
+        ], Response::HTTP_OK);
     }
 
     /**

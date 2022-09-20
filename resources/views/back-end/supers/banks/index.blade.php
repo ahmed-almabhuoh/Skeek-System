@@ -11,6 +11,13 @@
 
 @section('super-content')
     <div class="container-fluid">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+            New Bank
+        </button>
+        <button type="button" class="btn btn-default">
+            Export country report
+        </button>
+        <div style="margin: 10px"></div>
         @if (session()->get('created'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -57,6 +64,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (!count($banks))
+                                    <td colspan="10" >
+                                        <center>No data found ... </center>
+                                    </td>
+                                @endif
                                 @foreach ($banks as $bank)
                                     <tr>
                                         <td>{{ $bank->id }}</td>
@@ -65,7 +77,7 @@
                                                 $img = $bank->img;
                                             @endphp
                                             @if (!is_null($img))
-                                                <img src="{{ Storage::url('img/' . $bank->img) }}" width="40px"
+                                                <img src="{{ Storage::url('public/img/' . $bank->img) }}" width="40px"
                                                     height="40px" alt="No image">
                                             @else
                                                 No image
@@ -109,11 +121,18 @@
                                                     @endcan
 
                                                     @can('Delete-Bank')
-                                                        <button type="button" onclick="confirmDestroy({{ $bank->id }}, this)"
+                                                        <button type="button"
+                                                            onclick="confirmDestroy('{{ Crypt::encrypt($bank->id) }}', this)"
                                                             class="btn btn-danger">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     @endcan
+
+                                                    <button type="button" class="btn btn-default" data-toggle="modal"
+                                                        data-target="#bank-view-modal"
+                                                        onclick="bank_show('{{ Crypt::encrypt($bank->id) }}', '{{ Storage::url('public/img/') }}', '{{ route('banks.static_update', Crypt::encrypt($bank->id)) }}')">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
                                                 </div>
                                             </td>
                                         @endcanany
@@ -128,6 +147,195 @@
             </div>
         </div>
         <!-- /.row -->
+    </div>
+
+    <div class="modal fade" id="bank-view-modal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Static Bank Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a static bank is <strong>usable</strong> for all users in the system with
+                        <strong>active status</strong>
+                        <br> If you to change its settings <a id="bank_edit_link" href="">Go to its edit
+                            view</a>&hellip;
+                    </p>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bank_name">Bank name</label>
+                                    <input type="text" class="form-control" id="bank_name" name="bank_name"
+                                        placeholder="Enter Bank name" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" class="form-control" id="bank_country" name="country"
+                                        placeholder="Enter Bank country" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label for="Currancy">Currancy</label>
+                                    <input type="text" class="form-control" id="bank_currancy" name="Currancy"
+                                        placeholder="Enter Bank Currancy" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="City">City</label>
+                                    <input type="text" class="form-control" id="bank_city" name="City"
+                                        placeholder="Enter Bank City" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label for="created_at">Created at</label>
+                                    <input type="text" class="form-control" id="bank_created_at" name="created_at"
+                                        placeholder="Enter Bank created_at" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label for="updated_at">Updated at</label>
+                                    <input type="text" class="form-control" id="bank_updated_at" name="updated_at"
+                                        placeholder="Enter Bank updated_at" value="" readonly>
+                                </div>
+                                <!-- /.form-group -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <div class="row">
+                            <center>
+                                <div class="form-group">
+                                    <label for="City">Sheek Image</label><br>
+                                    <img src="" alt="Sheek image" id="bank_image">
+                                </div>
+                            </center>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new static bank</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('banks.static_store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <p>After you add this static bank with <strong>active status</strong>, it'll be
+                            <strong>usable</strong> for all users in systems&hellip;
+                        </p>
+                        <div class="form-group">
+
+                            <label for="name"
+                                @error('name')
+                                style="color: red;"
+                            @enderror>Bank
+                                name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                @error('name')
+                                    style="border-color: red" 
+                                    @enderror
+                                placeholder="Enter Bank name" value="{{ old('name') }}">
+                            @error('name')
+                                <small style="color:red">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>For country</label>
+                            <select class="form-control" name="country_id" id="country_id">
+                                <option value="0">*</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>With currancy</label>
+                            <select class="form-control" name="currancy_id" id="currancy_id">
+                                <option value="0">*</option>
+                                @foreach ($currancies as $currancy)
+                                    <option value="{{ $currancy->id }}">{{ $currancy->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="city"
+                                @error('city')
+                                style="color: red;"
+                            @enderror>
+                                In City
+                            </label>
+                            <input type="text" class="form-control" id="city" name="city"
+                                @error('city')
+                                    style="border-color: red" 
+                                    @enderror
+                                placeholder="Enter Bank city" value="{{ old('city') }}">
+                            @error('city')
+                                <small style="color:red">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Upload your sheek image</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image" id="image">
+                                    <label class="custom-file-label" for="image">Choose
+                                        image</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- select -->
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="active" name="active">
+                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Insert</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 @endsection
 
@@ -176,6 +384,35 @@
                 showConfirmButton: false,
                 timer: 2000
             });
+        }
+
+
+        function bank_show(id, local_storage_url, url) {
+            // static-country-view/{id}
+            axios.get('/cheek-system/static-bank-view/' + id)
+                .then(function(response) {
+                    // handle success
+                    console.log(response);
+
+                    document.getElementById('bank_edit_link').href = url;
+                    document.getElementById('bank_name').value = response.data.bank.name;
+                    document.getElementById('bank_country').value = response.data.country.name;
+                    document.getElementById('bank_currancy').value = response.data.currancy.name;
+                    document.getElementById('bank_city').value = response.data.bank.city;
+                    document.getElementById('bank_created_at').value = response.data.bank.created_at;
+                    document.getElementById('bank_updated_at').value = response.data.bank.updated_at;
+                    // {{ Storage::url('public/img/' . $bank->img) }}
+                    image_path = local_storage_url + response.data.bank.img;
+                    console.log(image_path);
+                    document.getElementById('bank_image').src = image_path;
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function() {
+                    // always executed
+                });
         }
     </script>
 @endsection

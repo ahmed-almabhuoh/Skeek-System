@@ -26,7 +26,8 @@ class StaticBankController extends Controller
 
         $banks = DB::table('static_bank')->get();
         $countries = DB::table('static_countries')->get();
-        $currancies = Currancy::all();
+        // scopeActive
+        $currancies = Currancy::active()->get();
         return response()->view('back-end.supers.banks.index', [
             'banks' => $banks,
             'countries' => $countries,
@@ -75,22 +76,20 @@ class StaticBankController extends Controller
 
 
         // Store Logs
-        $this->storeSuperLogs('Create New Static Bank with name: ' + $request->input('name'));
+        $this->storeSuperLogs('Create New Static Bank with name: ' . $request->input('name'));
 
         if ($isCreated) {
-            session([
+            return redirect()->route('banks.static_index')->with([
                 'created' => true,
                 'title' => 'Added Successfully',
                 'message' => 'Bank ' . $request->input('name') . ' added successfully.',
             ]);
-            return redirect()->route('banks.static_index');
         } else {
-            session([
+            return redirect()->route('banks.statis_create')->with([
                 'created' => false,
                 'title' => 'Failed',
                 'message' => 'Failed to add bank with un-expected error.',
             ]);
-            return redirect()->route('banks.statis_create');
         }
     }
 
@@ -106,7 +105,7 @@ class StaticBankController extends Controller
         $currancies = Currancy::where('active', true)->get();
 
         // Store Logs
-        $this->storeSuperLogs('Show Edit Static Bank Form with name: ' + $bank->name);
+        $this->storeSuperLogs('Show Edit Static Bank Form with name: ' . $bank->name);
 
         return response()->view('back-end.supers.banks.edit', [
             'bank' => $bank,
@@ -168,17 +167,18 @@ class StaticBankController extends Controller
     }
 
     // Delete Static Bank
-    public function delete($id)
+    public function delete($enc_bank_id)
     {
         // Check Ability
+
         $this->checkUserAbility('Delete-Bank');
 
-        $bank = DB::table('static_banks')->where('id', $id)->first();
+        $bank = DB::table('static_bank')->where('id', Crypt::decrypt($enc_bank_id))->first();
 
         // Store Logs
-        $this->storeSuperLogs('Delete Static Bank With Name: ' + $bank->name);
+        $this->storeSuperLogs('Delete Static Bank With Name: ' . $bank->name);
 
-        $isDeleted = DB::table('static_bank')->where('id', $id)->delete();
+        $isDeleted = DB::table('static_bank')->where('id',  Crypt::decrypt($enc_bank_id))->delete();
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
@@ -192,5 +192,18 @@ class StaticBankController extends Controller
                 'text' => 'Failed to delete static bank'
             ], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    public function show($enc_bank_id)
+    {
+        $bank = DB::table('static_bank')->where('id', Crypt::decrypt($enc_bank_id))->first();
+        $country = DB::table('static_countries')->where('id', $bank->country_id)->first();
+        $currancy = DB::table('currancies')->where('id', $bank->currancy_id)->first();
+        return response()->json([
+            'bank' => $bank,
+            'country' => $country,
+            'currancy' => $currancy,
+            'status' => true,
+        ], Response::HTTP_OK);
     }
 }

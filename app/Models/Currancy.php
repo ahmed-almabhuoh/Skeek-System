@@ -9,6 +9,11 @@ class Currancy extends Model
 {
     use HasFactory;
 
+    public function scopeActive($query)
+    {
+        return $query->where('active', '=', 1);
+    }
+
     public function getCurrancyStatusAttribute()
     {
         return $this->active ? 'Active' : 'In-active';
