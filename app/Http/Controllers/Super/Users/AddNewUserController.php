@@ -42,7 +42,7 @@ class AddNewUserController extends Controller
 
 
         if ($isCreated) {
-            return redirect()->route('super.user_add')->with([
+            return redirect()->route('super.user_show')->with([
                 'status' => 'User added successfully',
                 'code' => 200,
             ]);

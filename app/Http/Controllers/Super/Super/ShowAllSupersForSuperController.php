@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Super\Super;
 use App\Http\Controllers\Controller;
 use App\Models\Super;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class ShowAllSupersForSuperController extends Controller
 {
@@ -30,6 +31,8 @@ class ShowAllSupersForSuperController extends Controller
         }
         return response()->view('back-end.supers.supers.index', [
             'supers' => $supers,
+            'password' => $this->generateNewPassword(12),
+            'roles' => Role::get(),
         ]);
     }
 }

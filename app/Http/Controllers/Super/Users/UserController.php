@@ -24,6 +24,7 @@ class UserController extends Controller
 
         return response()->view('back-end.supers.users.index', [
             'admins' => $admins,
+            'password' => $this->generateNewPassword(12),
         ]);
     }
 

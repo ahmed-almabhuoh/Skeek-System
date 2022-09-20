@@ -65,7 +65,7 @@
                             </thead>
                             <tbody>
                                 @if (!count($banks))
-                                    <td colspan="10" >
+                                    <td colspan="10">
                                         <center>No data found ... </center>
                                     </td>
                                 @endif
@@ -210,12 +210,10 @@
                             <!-- /.col -->
                         </div>
                         <div class="row">
-                            <center>
-                                <div class="form-group">
-                                    <label for="City">Sheek Image</label><br>
-                                    <img src="" alt="Sheek image" id="bank_image">
-                                </div>
-                            </center>
+                            <div class="form-group d-flex jsutify-content-center">
+                                <label for="City">Sheek Image</label><br>
+                                <img src="" alt="Sheek image" id="bank_image">
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
@@ -250,10 +248,7 @@
                         </p>
                         <div class="form-group">
 
-                            <label for="name"
-                                @error('name')
-                                style="color: red;"
-                            @enderror>Bank
+                            <label>Bank
                                 name</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
@@ -266,23 +261,37 @@
                         </div>
 
                         <div class="form-group">
-                            <label>For country</label>
-                            <select class="form-control" name="country_id" id="country_id">
+                            <label>For
+                                country</label>
+                            <select class="form-control" name="country_id" id="country_id"
+                                @error('country_id')
+                                style="border-color: red;"
+                            @enderror>
                                 <option value="0">*</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                 @endforeach
                             </select>
+                            @error('country_id')
+                                <small style="color: red"> {{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>With currancy</label>
-                            <select class="form-control" name="currancy_id" id="currancy_id">
+                            <label>With
+                                currancy</label>
+                            <select class="form-control" name="currancy_id" id="currancy_id"
+                                @error('currancy_id')
+                                style="border-color: red"
+                            @enderror>
                                 <option value="0">*</option>
                                 @foreach ($currancies as $currancy)
                                     <option value="{{ $currancy->id }}">{{ $currancy->name }}</option>
                                 @endforeach
                             </select>
+                            @error('currancy_id')
+                                <small style="color: red">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -307,6 +316,7 @@
                             <label for="image">Upload your sheek image</label>
                             <div class="input-group">
                                 <div class="custom-file">
+
                                     <input type="file" class="custom-file-input" name="image" id="image">
                                     <label class="custom-file-label" for="image">Choose
                                         image</label>
@@ -315,6 +325,9 @@
                                     <span class="input-group-text">Upload</span>
                                 </div>
                             </div>
+                            @error('image')
+                                <small style="color: red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <!-- select -->
@@ -401,7 +414,6 @@
                     document.getElementById('bank_city').value = response.data.bank.city;
                     document.getElementById('bank_created_at').value = response.data.bank.created_at;
                     document.getElementById('bank_updated_at').value = response.data.bank.updated_at;
-                    // {{ Storage::url('public/img/' . $bank->img) }}
                     image_path = local_storage_url + response.data.bank.img;
                     console.log(image_path);
                     document.getElementById('bank_image').src = image_path;

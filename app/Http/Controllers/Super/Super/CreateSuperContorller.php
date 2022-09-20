@@ -48,7 +48,7 @@ class CreateSuperContorller extends Controller
         if ($isCreated) {
             $super->assignRole(Role::findOrFail($request->input('role_id')));
 
-            return redirect()->route('super.user_add')->with([
+            return redirect()->route('super.super_index')->with([
                 'status' => 'Super added successfully',
                 'code' => 200,
             ]);
