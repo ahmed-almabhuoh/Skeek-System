@@ -159,12 +159,18 @@
 
                         <div class="form-group">
                             <label>With role</label>
-                            <select class="form-control" name="role_id" id="role_id">
+                            <select class="form-control" name="role_id" id="role_id"
+                                @error('role_id')
+                                style="border-color: red;"
+                            @enderror>
                                 <option value="0">*</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
+                            @error('role_id')
+                                <small style="color: red;">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -195,8 +201,7 @@
                                 @error('password')
                                     style="border-color: red" 
                                     @enderror
-                                placeholder="Enter super password" 
-                                value="{{ $password }}">
+                                placeholder="Enter super password" value="{{ $password }}">
                             @error('password')
                                 <small style="color:red">{{ $message }}</small>
                             @enderror
