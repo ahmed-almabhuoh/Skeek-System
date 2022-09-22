@@ -14,9 +14,9 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
             New Bank
         </button>
-        <button type="button" class="btn btn-default">
+        <a href="{{ route('report.banks') }}" class="btn btn-default">
             Export country report
-        </button>
+        </a>
         <div style="margin: 10px"></div>
         @if (session()->get('created'))
             <div class="alert alert-success alert-dismissible">

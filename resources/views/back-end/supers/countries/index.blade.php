@@ -16,9 +16,11 @@
             New Country
         </button>
 
-        <button type="button" class="btn btn-default">
-            Export country report
-        </button>
+        <form action="{{ route('report.countries') }}" method="GET" style="display: inline;">
+            <button type="submit" class="btn btn-default">
+                Export country report
+            </button>
+        </form>
         <div style="margin: 10px"></div>
         @if (session()->get('created'))
             <div class="alert alert-success alert-dismissible">
@@ -301,6 +303,21 @@
                 .catch(function(error) {
                     // handle error
                     console.log(error);
+                })
+                .then(function() {
+                    // always executed
+                });
+        }
+
+        function countries_report() {
+            // static-country-view/{id}
+            axios.get('/cheek-system/reports/countries-report')
+                .then(function(response) {
+                    // handle success
+                    // console.log(response);
+                })
+                .catch(function(error) {
+                    // console.log(error);
                 })
                 .then(function() {
                     // always executed

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrancyController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SheekController;
 use App\Http\Controllers\Super\Bank\StaticBankController;
 use App\Http\Controllers\Super\Country\StaticCountriesController;
@@ -24,6 +25,7 @@ use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +126,12 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
 Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
     Route::get('super-dashboard', [SuperDashboardController::class, 'showSuperDashboard'])->name('super.dashboard');
 
+    Route::prefix('reports')->group(function () {
+        Route::get('countries-report', [ReportsController::class, 'getCountryReport'])->name('report.countries');
+        Route::get('banks.report', [ReportsController::class, 'getAllStaticBanksReport'])->name('report.banks');
+
+    });
+
     // Users
     Route::get('show-users', [UserController::class, 'showAllusers'])->name('super.user_show');
     Route::delete('delete-user/{admin}', [UserController::class, 'deleteUser']);
@@ -187,4 +195,9 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
 
     // Follow Up Super User
     Route::get('follow-up-super/{id}', [FollowUpSuperController::class, 'showSuperUserAction'])->name('super.follow_up_actions');
+});
+
+Route::get('test', function () {
+    $pdf = Pdf::loadView('reports.pdf.invoice');
+    return $pdf->download('invoice.pdf');
 });
