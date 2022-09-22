@@ -16,9 +16,9 @@
             New Currancy
         </button>
 
-        <button type="button" class="btn btn-default">
+        <a href="{{ route('report.currancies') }}" class="btn btn-default">
             Export currancy report
-        </button>
+        </a>
 
         <div style="margin: 10px;"></div>
 

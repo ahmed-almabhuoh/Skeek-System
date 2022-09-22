@@ -129,7 +129,7 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     Route::prefix('reports')->group(function () {
         Route::get('countries-report', [ReportsController::class, 'getCountryReport'])->name('report.countries');
         Route::get('banks.report', [ReportsController::class, 'getAllStaticBanksReport'])->name('report.banks');
-
+        Route::get('currancies.report', [ReportsController::class, 'getAllCurrancyReports'])->name('report.currancies');
     });
 
     // Users

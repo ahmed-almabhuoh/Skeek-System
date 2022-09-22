@@ -38,4 +38,16 @@ class ReportsController extends Controller
 
         return $pdf->download('banks.pdf');
     }
+
+    public function getAllCurrancyReports()
+    {
+        $currancies = Currancy::all();
+
+
+        $pdf = Pdf::loadView('reports.pdf.currancy-report', [
+            'currancies' => $currancies,
+        ]);
+
+        return $pdf->download('currancies.pdf');
+    }
 }
