@@ -4,26 +4,26 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Search</h3>
+                    <h3 class="card-title">{{__('Search')}}</h3>
                     <input type="text" wire:model="searchTerm"
                         style="margin-left: 15px; width: 250px; outline: none;" />
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table class="table table-bordered">
-                        <button id="myBtn" type="button">Create Bank</button>
+                        <button id="myBtn" type="button">{{__('Create Bank')}}</button>
                         <!-- The Modal -->
                         <div id="myModal" class="modal">
                             <!-- Modal content -->
                             <div class="modal-content">
                                 <span class="close">&times;</span>
-                                <p>Create new Bank..</p>
+                                <p>{{__('Create new Bank..')}}</p>
                                 <form id="create-form" method="POST" action="{{ route('banks.store') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="name">{{ __('cms.name') }}</label>
+                                            <label for="name">{{ __('Name') }}</label>
                                             @error('name')
                                                 <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                                     {{ $message }}</p>
@@ -32,7 +32,7 @@
                                                 placeholder="Enter bank name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="city">{{ __('cms.city') }}</label>
+                                            <label for="city">{{ __('City') }}</label>
                                             @error('city')
                                                 <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                                     {{ $message }}</p>
@@ -41,7 +41,7 @@
                                                 placeholder="Enter city">
                                         </div>
                                         <div class="form-group">
-                                            <label for="sheek_image">{{ __('cms.image') }}</label>
+                                            <label for="sheek_image">{{ __('Image') }}</label>
                                             @error('sheek_image')
                                                 <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                                     {{ $message }}</p>
@@ -51,10 +51,10 @@
                                                     <input type="file" class="custom-file-input" id="sheek_image"
                                                         name="sheek_image">
                                                     <label class="custom-file-label"
-                                                        for="sheek_image">{{ __('cms.select_sheek_image') }}</label>
+                                                        for="sheek_image">{{ __('Select sheek image') }}</label>
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text">{{ __('cms.upload') }}</span>
+                                                    <span class="input-group-text">{{ __('Upload') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                             <input type="checkbox" class="form-check-input" id="active"
                                                 name="active" checked>
                                             <label class="form-check-label"
-                                                for="active">{{ __('cms.active') }}</label>
+                                                for="active">{{ __('Active') }}</label>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
@@ -70,7 +70,7 @@
                                     <div class="card-footer">
                                         {{-- <button type="button" onclick="applyStoreBank()"
                                             class="btn btn-primary">{{ __('cms.create') }}</button> --}}
-                                        <input type="submit" value="Create" class="btn btn-primary">
+                                        <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
                                     </div>
                                 </form>
                             </div>
@@ -78,18 +78,18 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>{{ __('cms.name') }}</th>
-                                <th>{{ __('cms.country') }}</th>
-                                <th>Currancy</th>
-                                <th>{{ __('cms.active') }}</th>
-                                <th>{{ __('cms.created_at') }}</th>
-                                <th>{{ __('cms.updated_at') }}</th>
-                                <th>{{ __('cms.settings') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Country') }}</th>
+                                <th>{{__('Currancy')}}</th>
+                                <th>{{ __('Active') }}</th>
+                                <th>{{ __('Created at') }}</th>
+                                <th>{{ __('Updated at') }}</th>
+                                <th>{{ __('Settings') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <div wire:loading style="margin-left: 40%; font-size: 20px;">
-                                Loading
+                                {{__('Loading')}}
                             </div>
                             @foreach ($banks as $bank)
                                 <tr>
@@ -121,7 +121,7 @@
                                     <td colspan="8">
                                         <center>
                                             <div style="font-size: 16px; color: rgb(128, 126, 126)">
-                                                No data found
+                                                {{__('No data found')}}
                                             </div>
                                         </center>
                                     </td>

@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.banks') . ' in ' . $country->name)
-@section('location', __('cms.banks') . ' in ' . $country->name)
-@section('index', __('cms.index'))
+@section('title', __('Banks') . ' in ' . $country->name)
+@section('location', __('Banks') . ' in ' . $country->name)
+@section('index', __('Index'))
 
 @section('styles')
 
@@ -20,7 +20,7 @@
                                 style="margin-left: 15px; width: 250px; outline: none;" />
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('cms.banks') . ' in ' . $country->name }}</h3>
+                            <h3 class="card-title">{{ __('Banks') . ' in ' . $country->name }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -28,12 +28,12 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>{{ __('cms.name') }}</th>
-                                        <th>{{ __('cms.country') }}</th>
-                                        <th>{{ __('cms.active') }}</th>
-                                        <th>{{ __('cms.created_at') }}</th>
-                                        <th>{{ __('cms.updated_at') }}</th>
-                                        <th>{{ __('cms.settings') }}</th>
+                                        <th>{{ __('Name') }}</th>
+                                        <th>{{ __('Country') }}</th>
+                                        <th>{{ __('Active') }}</th>
+                                        <th>{{ __('Created at') }}</th>
+                                        <th>{{ __('Updated at') }}</th>
+                                        <th>{{ __('Settings') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

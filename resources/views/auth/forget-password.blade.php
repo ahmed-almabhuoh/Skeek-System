@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('forget_password') }}</title>
+    <title>{{ __('Forgot Password') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -23,10 +23,11 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="cms/index2.html" class="h1"><b>Sheek</b>System</a>
+                <a href="cms/index2.html" class="h1"><b>{{ __('Sheek') }}</b>{{ __('System') }}</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+                <p class="login-box-msg">
+                    {{ __('You forgot your password? Here you can easily retrieve a new password.') }}</p>
                 <form>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" id="email">
@@ -38,14 +39,14 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" onclick="sendResetLing()" class="btn btn-primary btn-block">Request
-                                new password</button>
+                            <button type="button" onclick="sendResetLing()"
+                                class="btn btn-primary btn-block">{{ __('Request new password') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
                 <p class="mt-3 mb-1">
-                    <a href="{{ route('login', 'patient') }}">Login</a>
+                    <a href="{{ route('login', 'patient') }}">{{ __('Login') }}</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

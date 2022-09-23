@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Super Supers')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Super Supers')
+@section('super-title', __('Super Supers'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Super Supers'))
 
 
 @section('super-styles')
@@ -11,11 +11,11 @@
 @section('super-content')
     <div class="container-fluid">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            New Super
+            {{__('New Super')}}
         </button>
 
         <button type="button" class="btn btn-default">
-            Export support report
+            {{__('Export support report')}}
         </button>
 
         <div class="row">
@@ -23,13 +23,13 @@
                 @if (session('code') == 200)
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                        <h5><i class="icon fas fa-check"></i> {{__('Success!')}}</h5>
                         {{ session('status') }}.
                     </div>
                 @elseif(session('code') == 500)
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                        <h5><i class="icon fas fa-check"></i> {{__('Failed!')}}</h5>
                         {{ session('status') }}.
                     </div>
                 @endif
@@ -37,7 +37,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Supers</h3>
+                        <h3 class="card-title">{{__('All Supers')}}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -57,14 +57,14 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>E-mail</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Status</th>
+                                    <th>#</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('E-mail')}}</th>
+                                    <th>{{__('Created at')}}</th>
+                                    <th>{{__('Updated at')}}</th>
+                                    <th>{{__('Status')}}</th>
                                     @canany(['Ban-Super', 'Follow-Up-Super', 'Update-Super', 'Delete-Super'])
-                                        <th>Settings</th>
+                                        <th>{{__('Status')}}</th>
                                     @endcanany
                                 </tr>
                             </thead>
@@ -129,7 +129,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add new supor</h4>
+                    <h4 class="modal-title">{{__('Add new supor')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -145,8 +145,7 @@
                             <label for="name"
                                 @error('name')
                                 style="color: red;"
-                            @enderror>Supor
-                                fullname</label>
+                            @enderror>{{__('Supor fullname')}}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -158,7 +157,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>With role</label>
+                            <label>{{__('With role')}}</label>
                             <select class="form-control" name="role_id" id="role_id"
                                 @error('role_id')
                                 style="border-color: red;"
@@ -178,8 +177,7 @@
                             <label for="email"
                                 @error('email')
                                 style="color: red;"
-                            @enderror>Supor
-                                email</label>
+                            @enderror>{{__('Supor email')}}</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 @error('email')
                                     style="border-color: red" 
@@ -195,8 +193,7 @@
                             <label for="password"
                                 @error('password')
                                 style="color: red;"
-                            @enderror>Supor
-                                password</label>
+                            @enderror>{{__('Supor password')}}</label>
                             <input type="text" class="form-control" id="password" name="password"
                                 @error('password')
                                     style="border-color: red" 
@@ -212,15 +209,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Insert</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Inserts')}}</button>
                     </div>
                 </form>
             </div>

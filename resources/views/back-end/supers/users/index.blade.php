@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Super Users')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Super Users')
+@section('super-title', __('Super Users'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Super Users'))
 
 
 @section('super-styles')
@@ -11,11 +11,11 @@
 @section('super-content')
     <div class="container-fluid">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            New User
+            {{__('New User')}}
         </button>
 
         <button type="button" class="btn btn-default">
-            Export user report
+            {{__('Export user report')}}
         </button>
         <div style="margin: 10px;"></div>
         <div class="row">
@@ -23,13 +23,13 @@
                 @if (session('code') == 200)
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                        <h5><i class="icon fas fa-check"></i> {{__('Success!')}}</h5>
                         {{ session('status') }}.
                     </div>
                 @elseif(session('code') == 500)
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                        <h5><i class="icon fas fa-check"></i> {{__('Failed!')}}</h5>
                         {{ session('status') }}.
                     </div>
                 @endif
@@ -37,7 +37,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Users</h3>
+                        <h3 class="card-title">{{__('All Users')}}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -57,14 +57,14 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>E-mail</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Status</th>
+                                    <th>#</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('E-mail')}}</th>
+                                    <th>{{__('Created at')}}</th>
+                                    <th>{{__('Updated at')}}</th>
+                                    <th>{{__('Status')}}</th>
                                     @canany(['Ban-User', 'Follow-Up-User', 'Delete-User'])
-                                        <th>Settings</th>
+                                        <th>{{__('Settings')}}</th>
                                     @endcanany
                                 </tr>
                             </thead>
@@ -122,7 +122,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add new user</h4>
+                    <h4 class="modal-title">{{__('Add new user')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -138,8 +138,7 @@
                             <label for="name"
                                 @error('name')
                                 style="color: red;"
-                            @enderror>User
-                                name</label>
+                            @enderror>{{__('User name')}}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -155,8 +154,7 @@
                             <label for="email"
                                 @error('email')
                                 style="color: red;"
-                            @enderror>User
-                                email</label>
+                            @enderror>{{__('User email')}}</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 @error('email')
                                     style="border-color: red" 
@@ -172,8 +170,7 @@
                             <label for="password"
                                 @error('password')
                                 style="color: red;"
-                            @enderror>User
-                                password</label>
+                            @enderror>{{__('User password')}}</label>
                             <input type="text" class="form-control" id="password" name="password"
                                 @error('password')
                                     style="border-color: red" 
@@ -189,15 +186,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Insert</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Insert')}}</button>
                     </div>
                 </form>
             </div>

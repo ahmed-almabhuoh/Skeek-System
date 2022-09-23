@@ -24,10 +24,10 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="index2.html" class="h1"><b>Sheek System</b></a>
+                <a href="index2.html" class="h1"><b>{{ __('Sheek System') }}</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">{{ __('Sign in to start your session') }}</p>
 
                 <form action="index3.html" method="post">
                     <div class="input-group mb-3">
@@ -51,14 +51,14 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    {{ __('Remember Me') }}
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="button" onclick="login('{{ $guard }}')"
-                                class="btn btn-primary btn-block">Sign In</button>
+                                class="btn btn-primary btn-block">{{ __('Sign in') }}</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -66,10 +66,10 @@
 
 
                 <p class="mb-1">
-                    <a href="{{ route('password.forget') }}">I forgot my password</a>
+                    <a href="{{ route('password.forget') }}">{{__('I forgot my password')}}</a>
                 </p>
                 <p class="mb-0">
-                    <a href="{{ route('register.view') }}" class="text-center">Register a new membership</a>
+                    <a href="{{ route('register.view') }}" class="text-center">{{__('Register a new membership')}}</a>
                 </p>
             </div>
             <!-- /.card-body -->

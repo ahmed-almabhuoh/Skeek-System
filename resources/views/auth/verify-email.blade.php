@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sheek System | Verify Email</title>
+    <title>{{ __('Sheek System') }} | {{ __('Verify Email') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -23,14 +23,16 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="sheekSystem/index2.html" class="h1"><b>Admin</b>LTE</a>
+                <a href="sheekSystem/index2.html" class="h1"><b>{{ __('Sheek') }}</b>{{ __('System') }}</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">You are only one step a way from email verification, verify your email now.</p>
+                <p class="login-box-msg">
+                    {{ __('You are only one step a way from email verification, verify your email now.') }}</p>
                 <form>
                     <div class="row">
                         <div class="col-12">
-                            <button type="button" onclick="applySendEmailVerification()" class="btn btn-primary btn-block">Send Email Verification</button>
+                            <button type="button" onclick="applySendEmailVerification()"
+                                class="btn btn-primary btn-block">Send Email Verification</button>
                         </div>
                         <!-- /.col -->
                     </div>

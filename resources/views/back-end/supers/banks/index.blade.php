@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Static Countries')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Static Countries')
+@section('super-title', __('Static banks'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Static banks'))
 
 
 @section('super-styles')
@@ -12,10 +12,10 @@
 @section('super-content')
     <div class="container-fluid">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            New Bank
+            {{__('New Bank')}}
         </button>
         <a href="{{ route('report.banks') }}" class="btn btn-default">
-            Export country report
+            {{__('')}}
         </a>
         <div style="margin: 10px"></div>
         @if (session()->get('created'))
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All static banks</h3>
+                        <h3 class="card-title">{{__('All static banks')}}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -49,24 +49,24 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Country</th>
-                                    <th>City</th>
-                                    <th>Currancy</th>
-                                    <th>Status</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
+                                    <th>#</th>
+                                    <th>{{__('Image')}}</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('Country')}}</th>
+                                    <th>{{__('City')}}</th>
+                                    <th>{{__('Currancy')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Created at')}}</th>
+                                    <th>{{__('Updated at')}}</th>
                                     @canany(['Update-Bank', 'Delete-Bank'])
-                                        <th>Settings</th>
+                                        <th>{{__('Settings')}}</th>
                                     @endcanany
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (!count($banks))
                                     <td colspan="10">
-                                        <center>No data found ... </center>
+                                        <center>{{__('No data found ... ')}}</center>
                                     </td>
                                 @endif
                                 @foreach ($banks as $bank)
@@ -80,7 +80,7 @@
                                                 <img src="{{ Storage::url('public/img/' . $bank->img) }}" width="40px"
                                                     height="40px" alt="No image">
                                             @else
-                                                No image
+                                                {{__('No image')}}
                                             @endif
                                         </td>
                                         <td>{{ $bank->name }}</td>
@@ -104,9 +104,9 @@
                                         <td><span
                                                 class="badge @if (!$bank->active) bg-danger @else bg-success @endif">
                                                 @if ($bank->active)
-                                                    Active
+                                                    {{__('Active')}}
                                                 @else
-                                                    In-active
+                                                    {{__('In-active')}}
                                                 @endif
                                             </span>
                                         </td>
@@ -153,34 +153,33 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Static Bank Details</h4>
+                    <h4 class="modal-title">{{__('Static Bank Details')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>This is a static bank is <strong>usable</strong> for all users in the system with
-                        <strong>active status</strong>
-                        <br> If you to change its settings <a id="bank_edit_link" href="">Go to its edit
-                            view</a>&hellip;
+                    <p>{{__('This is a static bank is')}} <strong>{{__('usable')}}</strong> {{__('for all users in the system with')}}
+                        <strong>{{__('active status')}}</strong>
+                        <br> {{__('If you need to change its settings')}} <a id="bank_edit_link" href="">{{__('Go to its edit view')}}</a>&hellip;
                     </p>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="bank_name">Bank name</label>
+                                    <label for="bank_name">{{__('Bank name')}}</label>
                                     <input type="text" class="form-control" id="bank_name" name="bank_name"
                                         placeholder="Enter Bank name" value="" readonly>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="country">Country</label>
+                                    <label for="country">{{__('Country')}}</label>
                                     <input type="text" class="form-control" id="bank_country" name="country"
                                         placeholder="Enter Bank country" value="" readonly>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="Currancy">Currancy</label>
+                                    <label for="Currancy">{{__('Currancy')}}</label>
                                     <input type="text" class="form-control" id="bank_currancy" name="Currancy"
                                         placeholder="Enter Bank Currancy" value="" readonly>
                                 </div>
@@ -189,19 +188,19 @@
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="City">City</label>
+                                    <label for="City">{{__('City')}}</label>
                                     <input type="text" class="form-control" id="bank_city" name="City"
                                         placeholder="Enter Bank City" value="" readonly>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="created_at">Created at</label>
+                                    <label for="created_at">{{__('Created at')}}</label>
                                     <input type="text" class="form-control" id="bank_created_at" name="created_at"
                                         placeholder="Enter Bank created_at" value="" readonly>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="updated_at">Updated at</label>
+                                    <label for="updated_at">{{__('Updated at')}}</label>
                                     <input type="text" class="form-control" id="bank_updated_at" name="updated_at"
                                         placeholder="Enter Bank updated_at" value="" readonly>
                                 </div>
@@ -211,13 +210,13 @@
                         </div>
                         <div class="row">
                             <div class="form-group d-flex jsutify-content-center">
-                                <label for="City">Sheek Image</label><br>
+                                <label for="City">{{__('Sheek Image')}}</label><br>
                                 <img src="" alt="Sheek image" id="bank_image">
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
                         </div>
                         <!-- /.row -->
                     </div>
@@ -235,7 +234,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add new static bank</h4>
+                    <h4 class="modal-title">{{__('Add new static bank')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -243,13 +242,12 @@
                 <form action="{{ route('banks.static_store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <p>After you add this static bank with <strong>active status</strong>, it'll be
-                            <strong>usable</strong> for all users in systems&hellip;
+                        <p>{{__('After you add this static bank with')}} <strong>{{__('active status')}}</strong>{{__(', it\'ll be')}}
+                            <strong>{{__('usable')}}</strong> {{__('for all users in systems')}}&hellip;
                         </p>
                         <div class="form-group">
 
-                            <label>Bank
-                                name</label>
+                            <label>{{__('Bank name')}}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -261,8 +259,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>For
-                                country</label>
+                            <label>{{__('For country')}}</label>
                             <select class="form-control" name="country_id" id="country_id"
                                 @error('country_id')
                                 style="border-color: red;"
@@ -278,8 +275,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>With
-                                currancy</label>
+                            <label>{{__('With currancy')}}</label>
                             <select class="form-control" name="currancy_id" id="currancy_id"
                                 @error('currancy_id')
                                 style="border-color: red"
@@ -300,7 +296,7 @@
                                 @error('city')
                                 style="color: red;"
                             @enderror>
-                                In City
+                                {{__('In City')}}
                             </label>
                             <input type="text" class="form-control" id="city" name="city"
                                 @error('city')
@@ -313,16 +309,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Upload your sheek image</label>
+                            <label for="image">{{__('Upload your sheek image')}}</label>
                             <div class="input-group">
                                 <div class="custom-file">
 
                                     <input type="file" class="custom-file-input" name="image" id="image">
-                                    <label class="custom-file-label" for="image">Choose
-                                        image</label>
+                                    <label class="custom-file-label" for="image">{{__('Choose image')}}</label>
                                 </div>
                                 <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
+                                    <span class="input-group-text">{{__('Upload')}}</span>
                                 </div>
                             </div>
                             @error('image')
@@ -334,15 +329,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Insert</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Insert')}}</button>
                     </div>
                 </form>
             </div>

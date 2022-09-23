@@ -83,28 +83,28 @@ class CreateBankRequest extends FormRequest
     {
         return [
             // Sheek image input
-            'sheek_image.max' => 'File is too large, try agian.',
+            'sheek_image.max' => __('File is too large, try agian.'),
 
 
             // Static Countries
-            'static_country_id.integer' => 'Invalid country number',
-            'static_country_id.exists' => 'Invalid country number',
+            'static_country_id.integer' => __('Invalid country number'),
+            'static_country_id.exists' => __('Invalid country number'),
 
             // Currancy
-            'currancy_id.exsits' => 'Invalid currancy entered',
+            'currancy_id.exsits' => __('Invalid currancy entered'),
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Bank name',
-            'City' => 'Bank city',
-            'country_id' => 'Bank country',
-            'sheek_image' => 'Bank sheek image',
-            'active' => 'Bank state',
-            'static_country_id' => 'Static Country',
-            'currancy_id' => 'Currancy',
+            'name' => __('Bank name'),
+            'City' => __('Bank city'),
+            'country_id' => __('Bank country'),
+            'sheek_image' => __('Bank sheek image'),
+            'active' => __('Bank state'),
+            'static_country_id' => __('Static Country'),
+            'currancy_id' => __('Currancy'),
         ];
     }
 

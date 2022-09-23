@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.banks'))
-@section('location', __('cms.banks'))
-@section('index', __('cms.index'))
+@section('title', __('Banks'))
+@section('location', __('Banks'))
+@section('index', __('Index'))
 
 @section('styles')
     <style>

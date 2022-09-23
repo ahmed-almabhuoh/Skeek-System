@@ -4,29 +4,29 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Search</h3>
+                    <h3 class="card-title">{{__('Search')}}</h3>
                     <input type="text" wire:model="searchTerm"
                         style="margin-left: 15px; width: 250px; outline: none;" />
                     <!-- Trigger/Open The Modal -->
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <button id="myBtn" type="button">Create Country</button>
+                    <button id="myBtn" type="button">{{__('Create Country')}}</button>
 
                     <!-- The Modal -->
                     <div id="myModal" class="modal">
                         <!-- Modal content -->
                         <div class="modal-content">
                             <span class="close">&times;</span>
-                            <p>Create new country..</p>
+                            <p>{{__('Create new country..')}}</p>
                             <form id="create-form" method="POST" action="{{ route('countries.store') }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">{{ __('cms.name') }}</label>
+                                        <label for="name">{{ __('Name') }}</label>
                                         @error('name')
                                             <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
-                                                Enter country name please.</p>
+                                                {{__('Enter country name please.')}}</p>
                                         @enderror
                                         <input type="text" class="form-control" id="name" name="name"
                                             value="{{ old('name') }}" placeholder="Enter country name">
@@ -34,13 +34,13 @@
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="active" name="active"
                                             checked>
-                                        <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                        <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <input type="submit" value="Create" class="btn btn-primary">
+                                    <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>
@@ -49,17 +49,17 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>{{ __('cms.name') }}</th>
-                                <th>{{ __('cms.bank_count') }}</th>
-                                <th>{{ __('cms.active') }}</th>
-                                <th>{{ __('cms.created_at') }}</th>
-                                <th>{{ __('cms.updated_at') }}</th>
-                                <th>{{ __('cms.settings') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Bank count') }}</th>
+                                <th>{{ __('Active') }}</th>
+                                <th>{{ __('Created at') }}</th>
+                                <th>{{ __('Updated at') }}</th>
+                                <th>{{ __('Settings') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <div wire:loading style="margin-left: 40%; font-size: 20px;">
-                                Loading
+                                {{__('Loading')}}
                             </div>
                             @foreach ($countries as $country)
                                 <tr>
@@ -74,7 +74,7 @@
                                         <a class="btn btn-app bg-danger"
                                             href="{{ route('banks.specific', $country->id) }}">
                                             <span class="badge bg-teal">{{ $country->banks_count }}</span>
-                                            <i class="fas fa-inbox"></i> {{ __('cms.bank_count') }}
+                                            <i class="fas fa-inbox"></i> {{ __('Bank count') }}
                                         </a>
                                     </td>
                                     <td><span
@@ -102,7 +102,7 @@
                                 <td colspan="8">
                                     <center>
                                         <div style="font-size: 16px; color: rgb(128, 126, 126)">
-                                            No data found
+                                            {{__('No data found')}}
                                         </div>
                                     </center>
                                 </td>

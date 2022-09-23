@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Add new currancy')
-@section('super-location', 'currnacies')
-@section('super-index', 'Add')
+@section('super-title', __('Add new currancy'))
+@section('super-location', __('currnacies'))
+@section('super-index', __('Add'))
 
 
 @section('super-styles')
@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add currancy</h3>
+                            <h3 class="card-title">{{__('Add currancy')}}</h3>
                         </div>
                         <div style="margin: 15px">
                             @if ($errors->any())
@@ -38,7 +38,7 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Currancy</label>
+                                    <label for="name">{{__('Currancy')}}</label>
                                     @error('name')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -57,7 +57,7 @@
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         checked="">
-                                    <label class="form-check-label" for="active">Active</label>
+                                    <label class="form-check-label" for="active">{{__('Active')}}</label>
                                 </div>
 
 
@@ -66,7 +66,7 @@
 
                             <div class="card-footer">
 
-                                <input type="submit" value="Create" class="btn btn-primary">
+                                <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

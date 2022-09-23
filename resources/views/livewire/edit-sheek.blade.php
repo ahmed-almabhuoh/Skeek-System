@@ -4,7 +4,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">{{ __('cms.edit_sheek') }}</h3>
+                <h3 class="card-title">{{ __('Edit sheek') }}</h3>
             </div>
             <!-- /.card-header -->
 
@@ -12,32 +12,32 @@
             <form>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="beneficiary_name">{{ __('cms.beneficiary_name') }}</label>
+                        <label for="beneficiary_name">{{ __('Beneficiary name') }}</label>
                         <input type="text" class="form-control" id="beneficiary_name"
                             placeholder="Enter Beneficiary Name" wire:model="beneficiary_name"
                             value="{{ $beneficiary_name }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="amount">{{ __('cms.amount') }}</label>
+                        <label for="amount">{{ __('Amount') }}</label>
                         <input type="number" class="form-control" id="amount" placeholder="Enter amount number"
                             wire:model="amount" value="{{ $amount }}">
                     </div>
 
                     <div class="form-group">
-                        <label>Currancy</label>
+                        <label>{{__('Currancy')}}</label>
                         <select class="form-control" id="currancy" wire:model="currancy">
-                            <option value="Dinar">{{ __('cms.dinar') }}
+                            <option value="Dinar">{{ __('Dinar') }}
                             </option>
-                            <option value="Dollar">{{ __('cms.dollar') }}
+                            <option value="Dollar">{{ __('Dollar') }}
                             </option>
-                            <option value="Shakel">{{ __('cms.shakel') }}
+                            <option value="Shakel">{{ __('Shakel') }}
                             </option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Country</label>
+                        <label>{{__('Country')}}</label>
                         <select class="form-control" id="country_id" wire:model="selected_country_id">
                             @foreach ($countries as $drop_country)
                                 <option value="{{ $drop_country->id }}"
@@ -48,13 +48,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="date">{{ __('cms.date') }}</label>
+                        <label for="date">{{ __('Date') }}</label>
                         <input type="text" class="form-control" id="date" placeholder="Enter sheek date"
                             wire:model="date" value="{{ $date }}">
                     </div>
 
                     <div class="form-group">
-                        <label>{{ __('cms.bank') }}</label>
+                        <label>{{ __('Bank') }}</label>
                         <select class="form-control" id="bank_id" wire:model="selected_bank_id">
                             @foreach ($banks as $drop_bank)
                                 <option value="{{ $drop_bank->id }}">{{ $drop_bank->name }}</option>
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Underline</label>
+                        <label>{{__('Underline')}}</label>
                         <select class="form-control" id="underline_type" wire:model="line_type">
                             <option value="1" @if ($this->sheek->underline_type == 1) selected @endif>//</option>
                             <option value="2" @if ($this->sheek->underline_type == 2) selected @endif>يصرف للمستفيد الأول
@@ -74,12 +74,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="desc">{{ __('cms.desc') }}</label>
+                        <label for="desc">{{ __('Description') }}</label>
                         <input type="text" class="form-control" id="desc" placeholder="Enter description"
                             wire:model="desc" value="{{ $desc }}">
                     </div>
 
-                    <label>{{ __('cms.type') }}</label>
+                    <label>{{ __('Type') }}</label>
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="status" id="paid"
@@ -97,7 +97,7 @@
 
                 <div class="card-footer">
                     <button type="button" onclick="update({{ $sheek->id }})"
-                        class="btn btn-primary">Update</button>
+                        class="btn btn-primary">{{__('Update')}}</button>
                 </div>
             </form>
         </div>
@@ -108,7 +108,7 @@
         <!-- Form Element sizes -->
         <div class="card card-success">
             <div class="card-header">
-                <h3 class="card-title">{{ __('cms.your_sheek') }}</h3>
+                <h3 class="card-title">{{ __('Your sheek') }}</h3>
             </div>
             <div class="card-body sheek-background">
                 <img src="{{ Storage::url($image_name) }}" alt="Sheek Image" class="inspire">

@@ -21,7 +21,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@700&family=Noto+Kufi+Arabic:wght@300&display=swap"
+        rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'Charm', cursive;
+            font-family: 'Noto Kufi Arabic', sans-serif;
+        }
+
         @media print {
             .inspire {
                 display: none;
@@ -104,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="index3.html" class="brand-link">
                 <img src="{{ asset('sheekSystem/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Sheek System</span>
+                <span class="brand-text font-weight-light">{{ __('Sheek System') }}</span>
             </a>
 
             <!-- Sidebar -->
@@ -143,7 +153,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Starter Pages
+                                    {{ __('Starter Pages') }}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -151,13 +161,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="#" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Active Page</p>
+                                        <p>{{ __('Active Page') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inactive Page</p>
+                                        <p>{{ __('Inactive Page') }}</p>
                                     </a>
                                 </li>
                             </ul>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\Auth\EmailVerifyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
@@ -89,6 +90,9 @@ Route::prefix('check-system')->middleware(['auth:admin', 'banned', 'verified'])-
 
     // Show specific banks
     Route::get('show-specific-banks/{country}/country', [BankController::class, 'showSpecificBanks'])->name('banks.specific');
+
+    // Change Language Settings
+    Route::get('lang/{lang}', [AdminSettingsController::class, 'changeLanguage'])->name('admins.lang');
 
     // Display Country Banks
     Route::get('country-banks/{country}', [CountryController::class, 'displayCountryBanks'])->name('country.banks');

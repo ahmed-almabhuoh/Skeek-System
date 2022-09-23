@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Add new super')
-@section('super-location', 'supers')
-@section('super-index', 'Add')
+@section('super-title', __('Add new super'))
+@section('super-location', __('supers'))
+@section('super-index', __('Add'))
 
 
 @section('super-styles')
@@ -14,7 +14,7 @@
         <div class="card-body">
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-check"></i> Success!</h5>
+                <h5><i class="icon fas fa-check"></i> {{__('Success!')}}</h5>
                 {{ session('status') }}
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="card-body">
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-ban"></i> Failed!</h5>
+                <h5><i class="icon fas fa-ban"></i> {{__('Failed!')}}</h5>
                 {{ session('status') }}
             </div>
         </div>
@@ -30,7 +30,7 @@
     <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Add New Super</h3>
+                <h3 class="card-title">{{__('Add New Super')}}</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Full name</label>
+                        <label for="name" class="col-sm-2 col-form-label">{{__('Full name')}}</label>
                         <div class="col-sm-10">
                             <input type="text" name="name" class="form-control" id="name"
                                 value="{{ $super->name }}" placeholder="Enter user full name"
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <label for="email" class="col-sm-2 col-form-label">{{__('Email')}}</label>
                         <div class="col-sm-10">
                             <input type="email" name="email" class="form-control" id="email"
                                 value="{{ $super->email }}" style="@error('email') border-color: red; @enderror"
@@ -74,12 +74,12 @@
 
 
                     <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <label for="password" class="col-sm-2 col-form-label">{{__('Password')}}</label>
                         <div class="col-sm-10">
                             <input type="text" name="password" class="form-control" id="password"
                                 style="@error('password') border-color: red; @enderror" placeholder="Enter user password"
                                 value="{{ $password }}">
-                            <small>If won't change the super password, let it empty.</small>
+                            <small>{{__('If won\'t change the super password, let it empty.')}}</small>
                             @error('password')
                                 <SMAll style="color: red">
                                     {{ $message }}
@@ -92,7 +92,7 @@
                         <div class="offset-sm-2 col-sm-10">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="active" checked>
-                                <label class="form-check-label" for="active">is Active!</label>
+                                <label class="form-check-label" for="active">{{__('is Active!')}}</label>
                             </div>
                         </div>
                     </div>
@@ -100,8 +100,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info">Update</button>
-                    <button type="submit" class="btn btn-default float-right">Cancel</button>
+                    <button type="submit" class="btn btn-info">{{__('Update')}}</button>
+                    <button type="submit" class="btn btn-default float-right">{{__('Cancel')}}</button>
                 </div>
                 <!-- /.card-footer -->
             </form>

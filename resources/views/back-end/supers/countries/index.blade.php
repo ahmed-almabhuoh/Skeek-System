@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Static Countries')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Static Countries')
+@section('super-title', __('Static countries'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Static countries'))
 
 
 @section('super-styles')
@@ -13,12 +13,12 @@
 
     <div class="container-fluid">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            New Country
+            {{__('New Country')}}
         </button>
 
         <form action="{{ route('report.countries') }}" method="GET" style="display: inline;">
             <button type="submit" class="btn btn-default">
-                Export country report
+                {{__('Export country report')}}
             </button>
         </form>
         <div style="margin: 10px"></div>
@@ -33,7 +33,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All static countries</h3>
+                        <h3 class="card-title">{{__('All static countries')}}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -53,19 +53,19 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
+                                    <th>#</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Created at')}}</th>
+                                    <th>{{__('Updated at')}}</th>
                                     @canany(['Update-Country', 'Delete-Country'])
-                                        <th>Settings</th>
+                                        <th>{{__('Settings')}}</th>
                                     @endcanany
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (!count($countries))
-                                    <td colspan="6">No data found ... </td>
+                                    <td colspan="6">{{__('No data found ... ')}}</td>
                                 @endif
                                 @foreach ($countries as $country)
                                     <tr>
@@ -76,9 +76,9 @@
                                         <td><span
                                                 class="badge @if (!$country->active) bg-danger @else bg-success @endif">
                                                 @if ($country->active)
-                                                    Active
+                                                    {{__('Active')}}
                                                 @else
-                                                    In-active
+                                                    {{__('In-active')}}
                                                 @endif
                                             </span>
                                         </td>
@@ -125,7 +125,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add new static country</h4>
+                    <h4 class="modal-title">{{__('Add new static country')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,16 +133,14 @@
                 <form action="{{ route('countries.statis_create') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <p>After you add this static country with <strong>active status</strong>, it'll be
-                            <strong>usable</strong> for all users in systems&hellip;
+                        <p>{{__('After you add this static country with active status, it\'ll be usable for all users in systems')}}&hellip;
                         </p>
                         <div class="form-group">
 
                             <label for="name"
                                 @error('name')
                                 style="color: red;"
-                            @enderror>Country
-                                name</label>
+                            @enderror>{{__('Country name')}}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -157,15 +155,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">Active ?!</label>
+                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Insert</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Insert')}}</button>
                     </div>
                 </form>
             </div>
@@ -178,27 +176,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Status country detail</h4>
+                    <h4 class="modal-title">{{__('Status country detail')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 @csrf
                 <div class="modal-body">
-                    <p>This is a static country is <strong>usable</strong> for all users in the system with
-                        <strong>active status</strong>
-                        <br> If you to change its settings <a id="country_edit_link" href="">Go to its edit
-                            view</a>&hellip;
+                    <p>{{__('This is a static country is usable for all users in the system with active status')}}
+                        <br> {{__('If you need to change its settings')}} <a id="country_edit_link" href="">{{__('Go to its edit view')}}</a>&hellip;
                     </p>
                     <div class="form-group">
 
-                        <label for="name">Country
-                            name</label>
+                        <label for="name">{{__('Country name')}}</label>
                         <input type="text" class="form-control" id="country_name" name="country_name"
                             placeholder="Enter country name" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="name">Created at</label>
+                        <label for="name">{{__('Created at')}}</label>
                         <input type="text" class="form-control" id="country_created_at" name="country_created_at"
                             placeholder="Enter country name" readonly>
                     </div>
@@ -208,7 +203,7 @@
                             placeholder="Enter country name" readonly>
                     </div> --}}
                     <div class="form-group">
-                        <label for="name">Updated at</label>
+                        <label for="name">{{__('Updated at')}}</label>
                         <input type="text" class="form-control" id="country_updated_at" name="country_updated_at"
                             placeholder="Enter country name" readonly>
                     </div>
@@ -224,7 +219,7 @@
                             <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input" type="checkbox" id="country_active"
                                     name="country_active" readonly>
-                                <label for="active" class="custom-control-label">Active ?!</label>
+                                <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
                             </div>
                         </div>
                     </div>

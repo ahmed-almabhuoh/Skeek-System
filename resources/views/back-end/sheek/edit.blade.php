@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.edit_sheek'))
-@section('location', __('cms.edit_sheek'))
-@section('index', __('cms.edit'))
+@section('title', __('Edit sheek'))
+@section('location', __('Edit sheek'))
+@section('index', __('Edit'))
 
 @section('styles')
     <style>

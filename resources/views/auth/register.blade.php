@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Registration Page (v2)</title>
+    <title>{{__('Sheek System')}} | {{__('Registration New Account')}}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -23,10 +23,10 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="sheekSystem/index2.html" class="h1"><b>Admin</b>LTE</a>
+                <a href="sheekSystem/index2.html" class="h1"><b>{{__('Sheek')}}</b>{{__('System')}}</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">{{__('Register a new membership')}}</p>
 
                 <form id="register-form">
                     <div class="input-group mb-3">
@@ -67,14 +67,14 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                 <label for="agreeTerms">
-                                    I agree to the <a href="#">terms</a>
+                                    {{__('I agree to the')}} <a href="#">{{__('terms')}}</a>
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="button" onclick="applyRegister()"
-                                class="btn btn-primary btn-block">Register</button>
+                                class="btn btn-primary btn-block">{{__('Register')}}</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -91,7 +91,7 @@
                     </a>
                 </div> --}}
 
-                <a href="{{ route('login', 'admin') }}" class="text-center">I already have a membership</a>
+                <a href="{{ route('login', 'admin') }}" class="text-center">{{__('I already have a membership')}}</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->

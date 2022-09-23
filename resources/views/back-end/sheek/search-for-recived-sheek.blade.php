@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.recived_sheek'))
-@section('location', __('cms.recived_sheek'))
-@section('index', __('cms.index'))
+@section('title', __('Recived sheeks'))
+@section('location', __('Recived sheeks'))
+@section('index', __('Index'))
 
 @section('styles')
     @livewireStyles

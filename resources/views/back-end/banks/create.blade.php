@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.add_bank'))
-@section('location', __('cms.add_bank'))
-@section('index', __('cms.add'))
+@section('title', __('Add bank'))
+@section('location', __('Add bank'))
+@section('index', __('Add'))
 
 @section('styles')
     <style>
@@ -76,13 +76,13 @@
                 <!-- left column -->
                 <div class="col-md-12">
                     <div class="callout callout-info">
-                        <h5>We are the work team, we have added some countries & its banks for you to save you time and
-                            effort!</h5>
+                        <h5>{{ __('We are the work team, we have added some countries & its banks for you to save you time and effort!') }}
+                        </h5>
                         <div class="row" style="margin-top: 20px;">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Our support countries & banks</h3>
+                                        <h3 class="card-title">{{ __('Our support countries & banks') }}</h3>
                                     </div>
                                     <!-- ./card-header -->
                                     <div class="card-body p-0">
@@ -144,12 +144,13 @@
                                 </li>
                             @endforeach
                         </ul> --}}
-                        <p>This does not prevent you from creating the countries & banks you want to deal with.</p>
+                        <p>{{ __('This does not prevent you from creating the countries & banks you want to deal with.') }}
+                        </p>
                     </div>
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('cms.add_bank') }}</h3>
+                            <h3 class="card-title">{{ __('Add Bank') }}</h3>
                         </div>
 
                         @if ($errors->any())
@@ -172,17 +173,17 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">{{ __('cms.name') }}</label>
+                                    <label for="name">{{ __('Bank name') }}</label>
                                     @error('name')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
                                     @enderror
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter bank name">
+                                        placeholder="{{__('Enter bank name')}}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Static Countries</label>
+                                    <label>{{__('Static Countries')}}</label>
                                     @error('static_country_id')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -196,7 +197,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Your Countries</label>
+                                    <label>{{__('Your Countries')}}</label>
                                     @error('country_id')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -210,7 +211,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Currancy</label>
+                                    <label>{{__('Currancy')}}</label>
                                     @error('currancy_id')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -226,13 +227,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="city">{{ __('cms.city') }}</label>
+                                    <label for="city">{{ __('City') }}</label>
                                     @error('city')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
                                     @enderror
                                     <input type="text" class="form-control" id="city" name="city"
-                                        placeholder="Enter city">
+                                        placeholder="{{__('Enter city name')}}">
                                 </div>
 
                                 <livewire:option-sheek-image />
@@ -243,7 +244,7 @@
                                             {{ $message }}</p>
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" checked>
-                                    <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                 </div>
 
 
@@ -251,9 +252,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                {{-- <button type="button" onclick="applyStoreBank()"
-                                    class="btn btn-primary">{{ __('cms.create') }}</button> --}}
-                                <input type="submit" value="Create" class="btn btn-primary">
+                                <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

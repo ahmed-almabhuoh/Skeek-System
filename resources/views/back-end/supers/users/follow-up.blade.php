@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Super Users')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Follow User Actions')
+@section('super-title', __('Super Users'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Follow User Actions'))
 
 @section('super-styles')
 
@@ -34,16 +34,16 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>IP</th>
-                                    <th>OS</th>
-                                    <th>Device</th>
-                                    <th>Platform</th>
-                                    <th>Browser</th>
-                                    <th>V</th>
-                                    <th>D-T</th>
-                                    <th>Action</th>
-                                    <th>At</th>
+                                    <th>#</th>
+                                    <th>{{__('IP')}}</th>
+                                    <th>{{__('OS')}}</th>
+                                    <th>{{__('Device')}}</th>
+                                    <th>{{__('Platform')}}</th>
+                                    <th>{{__('Browser')}}</th>
+                                    <th>{{__('V')}}</th>
+                                    <th>{{__('D-T')}}</th>
+                                    <th>{{__('Action')}}</th>
+                                    <th>{{__('At')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

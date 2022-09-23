@@ -38,40 +38,21 @@ var DataTable = $.fn.dataTable;
 $.extend( true, DataTable.Buttons.defaults, {
 	dom: {
 		container: {
-			className: 'dt-buttons btn-group flex-wrap'
+			className: 'dt-buttons btn-group'
 		},
 		button: {
 			className: 'btn btn-secondary'
 		},
 		collection: {
 			tag: 'div',
-			className: 'dropdown-menu',
-			closeButton: false,
+			className: 'dt-button-collection dropdown-menu',
 			button: {
 				tag: 'a',
 				className: 'dt-button dropdown-item',
 				active: 'active',
 				disabled: 'disabled'
 			}
-		},
-		splitWrapper: {
-			tag: 'div',
-			className: 'dt-btn-split-wrapper btn-group',
-			closeButton: false,
-		},
-		splitDropdown: {
-			tag: 'button',
-			text: '',
-			className: 'btn btn-secondary dt-btn-split-drop dropdown-toggle dropdown-toggle-split',
-			closeButton: false,
-			align: 'split-left',
-			splitAlignClass: 'dt-button-split-left'
-		},
-		splitDropdownButton: {
-			tag: 'button',
-			className: 'dt-btn-split-drop-button btn btn-secondary',
-			closeButton: false
-		} 
+		}
 	},
 	buttonCreated: function ( config, button ) {
 		return config.buttons ?

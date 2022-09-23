@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Search</h3>
+                            <h3 class="card-title">{{ __('Search') }}</h3>
                             <input type="text" wire:model="searchTerm"
                                 style="margin-left: 15px; width: 250px; outline: none;" />
                         </div>
@@ -17,27 +17,31 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>{{ __('cms.beneficiary_name') }}</th>
-                                        <th>{{ __('cms.bank_name') }}</th>
-                                        <th>{{ __('cms.amount') }}</th>
-                                        <th>{{ __('cms.date') }}</th>
-                                        <th>{{ __('cms.currancy') }}</th>
-                                        <th>{{ __('cms.type') }}</th>
-                                        <th>{{ __('cms.desc') }}</th>
-                                        <th>{{ __('cms.created_at') }}</th>
-                                        <th>{{ __('cms.updated_at') }}</th>
-                                        <th>{{ __('cms.settings') }}</th>
+                                        <th>{{ __('Beneficiary name') }}</th>
+                                        <th>{{ __('Bank name') }}</th>
+                                        <th>{{ __('Amount') }}</th>
+                                        <th>{{ __('Date') }}</th>
+                                        <th>{{ __('Currancy') }}</th>
+                                        <th>{{ __('Type') }}</th>
+                                        <th>{{ __('Description') }}</th>
+                                        <th>{{ __('Created at') }}</th>
+                                        <th>{{ __('Updated at') }}</th>
+                                        <th>{{ __('Settings') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <div wire:loading style="margin-left: 40%; font-size: 20px;">
-                                        Loading
+                                        {{ __('Loading') }}
                                     </div>
                                     @foreach ($sheeks as $sheek)
                                         <tr>
                                             <td>{{ $sheek->id }}</td>
                                             <td>{{ $sheek->beneficiary_name }}</td>
-                                            <td>{{ $sheek->bank->name }}</td>
+                                            @if ($sheek->bank)
+                                                <td>{{ $sheek->bank->name }}</td>
+                                            @else
+                                                <td>{{ __('no bank found') }}</td>
+                                            @endif
                                             <td>{{ $sheek->amount }}</td>
                                             <td>{{ $sheek->date }}</td>
                                             <td>{{ $sheek->currancy }}</td>
@@ -67,7 +71,7 @@
                                     <td colspan="8">
                                         <center>
                                             <div style="font-size: 16px; color: rgb(128, 126, 126)">
-                                                No data found
+                                                {{ __('No data found') }}
                                             </div>
                                         </center>
                                     </td>

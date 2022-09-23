@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Edit Static Bank')
-@section('super-location', 'Static banks')
-@section('super-index', 'Edit')
+@section('super-title', __('Edit static bank'))
+@section('super-location', __('Static banks'))
+@section('super-index', __('Edit'))
 
 
 @section('super-styles')
@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit bank</h3>
+                            <h3 class="card-title">{{ __('Edit bank') }}</h3>
                         </div>
                         <div style="margin: 15px">
                             @if ($errors->any())
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Name</label>
+                                    <label for="name">{{ __('Name') }}</label>
                                     @error('name')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -56,7 +56,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Country</label>
+                                    <label>{{ __('Country') }}</label>
                                     @error('country_id')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -74,7 +74,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Currancy</label>
+                                    <label>{{ __('Currancy') }}</label>
                                     @error('currancy_id')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="city">City</label>
+                                    <label for="city">{{ __('City') }}</label>
                                     @error('city')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -102,12 +102,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Choose sheek image</label>
+                                    <label for="exampleInputFile">{{ __('Choose sheek image') }}</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="image" id="image">
-                                            <label class="custom-file-label" for="image">Choose
-                                                image</label>
+                                            <label class="custom-file-label"
+                                                for="image">{{ __('Choose image') }}</label>
                                             @error('image')
                                                 <span style="margin-left: 15px;diplay: block; color: red;">
                                                     {{ $message }}
@@ -115,7 +115,7 @@
                                             @enderror
                                         </div>
                                         <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                            <span class="input-group-text">{{ __('Upload') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         @if ($bank->active) checked @endif>
-                                    <label class="form-check-label" for="active">Is active ?</label>
+                                    <label class="form-check-label" for="active">{{ __('Is active ?') }}</label>
                                 </div>
 
 
@@ -144,7 +144,7 @@
 
                             <div class="card-footer">
 
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="{{ __('Update') }}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

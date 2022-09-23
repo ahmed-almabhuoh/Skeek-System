@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Edit Static Countries')
-@section('super-location', 'Static countries')
-@section('super-index', 'Edit')
+@section('super-title', __('Edit static countries'))
+@section('super-location', __('Static countries'))
+@section('super-index', __('Edit'))
 
 
 @section('super-styles')
@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit static country</h3>
+                            <h3 class="card-title">{{__('Edit static country')}}</h3>
                         </div>
                         @if ($errors->any())
                             <div style="margin: 15px">
@@ -44,7 +44,7 @@
                                         placeholder="Enter country id" value="{{ Crypt::encrypt($country->id) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">{{ __('cms.name') }}</label>
+                                    <label for="name">{{ __('Name') }}</label>
                                     @error('name')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -55,7 +55,7 @@
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         @if ($country->active) checked @endif>
-                                    <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                     @error('active')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -65,7 +65,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

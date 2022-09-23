@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Search</h3>
+                    <h3 class="card-title">{{__('Search')}}</h3>
                     <input type="text" wire:model="searchTerm"
                         style="margin-left: 15px; width: 250px; outline: none;" />
                 </div>
@@ -14,17 +14,17 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>{{ __('cms.name') }}</th>
-                                <th>{{ __('cms.country') }}</th>
-                                <th>{{ __('cms.active') }}</th>
-                                <th>{{ __('cms.created_at') }}</th>
-                                <th>{{ __('cms.updated_at') }}</th>
-                                <th>{{ __('cms.settings') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Country') }}</th>
+                                <th>{{ __('Active') }}</th>
+                                <th>{{ __('Created at') }}</th>
+                                <th>{{ __('Updated at') }}</th>
+                                <th>{{ __('Settings') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <div wire:loading style="margin-left: 40%; font-size: 20px;">
-                                Loading
+                                {{__('Loading')}}
                             </div>
                             @foreach ($banks as $bank)
                                 <tr>

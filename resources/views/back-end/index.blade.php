@@ -1,8 +1,8 @@
 @extends('back-end.parent')
 
-@section('title', __('cms.dashboard'))
-@section('location', __('cms.dashboard'))
-@section('index', __('cms.index'))
+@section('title', __('Dashboard'))
+@section('location', __('Dashboard'))
+@section('index', __('Index'))
 
 @section('styles')
 
@@ -10,12 +10,12 @@
 
 @section('aside-items')
 
-    <li class="nav-header">Human Resources</li>
+    <li class="nav-header">{{__('Human Resources')}}</li>
     <li class="nav-item">
         <a href="#" class="nav-link">
             <i class="nav-icon fa fa-globe"></i>
             <p>
-                Countries
+                {{__('Countries')}}
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -23,13 +23,13 @@
             <li class="nav-item">
                 <a href="{{ route('countries.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Add Country</p>
+                    <p>{{__('Add Country')}}</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('countries.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Browse Countries</p>
+                    <p>{{__('Browse Countries')}}</p>
                 </a>
             </li>
         </ul>
@@ -38,7 +38,7 @@
         <a href="#" class="nav-link">
             <i class="nav-icon fa fa-handshake"></i>
             <p>
-                {{ __('cms.banks') }}
+                {{ __('Banks') }}
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -46,24 +46,24 @@
             <li class="nav-item">
                 <a href="{{ route('banks.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{{ __('cms.add_bank') }}</p>
+                    <p>{{ __('Add bank') }}</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('banks.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{{ __('cms.browse_banks') }}</p>
+                    <p>{{ __('Browse bank') }}</p>
                 </a>
             </li>
         </ul>
     </li>
 
-    <li class="nav-header">Sheeks Info</li>
+    <li class="nav-header">{{__('Sheeks Info')}}</li>
     <li class="nav-item">
         <a href="#" class="nav-link">
             <i class="nav-icon fa fa-handshake"></i>
             <p>
-                {{ __('cms.sheeks') }}
+                {{ __('Sheeks') }}
                 <i class="fas fa-angle-left right"></i>
             </p>
         </a>
@@ -71,31 +71,31 @@
             <li class="nav-item">
                 <a href="{{ route('sheeks.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{{ __('cms.add') }}</p>
+                    <p>{{ __('Create sheek') }}</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('sheeks.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>{{ __('cms.index') }}</p>
+                    <p>{{ __('Index') }}</p>
                 </a>
             </li>
         </ul>
     </li>
 
-    <li class="nav-header">Settings</li>
+    <li class="nav-header">{{__('Settings')}}</li>
     {{-- Change password --}}
     <li class="nav-item">
         <a href="{{ route('password.change') }}" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
-            <p>Change password</p>
+            <p>{{__('Change password')}}</p>
         </a>
     </li>
     {{-- Logout --}}
     <li class="nav-item">
         <a href="{{ route('logout') }}" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>Logout</p>
+            <p>{{__('Logout')}}</p>
         </a>
     </li>
 @endsection

@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.edit_countries'))
-@section('location', __('cms.edit_countries'))
-@section('index', __('cms.edit'))
+@section('title', __('Edit country'))
+@section('location', __('Edit country'))
+@section('index', __('Edit'))
 
 @section('styles')
 
@@ -17,7 +17,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('cms.edit_countries') }}</h3>
+                            <h3 class="card-title">{{ __('Edit country') }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -26,7 +26,7 @@
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">{{ __('cms.name') }}</label>
+                                    <label for="name">{{ __('Name') }}</label>
                                     @error('name')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -37,7 +37,7 @@
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" name="active" id="active"
                                         @if ($country->active) checked @endif>
-                                    <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -45,7 +45,7 @@
                             <div class="card-footer">
                                 {{-- <button type="button" onclick="applyEditingCountry()"
                                     class="btn btn-primary">{{ __('cms.edit') }}</button> --}}
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

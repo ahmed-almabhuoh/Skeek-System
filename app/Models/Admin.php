@@ -13,6 +13,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
+    protected $with = [
+        'settings',
+    ];
+
     public function sheeks()
     {
         return $this->hasMany(Sheek::class, 'admin_id', 'id');
@@ -26,5 +30,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function resetCodes()
     {
         return $this->hasMany(ResetCode::class, 'admin_id', 'id');
+    }
+
+    public function settings()
+    {
+        return $this->hasOne(AdminSettings::class, 'admin_id', 'id');
     }
 }

@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Create Static Countries')
-@section('super-location', 'Static countries')
-@section('super-index', 'Create')
+@section('super-title', __('Create static countries'))
+@section('super-location', __('Static countries'))
+@section('super-index', __('Create'))
 
 
 @section('super-styles')
@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add static country</h3>
+                            <h3 class="card-title">{{__('Add static country')}}</h3>
                         </div>
                         @if ($errors->any())
                             <div style="margin: 15px">
@@ -39,7 +39,7 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">{{ __('cms.name') }}</label>
+                                    <label for="name">{{ __('Name') }}</label>
                                     @error('name')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -59,7 +59,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <input type="submit" value="Create" class="btn btn-primary">
+                                <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

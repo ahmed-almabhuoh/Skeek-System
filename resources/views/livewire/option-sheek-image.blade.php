@@ -2,7 +2,7 @@
     {{-- Do your work, then step back. --}}
     <div>
         {{-- Start --}}
-        <h6>Upload Sheek Image</h6>
+        <h6>{{__('Upload Sheek Image')}}</h6>
 
         <label class="switch">
             <input type="checkbox" wire:click="$toggle('showFileElement')">
@@ -12,7 +12,7 @@
         <div class="container mx-auto">
             @if ($showFileElement)
                 <div class="form-group">
-                    <label for="sheek_image">{{ __('cms.image') }}</label>
+                    <label for="sheek_image">{{ __('Image') }}</label>
                     @error('sheek_image')
                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                             {{ $message }}</p>
@@ -21,10 +21,10 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="sheek_image" name="sheek_image">
                             <label class="custom-file-label"
-                                for="sheek_image">{{ __('cms.select_sheek_image') }}</label>
+                                for="sheek_image">{{ __('Select sheek image') }}</label>
                         </div>
                         <div class="input-group-append">
-                            <span class="input-group-text">{{ __('cms.upload') }}</span>
+                            <span class="input-group-text">{{ __('Upload') }}</span>
                         </div>
                     </div>
                 </div>

@@ -13,14 +13,14 @@
 
     @canany(['Create-Country', 'Read-Country', 'Update-Country', 'Delete-Country', 'Create-Bank', 'Read-Bank',
         'Update-Bank', 'Delete-Bank', 'Create-Cuurancy', 'Read-Cuurancy', 'Update-Cuurancy', 'Delete-Cuurancy'])
-        <li class="nav-header">Content Management</li>
+        <li class="nav-header">{{__('Content Management')}}</li>
 
         @canany(['Create-Country', 'Read-Country', 'Update-Country', 'Delete-Country'])
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                        Countries
+                        {{__('Countries')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a href="{{ route('countries.static_show') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>All</p>
+                                <p>{{__('All')}}</p>
                             </a>
                         </li>
                     @endcanany
@@ -38,7 +38,7 @@
                         <li class="nav-item">
                             <a href="{{ route('countries.statis_create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('Create')}}</p>
                             </a>
                         </li>
                     @endcan
@@ -51,7 +51,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                        Banks
+                        {{__('Banks')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -60,7 +60,7 @@
                         <li class="nav-item">
                             <a href="{{ route('banks.static_index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>All</p>
+                                <p>{{__('All')}}</p>
                             </a>
                         </li>
                     @endcanany
@@ -69,7 +69,7 @@
                         <li class="nav-item">
                             <a href="{{ route('banks.static_create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('Create')}}</p>
                             </a>
                         </li>
                     @endcan
@@ -82,7 +82,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                        Currancy
+                        {{__('Currancy')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -92,7 +92,7 @@
                         <li class="nav-item">
                             <a href="{{ route('currancies.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>All</p>
+                                <p>{{__('All')}}</p>
                             </a>
                         </li>
                     @endcanany
@@ -101,7 +101,7 @@
                         <li class="nav-item">
                             <a href="{{ route('currancies.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('Create')}}</p>
                             </a>
                         </li>
                     @endcan
@@ -112,14 +112,14 @@
 
     @canany(['Create-Super', 'Read-Super', 'Update-Super', 'Delete-Super', 'Create-User', 'Read-User', 'Update-User',
         'Delete-User'])
-        <li class="nav-header">Humman Recourses</li>
+        <li class="nav-header">{{__('Humman Recourses')}}</li>
 
         @canany(['Create-Super', 'Read-Super', 'Update-Super', 'Delete-Super'])
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                        Supers
+                        {{__('Supers')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -128,7 +128,7 @@
                         <li class="nav-item">
                             <a href="{{ route('super.super_index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>All</p>
+                                <p>{{__('All')}}</p>
                             </a>
                         </li>
                     @endcanany
@@ -137,7 +137,7 @@
                         <li class="nav-item">
                             <a href="{{ route('super.super_create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('Create')}}</p>
                             </a>
                         </li>
                     @endcan
@@ -150,7 +150,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
-                        Users
+                        {{__('Users')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -159,7 +159,7 @@
                         <li class="nav-item">
                             <a href="{{ route('super.user_show') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>All</p>
+                                <p>{{__('All')}}</p>
                             </a>
                         </li>
                     @endcanany
@@ -168,7 +168,7 @@
                         <li class="nav-item">
                             <a href="{{ route('super.user_add') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create</p>
+                                <p>{{__('Create')}}</p>
                             </a>
                         </li>
                     @endcan
@@ -179,12 +179,12 @@
 
 
     @if (auth('super')->user()->email == 'sheek.system.22@gmail.com' || auth()->user()->email == 'az54546@gmail.com')
-        <li class="nav-header">Roles & Permissions</li>
+        <li class="nav-header">{{__('Roles & Permissions')}}</li>
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
-                    Roles
+                    {{__('Roles')}}
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
@@ -192,14 +192,14 @@
                 <li class="nav-item">
                     <a href="{{ route('roles.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>All</p>
+                        <p>{{__('All')}}</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ route('roles.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Create</p>
+                        <p>{{__('Create')}}</p>
                     </a>
                 </li>
             </ul>
@@ -209,7 +209,7 @@
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
-                    Permissions
+                    {{__('Permissions')}}
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
@@ -217,26 +217,26 @@
                 <li class="nav-item">
                     <a href="{{ route('permissions.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>All</p>
+                        <p>{{__('All')}}</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ route('permissions.create') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Create</p>
+                        <p>{{__('Create')}}</p>
                     </a>
                 </li>
             </ul>
         </li>
     @endif
 
-    <li class="nav-header">Settings</li>
+    <li class="nav-header">{{__('Settings')}}</li>
     {{-- Logout --}}
     <li class="nav-item">
         <a href="{{ route('logout') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>Logout</p>
+            <p>{{__('Logout')}}</p>
         </a>
     </li>
 @endsection

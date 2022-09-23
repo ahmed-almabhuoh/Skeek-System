@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.change_password'))
-@section('location', __('cms.change_password'))
-@section('index', __('cms.edit'))
+@section('title', __('Change Password'))
+@section('location', __('Change Password'))
+@section('index', __('Edit'))
 
 @section('styles')
 
@@ -15,27 +15,27 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('cms.change_password') }}</h3>
+                        <h3 class="card-title">{{ __('Change Password') }}</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form id="change-form">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="beneficiary_name">{{ __('cms.current_password') }}</label>
-                                <input type="password" class="form-control" placeholder="Enter current password"
+                                <label for="beneficiary_name">{{ __('Currant Password') }}</label>
+                                <input type="password" class="form-control" placeholder="{{__('Enter current password')}}"
                                     id="current_password">
                             </div>
 
                             <div class="form-group">
-                                <label for="beneficiary_name">{{ __('cms.new_password') }}</label>
-                                <input type="password" class="form-control" placeholder="Enter new password"
+                                <label for="beneficiary_name">{{ __('New Password') }}</label>
+                                <input type="password" class="form-control" placeholder="{{__('Enter new password')}}"
                                     id="password">
                             </div>
 
                             <div class="form-group">
-                                <label for="beneficiary_name">{{ __('cms.new_password_confirmation') }}</label>
-                                <input type="password" class="form-control" placeholder="Enter new password confirmation"
+                                <label for="beneficiary_name">{{ __('New Password Confirmation') }}</label>
+                                <input type="password" class="form-control" placeholder="{{__('Enter new password confirmation')}}"
                                     id="password_confirmation">
                             </div>
                         </div>
@@ -43,7 +43,7 @@
 
                         <div class="card-footer">
                             <button type="button" onclick="applyChangePassword()"
-                                class="btn btn-primary">{{ __('cms.change') }}</button>
+                                class="btn btn-primary">{{ __('Change') }}</button>
                         </div>
                     </form>
                 </div>

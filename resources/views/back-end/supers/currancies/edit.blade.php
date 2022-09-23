@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Edit currancy')
-@section('super-location', 'currnacies')
-@section('super-index', 'Edit')
+@section('super-title', __('Edit currancy'))
+@section('super-location', __('currnacies'))
+@section('super-index', __('Edit'))
 
 
 @section('super-styles')
@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit currancy</h3>
+                            <h3 class="card-title">{{ __('Edit currancy') }}</h3>
                         </div>
                         <div style="margin: 15px">
                             @if ($errors->any())
@@ -44,7 +44,7 @@
                                         placeholder="Enter bank id" value="{{ Crypt::encrypt($currancy->id) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Currancy</label>
+                                    <label for="name">{{ __('Currancy') }}</label>
                                     @error('name')
                                         <span style="margin-left: 15px;diplay: block; color: red;">
                                             {{ $message }}
@@ -63,7 +63,7 @@
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         @if ($currancy->active) checked @endif>
-                                    <label class="form-check-label" for="active">Active</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                 </div>
 
 
@@ -72,7 +72,7 @@
 
                             <div class="card-footer">
 
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="{{ __('Update') }}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

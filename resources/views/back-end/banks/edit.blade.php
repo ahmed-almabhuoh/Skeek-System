@@ -1,8 +1,8 @@
 @extends('back-end.index')
 
-@section('title', __('cms.edit_bank'))
-@section('location', __('cms.edit_bank'))
-@section('index', __('cms.add'))
+@section('title', __('Edit bank'))
+@section('location', __('Edit bank'))
+@section('index', __('Edit'))
 
 @section('styles')
 
@@ -17,7 +17,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('cms.edit_bank') }}</h3>
+                            <h3 class="card-title">{{ __('Edit bank') }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -27,7 +27,7 @@
                             @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">{{ __('cms.name') }}</label>
+                                    <label for="name">{{ __('Bank name') }}</label>
                                     @error('name')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -36,7 +36,7 @@
                                         placeholder="Enter bank name" value="{{ $bank->name }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="city">{{ __('cms.city') }}</label>
+                                    <label for="city">{{ __('City') }}</label>
                                     @error('city')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -45,7 +45,7 @@
                                         placeholder="Enter city" value="{{ $bank->city }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>{{ __('cms.country') }}</label>
+                                    <label>{{ __('Country') }}</label>
                                     @error('country')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Currancy</label>
+                                    <label>{{__('Currancy')}}</label>
                                     @error('country')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -78,7 +78,7 @@
 
                                 <div class="form-group">
                                     {{-- 1657965807_sheek_images.png --}}
-                                    <label for="sheek_image">{{ __('cms.image') }}</label>
+                                    <label for="sheek_image">{{ __('Image') }}</label>
                                     @error('sheek_image')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>
@@ -88,10 +88,10 @@
                                             <input type="file" class="custom-file-input" id="sheek_image"
                                                 name="sheek_image">
                                             <label class="custom-file-label"
-                                                for="sheek_image">{{ __('cms.choose_image') }}</label>
+                                                for="sheek_image">{{ __('Choose image') }}</label>
                                         </div>
                                         <div class="input-group-append">
-                                            <span class="input-group-text">{{ __('cms.upload') }}</span>
+                                            <span class="input-group-text">{{ __('Upload') }}</span>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 2%;">
@@ -101,7 +101,7 @@
                                                 <img src="/storage/img/{{ $img->img ?? '' }}" alt="Sheek Image"
                                                     class="inspire">
                                             @else
-                                                No image found
+                                                {{__('No image found')}}
                                             @endif
                                         </center>
                                     </div>
@@ -113,7 +113,7 @@
                                     @enderror
                                     <input type="checkbox" class="form-check-input" id="active" name="active"
                                         @if ($bank->active) checked @endif>
-                                    <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -121,7 +121,7 @@
                             <div class="card-footer">
                                 {{-- <button type="button" onclick="applyEditBank()"
                                     class="btn btn-primary">{{ __('cms.edit') }}</button> --}}
-                                <input type="submit" value="Update" class="btn btn-primary">
+                                <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
