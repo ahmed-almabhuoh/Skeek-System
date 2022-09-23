@@ -22,7 +22,7 @@ class ResetPasswordController extends Controller
         ]), [
             'email' => 'required|email|exists:admins,email',
         ], [
-            'email.exists' => 'Wrong input',
+            'email.exists' => __('Wrong input'),
         ]);
         //
         if (! $validator->fails()) {
@@ -60,7 +60,7 @@ class ResetPasswordController extends Controller
             'token' => 'required|string',
             'password' => ['required', 'string', 'confirmed', \Illuminate\Validation\Rules\Password::min(8)->letters()->numbers()->mixedCase()->uncompromised()],
         ], [
-            'email.exists' => 'Wrong input',
+            'email.exists' => __('Wrong input'),
         ]);
         //
         if (! $validator->fails()) {

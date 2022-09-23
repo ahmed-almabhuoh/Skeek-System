@@ -20,7 +20,7 @@ class EmailVerifyController extends Controller
 //        new SendEmailVerificationJob($request->all());
         $request->user()->sendEmailVerificationNotification();
         return response()->json([
-            'message' => 'Verification email send successfully',
+            'message' => __('Verification email send successfully'),
         ], Response::HTTP_OK);
     }
 

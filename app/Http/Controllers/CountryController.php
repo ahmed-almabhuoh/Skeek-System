@@ -51,8 +51,8 @@ class CountryController extends Controller
 
         session([
             'created' => false,
-            'title' => 'Failed',
-            'message' => 'Wrong inputs, re-enter and retry agian.',
+            'title' => __('Failed'),
+            'message' => __('Wrong inputs, re-enter and retry agian.'),
         ]);
 
         return response()->view('back-end.countries.create', [
@@ -81,15 +81,15 @@ class CountryController extends Controller
             $this->storeUserLogs('create country');
             session([
                 'created' => true,
-                'title' => 'Added Successfully',
-                'message' => 'Country ' . $request->input('name') . ' added successfully.',
+                'title' => __('Added Successfully'),
+                'message' => __('Country added successfully.'),
             ]);
             return redirect()->route('countries.index');
         } else {
             session([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to add country with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to add country with un-expected error.'),
             ]);
             return redirect()->route('countries.create');
         }
@@ -140,15 +140,15 @@ class CountryController extends Controller
             $this->storeUserLogs('update country');
             session([
                 'created' => true,
-                'title' => 'Updated Successfully',
-                'message' => 'Country ' . $request->input('name') . ' updated successfully.',
+                'title' => __('Updated Successfully'),
+                'message' => __('Country updated successfully.'),
             ]);
             return redirect()->route('countries.index');
         } else {
             session([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to update country with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to update country with un-expected error.'),
             ]);
             return redirect()->route('countries.edit', $country);
         }
@@ -168,14 +168,14 @@ class CountryController extends Controller
             $this->storeUserLogs('delete country');
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Country deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('Country deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Faild!',
-                'text' => 'Faild to delete country',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete country'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }
@@ -184,7 +184,6 @@ class CountryController extends Controller
     {
         return response()->view('back-end.countries.country-banks', [
             'country' => $country,
-            // 'banks' => $country->banks,
         ]);
     }
 }

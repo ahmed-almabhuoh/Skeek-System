@@ -81,14 +81,14 @@ class StaticBankController extends Controller
         if ($isCreated) {
             return redirect()->route('banks.static_index')->with([
                 'created' => true,
-                'title' => 'Added Successfully',
-                'message' => 'Bank ' . $request->input('name') . ' added successfully.',
+                'title' => __('Added Successfully'),
+                'message' => __('Bank added successfully.'),
             ]);
         } else {
             return redirect()->route('banks.statis_create')->with([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to add bank with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to add bank with un-expected error.'),
             ]);
         }
     }
@@ -159,8 +159,8 @@ class StaticBankController extends Controller
         } else {
             session([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to update bank with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to update bank with un-expected error.'),
             ]);
             return redirect()->route('banks.statis_create');
         }
@@ -182,14 +182,14 @@ class StaticBankController extends Controller
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Static bank deleted successfully'
+                'title' => __('Deleted'),
+                'text' => __('Static bank deleted successfully')
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed',
-                'text' => 'Failed to delete static bank'
+                'title' => __('Failed'),
+                'text' => __('Failed to delete static bank')
             ], Response::HTTP_BAD_REQUEST);
         }
     }

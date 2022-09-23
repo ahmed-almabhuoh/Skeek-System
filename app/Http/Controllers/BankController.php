@@ -64,8 +64,8 @@ class BankController extends Controller
 
         session([
             'created' => false,
-            'title' => 'Failed',
-            'message' => 'Wrong inputs, re-enter and retry agian.',
+            'title' => __('Failed'),
+            'message' => __('Wrong inputs, re-enter and retry agian.'),
         ]);
         return response()->view('back-end.banks.create', [
             'countries' => $countries,
@@ -107,15 +107,15 @@ class BankController extends Controller
                 $this->storeUserLogs('create bank');
                 session([
                     'created' => true,
-                    'title' => 'Bank Created',
-                    'message' => 'Bank ' . $request->input('name') . ' created successfully',
+                    'title' => __('Bank Created'),
+                    'message' => __('Bank created successfully'),
                 ]);
                 return redirect()->route('banks.index');
             } else {
                 session([
                     'created' => false,
-                    'title' => 'Failed',
-                    'message' => 'Failed to create new bank',
+                    'title' => __('Failed'),
+                    'message' => __('Failed to create new bank'),
                 ]);
                 return redirect()->route('banks.create');
             }
@@ -175,15 +175,15 @@ class BankController extends Controller
                         $this->storeUserLogs('create bank');
                         session([
                             'created' => true,
-                            'title' => 'Bank Created',
-                            'message' => 'Bank ' . $request->input('name') . ' created successfully',
+                            'title' => __('Bank Created'),
+                            'message' => __('Bank created successfully'),
                         ]);
                         return redirect()->route('banks.index');
                     } else {
                         session([
                             'created' => false,
-                            'title' => 'Failed',
-                            'message' => 'Failed to create new bank',
+                            'title' => __('Failed'),
+                            'message' => __('Failed to create new bank'),
                         ]);
                         return redirect()->route('banks.create');
                     }
@@ -234,15 +234,15 @@ class BankController extends Controller
                         $this->storeUserLogs('create bank');
                         session([
                             'created' => true,
-                            'title' => 'Bank Created',
-                            'message' => 'Bank ' . $request->input('name') . ' created successfully',
+                            'title' => __('Bank Created'),
+                            'message' => __('Bank created successfully'),
                         ]);
                         return redirect()->route('banks.index');
                     } else {
                         session([
                             'created' => false,
-                            'title' => 'Failed',
-                            'message' => 'Failed to create new bank',
+                            'title' => __('Failed'),
+                            'message' => __('Failed to create new bank'),
                         ]);
                         return redirect()->route('banks.create');
                     }
@@ -282,8 +282,8 @@ class BankController extends Controller
         // Initial User Session
         session([
             'created' => false,
-            'title' => 'Failed',
-            'message' => 'Wrong inputs, re-enter and retry agian.',
+            'title' => __('Failed'),
+            'message' => __('Wrong inputs, re-enter and retry agian.'),
         ]);
         return response()->view('back-end.banks.edit', [
             'bank' => $bank,
@@ -348,15 +348,15 @@ class BankController extends Controller
             $this->storeUserLogs('edit bank');
             session([
                 'created' => true,
-                'title' => 'Success',
-                'message' => 'Bank ' . $request->input('name') . ' updated successfully.',
+                'title' => __('Success'),
+                'message' => __('Bank updated successfully.'),
             ]);
             return redirect()->route('banks.index');
         } else {
             session([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to update bank ' . $request->input('name') . '.',
+                'title' => __('Failed'),
+                'message' => __('Failed to update bank.'),
             ]);
             return redirect()->route('banks.edit', $bank->id);
         }
@@ -380,14 +380,14 @@ class BankController extends Controller
             $this->storeUserLogs('delete bank');
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Bank deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('Bank deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Faild',
-                'text' => 'Faild to delete bank',
+                'title' => __('Failed'),
+                'text' => __('Failed to delete bank'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

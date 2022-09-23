@@ -41,7 +41,7 @@ class AdminSettingsController extends Controller
         }
 
         return redirect()->route('admin.dashboard')->with([
-            'message' => $isSaved ? 'Language updated successfully' : 'Failed to update language',
+            'message' => $isSaved ? __('Language updated successfully') : __('Failed to update language'),
         ]);
     }
 }

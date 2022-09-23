@@ -31,7 +31,7 @@ class AuthController extends Controller
             'remember' => 'required|boolean',
             '_guard' => 'required|string|in:admin,super',
         ], [
-            '_guard.in' => 'Wrong URL, please choose the right URL',
+            '_guard.in' => __('Wrong URL, please choose the right URL'),
         ]);
 
         if (!$validator->fails()) {
@@ -45,7 +45,7 @@ class AuthController extends Controller
                 $admin = Admin::where('email', $request->input('email'))->first();
                 if (!$admin->active) {
                     return response()->json([
-                        'message' => 'Your account has been banned',
+                        'message' => __('Your account has been banned'),
                     ], Response::HTTP_BAD_REQUEST);
                 }
             }
@@ -65,12 +65,12 @@ class AuthController extends Controller
                 }
 
                 return response()->json([
-                    'message' => 'login successfully',
+                    'message' => __('login successfully'),
                     'guard' => $guard,
                 ], Response::HTTP_OK);
             } else {
                 return response()->json([
-                    'message' => 'wrong credentials',
+                    'message' => __('wrong credentials'),
                 ], Response::HTTP_BAD_REQUEST);
             }
         } else {
@@ -136,7 +136,7 @@ class AuthController extends Controller
                 ], $isChanged ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
             } else {
                 return response()->json([
-                    'message' => 'Wrong password',
+                    'message' => __('Wrong password'),
                 ], Response::HTTP_BAD_REQUEST);
             }
         } else {
@@ -171,7 +171,7 @@ class AuthController extends Controller
             // Terms
             if (!$request->input('terms'))
                 return response()->json([
-                    'message' => 'You cannot create new accout without approve on out terms',
+                    'message' => __('You cannot create new accout without approve on out terms'),
                 ], Response::HTTP_BAD_REQUEST);
 
             $admin = new Admin();
@@ -184,7 +184,7 @@ class AuthController extends Controller
                 Mail::to($admin)->send(new AdminWelcomeEmail($admin));
 
             return response()->json([
-                'message' => $isRegistered ? 'Register successfully' : 'Faild to register right now, please try another moment',
+                'message' => $isRegistered ? __('Register successfully') : __('Faild to register right now, please try another moment'),
             ], $isRegistered ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json([

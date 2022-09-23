@@ -39,14 +39,14 @@ class UserController extends Controller
         if ($admin->delete()) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'User deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('User deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed',
-                'text' => 'Failed to delete user',
+                'title' => __('Failed'),
+                'text' => __('Failed to delete user'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

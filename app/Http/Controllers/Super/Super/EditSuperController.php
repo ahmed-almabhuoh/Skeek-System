@@ -57,12 +57,12 @@ class EditSuperController extends Controller
 
         if ($isUpdated) {
             return redirect()->route('super.super_index')->with([
-                'status' => 'Super updated successfully',
+                'status' => __('Super updated successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to update super',
+                'status' => __('Failed to update super'),
                 'code' => 500,
             ]);
         }

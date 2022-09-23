@@ -23,20 +23,20 @@ class DeleteSuperController extends Controller
         if (auth('super')->user()->email == $super->email)
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed !',
-                'text' => 'Failed to delete super',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete super'),
             ], Response::HTTP_BAD_REQUEST);
         if ($super->delete()) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Super deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('Super deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed !',
-                'text' => 'Failed to delete super',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete super'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

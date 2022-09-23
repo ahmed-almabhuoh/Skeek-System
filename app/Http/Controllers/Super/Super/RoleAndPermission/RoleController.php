@@ -76,13 +76,13 @@ class RoleController extends Controller
             if ($role->hasPermissionTo($permission)) {
                 $role->revokePermissionTo($permission);
                 return response()->json([
-                    'message' => 'Permission removed from role successfully',
+                    'message' => __('Permission removed from role successfully'),
                 ], Response::HTTP_OK);
             } else {
                 $role->givePermissionTo($permission);
 
                 return response()->json([
-                    'message' => 'Permission added to role successfully',
+                    'message' => __('Permission added to role successfully'),
                 ], Response::HTTP_OK);
             }
         } else {
@@ -124,12 +124,12 @@ class RoleController extends Controller
 
         if ($isSaved) {
             return redirect()->route('roles.index')->with([
-                'status' => 'Role added successfully',
+                'status' => __('Role added successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to add role',
+                'status' => __('Failed to add role'),
                 'code' => 500,
             ]);
         }
@@ -183,12 +183,12 @@ class RoleController extends Controller
 
         if ($isSaved) {
             return redirect()->route('roles.index')->with([
-                'status' => 'Role updated successfully',
+                'status' => __('Role updated successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to update role',
+                'status' => __('Failed to update role'),
                 'code' => 500,
             ]);
         }
@@ -211,14 +211,14 @@ class RoleController extends Controller
         if ($role->delete()) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted!',
-                'text' => 'Role deleted successfully',
+                'title' => __('Deleted!'),
+                'text' => __('Role deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed!',
-                'text' => 'Failed to delete role',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete role'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

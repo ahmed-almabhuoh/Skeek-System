@@ -43,12 +43,12 @@ class AddNewUserController extends Controller
 
         if ($isCreated) {
             return redirect()->route('super.user_show')->with([
-                'status' => 'User added successfully',
+                'status' => __('User added successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to add user',
+                'status' => __('Failed to add user'),
                 'code' => 500,
             ]);
         }

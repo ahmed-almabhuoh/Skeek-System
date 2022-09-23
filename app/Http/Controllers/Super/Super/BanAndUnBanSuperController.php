@@ -27,19 +27,19 @@ class BanAndUnBanSuperController extends Controller
             $isSaved = $super->save();
         } else {
             return redirect()->route('super.super_index')->with([
-                'status' => 'Unauthrized action',
+                'status' => __('Unauthrized action'),
                 'code' => 500,
             ]);
         }
 
         if ($isSaved) {
             return redirect()->route('super.super_index')->with([
-                'status' => 'Changes updated successfully',
+                'status' => __('Changes updated successfully'),
                 'code' => 200,
             ]);
         } else {
             return redirect()->route('super.super_index')->with([
-                'status' => 'Failed to updated changes, re-try again please.',
+                'status' => __('Failed to updated changes, re-try again please.'),
                 'code' => 500,
             ]);
         }

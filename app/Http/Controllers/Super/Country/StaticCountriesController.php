@@ -62,14 +62,14 @@ class StaticCountriesController extends Controller
         if ($isCreated) {
             return redirect()->route('countries.static_show')->with([
                 'created' => true,
-                'title' => 'Added Successfully',
-                'message' => 'Country ' . $request->input('name') . ' added successfully.',
+                'title' => __('Added Successfully'),
+                'message' => __('Country added successfully.'),
             ]);
         } else {
             return redirect()->route('countries.statis_create')->with([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to add country with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to add country with un-expected error.'),
             ]);
         }
     }
@@ -93,14 +93,14 @@ class StaticCountriesController extends Controller
         if ($isDeleted) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Static country deleted successfully'
+                'title' => __('Deleted'),
+                'text' => __('Static country deleted successfully')
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed',
-                'text' => 'Failed to delete static country'
+                'title' => __('Failed'),
+                'text' => __('Failed to delete static country')
             ], Response::HTTP_BAD_REQUEST);
         }
     }
@@ -139,12 +139,12 @@ class StaticCountriesController extends Controller
 
         if ($isUpdated) {
             return redirect()->route('countries.static_show')->with([
-                'status' => 'Country Update Successfully',
+                'status' => __('Country Update Successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to update country',
+                'status' => __('Failed to update country'),
                 'code' => 500,
             ]);
         }

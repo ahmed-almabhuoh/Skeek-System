@@ -49,12 +49,12 @@ class CreateSuperContorller extends Controller
             $super->assignRole(Role::findOrFail($request->input('role_id')));
 
             return redirect()->route('super.super_index')->with([
-                'status' => 'Super added successfully',
+                'status' => __('Super added successfully'),
                 'code' => 200,
             ]);
         } else {
             return back()->with([
-                'status' => 'Failed to add super',
+                'status' => __('Failed to add super'),
                 'code' => 500,
             ]);
         }

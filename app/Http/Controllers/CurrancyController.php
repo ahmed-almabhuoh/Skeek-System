@@ -58,8 +58,8 @@ class CurrancyController extends Controller
             // ]);
             return redirect()->route('currancies.index')->with([
                 'created' => true,
-                'title' => 'Added Successfully',
-                'message' => 'Currancy ' . $request->input('name') . ' added successfully.',
+                'title' => __('Added Successfully'),
+                'message' => __('Currancy added successfully.'),
             ]);
         } else {
             // session([
@@ -69,8 +69,8 @@ class CurrancyController extends Controller
             // ]);
             return redirect()->route('currancies.create')->with([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to add Currancy with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to add Currancy with un-expected error.'),
             ]);
         }
     }
@@ -123,15 +123,15 @@ class CurrancyController extends Controller
         if ($isCreated) {
             session([
                 'created' => true,
-                'title' => 'Added Successfully',
-                'message' => 'Currancy ' . $request->input('name') . ' updated successfully.',
+                'title' => __('Added Successfully'),
+                'message' => __('Currancy updated successfully.'),
             ]);
             return redirect()->route('currancies.index');
         } else {
             session([
                 'created' => false,
-                'title' => 'Failed',
-                'message' => 'Failed to updated currancy with un-expected error.',
+                'title' => __('Failed'),
+                'message' => __('Failed to updated currancy with un-expected error.'),
             ]);
             return redirect()->route('currancies.edit', $currancy->id);
         }
@@ -149,14 +149,14 @@ class CurrancyController extends Controller
         if ($currancy->delete()) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Currancy deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('Currancy deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Faild!',
-                'text' => 'Faild to delete currancy',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete currancy'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

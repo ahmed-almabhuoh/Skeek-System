@@ -66,12 +66,12 @@ class PermissionController extends Controller
         if ($isSaved) {
             return redirect()->route('permissions.index')->with([
                 'code' => 200,
-                'status' => 'Permission added successfully',
+                'status' => __('Permission added successfully'),
             ]);
         } else {
             return back()->with([
                 'code' => 500,
-                'status' => 'Failed to create permission',
+                'status' => __('Failed to create permission'),
             ]);
         }
     }
@@ -125,12 +125,12 @@ class PermissionController extends Controller
 
         if ($isSaved) {
             return redirect()->route('permissions.index')->with([
-                'status' => 'Permission updated successfully',
+                'status' => __('Permission updated successfully'),
                 'code' => 200,
             ]);
         } else {
             return redirect()->route('permissions.index')->with([
-                'status' => 'Failed to update permission',
+                'status' => __('Failed to update permission'),
                 'code' => 500,
             ]);
         }
@@ -152,14 +152,14 @@ class PermissionController extends Controller
         if ($permission->delete()) {
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted!',
-                'text' => 'Permission deleted successfully',
+                'title' => __('Deleted!'),
+                'text' => __('Permission deleted successfully'),
             ], Response::HTTP_OK);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Failed!',
-                'text' => 'Failed to delete permission',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete permission'),
             ], Response::HTTP_BAD_REQUEST);
         }
     }

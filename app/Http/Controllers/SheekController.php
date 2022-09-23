@@ -73,7 +73,7 @@ class SheekController extends Controller
             'type' => 'required|string|in:paid,recived',
             'date' => 'required|string|min:6|max:20',
         ], [
-            'bank_id.required' => 'You have to choose a bank',
+            'bank_id.required' => __('You have to choose a bank')
         ]);
         //
         if (!$validator->fails()) {
@@ -96,7 +96,7 @@ class SheekController extends Controller
             // Store Logs
             $this->storeUserLogs('create sheek');
             return response()->json([
-                'message' => $isCreated ? 'Sheed added successfylly' : 'Faild to add sheek',
+                'message' => $isCreated ? __('Sheed added successfylly') : __('Faild to add sheek'),
             ], $isCreated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json([
@@ -178,7 +178,7 @@ class SheekController extends Controller
             $this->storeUserLogs('update sheek');
 
             return response()->json([
-                'message' => $isUpdated ? 'Sheek updated successfully' : 'Faild to update sheek',
+                'message' => $isUpdated ? __('Sheek updated successfully') : __('Faild to update sheek'),
             ], $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json([
@@ -201,14 +201,14 @@ class SheekController extends Controller
             $this->storeUserLogs('delete sheek');
             return response()->json([
                 'icon' => 'success',
-                'title' => 'Deleted',
-                'text' => 'Sheek deleted successfully',
+                'title' => __('Deleted'),
+                'text' => __('Sheek deleted successfully'),
             ]);
         } else {
             return response()->json([
                 'icon' => 'error',
-                'title' => 'Faild!',
-                'text' => 'Faild to delete sheek',
+                'title' => __('Failed!'),
+                'text' => __('Failed to delete sheek'),
             ]);
         }
     }
