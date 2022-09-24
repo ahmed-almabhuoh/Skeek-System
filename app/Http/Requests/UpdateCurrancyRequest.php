@@ -34,18 +34,18 @@ class UpdateCurrancyRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Please, enter the currancy name',
-            'name.string' => 'Currancy name have to be string',
-            'name.min' => 'Currancy name must contain at least 3 character',
-            'name.unique' => 'Currancy you try to create was created before',
+            'name.required' => __('Please, enter the currancy name'),
+            'name.string' => __('Currancy name have to be string'),
+            'name.min' => __('Currancy name must contain at least 3 character'),
+            'name.unique' => __('Currancy you try to create was created before'),
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Currancy name',
-            'active' => 'Currancy state',
+            'name' => __('Currancy name'),
+            'active' => __('Currancy status'),
         ];
     }
 

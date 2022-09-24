@@ -37,10 +37,10 @@ class UpdateSuperRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Super name',
-            'email' => 'Super email',
-            'password' => 'Super password',
-            'active' => 'Super status',
+            'name' => __('Super name'),
+            'email' => __('Super email'),
+            'password' => __('Super password'),
+            'active' => __('Super status'),
         ];
     }
 

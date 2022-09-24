@@ -37,11 +37,11 @@ class CreateSuperRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Super name',
-            'email' => 'Super email',
-            'password' => 'Super password',
-            'active' => 'Super status',
-            'role_id' => 'Role name',
+            'name' => __('Super name'),
+            'email' => __('Super email'),
+            'password' => __('Super password'),
+            'active' => __('Super status'),
+            'role_id' => __('Role name'),
         ];
     }
 

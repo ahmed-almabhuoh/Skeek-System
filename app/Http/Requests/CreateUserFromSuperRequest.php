@@ -36,10 +36,10 @@ class CreateUserFromSuperRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'User name',
-            'email' => 'User email',
-            'password' => 'User password',
-            'active' => 'User status',
+            'name' => __('User name'),
+            'email' => __('User email'),
+            'password' => __('User password'),
+            'active' => __('User status'),
         ];
     }
 

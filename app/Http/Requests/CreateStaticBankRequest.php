@@ -29,12 +29,12 @@ class CreateStaticBankRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Bank name',
-            'city' => 'Bank city',
-            'country_id' => 'Bank country',
-            'image' => 'Bank sheek image',
-            'active' => 'Bank state',
-            'currancy_id' => 'Currancy',
+            'name' => __('Bank name'),
+            'city' => __('Bank city'),
+            'country_id' => __('Bank country'),
+            'image' => __('Bank sheek image'),
+            'active' => __('Bank status'),
+            'currancy_id' => __('Currancy'),
         ];
     }
 

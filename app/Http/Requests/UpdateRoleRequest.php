@@ -34,8 +34,8 @@ class UpdateRoleRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Role name',
-            'guard' => 'Guard name',
+            'name' => __('Role name'),
+            'guard' => __('Guard name'),
         ];
     }
 }

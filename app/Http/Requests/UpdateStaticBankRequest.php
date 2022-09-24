@@ -30,12 +30,12 @@ class UpdateStaticBankRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Bank name',
-            'city' => 'Bank city',
-            'country_id' => 'Bank country',
-            'currancy_id' => 'Currancy',
-            'image' => 'Bank sheek image',
-            'active' => 'Bank state',
+            'name' => __('Bank name'),
+            'city' => __('Bank city'),
+            'country_id' => __('Bank country'),
+            'currancy_id' => __('Currancy'),
+            'image' => __('Bank sheek image'),
+            'active' => __('Bank status'),
         ];
     }
 

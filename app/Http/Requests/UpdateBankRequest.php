@@ -40,21 +40,21 @@ class UpdateBankRequest extends FormRequest
     {
         return [
             // Sheek image input
-            'sheek_image.max' => 'File is too large, try agian.',
+            'sheek_image.max' => __('File is too large, try agian.'),
 
-            'currancy_id.exists' => 'Invalid currancy entered',
+            'currancy_id.exists' => __('Invalid currancy entered'),
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Bank name',
-            'City' => 'Bank city',
-            'country_id' => 'Bank country',
-            'sheek_image' => 'Bank sheek image',
-            'active' => 'Bank state',
-            'currancy_id' => 'Currancy',
+            'name' => __('Bank name'),
+            'City' => __('Bank city'),
+            'country_id' => __('Bank country'),
+            'sheek_image' => __('Bank sheek image'),
+            'active' => __('Bank status'),
+            'currancy_id' => __('Currancy'),
         ];
     }
 

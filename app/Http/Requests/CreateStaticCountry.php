@@ -35,22 +35,22 @@ class CreateStaticCountry extends FormRequest
     {
         return [
             // Name input
-            'name.required' => 'Enter country name please.',
-            'name.string' => 'Country name is in-valid name.',
-            'name.min' => 'Enter a valid country name',
-            'name.max' => 'Larg country name, re-enter a valid country name.',
+            'name.required' => __('Enter country name please.'),
+            'name.string' => __('Country name is in-valid name.'),
+            'name.min' => __('Enter a valid country name'),
+            'name.max' => __('Larg country name, re-enter a valid country name.'),
 
             // Active input
-            'active.required' => 'Invalid active state, re-enter state of country',
-            'active.boolean' => 'Country state must to be active or in-active',
+            'active.required' => __('Invalid active state, re-enter state of country'),
+            'active.boolean' => __('Country state must to be active or in-active'),
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Country name',
-            'active' => 'Country state',
+            'name' => __('Country name'),
+            'active' => __('Country status'),
         ];
     }
 

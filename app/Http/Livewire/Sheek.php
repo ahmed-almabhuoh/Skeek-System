@@ -59,7 +59,7 @@ class Sheek extends Component
         $integer = $this->amount;
 
         if (is_null($this->adminBank)) {
-            return 'لم تقم بإختيار أي بنـــك';
+            return __('No bank select');
         } else {
             return $text = 'فقط ' .  $Arabic->int2str($integer) . ' ' . $this->checkCurrancyInArabic($this->adminBank->currancy->name);
         }
@@ -68,11 +68,11 @@ class Sheek extends Component
     public function checkCurrancyInArabic($str = 'NIS')
     {
         if ($this->adminBank->currancy->name == 'NIS') {
-            return 'شيكل لا غير';
+            return __('NIS only');
         } else if ($this->adminBank->currancy->name == 'Dollar') {
-            return 'دولار لا غير';
+            return __('Dollar only');
         } else if ($this->adminBank->currancy->name == 'Dinar') {
-            return 'دينار لا غير';
+            return __('Dinar only');
         }
     }
 
@@ -93,9 +93,9 @@ class Sheek extends Component
         if ($this->line_type == 1) {
             $this->underline = '//';
         } else if ($this->line_type == 2) {
-            $this->underline = 'يصرف للعميل الأول';
+            $this->underline = __('Disbursed to the first customer');
         } else if ($this->line_type == 3) {
-            $this->underline = 'غير قابل للصرف';
+            $this->underline = __('Non-exchangeable');
         } else {
             $this->underline = '';
         }
@@ -103,7 +103,7 @@ class Sheek extends Component
         if (!($this->country_id == 0))
             if (is_null($image_name))
                 return view('livewire.sheek', [
-                    'message' => 'You have no bank',
+                    'message' => __('You have no bank'),
                 ]);
             else
                 return view('livewire.sheek', [
@@ -112,7 +112,7 @@ class Sheek extends Component
                 ]);
         else
             return view('livewire.sheek', [
-                'message' => 'You have no country',
+                'message' => __('You have no country'),
             ]);
     }
 }
