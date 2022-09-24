@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 
 class AdminSettingsController extends Controller
 {
@@ -40,7 +41,7 @@ class AdminSettingsController extends Controller
             $isSaved = $adminSettings->save();
         }
 
-        return redirect()->route('admin.dashboard')->with([
+        return redirect(URL::previous())->with([
             'message' => $isSaved ? __('Language updated successfully') : __('Failed to update language'),
         ]);
     }
