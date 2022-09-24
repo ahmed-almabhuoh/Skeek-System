@@ -10,4 +10,9 @@ use Spatie\Permission\Traits\HasRoles;
 class Super extends Authenticatable
 {
     use HasFactory, HasRoles;
+
+    public function settings()
+    {
+        return $this->hasOne(SuperSettings::class, 'super_id', 'id');
+    }
 }

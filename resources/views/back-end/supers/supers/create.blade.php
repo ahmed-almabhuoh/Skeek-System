@@ -60,7 +60,7 @@
                         <label for="name" class="col-sm-2 col-form-label">{{__('Full name')}}</label>
                         <div class="col-sm-10">
                             <input type="text" name="name" class="form-control" id="name"
-                                value="{{ old('name') }}" placeholder="Enter user full name"
+                                value="{{ old('name') }}" placeholder="{{__('Enter super full name')}}"
                                 style="@error('name') border-color: red; @enderror">
                             @error('name')
                                 <SMAll style="color: red">
@@ -75,7 +75,7 @@
                         <div class="col-sm-10">
                             <input type="email" name="email" class="form-control" id="email"
                                 value="{{ old('email') }}" style="@error('email') border-color: red; @enderror"
-                                placeholder="Enter user email">
+                                placeholder="{{__('Enter super email')}}">
                             @error('email')
                                 <SMAll style="color: red">
                                     {{ $message }}
@@ -89,7 +89,7 @@
                         <label for="password" class="col-sm-2 col-form-label">{{__('Password')}}</label>
                         <div class="col-sm-10">
                             <input type="text" name="password" class="form-control" id="password"
-                                style="@error('password') border-color: red; @enderror" placeholder="Enter user password"
+                                style="@error('password') border-color: red; @enderror" placeholder="{{__('Enter super password')}}"
                                 value="{{ $password }}">
                             @error('password')
                                 <SMAll style="color: red">
@@ -112,7 +112,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info">{{__('Create')}}</button>
-                    <button type="submit" class="btn btn-default float-right">{{__('Cancel')}}</button>
+                    <button type="reset" class="btn btn-default float-right">{{__('Cancel')}}</button>
                 </div>
                 <!-- /.card-footer -->
             </form>

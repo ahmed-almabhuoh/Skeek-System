@@ -45,11 +45,11 @@
                                             {{ $message }}</p>
                                     @enderror
                                     <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Enter country name" value="{{ old('name') }}">
+                                        placeholder="{{__('Enter country name')}}" value="{{ old('name') }}">
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="active" name="active" checked>
-                                    <label class="form-check-label" for="active">{{ __('cms.active') }}</label>
+                                    <label class="form-check-label" for="active">{{ __('Active') }}</label>
                                     @error('active')
                                         <p class="text-danger" style="display: inline-block; padding: 0 0 0 10px;">
                                             {{ $message }}</p>

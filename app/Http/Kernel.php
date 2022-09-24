@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminSetLocale;
 use App\Http\Middleware\BanMiddleware;
+use App\Http\Middleware\SuperSetLocale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -40,6 +41,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             AdminSetLocale::class,
+            SuperSetLocale::class,
         ],
 
         'api' => [

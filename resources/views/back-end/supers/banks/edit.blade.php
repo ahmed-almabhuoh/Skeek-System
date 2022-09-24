@@ -41,7 +41,7 @@
                             <div class="card-body">
                                 <div class="form-group" style="display: none;">
                                     <input type="text" name="id" class="form-control" id="id"
-                                        placeholder="Enter bank id" value="{{ Crypt::encrypt($bank->id) }}">
+                                        placeholder="{{__('Enter bank id')}}" value="{{ Crypt::encrypt($bank->id) }}">
                                 </div>
 
                                 <div class="form-group">
@@ -52,7 +52,7 @@
                                         </span>
                                     @enderror
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter bank name" value="{{ $bank->name }}">
+                                        placeholder="{{__('Enter bank name')}}" value="{{ $bank->name }}">
                                 </div>
 
                                 <div class="form-group">
@@ -98,7 +98,7 @@
                                         </span>
                                     @enderror
                                     <input type="text" class="form-control" id="city" name="city"
-                                        placeholder="Enter city" value="{{ $bank->city }}">
+                                        placeholder="{{__('Enter city name')}}" value="{{ $bank->city }}">
                                 </div>
 
                                 <div class="form-group">

@@ -13,11 +13,11 @@
     <div class="container-fluid">
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            {{__('New Currancy')}}
+            {{ __('New Currancy') }}
         </button>
 
         <a href="{{ route('report.currancies') }}" class="btn btn-default">
-            {{__('Export currancy report')}}
+            {{ __('Export currancy report') }}
         </a>
 
         <div style="margin: 10px;"></div>
@@ -33,12 +33,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{__('All currancies')}}</h3>
+                        <h3 class="card-title">{{ __('All currancies') }}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
+                                    placeholder="{{ __('Search') }}">
 
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
@@ -54,12 +54,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('Status')}}</th>
-                                    <th>{{__('Created at')}}</th>
-                                    <th>{{__('Updated at')}}</th>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Created at') }}</th>
+                                    <th>{{ __('Updated at') }}</th>
                                     @canany(['Update-Currancy', 'Delete-Currancy'])
-                                        <th>{{__('Settings')}}</th>
+                                        <th>{{ __('Settings') }}</th>
                                     @endcanany
                                 </tr>
                             </thead>
@@ -71,9 +71,9 @@
                                         <td><span
                                                 class="badge @if (!$currancy->active) bg-danger @else bg-success @endif">
                                                 @if ($currancy->active)
-                                                    {{__('Active')}}
+                                                    {{ __('Active') }}
                                                 @else
-                                                    {{__('In-active')}}
+                                                    {{ __('In-active') }}
                                                 @endif
                                             </span>
                                         </td>
@@ -121,24 +121,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{__('Status country detail')}}</h4>
+                    <h4 class="modal-title">{{ __('Status country detail') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 @csrf
                 <div class="modal-body">
-                    <p>{{__('This is a static currancy is usable for all users in the system with active status')}}
-                        <br> {{__('If you to change its settings')}} <a id="currancy_edit_link" href="">{{__('Go to its edit view')}}</a>&hellip;
+                    <p>{{ __('This is a static currancy is usable for all users in the system with active status') }}
+                        <br> {{ __('If you to change its settings') }} <a id="currancy_edit_link"
+                            href="">{{ __('Go to its edit view') }}</a>&hellip;
                     </p>
                     <div class="form-group">
 
-                        <label for="name">{{__('Currancy name')}}</label>
+                        <label for="name">{{ __('Currancy name') }}</label>
                         <input type="text" class="form-control" id="currancy_name" name="currancy_name"
                             placeholder="Enter currancy name" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="name">{{__('Created at')}}</label>
+                        <label for="name">{{ __('Created at') }}</label>
                         <input type="text" class="form-control" id="currancy_created_at" name="currancy_created_at"
                             placeholder="Enter currancy name" readonly>
                     </div>
@@ -148,7 +149,7 @@
                             placeholder="Enter country name" readonly>
                     </div> --}}
                     <div class="form-group">
-                        <label for="name">{{__('Updated at')}}</label>
+                        <label for="name">{{ __('Updated at') }}</label>
                         <input type="text" class="form-control" id="currancy_updated_at" name="currancy_updated_at"
                             placeholder="Enter currancy name" readonly>
                     </div>
@@ -164,7 +165,7 @@
                             <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input" type="checkbox" id="currancy_active"
                                     name="currancy_active" readonly>
-                                <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
+                                <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
                             </div>
                         </div>
                     </div>
@@ -179,7 +180,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{__('Add new currancy')}}</h4>
+                    <h4 class="modal-title">{{ __('Add new currancy') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -187,14 +188,14 @@
                 <form action="{{ route('currancies.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <p>{{__('After you add this currancy with active status, it\'ll be usable for all users in system')}}&hellip;
+                        <p>{{ __('After you add this currancy with active status, it\'ll be usable for all users in system') }}&hellip;
                         </p>
                         <div class="form-group">
 
                             <label for="name"
                                 @error('name')
                                 style="color: red;"
-                            @enderror>{{__('Currancy name')}}</label>
+                            @enderror>{{ __('Currancy name') }}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -209,15 +210,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
+                                    <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="submit" class="btn btn-primary">{{__('Insert')}}</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Insert') }}</button>
                     </div>
                 </form>
             </div>
@@ -231,13 +232,14 @@
     <script>
         function confirmDestroy(id, refrance) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: '{{ __('Are you sure?') }}',
+                text: "{{ __('You won\'t be able to revert this!') }}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
+                cancelButtonText: '{{ __('Cancel') }}',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: "{{ __('Yes, delete it!') }}",
             }).then((result) => {
                 if (result.isConfirmed) {
                     destoy(id, refrance);

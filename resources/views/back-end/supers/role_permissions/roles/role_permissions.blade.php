@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'permission Permission')
-@section('super-location', 'Dashboard')
-@section('super-index', 'permission Permission')
+@section('super-title', __('permission Permission'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('permission Permission'))
 
 @section('super-styles')
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
@@ -15,14 +15,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Assign permissions to a specific <strong>{{ $role->name }}</strong>
-                            role.
+                        <h3 class="card-title">{{__('Assign permissions to a specific role.')}}
                         </h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
+                                    placeholder="{{__('Search')}}">
 
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
@@ -38,11 +37,11 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Permission Name</th>
-                                    <th>For Role</th>
-                                    <th>Guard Name</th>
-                                    <th>Assign</th>
+                                    <th>#</th>
+                                    <th>{{__('Permission Name')}}</th>
+                                    <th>{{__('For Role')}}</th>
+                                    <th>{{__('Guard Name')}}</th>
+                                    <th>{{__('Assign')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

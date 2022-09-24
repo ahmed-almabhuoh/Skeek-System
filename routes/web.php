@@ -22,6 +22,7 @@ use App\Http\Controllers\Super\Super\ShowAllSupersForSuperController;
 use App\Http\Controllers\Super\SuperDashboardController;
 use App\Http\Controllers\Super\Users\AddNewUserController;
 use App\Http\Controllers\Super\Users\UserController;
+use App\Http\Controllers\SuperSettingsController;
 use App\Http\Livewire\Counter;
 use App\Http\Livewire\EditSheek;
 use Illuminate\Support\Facades\Artisan;
@@ -91,8 +92,9 @@ Route::prefix('check-system')->middleware(['auth:admin', 'banned', 'verified'])-
     // Show specific banks
     Route::get('show-specific-banks/{country}/country', [BankController::class, 'showSpecificBanks'])->name('banks.specific');
 
-    // Change Language Settings
-    Route::get('lang/{lang}', [AdminSettingsController::class, 'changeLanguage'])->name('admins.lang');
+
+    // Admin Languages
+    Route::get('admin-lang/{lang}', [AdminSettingsController::class, 'changeLanguage'])->name('admins.lang');
 
     // Display Country Banks
     Route::get('country-banks/{country}', [CountryController::class, 'displayCountryBanks'])->name('country.banks');
@@ -196,6 +198,9 @@ Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(funct
     // Role Permission Routes
     Route::get('role-permission/{id}', [RoleController::class, 'showRolePermission'])->name('role.permissions');
     Route::post('role-permission/{id}', [RoleController::class, 'assignPermissionToRole']);
+
+    // Super Languages
+    Route::get('super-lang/{lang}', [SuperSettingsController::class, 'changeLanguage'])->name('supers.lang');
 
     // Follow Up Super User
     Route::get('follow-up-super/{id}', [FollowUpSuperController::class, 'showSuperUserAction'])->name('super.follow_up_actions');

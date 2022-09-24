@@ -1,8 +1,8 @@
 @extends('back-end.supers.parent')
 
-@section('super-title', 'Super Dashboard')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Super Dashboard')
+@section('super-title', __('Super Dashboard'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Super Dashboard'))
 
 
 @section('super-styles')

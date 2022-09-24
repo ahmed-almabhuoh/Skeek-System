@@ -4,6 +4,15 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+@php
+$langs = App\Models\SuperSettings::LANGS;
+$langs_key = [
+    'Arabic' => 'ar',
+    'English' => 'en',
+];
+$superSettings = auth('super')->user()->settings;
+$lang = $langs_key[$superSettings->lang];
+@endphp
 
 <head>
     <meta charset="utf-8">
@@ -13,10 +22,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('sheekSystem/dist/css/adminlte.min.css') }}">
+    @if ($lang == 'en')
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/fontawesome-free/css/all.min.css') }}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/dist/css/adminlte.min.css') }}">
+
+        <!-- Toastr -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
+    @elseif ($lang == 'ar')
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/fontawesome-free/css/all.min.css') }}">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Tempusdominus Bbootstrap 4 -->
+        <link rel="stylesheet"
+            href="{{ asset('sheekSystem/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+        <!-- JQVMap -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/jqvmap/jqvmap.min.css') }}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/dist/css/adminlte.min.css') }}">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet"
+            href="{{ asset('sheekSystem/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/daterangepicker/daterangepicker.css') }}">
+        <!-- summernote -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/summernote/summernote-bs4.css') }}">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- Bootstrap 4 RTL -->
+        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
+        <!-- Custom style for RTL -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/dist/css/custom.css') }}">
+
+
+        <!-- Toastr -->
+        <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
+    @endif
 
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('sheekSystem/plugins/toastr/toastr.min.css') }}">
@@ -65,14 +109,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('super.dashboard') }}" class="nav-link">{{ __('cms.dashboard') }}</a>
+                    <a href="{{ route('super.dashboard') }}" class="nav-link">{{ __('Dashboard') }}</a>
                 </li>
+                @php
+                    $langs = App\Models\SuperSettings::LANGS;
+                @endphp
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ __('Languages') }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach ($langs as $lang)
+                            <a class="dropdown-item" href="{{ route('supers.lang', $lang) }}">{{ __($lang) }}</a>
+                        @endforeach
+                    </div>
+                </div>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                         <i class="fas fa-search"></i>
                     </a>
@@ -92,9 +150,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
@@ -103,7 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -131,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
 
                 <!-- SidebarSearch Form -->
-                <div class="form-inline">
+                {{-- <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                         <input class="form-control form-control-sidebar" type="text" placeholder="Search"
                             aria-label="Search" wire:model="searchTerm" />
@@ -141,15 +199,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        {{-- <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -171,7 +227,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         @yield('super-aside-items')
                         {{-- <li class="nav-item">
             <a href="#" class="nav-link">
@@ -233,20 +289,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 {{ env('APP_VERSION') }}
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; {{ Date::now()->format('Y') }} <a
-                    href="https://adminlte.io">{{ env('APP_NAME') }}</a>.</strong> All rights reserved.
+            <strong>{{__('Copyright')}} &copy; {{ Date::now()->format('Y') }} <a
+                    href="https://adminlte.io">{{ env('APP_NAME') }}</a>.</strong> {{__('All rights reserved.')}}
         </footer>
     </div>
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
 
-    <!-- jQuery -->
-    <script src="{{ asset('sheekSystem/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('sheekSystem/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('sheekSystem/dist/js/adminlte.min.js') }}"></script>
+    @php
+        $langs = App\Models\SuperSettings::LANGS;
+        $langs_key = [
+            'Arabic' => 'ar',
+            'English' => 'en',
+        ];
+        $superSettings = auth('super')->user()->settings;
+        $lang = $langs_key[$superSettings->lang];
+    @endphp
+
+    @if ($lang == 'en')
+        <!-- jQuery -->
+        <script src="{{ asset('sheekSystem/plugins/jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ asset('sheekSystem/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('sheekSystem/dist/js/adminlte.min.js') }}"></script>
+    @elseif ($lang == 'ar')
+        <!-- jQuery -->
+        <script src="{{ asset('sheekSystem/plugins/jquery/jquery.min.js') }}"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="{{ asset('sheekSystem/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 rtl -->
+        <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ asset('sheekSystem/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- ChartJS -->
+        <script src="{{ asset('sheekSystem/plugins/chart.js/Chart.min.js') }}"></script>
+        <!-- Sparkline -->
+        <script src="{{ asset('sheekSystem/plugins/sparklines/sparkline.js') }}"></script>
+        <!-- JQVMap -->
+        <script src="{{ asset('sheekSystem/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('sheekSystem/plugins/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="{{ asset('sheekSystem/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+        <!-- daterangepicker -->
+        <script src="{{ asset('sheekSystem/plugins/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('sheekSystem/plugins/daterangepicker/daterangepicker.js') }}"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="{{ asset('sheekSystem/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
+        </script>
+        <!-- Summernote -->
+        <script src="{{ asset('sheekSystem/plugins/summernote/summernote-bs4.min.js') }}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{{ asset('sheekSystem/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('sheekSystem/dist/js/adminlte.js') }}"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="{{ asset('sheekSystem/dist/js/pages/dashboard.js') }}"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="{{ asset('sheekSystem/dist/js/demo.js') }}"></script>
+    @endif
 
 
     {{-- Sweet Alert --}}

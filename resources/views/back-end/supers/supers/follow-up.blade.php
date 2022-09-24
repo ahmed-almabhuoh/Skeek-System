@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Super Actions')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Follow Super Actions')
+@section('super-title', __('Super Actions'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Follow Super Actions'))
 
 @section('super-styles')
 

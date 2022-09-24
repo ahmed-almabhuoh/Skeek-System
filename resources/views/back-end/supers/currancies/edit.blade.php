@@ -51,7 +51,7 @@
                                         </span>
                                     @enderror
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter bank name" value="{{ $currancy->name }}">
+                                        placeholder="{{__('Enter currancy name')}}" value="{{ $currancy->name }}">
                                 </div>
 
                                 <!-- Livewire Component wire-end:W8rBrt6UaZnBPLgsFBGB -->

@@ -1,8 +1,8 @@
 @extends('back-end.supers.dashboard')
 
-@section('super-title', 'Roles')
-@section('super-location', 'Dashboard')
-@section('super-index', 'Roles')
+@section('super-title', __('Roles'))
+@section('super-location', __('Dashboard'))
+@section('super-index', __('Roles'))
 
 @section('super-styles')
 @endsection
@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
+                        <h5><i class="icon fas fa-check"></i> {{ __('Success!') }}</h5>
                         {{ session('status') }}
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Failed!</h5>
+                        <h5><i class="icon fas fa-ban"></i> {{ __('Failed!') }}</h5>
                         {{ session('status') }}
                     </div>
                 </div>
@@ -31,12 +31,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Roles</h3>
+                        <h3 class="card-title">{{ __('All Roles') }}</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="Search">
+                                    placeholder="{{__('Search')}}">
 
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
@@ -52,12 +52,12 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Permission</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th>Settings</th>
+                                    <th>#</th>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Permission') }}</th>
+                                    <th>{{ __('Created at') }}</th>
+                                    <th>{{ __('Updated at') }}</th>
+                                    <th>{{ __('Settings') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +70,7 @@
                                                 <a href="{{ route('role.permissions', Crypt::encrypt($role->id)) }}"
                                                     class="btn btn-block btn-outline-primary btn-flat">
                                                     <small>- {{ $role->permissions_count }} -</small>
-                                                    Permissions
+                                                    {{ __('Permissions') }}
                                                 </a>
                                             </div>
                                         </td>
@@ -106,13 +106,14 @@
     <script>
         function confirmDestroy(id, refrance) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: '{{ __('Are you sure?') }}',
+                text: "{{ __('You won\'t be able to revert this!') }}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
+                cancelButtonText: '{{ __('Cancel') }}',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: "{{ __('Yes, delete it!') }}",
             }).then((result) => {
                 if (result.isConfirmed) {
                     destoy(id, refrance);

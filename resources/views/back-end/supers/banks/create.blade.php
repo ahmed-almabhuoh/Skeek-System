@@ -45,7 +45,7 @@
                                         </span>
                                     @enderror
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter bank name" value="{{ old('name') }}">
+                                        placeholder="{{ __('Enter bank name') }}" value="{{ old('name') }}">
                                 </div>
 
                                 <div class="form-group">
@@ -85,7 +85,7 @@
                                         </span>
                                     @enderror
                                     <input type="text" class="form-control" id="city" name="city"
-                                        placeholder="Enter city" value="{{ old('city') }}">
+                                        placeholder="{{ __('Enter city name') }}" value="{{ old('city') }}">
                                 </div>
 
                                 <div class="form-group">
