@@ -11,7 +11,11 @@ $langs_key = [
     'English' => 'en',
 ];
 $superSettings = auth('super')->user()->settings;
-$lang = $langs_key[$superSettings->lang];
+if ($superSettings) {
+    $lang = $langs_key[$superSettings->lang];
+} else {
+    $lang = 'en';
+}
 @endphp
 
 <head>
@@ -289,8 +293,8 @@ $lang = $langs_key[$superSettings->lang];
                 {{ env('APP_VERSION') }}
             </div>
             <!-- Default to the left -->
-            <strong>{{__('Copyright')}} &copy; {{ Date::now()->format('Y') }} <a
-                    href="https://adminlte.io">{{ env('APP_NAME') }}</a>.</strong> {{__('All rights reserved.')}}
+            <strong>{{ __('Copyright') }} &copy; {{ Date::now()->format('Y') }} <a
+                    href="https://adminlte.io">{{ env('APP_NAME') }}</a>.</strong> {{ __('All rights reserved.') }}
         </footer>
     </div>
     <!-- ./wrapper -->
@@ -304,7 +308,11 @@ $lang = $langs_key[$superSettings->lang];
             'English' => 'en',
         ];
         $superSettings = auth('super')->user()->settings;
-        $lang = $langs_key[$superSettings->lang];
+        if ($superSettings) {
+            $lang = $langs_key[$superSettings->lang];
+        } else {
+            $lang = 'en';
+        }
     @endphp
 
     @if ($lang == 'en')

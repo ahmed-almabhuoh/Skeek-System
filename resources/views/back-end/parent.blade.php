@@ -10,7 +10,11 @@ $langs_key = [
     'English' => 'en',
 ];
 $adminSettings = auth('admin')->user()->settings;
-$lang = $langs_key[$adminSettings->lang];
+if ($adminSettings) {
+    $lang = $langs_key[$adminSettings->lang];
+} else {
+    $lang = 'en';
+}
 @endphp
 <html lang="{{ $lang }}">
 
@@ -287,7 +291,11 @@ $lang = $langs_key[$adminSettings->lang];
             'English' => 'en',
         ];
         $adminSettings = auth('admin')->user()->settings;
-        $lang = $langs_key[$adminSettings->lang];
+        if ($adminSettings) {
+            $lang = $langs_key[$adminSettings->lang];
+        } else {
+            $lang = 'en';
+        }
     @endphp
 
     @if ($lang == 'en')
