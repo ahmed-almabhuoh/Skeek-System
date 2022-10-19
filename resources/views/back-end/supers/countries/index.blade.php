@@ -54,6 +54,7 @@
                                 style="color: red;"
                             @enderror>{{ __('Country name') }}</label>
                             <input type="text" class="form-control" id="name" name="name"
+                                wire:model="static_country_name"
                                 @error('name')
                                     style="border-color: red" 
                                     @enderror
@@ -75,7 +76,8 @@
                     <div class="modal-footer justify-content-between">
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Insert') }}</button>
+                        <button type="submit" class="btn btn-primary"
+                           >{{ __('Insert') }}</button>
                     </div>
                 </form>
             </div>
