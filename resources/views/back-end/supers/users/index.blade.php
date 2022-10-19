@@ -6,16 +6,17 @@
 
 
 @section('super-styles')
+    @livewireStyles
 @endsection
 
 @section('super-content')
     <div class="container-fluid">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-            {{__('New User')}}
+            {{ __('New User') }}
         </button>
 
         <button type="button" class="btn btn-default">
-            {{__('Export user report')}}
+            {{ __('Export user report') }}
         </button>
         <div style="margin: 10px;"></div>
         <div class="row">
@@ -23,97 +24,22 @@
                 @if (session('code') == 200)
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> {{__('Success!')}}</h5>
+                        <h5><i class="icon fas fa-check"></i> {{ __('Success!') }}</h5>
                         {{ session('status') }}.
                     </div>
                 @elseif(session('code') == 500)
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-check"></i> {{__('Failed!')}}</h5>
+                        <h5><i class="icon fas fa-check"></i> {{ __('Failed!') }}</h5>
                         {{ session('status') }}.
                     </div>
                 @endif
             </div>
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">{{__('All Users')}}</h3>
+            @livewire('admin-search-table')
 
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right"
-                                    placeholder="{{__('Search')}}">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{__('Name')}}</th>
-                                    <th>{{__('E-mail')}}</th>
-                                    <th>{{__('Created at')}}</th>
-                                    <th>{{__('Updated at')}}</th>
-                                    <th>{{__('Status')}}</th>
-                                    @canany(['Ban-User', 'Follow-Up-User', 'Delete-User'])
-                                        <th>{{__('Settings')}}</th>
-                                    @endcanany
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($admins as $admin)
-                                    <tr>
-                                        <td>{{ $admin->id }}</td>
-                                        <td>{{ $admin->name }}</td>
-                                        <td>{{ $admin->email }}</td>
-                                        <td>{{ $admin->created_at->diffForHumans() }}</td>
-                                        <td>{{ $admin->updated_at->diffForHumans() }}</td>
-                                        <td><span
-                                                class="tag tag-success">{{ $admin->active ? __('Un-Banned') : __('Banned') }}</span>
-                                        </td>
-                                        @canany(['Ban-User', 'Follow-Up-User', 'Delete-User'])
-                                            <td>
-                                                <div class="btn-group">
-                                                    @can('Delete-Uer')
-                                                        <button type="button" onclick="confirmDestroy('{{ $admin->id }}', this)"
-                                                            class="btn btn-danger btn-flat">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    @endcan
-
-                                                    @can('Follow-Up-User')
-                                                        <a href="{{ route('super.user_follow_actions', $admin->id) }}"
-                                                            class="btn btn-danger btn-flat">
-                                                            <i class="fa fa-location-arrow"></i>
-                                                        </a>
-                                                    @endcan
-
-                                                    @can('Ban-User')
-                                                        <a href="{{ route('super.user_ban', $admin->id) }}"
-                                                            class="btn btn-danger btn-flat">
-                                                            <i class="fa fa-ban" aria-hidden="true"></i>
-                                                        </a>
-                                                    @endcan
-                                                </div>
-                                            </td>
-                                        @endcanany
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
+         
+            
+         
         </div>
         <!-- /.row -->
     </div>
@@ -122,7 +48,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{__('Add new user')}}</h4>
+                    <h4 class="modal-title">{{ __('Add new user') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -138,7 +64,7 @@
                             <label for="name"
                                 @error('name')
                                 style="color: red;"
-                            @enderror>{{__('User name')}}</label>
+                            @enderror>{{ __('User name') }}</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 @error('name')
                                     style="border-color: red" 
@@ -154,7 +80,7 @@
                             <label for="email"
                                 @error('email')
                                 style="color: red;"
-                            @enderror>{{__('User email')}}</label>
+                            @enderror>{{ __('User email') }}</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 @error('email')
                                     style="border-color: red" 
@@ -170,7 +96,7 @@
                             <label for="password"
                                 @error('password')
                                 style="color: red;"
-                            @enderror>{{__('User password')}}</label>
+                            @enderror>{{ __('User password') }}</label>
                             <input type="text" class="form-control" id="password" name="password"
                                 @error('password')
                                     style="border-color: red" 
@@ -186,15 +112,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">{{__('Active ?!')}}</label>
+                                    <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{{__('Close')}}</button>
-                        <button type="submit" class="btn btn-primary">{{__('Insert')}}</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Insert') }}</button>
                     </div>
                 </form>
             </div>
@@ -252,4 +178,6 @@
             });
         }
     </script>
+
+    @livewireScripts
 @endsection
