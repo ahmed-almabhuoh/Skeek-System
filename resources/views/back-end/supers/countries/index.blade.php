@@ -42,7 +42,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('countries.statis_create') }}" method="POST">
+                <form action="{{ route('countries.static_store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <p>{{ __('After you add this static country with active status, it\'ll be usable for all users in systems') }}&hellip;

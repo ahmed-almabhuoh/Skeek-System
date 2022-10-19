@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class CountrySuperSearch extends Component
@@ -11,7 +11,7 @@ class CountrySuperSearch extends Component
 
     public function render()
     {
-        $countries = Country::where('name', 'LIKE', '%' . $this->searchTerm . '%')->paginate();
+        $countries = DB::table('static_countries')->where('name', 'LIKE', '%' . $this->searchTerm . '%')->paginate();
 
         return view('livewire.country-super-search', ['countries' => $countries]);
     }
