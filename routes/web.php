@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\UnCompleteEmailController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\Auth\EmailVerifyController;
@@ -210,3 +211,7 @@ Route::get('test', function () {
     $pdf = Pdf::loadView('reports.pdf.invoice');
     return $pdf->download('invoice.pdf');
 });
+
+
+Route::get('un-verifyed-admin', [UnCompleteEmailController::class, 'sendUnVerifyedAdmin']);
+Route::get('send-offer', [UnCompleteEmailController::class, 'sendOfferForAdmins']);

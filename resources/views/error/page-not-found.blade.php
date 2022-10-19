@@ -2,42 +2,58 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            margin-top: 150px;
+            background-color: #C4CCD9;
+        }
 
-	<title>404 HTML Template by Colorlib</title>
+        .error-main {
+            background-color: #fff;
+            box-shadow: 0px 10px 10px -10px #5D6572;
+        }
 
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:700,900" rel="stylesheet">
+        .error-main h1 {
+            font-weight: bold;
+            color: #444444;
+            font-size: 150px;
+            text-shadow: 2px 4px 5px #6E6E6E;
+        }
 
-	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="{{asset('error/css/style.css')}}" />
+        .error-main h6 {
+            color: #42494F;
+            font-size: 20px;
+        }
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
+        .error-main p {
+            color: #9897A0;
+            font-size: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
-	<div id="notfound">
-		<div class="notfound">
-			<div class="notfound-404">
-				<h1>404</h1>
-			</div>
-			<h2>Oops! This Page Could Not Be Found</h2>
-			<p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
-			<a href="{{route('login', 'admin')}}">Go To Homepage</a>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-6 offset-lg-3 col-sm-6 offset-sm-3 col-12 p-3 error-main">
+                <div class="row">
+                    <div class="col-lg-8 col-12 col-sm-10 offset-lg-2 offset-sm-1">
+                        <h1 class="m-0">404</h1>
+                        <h6>Page not found - <a href="sheek.manarat-free.com"
+                                style="text-decoration: none;">sheek.manarat-free.com</a></h6>
+                        <p>This page is not definded or has been expired by admin, so try to go to <span
+                                class="text-info"><a href="{{ route('admin.dashboard') }}"
+                                    style="text-decoration: none;">home</a></span>, to start
+                            managing <span class="text-info"><a href=""><a href="{{ route('sheeks.index') }}"
+                                        style="text-decoration: none;">your sheeks</a></a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>
