@@ -14,6 +14,8 @@
                     style="border-color: red" 
                     @enderror
                 placeholder="{{ __('Enter country name') }}" value="{{ old('name') }}">
+            <small>{{ __('The country name should have at least three letters') }}</small>
+
             @error('name')
                 <small style="color:red">{{ $message }}</small>
             @enderror
@@ -31,7 +33,12 @@
     <div class="modal-footer justify-content-between">
 
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Close') }}</button>
-        <button type="submit" class="btn btn-primary"
-            @if (empty($static_country_name)) disabled @endif>{{ __('Insert') }}</button>
+        <button type="submit" class="btn btn-primary" <?php
+        if (empty($static_country_name)) {
+            echo 'disabled';
+        } elseif (strlen($static_country_name) <= 2) {
+            echo 'disabled';
+        }
+        ?>>{{ __('Insert') }}</button>
     </div>
 </form>

@@ -9,6 +9,7 @@
             @enderror" id="name"
                 name="name" placeholder="{{ __('Enter country name') }}" value="{{ old('name') }}"
                 wire:model="country_name">
+            <small>{{ __('The country name should have at least three letters') }}</small>
             @error('name')
                 <small style="color:red;">{{ $message }}</small>
             @enderror
@@ -24,8 +25,13 @@
     </div>
 
     <div class="card-footer">
-        <input type="submit" value="{{ __('Create') }}" class="btn btn-primary"
-            @if (empty($country_name)) disabled @endif>
+        <input type="submit" value="{{ __('Create') }}" class="btn btn-primary" <?php
+        if (empty($country_name)) {
+            echo 'disabled';
+        } elseif (strlen($country_name) <= 2) {
+            echo 'disabled';
+        }
+        ?>>
     </div>
 
 </form>
