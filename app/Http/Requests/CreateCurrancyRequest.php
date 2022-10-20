@@ -25,7 +25,7 @@ class CreateCurrancyRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|min:3|max:50|unique:currancies,name',
+            'name' => 'required|string|min:2|max:20|unique:currancies,name',
             'active' => 'required|boolean',
         ];
     }
