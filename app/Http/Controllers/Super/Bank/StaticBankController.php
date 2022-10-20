@@ -85,7 +85,7 @@ class StaticBankController extends Controller
                 'message' => __('Bank added successfully.'),
             ]);
         } else {
-            return redirect()->route('banks.statis_create')->with([
+            return redirect()->route('banks.static_index')->with([
                 'created' => false,
                 'title' => __('Failed'),
                 'message' => __('Failed to add bank with un-expected error.'),

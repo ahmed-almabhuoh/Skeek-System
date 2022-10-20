@@ -20,9 +20,9 @@ class CreateStaticBankRequest extends FormRequest
     {
         return [
             // Sheek image input
-            'image.max' => 'File is too large, try agian.',
-            'currancy_id.exists' => 'Invalid currancy entered',
-            'country_id.exists' => 'Invalid country entered',
+            'image.max' => __('File is too large, try agian.'),
+            'currancy_id.exists' => __('Invalid currancy entered'),
+            'country_id.exists' => __('Invalid country entered'),
         ];
     }
 

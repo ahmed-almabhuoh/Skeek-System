@@ -361,6 +361,7 @@
     "Edit": "تعديل",
     "Enter country id": "أدخل رقم الدولة",
     "Yes, delete it!": "نعم قم بحذف العنصر!",
+    "Invalid country entered": "رقم الدولة المستخدم غير صحيح",
     "File is too large, try agian.": "الملف كبير جداً, حاول مرة أخرى",
     "Enter bank id": "أدخل رقم البنك",
     "Invalid country number": "رقم الدولة غير صحيح",
