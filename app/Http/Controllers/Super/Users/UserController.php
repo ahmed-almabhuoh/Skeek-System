@@ -61,8 +61,11 @@ class UserController extends Controller
         $this->storeSuperLogs('Ban User With Name: ' . $admin->name);
 
         $admin->active = $admin->active ? false : true;
-        $admin->save();
-        return redirect()->route('super.user_show');
+        $isSaved = $admin->save();
+        return redirect()->route('super.user_show', [
+            'message' => $isSaved ? 'Changes saved successfully' : 'Failed to save your changes!',
+            'code' => $isSaved ? 200 : 500,
+        ]);
     }
 
     // Follow Up Admin
@@ -74,7 +77,7 @@ class UserController extends Controller
         // Store Logs
         $this->storeSuperLogs('Show All User Actions With Name: ' . $admin->name);
 
-        $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->orderBy('created_at', 'DESC')->get();
+        $userLogs = DB::table('user_logs')->where('admin_id', $admin->id)->orderBy('created_at', 'DESC')->paginate();
 
         return response()->view('back-end.supers.users.follow-up', [
             'userLogs' => $userLogs,

@@ -11,6 +11,21 @@
 
 @section('super-content')
     <div class="container-fluid">
+
+        @if (session('message'))
+            <div class="alert @if (@session('code') == 200) alert-success @else alert-danger @endif alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-check"></i>
+                    @if (session('code') == 200)
+                        {{ __('Success!') }}
+                    @else
+                        {{ __('Failed!') }}
+                    @endif
+                </h5>
+                {{ session('message') }}.
+            </div>
+        @endif
+
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
             {{ __('New User') }}
         </button>
