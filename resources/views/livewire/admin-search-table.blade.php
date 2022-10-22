@@ -72,10 +72,17 @@
 
                                         @can('Ban-User')
                                             <a href="{{ route('super.user_ban', $admin->id) }}"
-                                                class="btn btn-danger btn-flat">
+                                                class="btn btn-warning btn-flat">
                                                 <i class="fa fa-ban" aria-hidden="true"></i>
                                             </a>
                                         @endcan
+
+                                        {{-- @can('Update-Admin') --}}
+                                        <a href="{{ route('admins.edit', Crypt::encrypt($admin->id)) }}"
+                                            class="btn btn-primary btn-flat">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </a>
+                                        {{-- @endcan --}}
                                     </div>
                                 </td>
                             @endcanany

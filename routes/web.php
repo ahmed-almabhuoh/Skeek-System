@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\UnCompleteEmailController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\Auth\EmailVerifyController;
@@ -124,6 +125,9 @@ Route::get('/foo', function () {
 
 Route::prefix('cheek-system')->middleware(['auth:super', 'banned'])->group(function () {
     Route::resource('currancies', CurrancyController::class);
+    Route::resource('admins', AdminController::class);
+
+    Route::put('update-admin/{id}', [AdminController::class, 'update'])->name('super.admins_update');
 
     // Roles And Permissions
     Route::resource('roles', RoleController::class);
