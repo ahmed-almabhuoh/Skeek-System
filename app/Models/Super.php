@@ -15,4 +15,8 @@ class Super extends Authenticatable
     {
         return $this->hasOne(SuperSettings::class, 'super_id', 'id');
     }
+
+    // Scope
+    
+    // End Of Scope
 }

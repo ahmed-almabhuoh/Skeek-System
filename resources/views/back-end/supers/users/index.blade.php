@@ -37,9 +37,9 @@
             </div>
             @livewire('admin-search-table')
 
-         
-            
-         
+
+
+
         </div>
         <!-- /.row -->
     </div>
@@ -53,76 +53,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('super.user_store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        {{-- <p>After you add this static country with <strong>active status</strong>, it'll be
-                            <strong>usable</strong> for all users in systems&hellip;
-                        </p> --}}
-                        <div class="form-group">
-
-                            <label for="name"
-                                @error('name')
-                                style="color: red;"
-                            @enderror>{{ __('User name') }}</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                @error('name')
-                                    style="border-color: red" 
-                                    @enderror
-                                placeholder="Enter country name" value="{{ old('name') }}">
-                            @error('name')
-                                <small style="color:red">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="email"
-                                @error('email')
-                                style="color: red;"
-                            @enderror>{{ __('User email') }}</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                @error('email')
-                                    style="border-color: red" 
-                                    @enderror
-                                placeholder="Enter super mail" value="{{ old('email') }}">
-                            @error('email')
-                                <small style="color:red">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="password"
-                                @error('password')
-                                style="color: red;"
-                            @enderror>{{ __('User password') }}</label>
-                            <input type="text" class="form-control" id="password" name="password"
-                                @error('password')
-                                    style="border-color: red" 
-                                    @enderror
-                                placeholder="Enter super password" value="{{ $password }}">
-                            @error('password')
-                                <small style="color:red">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <!-- select -->
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="active" name="active">
-                                    <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-
-                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Insert') }}</button>
-                    </div>
-                </form>
+                @livewire('create-user-with-constraints-for-modal')
             </div>
             <!-- /.modal-content -->
         </div>

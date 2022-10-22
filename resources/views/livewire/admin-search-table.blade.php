@@ -38,7 +38,7 @@
                         <tr>
                             <td colspan="7">
                                 <center>
-                                    No search result ...
+                                    {{ __('No items found .... ') }}
                                 </center>
                             </td>
                         </tr>
