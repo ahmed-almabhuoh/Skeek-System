@@ -94,4 +94,6 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+
+    {{ $admins->links() }}
 </div>

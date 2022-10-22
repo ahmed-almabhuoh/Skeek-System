@@ -41,7 +41,7 @@
                 class="form-control @error('password')
                 is-invalid
             @enderror" id="password"
-                name="password" placeholder="{{ __('Enter user password') }}" value="{{ $password }}">
+                name="password" placeholder="{{ __('Enter user password') }}" value="{{ $password }}" wire:model="password">
             @error('password')
                 <small style="color:red">{{ $message }}</small>
             @enderror
@@ -63,7 +63,7 @@
             <!-- select -->
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="active" name="active">
+                    <input class="custom-control-input" type="checkbox" id="active" name="active" checked>
                     <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
                 </div>
             </div>
