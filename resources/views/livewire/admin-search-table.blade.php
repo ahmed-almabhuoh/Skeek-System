@@ -65,7 +65,7 @@
 
                                         @can('Follow-Up-User')
                                             <a href="{{ route('super.user_follow_actions', $admin->id) }}"
-                                                class="btn btn-danger btn-flat">
+                                                class="btn btn-secondary btn-flat">
                                                 <i class="fa fa-location-arrow"></i>
                                             </a>
                                         @endcan
@@ -77,12 +77,19 @@
                                             </a>
                                         @endcan
 
-                                        {{-- @can('Update-Admin') --}}
+                                        @can('Update-User')
                                         <a href="{{ route('admins.edit', Crypt::encrypt($admin->id)) }}"
                                             class="btn btn-primary btn-flat">
                                             <i class="fa fa-edit" aria-hidden="true"></i>
                                         </a>
-                                        {{-- @endcan --}}
+                                        @endcan
+
+                                        @can('Delete-User')
+                                            <button type="button" onclick="confirmDestroy('{{Crypt::encrypt( $admin->id) }}', this)"
+                                                class="btn btn-danger btn-flat">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </div>
                                 </td>
                             @endcanany
@@ -91,7 +98,7 @@
                     <div>
                         <tr wire:loading>
                             <td wire:loading colspan="7">
-                                <center>{{ __('No data found ... ') }}</center>
+                                <center>{{ __('Searching for items .... ') }}</center>
                             </td>
                         </tr>
                     </div>

@@ -46,9 +46,9 @@ class PermissionSeeder extends Seeder
         // Permission::create(['name' => 'Update-User', 'guard_name' => 'super']);
         // Permission::create(['name' => 'Delete-User', 'guard_name' => 'super']);
 
-        Permission::create(['name' => 'Ban-Super', 'guard_name' => 'super']);
-        Permission::create(['name' => 'Follow-Up-Super', 'guard_name' => 'super']);
-        Permission::create(['name' => 'Ban-User', 'guard_name' => 'super']);
-        Permission::create(['name' => 'Follow-Up-User', 'guard_name' => 'super']);
+        // Permission::create(['name' => 'Ban-Super', 'guard_name' => 'super']);
+        // Permission::create(['name' => 'Follow-Up-Super', 'guard_name' => 'super']);
+        // Permission::create(['name' => 'Ban-User', 'guard_name' => 'super']);
+        // Permission::create(['name' => 'Follow-Up-User', 'guard_name' => 'super']);
     }
 }
