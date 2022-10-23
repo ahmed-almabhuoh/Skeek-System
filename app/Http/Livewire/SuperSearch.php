@@ -11,7 +11,7 @@ class SuperSearch extends Component
 
     public function render()
     {
-        $supers = Super::where('name', 'LIKE', '%' . $this->searchTerm . '%')->get();
+        $supers = Super::where('name', 'LIKE', '%' . $this->searchTerm . '%')->paginate();
         return view('livewire.super-search', ['supers' => $supers]);
     }
 }

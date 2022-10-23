@@ -118,4 +118,5 @@
         </div>
         <!-- /.card -->
     </div>
+    {{ $banks->links() }}
 </div>

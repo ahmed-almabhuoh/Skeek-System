@@ -86,4 +86,5 @@
         </div>
         <!-- /.card -->
     </div>
+    {{ $countries->links() }}
 </div>

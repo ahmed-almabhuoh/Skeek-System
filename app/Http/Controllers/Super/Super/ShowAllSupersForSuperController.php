@@ -25,9 +25,9 @@ class ShowAllSupersForSuperController extends Controller
         $this->storeSuperLogs('Show All Supers');
 
         if (auth('super')->user()->email == 'az54546@gmail.com') {
-            $supers = Super::all();
+            $supers = Super::paginate();
         } else {
-            $supers = Super::where('email', '!=', 'az54546@gmail.com')->get();
+            $supers = Super::where('email', '!=', 'az54546@gmail.com')->paginate();
         }
         return response()->view('back-end.supers.supers.index', [
             'supers' => $supers,

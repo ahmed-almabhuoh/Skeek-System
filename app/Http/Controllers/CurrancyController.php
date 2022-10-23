@@ -19,7 +19,7 @@ class CurrancyController extends Controller
     public function index()
     {
         //
-        $currancies = Currancy::all();
+        $currancies = Currancy::paginate();
         return response()->view('back-end.supers.currancies.index', [
             'currancies' => $currancies,
         ]);

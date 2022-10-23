@@ -25,7 +25,7 @@ class StaticCountriesController extends Controller
         $this->storeSuperLogs('Show All Static Countries');
 
 
-        $countries = DB::table('static_countries')->get();
+        $countries = DB::table('static_countries')->paginate();
 
         return response()->view('back-end.supers.countries.index', [
             'countries' => $countries,

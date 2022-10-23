@@ -93,4 +93,5 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+    {{ $supers->links() }}
 </div>

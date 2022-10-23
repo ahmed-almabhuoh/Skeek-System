@@ -24,7 +24,7 @@ class StaticBankController extends Controller
         // Store Logs
         $this->storeSuperLogs('Store Static Banks');
 
-        $banks = DB::table('static_bank')->get();
+        $banks = DB::table('static_bank')->paginate();
         $countries = DB::table('static_countries')->get();
         // scopeActive
         $currancies = Currancy::active()->get();

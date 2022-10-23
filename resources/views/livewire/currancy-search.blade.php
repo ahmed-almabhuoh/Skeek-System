@@ -98,4 +98,5 @@
         </div>
         <!-- /.card -->
     </div>
+    {{ $currancies->links() }}
 </div>
