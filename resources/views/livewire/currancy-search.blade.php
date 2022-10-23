@@ -37,7 +37,7 @@
                             <tr>
                                 <td colspan="6">
                                     <center>
-                                        No items found ....
+                                        {{__('No items found ....')}}
                                     </center>
                                 </td>
                             </tr>
@@ -86,7 +86,7 @@
                             <tr wire:loading>
                                 <td colspan="6">
                                     <center>
-                                        Processing Payment...
+                                        {{__('Searching for items .... ')}}
                                     </center>
                                 </td>
                             </tr>

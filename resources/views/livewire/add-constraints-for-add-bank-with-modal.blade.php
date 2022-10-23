@@ -88,7 +88,7 @@
             <!-- select -->
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="active" name="active">
+                    <input class="custom-control-input" type="checkbox" id="active" name="active" checked>
                     <label for="active" class="custom-control-label">{{ __('Active ?!') }}</label>
                 </div>
             </div>

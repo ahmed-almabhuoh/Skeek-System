@@ -120,7 +120,7 @@ class StaticBankController extends Controller
         // Check Ability
         $this->checkUserAbility('Update-Bank');
 
-        $bank = DB::table('static_banks')->where('id', Crypt::decrypt($bank_enc_id))->first();
+        $bank = DB::table('static_bank')->where('id', Crypt::decrypt($bank_enc_id))->first();
 
         if ($request->hasFile('image')) {
             $sheekImageName = time() . '_sheek_images' . '.' . $request->file('image')->getClientOriginalExtension();
@@ -147,22 +147,20 @@ class StaticBankController extends Controller
         }
 
         // Store Logs
-        $this->storeSuperLogs('Update Static Bank with name: ' + $bank->name);
+        $this->storeSuperLogs('Update Static Bank with name: ' . $bank->name);
 
         if ($isUpdated) {
-            session([
+            return redirect()->route('banks.static_index')->with([
                 'created' => true,
-                'title' => 'Updaeed Successfully',
-                'message' => 'Bank ' . $request->input('name') . ' updated successfully.',
+                'title' => __('Updated Successfully'),
+                'message' => __('Bank ') . $request->input('name') . __(' updated successfully.'),
             ]);
-            return redirect()->route('banks.static_index');
         } else {
-            session([
+            return redirect()->route('banks.statis_create')->with([
                 'created' => false,
                 'title' => __('Failed'),
                 'message' => __('Failed to update bank with un-expected error.'),
             ]);
-            return redirect()->route('banks.statis_create');
         }
     }
 
