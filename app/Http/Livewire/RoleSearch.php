@@ -16,7 +16,7 @@ class RoleSearch extends Component
     }
     public function render()
     {
-        $this->roles = Role::where('name', 'LIKE', '%' . $this->searchTerm . '%')->paginate();
+        $this->roles = Role::where('name', 'LIKE', '%' . $this->searchTerm . '%')->withCount('permissions')->paginate();
         return view('livewire.role-search', [
             'roles' => $this->roles,
         ]);

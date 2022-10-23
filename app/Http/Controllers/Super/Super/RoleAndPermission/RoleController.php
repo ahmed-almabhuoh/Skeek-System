@@ -22,7 +22,7 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::withCount('permissions')->get();
+        $roles = Role::withCount('permissions')->paginate();
 
         // Store Logs
         $this->storeSuperLogs('Show all rules');
